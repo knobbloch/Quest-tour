@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Детали товара</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<h1></h1>
+    <script>
+        async function getData() {
+            const h1 = document.querySelector("h1");
+
+            const URL = window.location.origin + "/script";
+
+            try {
+                const response = await axios.get(URL);
+                const data = response.data;
+
+                h1.innerHTML = data.message;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        getData();
+    </script>
+	<p>Hello che s licom</p>
+	<a href="../inde.html">
+        <h1 class="btn from-top">Spike</h1>
+    </a>
+</body>
+</html>
