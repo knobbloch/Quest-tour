@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Item Details</title>
+</head>
+<body>
+	<h1></h1>
+    <script>
+              async function getData() {
+              const h1 = document.querySelector("h1");
+
+              const URL = window.location.origin + "/meow";
+              const response = await fetch(URL);
+    
+              const data = await response.json();
+              h1.innerHTML = await data.page_number;    
+              }
+              getData()
+    </script>
+	<p>HI2</p>
+	
+</body>
+</html>
