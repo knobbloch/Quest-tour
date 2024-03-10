@@ -9,4 +9,3 @@ async def root():
     return {"message": "Hello World"}
 
 app.mount("/", StaticFiles(directory="front", html=True), name="front")
-
