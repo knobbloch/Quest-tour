@@ -1,12 +1,3 @@
-
-// const questionsWithAnswers = [
-//     { question: "Твоя мама гей?", answers: ["Да", "Да"] },
-//     { question: "Твой папа гей?", answers: ["Да", "ДА"] },
-//     { question: "Ты гей?", answers: ["Да", "ДАААА~~~~~"] },
-//     { question: "Ты любишь маму?", answers: ["Да", "Нет", "Твою?"] },
-//     { question: "Че с лицом?", answers: ["Че снилось", "мяу("] }
-// ];
-
 async function getQuestions() {
 
     const URL = `${window.location.origin}/script/read_test_from_file`;
@@ -19,19 +10,6 @@ async function getQuestions() {
         console.error('Ошибка при получении', error);
     }  
 }
-
-// async function getAnswers(answerNumber) {
-
-//     const h1 = document.createElement("h2");
-//     const URL = `${window.location.origin}/script/read_test_from_file?question_number=${answerNumber}`;
-//     const response = await axios.get(URL);
-//     const data = response.data;
-//     return (data.answers);
-    
-// }
-// const answerText = await getAnswers(1)
-// console.log(answerText)
-// getAnswers(1)
 
 async function CreateQuestion() {
     questionsWithAnswers = await getQuestions();
@@ -72,47 +50,29 @@ function getSelectedAnswers() {
         });
         allAnswers.push(selectedIndexes.join(', '));
     }
-    // for (let i = 0; i < questionsWithAnswers.length; i++) {
-    //     const selectedIndexes = "";
-    //     const checkboxes = document.querySelectorAll(`input[name="question${i}"]:checked`);
-    //     checkboxes.forEach((checkbox) => {
-    //         const checkboxIndex = Array.from(checkbox.parentNode.children).indexOf(checkbox);
-    //         selectedIndexes += `${checkboxIndex/2}, `;
-    //     });
-    //     allAnswers.push(selectedIndexes);
-    // }
     return allAnswers;
 }
 
 const sendAnswersButton = document.getElementById('sendAnswers');
 
-// const selectedAnswers = getSelectedAnswers();
 sendAnswersButton.addEventListener('click', () => 
     sendAnswersToServer(getSelectedAnswers()) 
-    // console.log(getSelectedAnswers())
 )
-// console.log(getSelectedAnswers());
 
 
-async function sendAnswersToServer(selectedAnswers) {
-    // const URL = `${window.location.origin}/script/send_answers?answer_list=${selectedAnswers}`;
-    // // const URL = `${window.location.origin}/script/send_answers`;
-    // try {
-    //     // const response = await axios.post(URL, {selectedAnswers});
-    //     const response = await axios.post(URL);
-    //     console.log('Ответы отправлены', response.data);
-    // } catch (error) {
-    //     console.error('Ошибка при отправке', error);
-    // }   
-
-    const URL = `${window.location.origin}/script/test_post?text=${'иди нахуй'}`;
-    // const URL = `${window.location.origin}/script/send_answers`;
-    try {
-        // const response = await axios.post(URL, {selectedAnswers});
-        const response = await axios.post(URL);
-        console.log('Ответы отправлены', response.data);
-    } catch (error) {
-        console.error('Ошибка при отправке', error);
-    }  
-}
+async function sendAnswersToServer(selectedAnswers) { 
+    const URL = `${window.location.origin}/script/send_answers`;
+    const data = JSON.stringify({sections: selectedAnswers})
+    console.log(data)
+    const config = {
+        headers: {'Content-Type': 'application/json'}
+    }
+    const response = await axios.post('script/send_answers', data, config)
+    .then(response => {
+        console.log('Правильных ответов: ', response.data)
+    })
+    .catch(error => {
+        console.error('Ошибка при отправке', error)})
+    return response
+    }
     
