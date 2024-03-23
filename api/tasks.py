@@ -65,3 +65,10 @@ async def send_answer(answer_list: List_of_str):
             counter += 1
 
     return counter
+
+# @task_router.get("/script/get_result", response_model=int)
+# async def get_result(practice_id: int):
+#     #зову функцию по поиску записи о задании
+#     #вычленяю оценку из списочка
+#     #отдаю оценочку
+#     return 1
