@@ -2,10 +2,9 @@ import sqlite3 #import psycopg2 #заменить при переезде на �
 
 cursor = None
 conn = None
-conn = sqlite3.connect('test.db')
 try:
     #conn = psycopg2.connect("dbname=test user=postgres password=postgres") #заменить при переезде на сервер
-    conn = sqlite3.connect('test.db')
+    conn = sqlite3.connect('db.db')
     cursor = conn.cursor()
 except Exception as error:
     print("AN ERROR OCCURED:", error) # An error occurred: name 'x' is not defined
@@ -45,4 +44,24 @@ def get_all_LectionRes_byemail(email):
     except Exception as error:
         return [('0')]
     print("get_all_LectionRes_byemail happened")
+    return records
+
+def get_all_practices():
+    try:
+        cursor.execute("""SELECT * from Practice p ORDER BY p.orderc""")
+        records = cursor.fetchall()
+    except Exception as error:
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("get_all_practices happened")
+    return records
+
+def get_all_lections():
+    try:
+        cursor.execute("""SELECT * from Lection l ORDER BY l.orderc""")
+        records = cursor.fetchall()
+    except Exception as error:
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("get_all_lections happened")
     return records
