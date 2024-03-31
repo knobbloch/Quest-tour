@@ -1,22 +1,16 @@
 <html>
 <head>
     <title>Item Details</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-	<h1></h1>
-    <script>
-              async function getData() {
-              const h1 = document.querySelector("h1");
 
-              const URL = window.location.origin + "/script";
-              const response = await fetch(URL);
-    
-              const data = await response.json();
-              h1.innerHTML = await data.message;    
-              }
-              getData()
-    </script>
-	<p>HI2</p>
-	
+	<h1></h1>
+    <div id="questions-container"></div>
+    <button id='sendAnswers'type="button">отправить ответы</button>
+    <script src="js/test3.js"></script>
+
+
+
 </body>
 </html>

@@ -1,1 +1,5 @@
 venv/
+.vs/
+.idea/
+/test.db
+/db.db
