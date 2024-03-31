@@ -13,9 +13,28 @@ object3 = Question(question="Am I gay?", answers=["of course", "why", "14"], rig
 
 list_object = [object, object2, object3]  # список
 
-file = open("data/files/test.txt", "wb")  # запись в файл
-pickle.dump(list_object, file)  # сереализация
-file.close()
+
+def write_new_in_file(path: str, question: Question):
+    q_list = read_file_test(path)
+    q_list.append(question)
+    file = open(path, "wb")  # запись в файл
+    pickle.dump(q_list, file)  # сереализация
+    file.close()
+    return
+
+
+def delete_from_file(path: str, num: int):
+    q_list = read_file_test(path)
+    q_list.pop(num)
+    file = open(path, "wb")  # запись в файл
+    pickle.dump(q_list, file)  # сереализация
+    file.close()
+    return
+
+
+# file = open("data/files/test.txt", "wb")  # запись в файл
+# pickle.dump(list_object, file)  # сереализация
+# file.close()
 
 
 def read_file_test(path: str):
@@ -25,12 +44,12 @@ def read_file_test(path: str):
     return readed_list
 
 
-@task_router.post("/script/write_to_file")
-async def write_to_file():
-    return {"message": "Hello World"}
+# @task_router.post("/script/write_to_file")
+# async def write_to_file():
+#     return {"message": "Hello World"}
 
 
-@task_router.get("/script/read_test_from_file")
+@task_router.get("/script/read_test")
 async def read():
     questions = read_file_test("data/files/test.txt")
     for i in questions:
@@ -38,9 +57,16 @@ async def read():
     return questions
 
 
-@task_router.post("/script/test_post")
-async def test(text: List_of_str):
-    return text
+@task_router.post("/script/add_question")
+async def add_question(new_question: Question):
+    write_new_in_file("data/files/test.txt", new_question)
+    return {"status": 200, "Message": "new question added"}
+
+
+@task_router.post("/script/delete_question")
+async def add_question(num: int):
+    delete_from_file("data/files/test.txt", num)
+    return {"status": 200, "Message": "question deleted"}
 
 
 @task_router.post("/script/send_answers", response_model=int)
@@ -64,7 +90,11 @@ async def send_answer(answer_list: List_of_str):
         if new_answers[i] == right_answer_list[i]:
             counter += 1
 
-    return counter
+    total_counter = len(right_answer_list)
+    grade = counter / total_counter * 100
+    # сразу записать в бд, тут не отдавать
+
+    return grade
 
 # @task_router.get("/script/get_result", response_model=int)
 # async def get_result(practice_id: int):
