@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect('test.db')
+connection = sqlite3.connect('db.db')
 cursor = connection.cursor()
 
 cursor.execute ('''
@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS Practice (
 	    title VARCHAR(64) not null,
         description TEXT,
         testornot BOOLEAN not null,
-        pathto TEXT,
 		orderc INTEGER not null
 )''')
 cursor.execute ('''
@@ -55,7 +54,6 @@ cursor.execute ('''
 CREATE TABLE IF NOT EXISTS PracticeRes (
 		id INTEGER not null primary key AUTOINCREMENT,
 		grade INTEGER,
-		pathto TEXT,
 		commentp TEXT,
         idperson VARCHAR(64) not null ,
         idpractice INTEGER not null , 
