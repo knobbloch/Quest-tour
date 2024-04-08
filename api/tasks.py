@@ -5,13 +5,13 @@ from api.models import Question, List_of_str
 
 task_router = APIRouter()
 
-object = Question(question="Ты gay?", answers=["yes", "yess", "yess", "no", "?"],
-                  right_answers=[0, 1, 2])  # первый обьект
-object2 = Question(question="your mama gay?", answers=["yes", "yess", "-", "no", "?"],
-                   right_answers=[0, 1])  # второй обьект
-object3 = Question(question="Am I gay?", answers=["of course", "why", "14"], right_answers=[2])
-
-list_object = [object, object2, object3]  # список
+# object = Question(question="Ты gay?", answers=["yes", "yess", "yess", "no", "?"],
+#                   right_answers=[0, 1, 2])  # первый обьект
+# object2 = Question(question="your mama gay?", answers=["yes", "yess", "-", "no", "?"],
+#                    right_answers=[0, 1])  # второй обьект
+# object3 = Question(question="Am I gay?", answers=["of course", "why", "14"], right_answers=[2])
+#
+# list_object = [object, object2, object3]  # список
 
 
 def write_new_in_file(path: str, question: Question):
@@ -49,7 +49,7 @@ def read_file_test(path: str):
 #     return {"message": "Hello World"}
 
 
-@task_router.get("/script/read_test")
+@task_router.get("/script/read_test_from_file")
 async def read():
     questions = read_file_test("data/files/test.txt")
     for i in questions:
@@ -64,7 +64,7 @@ async def add_question(new_question: Question):
 
 
 @task_router.post("/script/delete_question")
-async def add_question(num: int):
+async def delete_question(num: int):
     delete_from_file("data/files/test.txt", num)
     return {"status": 200, "Message": "question deleted"}
 
