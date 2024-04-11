@@ -2,6 +2,7 @@ import sqlite3  # import psycopg2 #заменить при переезде на
 from fastapi import APIRouter
 import api.db_creation
 import api.debugging
+import datetime
 
 db_router = APIRouter()
 
@@ -22,6 +23,10 @@ except Exception as error:
 ###########NEW########### returns True if all okay
 
 def new_person(email, surname, namep, admornot, thirdname=None, division=None, city=None, employment=None):
+    current_datetime = datetime.datetime.now()
+    current_date = current_datetime.date()
+    future_date = datetime.datetime.today() + datetime.timedelta(days=30)
+    current_date_str = future_date.strftime("%Y-%m-%d")
     try:
         cursor.execute("SELECT * FROM Practice")
         practice_records = cursor.fetchall()
@@ -35,9 +40,10 @@ def new_person(email, surname, namep, admornot, thirdname=None, division=None, c
         cursor.execute(
             "INSERT INTO person (email, namep, surname, thirdname, division, city, employment, admornot) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             (email, namep, surname, thirdname, division, city, employment, admornot))
-        cursor.execute("INSERT INTO CourseRes (idperson) VALUES (?)", (email,))
+        cursor.execute("INSERT INTO CourseRes (idperson, deadline) VALUES (?, ?)", (email,current_date_str))
         conn.commit()
     except Exception as error:
+        conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return False
     print("new_person happened")
@@ -61,6 +67,7 @@ def new_lection(title, orderc, description=None, pathto=None):
                            (record[0], increment[0][0], False))
         conn.commit()
     except Exception as error:
+        conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return -1
     print("new_lection happened")
@@ -84,6 +91,7 @@ def new_practice(title, orderc, testornot, description=None):
             cursor.execute("INSERT INTO PracticeRes (idperson, idpractice) VALUES (?, ?)", (record[0], increment[0][0]))
         conn.commit()
     except Exception as error:
+        conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return -1
     print("new_practice happened")
@@ -102,6 +110,7 @@ def edit_person(email, namep=None, surname=None, thirdname=None, division=None, 
         (changes[2], changes[1], changes[3], changes[4], changes[5], changes[6], email))
         conn.commit()
     except Exception as error:
+        conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return False
     print("edit_person happened")
@@ -118,6 +127,7 @@ def edit_practice(id, title=None, description=None):
         (changes[0], changes[1], id))
         conn.commit()
     except Exception as error:
+        conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return False
     print("edit_practice happened")
@@ -134,6 +144,7 @@ def edit_lection(id, title=None, description=None):
         (changes[0], changes[1], id))
         conn.commit()
     except Exception as error:
+        conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return False
     print("edit_lection happened")
@@ -149,8 +160,11 @@ def edit_practice_res(id_practice, email, grade=None, commentp=None):
         changes = [elem_noww if elem_input is None else elem_input for elem_noww, elem_input in zip(noww, input)]
         cursor.execute("UPDATE PracticeRes SET grade=?, commentp=? WHERE idpractice = ? AND idperson = ?",
         (changes[0], changes[1], id_practice, email))
+        if not is_all_course_completed(email):
+            raise Exception("is_all_course_completed not happened")
         conn.commit()
     except Exception as error:
+        conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return False
     print("edit_lection happened")
@@ -160,8 +174,11 @@ def edit_lection_res(id_lection, email, viewed):
     try:
         cursor.execute("UPDATE LectionRes SET viewed=? WHERE idlection = ? AND idperson = ?",
         (viewed, id_lection, email))
+        if not is_all_course_completed(email):
+            raise Exception("is_all_course_completed not happened")
         conn.commit()
     except Exception as error:
+        conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return False
     print("edit_lection_res happened")
@@ -261,6 +278,18 @@ def get_lection_res(id_lection, email):
     print("get_lection_res happened")
     return records[0]
 
+#id, deadline, endate, email
+def get_course_res (email):
+    try:
+        cursor.execute("""SELECT * from CourseRes cr WHERE cr.idperson = ?""", (email,))
+        records = cursor.fetchall()
+        records.append([])
+    except Exception as error:
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("get_course_res happened")
+    return records[0]
+
 ###########DELETE###########
 
 def delete_person(email):
@@ -270,12 +299,64 @@ def delete_person(email):
         cursor.execute("""DELETE FROM Person WHERE email = ?""", (email, ))
         conn.commit()
     except Exception as error:
+        conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return False
     print("delete_person happened")
     return True
 
+def delete_lection(id):
+    try:
+        cursor.execute("""DELETE FROM LectionRes WHERE idlection = ?""", (id, ))
+        print("bebebbeb")
+        cursor.execute("""DELETE FROM Lection WHERE id = ?""", (id, ))
+        print("bbbabaab")
+        conn.commit()
+    except Exception as error:
+        conn.rollback()
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("delete_lection happened")
+    return True
 
+def delete_practice(id):
+    try:
+        cursor.execute("""DELETE FROM PracticeRes WHERE idpractice = ?""", (id, ))
+        print("bebebbeb")
+        cursor.execute("""DELETE FROM Practice WHERE id = ?""", (id, ))
+        print("bbbabaab")
+        conn.commit()
+    except Exception as error:
+        conn.rollback()
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("delete_practice happened")
+    return True
+
+#OTHER
+#check all lecRes and pracRes and change enddate to now
+def is_all_course_completed(email):
+    current_datetime = datetime.datetime.now()
+    current_date = current_datetime.date()
+    endate = current_date.strftime("%Y-%m-%d")
+    try:
+        cursor.execute("SELECT COUNT(*) FROM LectionRes WHERE idperson = ? AND viewed = 1", (email,))
+        count_lecRes = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM PracticeRes WHERE idperson = ? AND grade != 'None'", (email,))
+        count_pracRes = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM Practice")
+        count_prac = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM Lection")
+        count_lec = cursor.fetchone()[0]
+        if (count_prac == count_pracRes and count_lec == count_lecRes):
+            cursor.execute("UPDATE CourseRes SET endate = ? WHERE idperson = ?", (endate, email))
+            print("endate changed")
+    except Exception as error:
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("is_all_course_completed happened")
+    return True
+    print()
 
 #print (new_practice("meowmeow", 1  , testornot=False))
 #print(new_lection("blabla", 1, "HALO"))
@@ -286,9 +367,11 @@ def delete_person(email):
 #print (new_lection("blabla", 1, "HALO"))
 
 #delete_person("lox@gmail.com")
-
+#print(edit_lection_res(1, "lox@gmail.com", True))
+#print(edit_practice_res(1, "lox@gmail.com", grade = 52))
 #print(api.debugging.get_all_persons())
 #print(api.debugging.get_all_CourseRes())
+#print(get_course_res("lox@gmail.com"))
 #print(get_all_not_adms())
 #edit_practice(1, 'MEOW', 'this practice is about how to meow')
 #print(api.debugging.get_all_practices())
