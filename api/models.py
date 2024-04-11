@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -18,25 +18,30 @@ class Person(BaseModel):
     namep: str
     surname: str
     admornot: int
-    thirdname: str | None
-    division: str | None
-    city: str | None
-    employment: str | None
+    thirdname: Optional[str] = None
+    division: Optional[str] = None
+    city: Optional[str] = None
+    employment: Optional[str] = None
+
+
+class UserFIO(BaseModel):
+    email: str
+    fio: str
 
 
 class Lecture(BaseModel):
-    id: int | None
+    id: Optional[int] = None
     title: str
     orderc: int
-    description: str | None
-    pathto: str | None
+    description: Optional[str] = None
+    pathto: Optional[str] = None
 
 
 class Practice(BaseModel):
-    id: int | None
+    id: Optional[int] = None
     title: str
     orderc: int
     testornot: bool
-    description: str | None
-    pathto: str | None
+    description: Optional[str] = None
+    pathto: Optional[str] = None
 
