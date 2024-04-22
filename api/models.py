@@ -43,5 +43,4 @@ class Practice(BaseModel):
     orderc: int
     testornot: bool
     description: Optional[str] = None
-    pathto: Optional[str] = None
 
