@@ -47,7 +47,9 @@ async def delete_practice(p_id:int):
     print(practice_info)
     if db_main.delete_practice(p_id):
         if practice_info[3]==1:
-            os.remove(f"C:/Users/User/PycharmProjects/Quest-tour/data/test/practice_{p_id}.txt")
+            path=os.path.abspath(os.getcwd())
+            print(path)
+            os.remove(f"{path}\\data\\test\\practice_{p_id}.txt")
         return {'Message': f'practice №{p_id} deleted'}
     else:
         return {'Message': 'an error occurred'}
