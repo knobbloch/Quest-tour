@@ -54,30 +54,30 @@ def read_file_test(path: str):
 
 
 @task_router.get("/script/read_test_from_file")
-async def read(name: str):
-    questions = read_file_test("data/test/"+name+".txt")
+async def read(p_id: int):
+    questions = read_file_test("data/test/practice_"+str(p_id)+".txt")
     for i in questions:
         i.right_answers = []
     return questions
 
 
 @task_router.post("/script/add_question")
-async def add_question(new_question: Question, name: str):
-    write_new_in_file("data/test/"+name+".txt", new_question)
+async def add_question(new_question: Question, p_id:int):
+    write_new_in_file("data/test/practice_"+str(p_id)+".txt", new_question)
     return {"status": 200, "Message": "new question added"}
 
 
 @task_router.delete("/script/delete_question")
-async def delete_question(num: int, name:str):
-    delete_from_file("data/test/"+name+".txt", num)
+async def delete_question(num: int, p_id:int):
+    delete_from_file("data/test/practice_"+str(p_id)+".txt", num)
     return {"status": 200, "Message": "question deleted"}
 
 
 @task_router.post("/script/send_answers", response_model=int)
-async def send_answer(answer_list: List_of_str, name:str):
+async def send_answer(answer_list: List_of_str, p_id:int):
     right_answer_list = []
     counter = 0
-    questions = read_file_test("data/test/"+name+".txt")
+    questions = read_file_test("data/test/practice_"+str(p_id)+".txt")
     new_answers = []
     print(answer_list.sections)
     for i in answer_list.sections:

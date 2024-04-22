@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from api.db_main import new_person, delete_person, get_person, edit_person
-from api.debugging import get_all_persons
+from api.db_main import new_person, delete_person, get_person, edit_person, get_all_not_adms
+#from api.debugging import get_all_persons
 from api.models import Person, UserFIO
 
 user_router = APIRouter()
@@ -14,7 +14,7 @@ async def test(user: Person):
 
 @user_router.get("/script/user_list", response_model=list[UserFIO])
 async def user_list():
-    records = get_all_persons()
+    records = get_all_not_adms()
     users = []
     for record in records:
         if record[3] is None:
