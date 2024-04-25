@@ -61,4 +61,19 @@ CREATE TABLE IF NOT EXISTS PracticeRes (
         FOREIGN KEY (idpractice) REFERENCES Practice(id)
 )''')
 
+cursor.execute ('''
+CREATE TABLE IF NOT EXISTS Auth (
+		email VARCHAR(64) not null,
+		password VARCHAR(64) not null,
+        FOREIGN KEY (email) REFERENCES Person (email),
+        PRIMARY KEY (email)
+)''')
+
+cursor.execute ('''
+CREATE TABLE IF NOT EXISTS Token (
+		token VARCHAR(64), 
+		tokenData DATETIME,
+        PRIMARY KEY (token)
+)''')
+
 connection.close()
