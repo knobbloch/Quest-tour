@@ -2,9 +2,12 @@ import pickle
 import os
 
 from fastapi import APIRouter
+
+from api.db_main import edit_practice_res
 from api.models import Question, List_of_str
 
 task_router = APIRouter()
+
 
 # object = Question(question="Ты gay?", answers=["yes", "yess", "yess", "no", "?"],
 #                   right_answers=[0, 1, 2])  # первый обьект
@@ -40,8 +43,8 @@ def delete_from_file(path: str, num: int):
 
 def read_file_test(path: str):
     file2 = open(path, "rb")
-    if os.stat(path).st_size==0:
-        readed_list=[]
+    if os.stat(path).st_size == 0:
+        readed_list = []
     else:
         readed_list = pickle.load(file2)  # десереализация
     file2.close()
@@ -55,29 +58,29 @@ def read_file_test(path: str):
 
 @task_router.get("/script/read_test_from_file")
 async def read(p_id: int):
-    questions = read_file_test("data/test/practice_"+str(p_id)+".txt")
+    questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
     for i in questions:
         i.right_answers = []
     return questions
 
 
 @task_router.post("/script/add_question")
-async def add_question(new_question: Question, p_id:int):
-    write_new_in_file("data/test/practice_"+str(p_id)+".txt", new_question)
+async def add_question(new_question: Question, p_id: int):
+    write_new_in_file("data/test/practice_" + str(p_id) + ".txt", new_question)
     return {"status": 200, "Message": "new question added"}
 
 
 @task_router.delete("/script/delete_question")
-async def delete_question(num: int, p_id:int):
-    delete_from_file("data/test/practice_"+str(p_id)+".txt", num)
+async def delete_question(num: int, p_id: int):
+    delete_from_file("data/test/practice_" + str(p_id) + ".txt", num)
     return {"status": 200, "Message": "question deleted"}
 
 
-@task_router.post("/script/send_answers", response_model=int)
-async def send_answer(answer_list: List_of_str, p_id:int):
+@task_router.post("/script/send_answers")
+async def send_answer(p_id:int, email: str, answer_list: List_of_str):
     right_answer_list = []
     counter = 0
-    questions = read_file_test("data/test/practice_"+str(p_id)+".txt")
+    questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
     new_answers = []
     print(answer_list.sections)
     for i in answer_list.sections:
@@ -96,9 +99,11 @@ async def send_answer(answer_list: List_of_str, p_id:int):
 
     total_counter = len(right_answer_list)
     grade = counter / total_counter * 100
-    # сразу записать в бд, тут не отдавать
+    if edit_practice_res(p_id, email, grade):
+        return {'status': 200, 'Message': 'answers sent'}
+    else:
+        return {'status': 500, 'Message': 'an error occurred!'}
 
-    return grade
 
 # @task_router.get("/script/get_result", response_model=int)
 # async def get_result(practice_id: int):
