@@ -1,4 +1,6 @@
 import sqlite3  # import psycopg2 #заменить при переезде на сервер
+import time
+
 from fastapi import APIRouter
 import api.db_creation
 import api.debugging
@@ -9,13 +11,15 @@ db_router = APIRouter()
 ANSWERS = 'data/answers'
 TEST = 'data/test'
 LECTION = 'data/lection'
+DEFAULT_PASSWORD = "Hi"
+DEFAULT_DEADLINE = datetime.timedelta(days=30)
 
 # Initialization
 cursor = None
 conn = None
 try:
     # conn = psycopg2.connect("dbname=test user=postgres password=postgres") #заменить при переезде на сервер
-    conn = sqlite3.connect('db.db')
+    conn = sqlite3.connect('db.db', check_same_thread=False)
     cursor = conn.cursor()
 except Exception as error:
     print("AN ERROR OCCURED:", error)  # An error occurred: name 'x' is not defined
@@ -25,7 +29,7 @@ except Exception as error:
 def new_person(email, surname, namep, admornot, thirdname=None, division=None, city=None, employment=None):
     current_datetime = datetime.datetime.now()
     current_date = current_datetime.date()
-    future_date = datetime.datetime.today() + datetime.timedelta(days=30)
+    future_date = datetime.datetime.today() + DEFAULT_DEADLINE
     current_date_str = future_date.strftime("%Y-%m-%d")
     try:
         cursor.execute("SELECT * FROM Practice")
@@ -41,6 +45,7 @@ def new_person(email, surname, namep, admornot, thirdname=None, division=None, c
             "INSERT INTO person (email, namep, surname, thirdname, division, city, employment, admornot) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             (email, namep, surname, thirdname, division, city, employment, admornot))
         cursor.execute("INSERT INTO CourseRes (idperson, deadline) VALUES (?, ?)", (email,current_date_str))
+        cursor.execute("INSERT INTO Auth (email, password) VALUES (?, ?)", (email, DEFAULT_PASSWORD))
         conn.commit()
     except Exception as error:
         conn.rollback()
@@ -96,6 +101,17 @@ def new_practice(title, orderc, testornot, description=None):
         return -1
     print("new_practice happened")
     return increment[0][0]
+
+def new_token(token=None, date=None):
+    try:
+        cursor.execute("INSERT INTO Token (token, tokenData) VALUES (?, ?)",(token, date))
+        conn.commit()
+    except Exception as error:
+        conn.rollback()
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("new_practice happened")
+    return True
 
 ###########EDIT########### returns True if all okay
 
@@ -184,6 +200,26 @@ def edit_lection_res(id_lection, email, viewed):
     print("edit_lection_res happened")
     return True
 
+#for Auth
+def edit_auth(email, password=None):
+    try:
+        cursor.execute("""SELECT * from Auth WHERE email = ?""", (email,))
+        records = cursor.fetchall()
+        noww = [records[0][1]]
+        print(noww)
+        input = [password]
+        changes = [elem_noww if elem_input is None else elem_input for elem_noww, elem_input in zip(noww, input)]
+        print(changes)
+        cursor.execute("UPDATE Auth SET password=? WHERE email=?",
+        (changes[0], email))
+        conn.commit()
+    except Exception as error:
+        conn.rollback()
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("edit_auth happened")
+    return True
+
 ###########GET###########
 
 #email, name, surname, thirdname, division, city, employment, admornot
@@ -210,19 +246,19 @@ def get_person(email):
     return records[0]
 
 #title; 0-lection, 1-practice; (0-not viewed, 1-viewed) - lection, (None-no grade) - practice; order on map на всяки случай
-def get_map():
+def get_map(email):
     try:
         cursor.execute("""SELECT l.title, 0, lr.viewed, l.orderc
         FROM Lection l
-        LEFT JOIN LectionRes lr
-        ON l.id = lr.idlection
+        LEFT JOIN LectionRes lr 
+        ON l.id = lr.idlection  WHERE lr.idperson = ?
         UNION ALL
         SELECT p.title, 1, pr.grade, p.orderc
         FROM Practice p
-        LEFT JOIN PracticeRes pr
-        ON p.id = pr.idpractice
+        LEFT JOIN PracticeRes pr 
+        ON p.id = pr.idpractice WHERE pr.idperson = ?
         ORDER BY l.orderc, p.orderc
-        """)
+        """, (email, email))
         records = cursor.fetchall()
     except Exception as error:
         print("An error occurred:", error)  # An error occurred: name 'x'
@@ -290,13 +326,32 @@ def get_course_res (email):
     print("get_course_res happened")
     return records[0]
 
+#for auth, email, password
+def get_auth(email):
+    try:
+        cursor.execute("SELECT * from Auth a WHERE a.email = ?", (email,))
+        records = cursor.fetchall()
+        records.append([])
+    except Exception as error:
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("get_auth happened")
+    return records[0]
+
+def get_token(email):
+    
+    pass
+
 ###########DELETE###########
 
 def delete_person(email):
     try:
         cursor.execute("""DELETE FROM LectionRes WHERE idperson = ?""", (email, ))
         cursor.execute("""DELETE FROM PracticeRes WHERE idperson = ? """, (email, ))
+        cursor.execute("""DELETE FROM CourseRes WHERE idperson = ? """, (email,))
+        cursor.execute("""DELETE FROM Auth WHERE email = ? """, (email,))
         cursor.execute("""DELETE FROM Person WHERE email = ?""", (email, ))
+        cursor.execute("DELETE FROM Auth WHERE email = ?", (email, ))
         conn.commit()
     except Exception as error:
         conn.rollback()
@@ -360,7 +415,15 @@ def is_all_course_completed(email):
 
 #print (new_practice("meowmeow", 1  , testornot=False))
 #print(new_lection("blabla", 1, "HALO"))
-#g = new_person("lox@gmail.com", "lox", "xol", 0, division = "fdsafdfa")
+
+#print(new_person("lox@gmail.com", "lox", "xol", 0, division = "fdsafdfa"))
+#(api.debugging.get_all_auths())
+#now = datetime.datetime.now()
+#new_date = now + datetime.timedelta(days=2)
+
+#print(edit_auth("lox@gmail.com", token="IMTOKEN", date=new_date))
+#print(get_auth("lox@gmail.com"))
+
 #g = new_person("SSSghoul@gmail.com", namep = "lox", surname = "AAA", admornot = 0, division = "fdsafdfa")
 #g = new_person("debil@gmail.com", "debil", "libed", 1, division = "division by zero")
 #new_practice("QQQQQQQQQQQQ", 1  , testornot=False)
@@ -382,8 +445,12 @@ def is_all_course_completed(email):
 #edit_person("lox@gmail.com", surname = "meow", division="qwertyuio", thirdname ="Петрович", employment="старший стражер")
 #print(get_all_not_adms())
 
+print(get_person("lox@gmail.com"))
+print(api.debugging.get_all_lections())
+print(api.debugging.get_all_PracticeRes_byemail("lox@gmail.com"))
+print(api.debugging.get_all_LectionRes_byemail("lox@gmail.com"))
 #print(get_person("lox@gmail.com"))
-#print(get_map())
+print(get_map("lox@gmail.com"))
 #edit_lection(1, 'LEC2', 'this lection is about how to lection')
 #print(api.debugging.get_all_practices())
 #print(api.debugging.get_all_lections())
