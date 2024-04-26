@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    src: url(Montserrat-Regular.ttf);
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: bold;
+    src: url(Montserrat-Bold.ttf);
+}
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    font-style: normal;
+    font-weight: normal;
+    src: url(Montserrat-SemiBold.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat-SemiBold';
+}
+body{
+    background-image: url('img/загрузка.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    
+}
+
+
+
+/* Мишина часть*/
+
+
+/* Комментарий (админ) */
+
+.comment-admin{
+    box-sizing: border-box;
+    
+    position: relative;
+    top: 400px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+
+    width: 1040px;
+    height: 110px;
+
+
+}
+
+.comment-admin__text{
+    width: 1040px;
+    height: 70px;
+    min-height: 70px;
+    padding: 23px 50px 23px 80px;
+    resize: none;
+
+    overflow: hidden;
+
+    background: #FFFFFF;
+    border: 2px solid #0F2232;
+    border-radius: 15px;
+
+    font-size: 16px;
+    max-block-size: 10;
+}
+
+.comment-admin__img{
+    position: relative;
+    top: 53px;
+    right: 0px;
+    bottom: 0;
+    left: 25px;
+}
+
+.comment-admin__text::placeholder{
+    font-family: 'Montserrat';
+
+    font-weight: 450;
+    font-size: 18px;
+}

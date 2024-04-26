@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+.nav_close{
+    background: #E9ECEE;
+    width: 4.5rem;
+    height: 100%;
+    min-height: 100%;
+    position: fixed; 
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    left: 0;
+    transition: left 0.3s;
+    z-index: 2000;
+}
+.open_menu_btn{
+    background-color: inherit;
+}
+.open_menu_btn svg{
+    width:1.7rem;
+    height:1.7rem;
+    margin:1.3rem;
+}
+
+.close_menu_btn{
+    background-color: inherit;
+}
+.close_menu_btn svg{
+    width:1.8rem;
+    height:1.8rem;
+    margin:1.2rem 0rem 0.8rem 1rem;
+}
+a{
+    text-align: left;
+    display:flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: #0F2232;
+    text-decoration: none;
+    position: relative;
+    margin: 1.7rem 1.4rem;
+    svg{
+        margin:0rem 0.7rem 0rem 0rem;
+        width:1.7rem;
+        height:1.7rem; 
+    }
+}
+.see_answers{
+    margin: 0rem 0rem 0rem 1.4rem;
+}
+.logo svg{
+    bottom:0;
+    left:0;
+    position:fixed;
+    margin: 1.1rem;
+    width: 2.7rem;
+    height: 8rem;
+}
+.see_answers::before, .edit::before{
+    content:'';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-left: 2.4rem;
+    width: 0;
+    height: 0.15rem;
+    background: #EC1C24;
+    transition: 0.3s;
+    border-radius: 25rem;
+}
+.see_answers:hover:before, .edit:hover:before{
+    width: 11.5rem;
+}
+.open_menu_btn:hover ,.close_menu_btn:hover{
+    svg{
+        path{
+            stroke:#EC1C24;
+        }
+    }
+}
+a:hover{
+    color:#EC1C24;
+    svg{
+        path{
+            fill: #EC1C24;
+        }
+    }
+}
+
+@media (max-width:800px){
+    .nav_open{
+        width: 12rem;
+    }
+    a{
+        font-size: 0.9rem;
+        margin: 1.4rem 1rem;
+        svg{
+            margin:0rem 0.7rem 0rem 0rem;
+            width:1.3rem;
+            height:1.3rem; 
+        }
+    }
+    .see_answers{
+        margin: 0rem 0rem 0rem 1.1rem;
+    }
+    a::before{
+        margin-left: 2rem;
+        height: 0.1rem;
+    }
+    a:hover:before{
+        width: 7.25rem;
+    }
+    .logo svg{
+        margin: 1rem;
+        width: 2.3rem;
+        height: 7rem;
+    }
+    .close_menu_btn svg{
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}

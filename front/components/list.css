@@ -1,0 +1,104 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+
+
+text{
+    color: #000000; 
+    font-size: 16pt;
+    font-weight: 800;
+    font-family: 'Montserrat';
+    font-style: normal;
+    text-align: left;
+    position: relative;
+}
+
+.line {
+    /* margin-bottom: 1rem; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #E9ECEE;
+    border-radius: 14px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    height: 4.5rem;
+    margin-bottom: 1.5rem;
+}
+/* Rectangle 10 */
+
+
+
+.line:hover {
+    box-shadow: 0 0 0.8rem rgba(0,0,0,0.3);
+}
+
+.username{
+    font-size: 0.8rem;
+    color: rgb(162, 159, 161)
+}
+
+.user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile{
+    width: 2.9rem;
+    height: 2.9rem;
+    background-image: url("./svg/profile.svg");
+    background-size: 100%;
+    margin-right: 0.8rem;
+    cursor: pointer;
+}
+
+.profile:hover {
+    margin-bottom: 10%;
+    transition: 0.2s;
+}
+.delete {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-bottom: 5%;
+    background-image: url("./svg/delete.svg");
+    background-size: 100%;
+    cursor: pointer;
+}
+
+.delete:hover {
+    margin-bottom: 15%;
+    transition: 0.2s;
+}
+
+.user .details {
+    margin-left: 1.5rem;
+    line-height: 1.3;
+    text-transform: capitalize;
+}
+
+
+.action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.answer {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-bottom: 5%;
+    background-image: url("./svg/delete.svg");
+    background-size: 100%;
+    cursor: pointer;
+}
+
+.answer:hover {
+    margin-bottom: 15%;
+    transition: 0.2s;
+}
