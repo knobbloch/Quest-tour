@@ -1,3 +1,19 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(Montserrat-VariableFont_wght.ttf);
+}
+*{
+    font-family: 'Montserrat';
+    font-weight: 600;
+    color:#0F2232;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
 .nav_close{
     background: #E9ECEE;
     width: 4.5rem;
@@ -13,6 +29,7 @@
 }
 .open_menu_btn{
     background-color: inherit;
+    
 }
 .open_menu_btn svg{
     width:1.7rem;
@@ -119,7 +136,7 @@ a:hover{
         height: 0.1rem;
     }
     .see_answers:hover:before, .edit:hover:before{
-        width: 7.3rem;
+        width: 7.4rem;
     }
     .logo svg{
         margin: 1rem;
