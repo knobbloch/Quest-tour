@@ -1,0 +1,57 @@
+.nav_panel{
+    background: #E9ECEE;
+    width: 4.5rem;
+    height: 100%;
+    min-height: 100%;
+    position: fixed; 
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    left: 0;
+    z-index: 2000;
+}
+.back_btn{
+    background-color: inherit;
+    border: none;
+}
+.back_btn svg{
+    width:1.8rem;
+    height:1.8rem;
+    margin:1.2rem 0rem 0rem 0.9rem;
+}
+.logo svg{
+    bottom:0;
+    left:0;
+    position:fixed;
+    margin: 1.1rem;
+    width: 2.7rem;
+    height: 8rem;
+}
+.back_btn:hover{
+    svg{
+        path{
+            stroke:#EC1C24;
+        }
+    }
+}
+a:hover{
+    color:#EC1C24;
+    svg{
+        path{
+            fill: #EC1C24;
+        }
+    }
+}
+
+@media (max-width:800px){
+    .logo svg{
+        margin: 1rem;
+        width: 2.3rem;
+        height: 7rem;
+    }
+    .back_btn svg{
+        width: 1.5rem;
+        height: 1.5rem;
+        margin:1.2rem 0rem 0rem 1rem;
+    }
+}
