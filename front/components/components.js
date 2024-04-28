@@ -1,14 +1,20 @@
 class Custom_checkbox extends HTMLElement {
     connectedCallback() {
+        const text = this.getAttribute('text');
+        const group = this.getAttribute('group');
 
         this.innerHTML = `   
-            <link rel="stylesheet" href="./checkbox.css"/>
+            <link rel="stylesheet" href="../components/checkbox.css"/>
 
-            <label class="label">
-                <input id = "check" type="checkbox" class="checkbox" value="yes">
+            <label class="label-check">
+                <input id = "check" type="checkbox" class="checkbox" name="${group}" value="yes">
                 
-                <span class="fake"></span>
-                <span class="text">da?</span>
+                <span class="fake">
+                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6953 0.162106C12.0294 0.433152 12.0995 0.949317 11.8519 1.31499L6.49691 9.22195C5.91843 10.0761 4.81642 10.2544 4.03686 9.62L0.303744 6.58188C-0.0299928 6.31028 -0.0993633 5.794 0.148801 5.42873C0.396964 5.06347 0.868688 4.98755 1.20243 5.25916L4.93554 8.29727C5.0469 8.38791 5.20433 8.36243 5.28697 8.24041L10.6419 0.333448C10.8896 -0.0322278 11.3612 -0.10894 11.6953 0.162106Z" fill="transparent"/>
+                </svg>
+                </span>
+                <span class="text">${text}</span>
             </label>`;
     }
 }
@@ -25,7 +31,7 @@ class Custom_radio extends HTMLElement {
 
             <div>
                 <label class="label">
-                    <input id="radio1" type="radio" class="radiobutton" name="${group}" value="no">
+                    <input id="radio1" type="radio" class="radiobutton" name="${group}" value="no" >
                     <span class="fake-radio"></span>
                     <span class="text-radio">${text}</span>
                 </label>
@@ -73,7 +79,7 @@ customElements.define('user-list', User_list);
 class Task_list extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="list.css">
+        <link rel="stylesheet" type="text/css" href="../components/list.css">
         <div class="list" id="listContainer">
             <template id="listTemplate">
                 <div class="line" onclick="redirectToPage(this)">
@@ -100,6 +106,7 @@ customElements.define('task-list', Task_list);
 class Header extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
+        <link rel="stylesheet" type="text/css" href="../components/header_style.css">
             <header class="header">
                 <a href="#" title="Главная">
                     <svg class="logo" viewBox="0 0 220 67" fill="none" xmlns="http://www.w3.org/2000/svg">
