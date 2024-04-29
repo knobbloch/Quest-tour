@@ -43,5 +43,16 @@ class Practice(BaseModel):
     orderc: int
     testornot: bool
     description: Optional[str] = None
-    pathto: Optional[str] = None
 
+
+class PracticeRes(BaseModel):
+    id: int
+    grade: Optional[int] = None
+    comment: Optional[str] = None
+    user_email: str
+    practice_id: int
+
+
+class Grade(BaseModel):
+    result: Optional[int] = None
+    comment: Optional[str] = None
