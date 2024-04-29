@@ -3,11 +3,11 @@
     display: none;
 }
 
-/* .label {
+.label {
     display: flex;
-    align-items: center; 
+    align-items: center;
     cursor: pointer;
-} */
+}
 
 .fake-radio {
     display: flex;
@@ -19,6 +19,7 @@
     box-sizing: border-box;
     justify-content: center; /* Центрирование содержимого по горизонтали */
     align-items: center;
+    margin-right: 0.8rem;
 }
 
 .fake-radio::before {
