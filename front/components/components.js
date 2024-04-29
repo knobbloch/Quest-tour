@@ -356,3 +356,18 @@ class Text_input extends HTMLElement {
     }
 }
 customElements.define('text-input', Text_input);
+
+class Sun extends HTMLElement{
+    connectedCallback(){
+        this.innerHTML = `
+        <link rel="stylesheet" type="text/css" href="sun_style.css">
+        <div class="sun_box">
+        <div class="circular-progress">
+            <span class="progress-value">0%</span>
+        </div>    
+        <img src="svg/sun.svg" id="sun_svg">
+        </div>
+        `
+    }
+}
+customElements.define('sun', Sun);
