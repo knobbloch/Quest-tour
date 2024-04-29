@@ -8,7 +8,7 @@
     z-index: 2; /* Перемещает SVG на передний план */
 }
 
-.label-check {
+.label {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -25,6 +25,7 @@
     
     justify-content: center; 
     align-items: center;
+    margin-right: 0.8rem;
     
 }
 
