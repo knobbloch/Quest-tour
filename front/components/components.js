@@ -6,7 +6,7 @@ class Custom_checkbox extends HTMLElement {
         this.innerHTML = `   
             <link rel="stylesheet" href="../components/checkbox.css"/>
 
-            <label class="label-check">
+            <label class="label">
                 <input id = "check" type="checkbox" class="checkbox" name="${group}" value="yes">
                 
                 <span class="fake">
@@ -33,7 +33,7 @@ class Custom_radio extends HTMLElement {
                 <label class="label">
                     <input id="radio1" type="radio" class="radiobutton" name="${group}" value="no" >
                     <span class="fake-radio"></span>
-                    <span class="text-radio">${text}</span>
+                    <span class="text">${text}</span>
                 </label>
             </div>
         `;
