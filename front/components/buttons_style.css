@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(Montserrat-VariableFont_wght.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+html{
+    font-size: 20px;
+}
+.button_red{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 3.4rem;
+    background: #FF0000;
+    border-radius: 1rem;
+    border-style: none;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+}
+
+.button_red:hover{
+    background: #EB0000;
+}
+.button_red:active{
+    background: #dd7679;
+}
+.button_red:disabled{
+    background: #F6999C;
+}
+
+
+.button_white{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 3.4rem;
+    background: #FFFFFF;
+    border: 3px solid #FF0000;
+    border-radius: 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #FF0000;
+}
+
+.button_white:hover{
+    background: #FFF5F5;
+    color: #EB0000;
+    border-color:#EB0000;
+}
+.button_white:active{
+    background: #ffd6d6;
+    color: #AC0000;
+    border-color: #AC0000;
+}
+.button_white:disabled{
+    background: #EFEFEF;
+    color: #F6999C;
+    border-color: #F6999C;
+}
+
+
+.button_blue{
+    width: 10rem;
+    height: 3.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #6B80A0;
+    border-radius: 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #0F2232;
+    background-color: #FFFFFF;
+}
+.button_blue:hover{
+    background: rgb(248, 251, 255);
+}
+
+.button_blue:active{
+    background: #ececec;
+    border-color: #12629c;
+}
+.button_blue:disabled{
+    background: #EFEFEF;
+    color: #8A8A8A;
+}
+
+
+.button_plus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: #FF0000;
+    border-style: none;
+    border-radius: 1rem;
+}
+.button_plus_svg{
+    width:1.8rem;
+    height:1.8rem;
+}
+
+.button_plus:hover
+{
+    background: #EB0000;
+}
+.button_plus:active{
+    background: #dd7679;
+}
+.button_plus:disabled{
+    background: #F6999C;
+}

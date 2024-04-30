@@ -46,6 +46,60 @@ class Custom_radio extends HTMLElement {
 
 customElements.define('custom-radiobutton', Custom_radio);
 
+class Custom_button_red extends HTMLElement {
+    connectedCallback() {
+        const text = this.textContent.trim();
+        this.innerHTML = `
+        
+        <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
+        <button class="button_red">${text}</button>
+        `
+    }
+}
+
+customElements.define('custom-button-red', Custom_button_red);
+
+class Custom_button_white extends HTMLElement {
+    connectedCallback() {
+        const text = this.textContent.trim();
+        this.innerHTML = `
+        
+        <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
+        <button class="button_white">${text}</button>
+        `
+    }
+}
+
+customElements.define('custom-button-white', Custom_button_white);
+
+class Custom_button_blue extends HTMLElement {
+    connectedCallback() {
+        const text = this.textContent.trim();
+        this.innerHTML = `
+        
+        <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
+        <button class="button_blue">${text}</button>
+        `
+    }
+}
+
+customElements.define('custom-button-blue', Custom_button_blue);
+
+class Button_plus extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
+        <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
+        <button class="button_plus">
+            <svg class="button_plus_svg" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.5456 32.6257V18.0423M18.5456 18.0423V3.45898M18.5456 18.0423L2.50391 18.0423M18.5456 18.0423L34.5872 18.0423" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        `
+    }
+}
+customElements.define('custom-button-plus', Button_plus);
+
+
 class User_list extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -227,18 +281,6 @@ class Sidepanel extends HTMLElement {
 customElements.define('custom-sidepanel', Sidepanel);
 
 
-class Button_plus extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
-        <button class="button_plus">
-            <svg width="30" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.5456 32.6257V18.0423M18.5456 18.0423V3.45898M18.5456 18.0423L2.50391 18.0423M18.5456 18.0423L34.5872 18.0423" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-        `
-    }
-}
-customElements.define('button-plus', Button_plus);
 
 
 
