@@ -1,10 +1,10 @@
 import sqlite3  # import psycopg2 #заменить при переезде на сервер
-import time
 
 from fastapi import APIRouter
 import api.db_creation
 import api.debugging
 import datetime
+import threading
 
 db_router = APIRouter()
 
@@ -13,6 +13,7 @@ TEST = 'data/test'
 LECTION = 'data/lection'
 DEFAULT_PASSWORD = "Hi"
 DEFAULT_DEADLINE = datetime.timedelta(days=30)
+TOKEN_TIME = datetime.timedelta(hours=30)
 
 # Initialization
 cursor = None
@@ -102,15 +103,17 @@ def new_practice(title, orderc, testornot, description=None):
     print("new_practice happened")
     return increment[0][0]
 
-def new_token(token=None, date=None):
+def new_token(token, email, date=None):
+    if date == None:
+        date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     try:
-        cursor.execute("INSERT INTO Token (token, tokenData) VALUES (?, ?)",(token, date))
+        cursor.execute("INSERT INTO Token (token, email, tokenDate) VALUES (?, ?, ?)",(token, email, date))
         conn.commit()
     except Exception as error:
         conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return False
-    print("new_practice happened")
+    print("new_token happened")
     return True
 
 ###########EDIT########### returns True if all okay
@@ -329,7 +332,8 @@ def get_course_res (email):
 #for auth, email, password
 def get_auth(email):
     try:
-        cursor.execute("SELECT * from Auth a WHERE a.email = ?", (email,))
+        cursor.execute("""SELECT a.email, a.password, p.admornot from Auth a 
+                       LEFT JOIN Person p ON p.email = a.email WHERE a.email = ?""", (email,))
         records = cursor.fetchall()
         records.append([])
     except Exception as error:
@@ -337,10 +341,6 @@ def get_auth(email):
         return False
     print("get_auth happened")
     return records[0]
-
-def get_token(email):
-    
-    pass
 
 ###########DELETE###########
 
@@ -363,9 +363,7 @@ def delete_person(email):
 def delete_lection(id):
     try:
         cursor.execute("""DELETE FROM LectionRes WHERE idlection = ?""", (id, ))
-        print("bebebbeb")
         cursor.execute("""DELETE FROM Lection WHERE id = ?""", (id, ))
-        print("bbbabaab")
         conn.commit()
     except Exception as error:
         conn.rollback()
@@ -377,15 +375,36 @@ def delete_lection(id):
 def delete_practice(id):
     try:
         cursor.execute("""DELETE FROM PracticeRes WHERE idpractice = ?""", (id, ))
-        print("bebebbeb")
         cursor.execute("""DELETE FROM Practice WHERE id = ?""", (id, ))
-        print("bbbabaab")
         conn.commit()
     except Exception as error:
         conn.rollback()
         print("An error occurred:", error)  # An error occurred: name 'x'
         return False
     print("delete_practice happened")
+    return True
+
+def delete_old_tokens():
+    current_date = datetime.datetime.now()
+    try:
+        cursor.execute("""DELETE FROM Token WHERE tokenDate <= ?""", (current_date+TOKEN_TIME, ))
+        conn.commit()
+    except Exception as error:
+        conn.rollback()
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("delete_old_tokens happened")
+    return True
+
+def delete_token (token):
+    try:
+        cursor.execute("""DELETE FROM Token WHERE token = ?""", (token,))
+        conn.commit()
+    except Exception as error:
+        conn.rollback()
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("delete_token happened")
     return True
 
 #OTHER
@@ -413,9 +432,38 @@ def is_all_course_completed(email):
     return True
     print()
 
+def check_token(token):
+    records = None
+    try:
+        cursor.execute("SELECT * from Token t WHERE t.token = ?", (token,))
+        records = cursor.fetchall()
+        #records.append([])
+
+    except Exception as error:
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+
+    print("check_token happened")
+    records.append([])
+    if not (records[0] == []):
+        recieved_data = records[0][1]
+        format = '%Y-%m-%d %H:%M:%S'
+        data = datetime.datetime.strptime(recieved_data, format)
+
+        if (datetime.datetime.now()-data <= TOKEN_TIME):
+            return {"user": records[0][2],
+                    "data": records[0][1]}
+    return False
+
+def clean_tokens():
+    thread = threading.Timer(600, delete_old_tokens)
+    thread.start()
+
+#clean_tokens()                 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 #print (new_practice("meowmeow", 1  , testornot=False))
 #print(new_lection("blabla", 1, "HALO"))
-
+#
 #print(new_person("lox@gmail.com", "lox", "xol", 0, division = "fdsafdfa"))
 #(api.debugging.get_all_auths())
 #now = datetime.datetime.now()
@@ -424,10 +472,15 @@ def is_all_course_completed(email):
 #print(edit_auth("lox@gmail.com", token="IMTOKEN", date=new_date))
 #print(get_auth("lox@gmail.com"))
 
+#print(new_token("weewq", "lox@gmail.com"))
+#print(check_token("weewq"))
+
+
 #g = new_person("SSSghoul@gmail.com", namep = "lox", surname = "AAA", admornot = 0, division = "fdsafdfa")
 #g = new_person("debil@gmail.com", "debil", "libed", 1, division = "division by zero")
 #new_practice("QQQQQQQQQQQQ", 1  , testornot=False)
 #print (new_lection("blabla", 1, "HALO"))
+
 
 #delete_person("lox@gmail.com")
 #print(edit_lection_res(1, "lox@gmail.com", True))

@@ -72,8 +72,10 @@ CREATE TABLE IF NOT EXISTS Auth (
 cursor.execute ('''
 CREATE TABLE IF NOT EXISTS Token (
 		token VARCHAR(64), 
-		tokenData DATETIME,
-        PRIMARY KEY (token)
+		tokenDate DATETIME,
+		email VARCHAR(64) not null,
+        PRIMARY KEY (token),
+        FOREIGN KEY (email) REFERENCES Auth (email)
 )''')
 
 connection.close()
