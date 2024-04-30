@@ -1,0 +1,190 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    src: url(Montserrat-Regular.ttf);
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: bold;
+    src: url(Montserrat-Bold.ttf);
+}
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    font-style: normal;
+    font-weight: normal;
+    src: url(Montserrat-SemiBold.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat-SemiBold';
+}
+body{
+    background-image: url('img/загрузка.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+
+    
+}
+
+
+
+/* Мишина часть*/
+
+
+/* Кнопки */
+
+.button-blue{  
+    display: flex;
+    position: relative;
+    top: 5rem;
+    left: 15rem;
+
+    cursor: pointer;
+
+    width: 14rem;
+    height: 6rem;
+    
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    
+    font-size: 22pt;
+    border: 3px solid #6B80A0;
+    border-radius: 25px;
+    color: #0F2232;
+    background-color: #FFFFFF;
+}
+.button-blue:hover{
+    background: rgba(15, 34, 50, 0.09);
+}
+
+.button-blue:active{
+    background: #E1ECF5;
+}
+.button-blue:disabled{
+    background: #EFEFEF;
+    color: #8A8A8A;
+}
+
+.modal .button-red{ 
+    display: flex;
+    position: relative;
+    top: 4em;
+    left: -0.5em;
+
+    cursor: pointer;
+
+    width: 8em;
+    height: 3em;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 22pt;
+    border-radius: 25px;
+    border-style: none;
+    background: #FF0000;
+    color: rgb(255, 255, 255);
+}
+.modal .button-red:hover{
+    background: #EB0000;
+}
+.modal .button-red:active{
+    background: #EC1C24;
+}
+.modal .button-red:disabled{
+    background: #F6999C;
+}
+
+.modal .button-blue{  
+    display: flex;
+    position: relative;
+    top: 1em;
+    right: -0.5em;
+
+    width: 8em;
+    height: 3em;
+
+}
+
+/* Модальное окно */
+
+.modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100vh;
+    
+    z-index: 99998;
+
+    background-color: rgba(0,0,0,.3);
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .4s, visibility .4s;
+}
+
+.modal__box{
+    margin: 3rem 1.5rem;
+    padding: 3rem;
+
+    width: 34.5rem;
+    height: 30rem;
+
+    z-index: 1;
+    
+    background-color: #E9ECEE;
+    border: 3px solid #293240;
+    border-radius: 25px;
+    box-shadow: 0px 0px 17px -7px rgba(34,60,80,.2);
+
+    transform: scale(0);
+    transition: transform .8s;
+}
+
+.modal__box-header{
+    font-weight: 800;
+    font-size: 35px;
+    line-height: 43px;
+    
+    text-align: center;
+
+    color: #EC1C24;
+}
+
+.modal__box-text{
+    font-family: 'Montserrat';
+
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 41px;
+
+    margin-top: 2vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+
+    color: #0F2232;
+}
+
+.modal.open{
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal.open .modal__box{
+    transform: scale(1);
+}

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from api.db_main import new_person, delete_person, get_person, edit_person
-from api.debugging import get_all_persons
+from api.db_main import new_person, delete_person, get_person, edit_person, get_all_not_adms
+#from api.debugging import get_all_persons
 from api.models import Person, UserFIO
 
 user_router = APIRouter()
@@ -14,7 +14,7 @@ async def test(user: Person):
 
 @user_router.get("/script/user_list", response_model=list[UserFIO])
 async def user_list():
-    records = get_all_persons()
+    records = get_all_not_adms()
     users = []
     for record in records:
         if record[3] is None:
@@ -48,7 +48,7 @@ async def add_user(user: Person):
         return {"status": 500, "Message": "an error occurred :("}
 
 
-@user_router.post("/script/edit_user")
+@user_router.put("/script/edit_user")
 async def edit_user(email: str, name=None, surname=None, thirdname=None, division=None, city=None, employment=None):
     if edit_person(email, name, surname, thirdname, division, city, employment):
         return {"status": 200, "Message": "user data changed"}
@@ -56,7 +56,7 @@ async def edit_user(email: str, name=None, surname=None, thirdname=None, divisio
         return {"status": 500, "Message": "an error occurred!"}
 
 
-@user_router.post("/script/delete_user")
+@user_router.delete("/script/delete_user")
 async def delete_user(email: str):
     if delete_person(email):
         return {"status": 200, "Message": "user deleted"}

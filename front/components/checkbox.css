@@ -1,0 +1,101 @@
+
+.checkbox {
+    display: none;
+}
+
+.fake svg {
+    display: block; /* Убирает лишние отступы вокруг SVG */
+    z-index: 2; /* Перемещает SVG на передний план */
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.fake {
+    display: flex;
+    border: 2px solid #D7D7D7;
+    position: relative;
+    width: 1rem;
+    height: 1rem;   
+    border-radius: 25%;
+    box-sizing: border-box;
+    
+    justify-content: center; 
+    align-items: center;
+    margin-right: 0.8rem;
+    
+}
+
+.fake::before {
+    padding: inherit;
+    width: inherit;
+    height: inherit;   
+    border-radius: inherit;
+    background: #FF6666;
+    border: 0px solid #FF6666;
+    /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e"); */
+    /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"\  width="20" height="20" viewBox="0 0 16 16" fill="%23fff"><path d="M13.6953 3.16211C14.0294 3.43315 14.0995 3.94932 13.8519 4.31499L8.49691 12.222C7.91843 13.0761 6.81642 13.2544 6.03686 12.62L2.30374 9.58188C1.97001 9.31028 1.90064 8.794 2.1488 8.42873C2.39696 8.06347 2.86869 7.98755 3.20243 8.25916L6.93554 11.2973C7.0469 11.3879 7.20433 11.3624 7.28697 11.2404L12.6419 3.33345C12.8896 2.96777 13.3612 2.89106 13.6953 3.16211Z" fill="white"/></svg>'); */
+    content: "";
+    position: absolute; 
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    box-sizing: border-box;
+    /* transition: .1s; */
+    
+}
+.fake svg path {
+    fill: #FFFFFF;
+}
+
+.checkbox:checked + .fake::before {
+    opacity: 1;
+}
+.checkbox:hover + .fake::before {
+    border: 2px solid #BF0000;
+}
+.checkbox:hover + .fake{
+    border: 2px solid #BF0000;
+}
+
+.checkbox:active + .fake{
+    border: 2px solid #EC1C24;
+}
+.checkbox:active + .fake::before{ 
+    background: #EC1C24;
+    border: 2px solid #EC1C24;
+    /* background-image:  url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"\ viewBox="0 0 16 16" fill="%23fff"><path d="M13.6953 3.16211C14.0294 3.43315 14.0995 3.94932 13.8519 4.31499L8.49691 12.222C7.91843 13.0761 6.81642 13.2544 6.03686 12.62L2.30374 9.58188C1.97001 9.31028 1.90064 8.794 2.1488 8.42873C2.39696 8.06347 2.86869 7.98755 3.20243 8.25916L6.93554 11.2973C7.0469 11.3879 7.20433 11.3624 7.28697 11.2404L12.6419 3.33345C12.8896 2.96777 13.3612 2.89106 13.6953 3.16211Z" fill="white"/></svg>'); */
+}
+.checkbox:active + .fake::before svg path {
+    fill: #FFFFFF;
+}
+
+.checkbox:disabled + .fake {
+    background: #FFFFFF;
+    border: 2px solid #FF6666;
+    /* cursor: default; */
+}
+
+.checkbox:disabled + .fake::before {
+    background: #FFFFFF;
+    border: 2px solid #FF6666;   
+    /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"\ viewBox="0 0 16 16" fill="%23fff"><path d="M13.6953 3.16211C14.0294 3.43315 14.0995 3.94932 13.8519 4.31499L8.49691 12.222C7.91843 13.0761 6.81642 13.2544 6.03686 12.62L2.30374 9.58188C1.97001 9.31028 1.90064 8.794 2.1488 8.42873C2.39696 8.06347 2.86869 7.98755 3.20243 8.25916L6.93554 11.2973C7.0469 11.3879 7.20433 11.3624 7.28697 11.2404L12.6419 3.33345C12.8896 2.96777 13.3612 2.89106 13.6953 3.16211Z" fill="%23FF6666"/></svg>'); */
+    /* cursor: default; */
+}
+
+
+/* Правило для неактивного и невыбранного чекбокса, делаем галочку прозрачной */
+.checkbox:disabled + .fake svg path {
+    fill: transparent; /* Прозрачная галочка */
+    /* cursor: default; */
+}
+
+/* Правило для неактивного и выбранного чекбокса, делаем галочку красной */
+.checkbox:disabled:checked + .fake svg path {
+    fill: #FF6666; /* Красный цвет галочки */
+    /* cursor: default; */
+}

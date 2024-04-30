@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Создание теста</title>
+        <!-- <link rel="stylesheet" href="reset.css"/> -->
+        <link rel="stylesheet" href="styles/create-test.css"/>
+        
+    </head>
+
+    <body>       
+        <main>
+            <custom-sidepanel class="cs"></custom-sidepanel>
+            <div class="main__test">
+                <!-- Принимать заголовок  -->
+                <div class="header"> 
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.9555 6.29491C11.4299 0.0613213 20.5701 0.0613289 21.0444 6.29492C21.234 8.78617 23.2138 10.766 25.7051 10.9555C31.9386 11.4299 31.9386 20.5701 25.705 21.0444C23.2138 21.234 21.234 23.2138 21.0444 25.7051C20.5701 31.9386 11.4299 31.9386 10.9555 25.705C10.766 23.2138 8.78616 21.234 6.29491 21.0444C0.0613213 20.5701 0.0613289 11.4299 6.29492 10.9555C8.78617 10.766 10.766 8.78616 10.9555 6.29491Z" fill="#EC1C24"/>
+                        <path d="M11.0512 16.7071C10.6607 16.3166 10.6607 15.6834 11.0512 15.2929L15.2939 11.0503C15.6844 10.6597 16.3176 10.6597 16.7081 11.0503L20.9507 15.2929C21.3412 15.6834 21.3412 16.3166 20.9507 16.7071L16.7081 20.9497C16.3176 21.3403 15.6844 21.3403 15.2939 20.9497L11.0512 16.7071Z" fill="#FFCCCC" stroke="#FF6666" stroke-width="2"/>
+                        </svg>                                                                  
+                    <h1>Первый тест</h1>
+                </div>
+                <div class="test">
+                    <div class="questions">
+                        <div class="question">
+                            <div class="name__question">
+                                1. Кто платит? ЧТо платит?
+                            </div>
+                            <div class="answers__question">
+                                <custom-radiobutton text="лалалла" group="myGroup"> </custom-radiobutton>
+                                <custom-radiobutton text="иди нахуй" group="myGroup"></custom-radiobutton>
+                                <custom-radiobutton text="долбаеб" group="myGroup"></custom-radiobutton>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="name__question">
+                                2. Мама или чекбокс?
+                            </div>
+                            <div class="answers__question">
+                                <custom-checkbox class="ccheckbox" text="я лох" group="myGroup"> </custom-checkbox>
+                                <custom-checkbox class="ccheckbox" text="тупой чекбокс ненвижу" group="myGroup"> </custom-checkbox>
+                                <custom-checkbox class="ccheckbox" text="лалалла" group="myGroup"> </custom-checkbox>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>            
+        </main>
+        <script src="../components/components.js"></script>
+        <!-- <script src="../components/scripts/sidebar.js"></script> -->
+    </body>
+</html>

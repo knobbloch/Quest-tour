@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Статистика</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./statistics.css"/>
+</head>
+<body>
+    <script src="components.js"></script>
+    <main>
+        <div class="stats">
+            <template class="user-template">
+                <div class="name"></div>
+                <div class="line_points"></div>
+            </template>
+            <div class="users">
+                <header class="numbers">
+                    <div class="task"></div>
+                </header>
+            </div>
+            <div class="scrollbox">
+                <div class="tasks">                
+                    <header class="numbers">
+                        <div class="task">Задание 1</div>
+                    </header>
+                    <div class="points"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="statistics.js"></script>
+    
+</body>
+</html>

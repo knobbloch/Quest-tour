@@ -1,0 +1,150 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    src: url(Montserrat-Regular.ttf);
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: bold;
+    src: url(Montserrat-Bold.ttf);
+}
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    font-style: normal;
+    font-weight: normal;
+    src: url(Montserrat-SemiBold.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat-SemiBold';
+}
+body{
+    background-image: url('img/загрузка.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    
+}
+
+
+
+/* Мишина часть*/
+
+
+/* Поле для написания ответа */
+
+.answer-input{
+
+    position: relative;
+    top: 450px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+
+    width: 1040px;
+    height: 110px;
+
+
+}
+
+.answer-input__text{
+    width: 1040px;
+    height: 200px;
+    min-height: 200px;
+    padding: 20px 60px 20px 20px;
+    resize: none;
+
+    overflow: hidden;
+
+    background: rgba(233, 236, 238, 0.5);
+    border: none;
+    border-radius: 15px;
+
+    font-size: 16px;
+    max-block-size: 10;
+}
+
+.answer-input__text::placeholder{
+    font-family: 'Montserrat';
+
+    font-weight: 450;
+    font-size: 16px;
+}
+
+
+
+.answer-input__field {
+    position: absolute;
+    left: 96%;
+    top: 15%;
+
+    width: 2%;
+    height: 29%;
+    
+    cursor: pointer;
+}
+
+
+.answer-input__field img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.answer-input__field input{
+    display: none;
+}
+
+/* Загруженный файл */
+
+.file__box img{
+    display: inline-block;
+    position: relative;
+}
+
+.file__box img{
+    position: relative;
+    left: 10%;
+
+    width: 90px;
+    height: 94.5px;
+    object-fit: cover;
+}
+
+.file__box-label{
+    position: relative;
+
+    left: 9.5%;
+}
+
+.file__box .button-delete{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    left: 10.5vw;
+    bottom: 6vh;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    background-image: url("img/delete.svg");
+    background-size: 100%;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* Драгндроп полю файлов */
+
+.answer-input__text.drop {
+    background: rgba(15, 34, 50, 0.09);
+}

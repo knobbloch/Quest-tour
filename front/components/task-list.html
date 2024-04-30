@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Список заданий</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./list.css"/>
+</head>
+<body>
+    <script src="components.js"></script>
+    <main>
+        <div class="list" id="listContainer">
+            <template id="listTemplate">
+                <div class="line" onclick="redirectToPage(this)">
+                    <div class="user">
+                        <div class="details">
+                            <h1 class="name"></h1>
+                        </div>
+
+                    </div>
+                    <div class="action">
+                        <div class="delete" onclick="deleteTask(event)">
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </main>
+    <script src="task-list.js"></script>
+</body>
+</html>

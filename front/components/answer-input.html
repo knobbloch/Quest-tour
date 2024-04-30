@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Модальное окно</title>
+<link rel="stylesheet" type="text/css" href="answer-input.css">
+</head>
+<body>
+    
+    <!-- Окошко для ответа -->
+    <div class="answer-input">
+        <textarea class="answer-input__text"  placeholder="Введите ответ" oninput="auto_grow(this)"></textarea>
+
+        <label class="answer-input__field">
+            <img src="img/File_bt.svg">
+            <input type="file" id="add_file" multiple>
+        </label>
+
+    <!-- Место,куда вставляются все файлы  -->
+    <div class="filePlayer" id="filePlayer">
+
+    </div>
+
+
+    <script src="answer-input.js"></script>
+</body>
+</html>

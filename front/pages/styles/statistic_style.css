@@ -1,0 +1,131 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(../../components/Montserrat-VariableFont_wght.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+html{
+    font-size: 20px;
+}
+body{
+    min-height: 100vh;
+}
+
+.container{
+    min-height: 100vh;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3.7rem 5rem 1fr;
+}
+.heading{
+    display: grid;
+    grid-template-columns: 8% 1fr;
+    align-content: center;
+    align-items: center; 
+    margin: 1rem;
+}
+.heading p{
+    font-weight: 600;
+    color: #0F2232;
+    font-size: 2rem;
+}
+.back_btn{
+    background: none;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display:flex;
+}
+.back_btn svg{
+    width:2.3rem;
+    height:2.3rem;
+}
+.back_btn svg:hover{
+    path{
+        stroke: #EC1C24;
+    }
+}
+.content_pb{
+    display:grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 30% 15% 10% 15% 25%;
+    justify-items: center;
+    align-items: center;
+}
+.content_pb custom-progressbar{
+    grid-row: 1/6;
+    justify-self: right;
+}
+#stick{
+    width: 36rem;
+    height:5.15rem;
+    grid-column-start: 2;
+    justify-self: left; 
+    align-self: self-start;
+}
+#progress_text{
+    align-self: self-end;
+}
+.content_pb p{
+    grid-column-start: 2;
+    justify-self: left;
+    align-self: self-start;
+    margin: 0rem 0rem 0rem 6.4rem;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 800px){
+    .content_pb svg{
+        width: 19.3rem;
+        height:3rem;
+    }
+    .content_pb p{
+        margin: 0rem 0rem 0rem 3.6rem;
+        font-size: 0.9rem;
+    }
+    #stick{
+        width: 20rem;
+        height: 3rem;
+    }
+}
+@media (max-width: 500px){
+    .content_pb{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        justify-items: center;
+        align-items:center;
+    }
+    .content_pb custom-progressbar{
+        justify-self: center;
+        align-self: center;
+        margin-bottom: 1rem;
+    }
+    #stick{
+        display: none;
+    }
+    .content_pb p{
+        align-self: center;
+        justify-self: center;
+        grid-column: 1;
+        text-align: center;
+        margin: 1rem 0rem 1rem 0rem;
+        font-size: 0.9rem;
+    }
+    .heading{
+        grid-template-columns: 6% 1fr;
+        margin: 1rem;
+    }
+    .heading p{
+        font-weight: 600;
+        color: #0F2232;
+        font-size: 1.5rem;
+        margin-left: 0.5rem;
+    }
+}
