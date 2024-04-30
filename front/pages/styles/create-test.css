@@ -6,7 +6,7 @@
 
 *{
     margin: 0;
-    padding:0;
+    padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat';
     color: #0F2232
@@ -27,7 +27,7 @@ h1 {
 }
 
 h2 {
-    
+
 }
 main {
     height: 100%;
@@ -64,4 +64,25 @@ main {
     margin-left: 8rem;
 
 }
+.name__question {
+    font-weight: 500;
+    /* font-size: 1.8rem; */
+}
 
+.question {
+    margin-bottom: 1rem;
+}
+
+.answers__question {
+    margin-left: 1rem;
+
+}
+
+
+.text {
+    font-weight: 400;
+}
+
+.ccheckbox{
+    margin-bottom: 1rem;
+}
