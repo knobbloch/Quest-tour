@@ -356,3 +356,31 @@ class Text_input extends HTMLElement {
     }
 }
 customElements.define('text-input', Text_input);
+
+class CustomProgressbar extends HTMLElement {
+    connectedCallback(){
+        this.innerHTML = `
+            <link rel="stylesheet" type="text/css" href="../components/progress_bar_style.css">
+            
+            <div class="skill">
+                <div class="outer">
+                    <div class="inner">
+                        <div id="number">0%
+                        </div>
+                    </div>
+                </div>
+
+                <svg id="percentages" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <defs>
+                    <linearGradient id="GradientColor">
+                        <stop class="circle_progress" offset="100%" stop-color="#EC1C24" />
+                    </linearGradient>
+                    </defs>
+                    <circle class="circle" cx="-9.5rem" cy="9.5rem" r="8.5rem" stroke-linecap="round" transform="rotate(-90 0 0)"/>
+                </svg>
+            </div>
+        `
+    }
+}
+
+customElements.define('custom-progressbar', CustomProgressbar);
