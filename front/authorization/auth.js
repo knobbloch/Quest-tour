@@ -1,4 +1,5 @@
-function CheckingEnteredLogin() {
+ console.log("data1")
+ function CheckingEnteredLogin() {
     var login = document.getElementById('login')
     return login.value.trim().length > 1 && login.value.trim().length < 30;
 }
@@ -30,29 +31,35 @@ document.getElementById('pass').addEventListener('input', function() {
 
 const SendDataButton = document.getElementById('sign-in');
 SendDataButton.addEventListener('click', () => {
+    console.log("data12")
     var login = document.getElementById('login');
     var password = document.getElementById('pass');
     if (CheckingEnteredLogin()) 
-        SendDataToServer({login: login.value.trim(), password: password.value.trim()}) 
+        //SendDataToServer({login: login.value.trim(), password: password.value.trim()})
+        SendDataToServer(login.value.trim())
 }
 )
 
 async function SendDataToServer(enteredData) {
-    const URL = `${window.location.origin}/script/send_entered_data`;
+    const URL = `${window.location.origin}/script/authorisation/`;
     const data = JSON.stringify({data: enteredData})
-    window.location.href = '../../index.html';
-    console.log(data)
     const config = {
-        headers: {'Content-Type': 'application/json'}
+        headers: {'Content-Type': 'application/json', "login": "Finn", "password": "Williams"}
     }
-    const response = await axios.post(URL, data, config)
+    axios({
+      method: 'post',
+      url: URL,
+      data: JSON.stringify({
+        "login": "Finn",
+        "password": "Williams"
+      }),
+      headers: config.headers
+    })
     .then(response => {
-        if (response) {
-            window.location.href = 'index.html';
-        }
+        console.log("data3")
         console.log(response.data)
     })
     .catch(error => {
         console.error(error)})
-    return response
+    //return response
 }

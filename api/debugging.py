@@ -65,3 +65,22 @@ def get_all_lections():
         return False
     print("get_all_lections happened")
     return records
+def get_all_auths():
+    try:
+        cursor.execute("""SELECT * from Auth a ORDER BY a.email""")
+        records = cursor.fetchall()
+    except Exception as error:
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("get_all_auths happened")
+    return records
+
+def get_all_tokens():
+    try:
+        cursor.execute("""SELECT * from Token""")
+        records = cursor.fetchall()
+    except Exception as error:
+        print("An error occurred:", error)  # An error occurred: name 'x'
+        return False
+    print("get_all_auths happened")
+    return records
