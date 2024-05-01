@@ -22,10 +22,10 @@ html{
 
 main {
     height: 100%;
-    width: 100%;
+    width: 90%;
     display: grid;
-    grid-template-columns: auto auto; 
-    column-gap: 10rem;
+    grid-template-columns: 1fr 8fr; 
+    /* column-gap: 10rem; */
     justify-content: start;
 }
 
@@ -40,6 +40,7 @@ main {
 
 }
 .header {
+    width: 100%;
     z-index: 3;
     padding-top: 2rem;
     position: fixed;
@@ -126,3 +127,20 @@ custom-button-blue{
     justify-self: flex-end;
 }
 
+.progress_bar {
+    background-color: aqua;
+    height: 20rem;
+    width: 20rem;
+    justify-self: center;
+}
+
+.lecture{
+    width: 100%; /* Установка ширины контейнера */
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    resize: none; /* Отключение изменения размера пользователем */
+    overflow: hidden; /* Скрытие полос прокрутки */
+    white-space: pre-wrap; /* Перенос строк в соответствии с содержимым */
+    word-wrap: break-word; /* Перенос длинных слов */
+}
