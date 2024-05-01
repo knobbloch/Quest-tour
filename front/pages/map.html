@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Карта</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link rel="stylesheet" type="text/css" href="../components/sun_style.css">
+<link rel="stylesheet" type="text/css" href="styles/map.css">
+</head>
+<body>
+  <custom-header></custom-header>
+
+
+    <div class="contaner" style="position: relative;">
+
+      <div class="swiper-bg"></div>
+
+        <div class="swiper map-main">
+
+          <div class="deadline">
+            <p id= "deadline" ></p>
+            <p id = "end"></p>
+          </div>
+
+            <div class="swiper-wrapper">
+            </div>
+
+            <div class="sun_box sun">
+              <div class="circular-progress">
+                  <span class="progress-value">0%</span>
+              </div>    
+              <img src="svg/sun.svg" id="sun_svg">
+            </div>
+            
+            <div class="navigation">
+              <div class="nuv_btn left">
+      
+              </div>
+      
+              <div class="map-pagination"></div>
+      
+              <div class="nuv_btn right">
+      
+              </div>
+            </div>
+        </div>
+
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="scripts/map.js"></script>
+    <script src="scripts/sun_script.js"></script>
+    <script src="../components/components.js"></script>
+</body>
+</html>

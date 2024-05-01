@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Пароль пользователя</title>
+<link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="styles/pass_change.css">
+</head>
+<body>
+  <custom-header></custom-header>
+  
+  <div class="container">
+    
+    <div class="back-bt">
+
+    </div>
+
+    <label class="title" id="title">
+
+    </label>
+
+  </div>
+
+  <div class="block first_block">
+    <label class="block-title">
+      Текущий пароль
+    </label>
+    <textarea class="block-text" id="pass" readonly></textarea>
+  </div>
+
+  <label class="title-error">
+  </label>
+
+  <div class = "information">
+    <div class="block">
+      <label class="block-title">
+        Новый пароль
+      </label>
+      <input type="password" class="block-text input" id="new_pass" maxlength="20" ></input>
+    </div>
+
+    <div class="block">
+      <label class="block-title">
+        Подтверждение пароля
+      </label>
+      <input type="password" class="block-text input" id="agein_pass" maxlength="20"></input>
+    </div>
+  </div>
+
+  <div class="pass-btn" onclick="hide_pass()">
+
+  </div>
+
+  <div class="buttons">
+
+    <custom-button-red onclick="check_pass()">Сохранить</custom-button-red>
+
+    <custom-button-white>Отмена</custom-button-white>
+      
+    </div>
+
+  </div>
+    
+
+  <script src="scripts/pass_change.js"></script>
+  <script src="../components/components.js"></script>
+</body>
+</html>
