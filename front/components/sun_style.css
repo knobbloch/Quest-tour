@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(Montserrat-VariableFont_wght.ttf);
+}
+*{
+    font-family: 'Montserrat';
+    font-weight: 600;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.sun_box{
+    height: 10vw;
+    width: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circular-progress{
+    position: relative;
+    height: 5.5vw;
+    width: 5.5vw;
+    background: conic-gradient(#F69933 3.6deg, #ffe0aadc 0deg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circular-progress::before{
+    content: "";
+    position: absolute;
+    height: 3.8vw;
+    width: 3.8vw;
+    border-radius: 50%;
+    background-color: #DFF0FF;
+}
+.progress-value{
+    position: relative;
+    font-size: 1.25vw;
+    font-weight: bold;
+    color: #FF6636;
+}
+#sun_svg{
+    position: absolute;
+    width: 10vw;
+    height: 10vw;
+    display: flex;
+}
+

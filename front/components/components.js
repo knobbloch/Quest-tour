@@ -4,7 +4,6 @@ class Custom_checkbox extends HTMLElement {
         const group = this.getAttribute('group');
 
         this.innerHTML = `   
-            <link rel="stylesheet" href="../components/checkbox.css"/>
 
             <label class="label">
                 <input id = "check" type="checkbox" class="checkbox" name="${group}" value="yes">
@@ -27,7 +26,6 @@ class Custom_radio extends HTMLElement {
         const group = this.getAttribute('group');
 
         this.innerHTML = `
-            <link rel="stylesheet" href="../components/radiobutton.css"/>
 
             <div>
                 <label class="label">
@@ -50,8 +48,6 @@ class Custom_button_red extends HTMLElement {
     connectedCallback() {
         const text = this.textContent.trim();
         this.innerHTML = `
-        
-        <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
         <button class="button_red">${text}</button>
         `
     }
@@ -64,7 +60,6 @@ class Custom_button_white extends HTMLElement {
         const text = this.textContent.trim();
         this.innerHTML = `
         
-        <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
         <button class="button_white">${text}</button>
         `
     }
@@ -77,7 +72,6 @@ class Custom_button_blue extends HTMLElement {
         const text = this.textContent.trim();
         this.innerHTML = `
         
-        <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
         <button class="button_blue">${text}</button>
         `
     }
@@ -88,7 +82,6 @@ customElements.define('custom-button-blue', Custom_button_blue);
 class Button_plus extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
         <button class="button_plus">
             <svg class="button_plus_svg" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.5456 32.6257V18.0423M18.5456 18.0423V3.45898M18.5456 18.0423L2.50391 18.0423M18.5456 18.0423L34.5872 18.0423" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
