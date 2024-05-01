@@ -56,8 +56,30 @@
                 <custom-button-blue>мам</custom-button-blue>
                 <custom-button-white>папа</custom-button-white>
                 <custom-button-plus></custom-button-plus> -->
-            </div>            
+            </div>       
+            <!-- <div class="progress_bar">
+
+            </div>      -->
+            <textarea readonly disabled class="lecture">
+            </textarea>
+    
         </main>
+        <script>
+            // Функция для автоматического увеличения высоты контейнера
+            function adjustHeight(textarea) {
+                // Сброс высоты контейнера
+                textarea.style.height = 'auto';
+    
+                // Установка новой высоты контейнера на основе содержимого
+                textarea.style.height = textarea.scrollHeight + 'px';
+            }
+    
+            // Обработчик события для увеличения высоты textarea при загрузке
+            document.addEventListener('DOMContentLoaded', function() {
+                const textarea = document.querySelector('.lecture');
+                adjustHeight(textarea);
+            });
+        </script>
         <script src="../components/components.js"></script>
         <script src="scripts/print-test.js"></script>
         <!-- <script src="../components/scripts/sidebar.js"></script> -->
