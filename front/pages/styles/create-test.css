@@ -13,55 +13,72 @@
 }
 body{
     height: 100%;
+    width: 100%;
 }
 
 html{
     font-size: 20px;
 }
 
-h1 {
-    font-weight: 700;
+main {
+    height: 100%;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 8fr; 
+    /* column-gap: 10rem; */
+    justify-content: start;
+}
+
+.main__test {
+    
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto auto;
+    position: relative;
+    align-content: start;
+    padding-bottom: 4rem;
+
+}
+.header {
+    width: 100%;
+    z-index: 3;
+    padding-top: 2rem;
+    position: fixed;
+    font-size: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* align-items: center; */
+    background-color: #FFFFFF;
+
+}
+.name__header {
+    min-width: max-content;
+    align-items: center;
+    display: flex;
+
+}
+
+.header svg {
+}
+
+.header h1 {
+    font-weight: bold;
     font-size: 1.8rem;
     margin-left: 0.5rem;
     
 }
 
-h2 {
-
-}
-main {
-    height: 100%;
-    display: grid;
-    grid-template-columns: auto auto; 
-    column-gap: 2rem;
-    justify-content: start;
+.main__test h2{
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: #FF0000;
+    margin-bottom: 1rem;
+    display: none;
 }
 
-.cs{
-    background-color: aquamarine;
-    width: 4.6rem;
-}
-.main__test {
-
-    margin-top: 4rem;
-    display: grid;
-    grid-template-rows: auto auto;
-    position: relative;
-    align-content: start;
-    justify-content: start;
-    /* background: #87c9ff; */
-
-}
-.header {
-    position:relative;
-    font-size: 2rem;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-
-}
 .test {
-    margin-left: 8rem;
+    margin-top: 7rem;
+    margin-left: 4rem;
 
 }
 .name__question {
@@ -70,10 +87,11 @@ main {
 }
 
 .question {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
 
 .answers__question {
+    margin-top: 1rem;
     margin-left: 1rem;
 
 }
@@ -81,8 +99,48 @@ main {
 
 .text {
     font-weight: 400;
+    font-size: 0.9rem;
 }
 
-.ccheckbox{
-    margin-bottom: 1rem;
+.label {
+    margin-bottom: 0.9rem;
+}
+.button_blue{
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 0.8rem;
+    height: 3rem;
+    width: 9rem;
+    
+}
+
+.button_red{
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 0.8rem;
+    height: 3rem;
+    width: 9rem;
+    
+}
+
+custom-button-blue{
+    justify-self: flex-end;
+}
+
+.progress_bar {
+    background-color: aqua;
+    height: 20rem;
+    width: 20rem;
+    justify-self: center;
+}
+
+.lecture{
+    width: 100%; /* Установка ширины контейнера */
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    resize: none; /* Отключение изменения размера пользователем */
+    overflow: hidden; /* Скрытие полос прокрутки */
+    white-space: pre-wrap; /* Перенос строк в соответствии с содержимым */
+    word-wrap: break-word; /* Перенос длинных слов */
 }

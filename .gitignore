@@ -3,3 +3,7 @@ venv/
 .idea/
 /test.db
 /db.db
+/data/lection/
+/data/test/
+/data/files/
+/data/answers/
