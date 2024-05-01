@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(../../components/Montserrat-VariableFont_wght.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+/* Заголовок */
+
+.container{
+    display: flex;
+
+    width: 48rem;
+
+    position: relative;
+    left: 5rem;
+    top: 7rem;
+    gap: 6rem;
+}
+
+.title{
+
+    width: 39rem;
+
+    font-weight: 700;
+    font-size: 2.3rem;
+    line-height: 3rem;
+
+    color: #0F2232;
+}
+
+/* Кнопка назад */
+
+.back-bt{
+    width: 4rem;
+    height: 3rem;
+    
+    background-image: url(../svg/Buttons/left.svg);
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.back-bt:hover{
+    background-image: url(../svg/Buttons/left_hov.svg);
+}
+
+/* Информация */
+
+.information{
+    display: flex;
+
+    width: 52rem;
+
+    position: relative;
+    left: 18rem;
+    top: 9rem;
+
+    gap: 6rem;
+}
+
+.block{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.block-title{
+    width: 13rem;
+
+    margin-left: 1rem;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 3rem;
+
+
+    color: #0F2232;
+}
+
+.block-text{
+    width: 23rem;
+    height: 4rem;
+
+    padding: 0.6rem 0.6rem 0 1rem;
+
+    background: #E9ECEE;
+    border: none;
+    border-radius: 20px;
+
+    pointer-events: none;
+    resize: none;
+    overflow: hidden;
+
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 3rem;
+
+    color: #0F2232;
+}
+
+.last_block{
+    width: 23rem;
+
+    position: relative;
+    left: 18rem;
+    top: 12rem;
+}
+
+/* Кнопки */
+
+.buttons{
+    width: 33rem;
+
+    position: relative;
+    left: 18rem;
+    top: 18rem;
+
+    display: flex;
+    gap: 5rem;
+}
+
+.button_red{
+    width: 12rem;
+    height: 3.5rem;
+
+    border-radius: 20px;
+}
+
+.button_white{
+    width: 16rem;
+    height: 3.55rem;
+
+    border-radius: 20px;
+}
+
