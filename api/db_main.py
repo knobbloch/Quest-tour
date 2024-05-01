@@ -248,15 +248,15 @@ def get_person(email):
     print("get_person happened")
     return records[0]
 
-#title; 0-lection, 1-practice; (0-not viewed, 1-viewed) - lection, (None-no grade) - practice; order on map на всяки случай
+#title; id, 0-lection, 1-practice; (0-not viewed, 1-viewed) - lection, (None-no grade) - practice; order on map на всяки случай
 def get_map(email):
     try:
-        cursor.execute("""SELECT l.title, 0, lr.viewed, l.orderc
+        cursor.execute("""SELECT l.id, l.title, 0, lr.viewed, l.orderc
         FROM Lection l
         LEFT JOIN LectionRes lr 
         ON l.id = lr.idlection  WHERE lr.idperson = ?
         UNION ALL
-        SELECT p.title, 1, pr.grade, p.orderc
+        SELECT p.id, p.title, 1, pr.grade, p.orderc
         FROM Practice p
         LEFT JOIN PracticeRes pr 
         ON p.id = pr.idpractice WHERE pr.idperson = ?
@@ -503,6 +503,7 @@ def clean_tokens():
 #print(api.debugging.get_all_PracticeRes_byemail("lox@gmail.com"))
 #print(api.debugging.get_all_LectionRes_byemail("lox@gmail.com"))
 #print(get_person("lox@gmail.com"))
+#print(api.debugging.get_all_persons())
 #print(get_map("lox@gmail.com"))
 #edit_lection(1, 'LEC2', 'this lection is about how to lection')
 #print(api.debugging.get_all_practices())

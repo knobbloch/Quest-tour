@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Информация пользователя</title>
+<link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="styles/information_change.css">
+</head>
+<body>
+  <custom-header></custom-header>
+
+  <div class="back-bt">
+
+  </div>
+  
+  <div class="container1">
+
+    <div class="block">
+      <label class="block-title">
+        Фамилия
+      </label>
+      <input type="text" class="block-text input" id="surname" maxlength="20" ></input>
+    </div>
+
+    <div class="block">
+      <label class="block-title">
+        Имя
+      </label>
+      <input type="text" class="block-text input" id="name" maxlength="20" ></input>
+    </div>
+
+    <div class="block">
+      <label class="block-title">
+        Отчество
+      </label>
+      <input type="text" class="block-text input" id="midname" maxlength="20" ></input>
+    </div>
+
+  </div>
+
+  <div class = "container2">
+    <div class="block">
+      <label class="block-title">
+        Город
+      </label>
+      <input type="text" class="block-text input" id="city" maxlength="20" ></input>
+    </div>
+
+    <div class="block">
+      <label class="block-title blocked_title">
+        Подразделение
+      </label>
+      <textarea class="block-text blocked_text" id="department" readonly></textarea>
+    </div>
+  </div>
+
+
+  <div class="last-block">
+    <div class="block">
+      <label class="block-title blocked_title">
+        Логин
+      </label>
+      <textarea class="block-text blocked_text" id="login" readonly></textarea>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <custom-button-red onclick="change_inf()" >Сохранить</custom-button-red>
+  </div>
+    
+
+  <script src="scripts/information_change.js"></script>
+  <script src="../components/components.js"></script>
+</body>
+</html>

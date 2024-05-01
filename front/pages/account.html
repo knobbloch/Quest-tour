@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Аккаунт пользователя</title>
+<link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="styles/account.css">
+</head>
+<body>
+  <custom-header></custom-header>
+  
+  <div class="container">
+    
+    <div class="back-bt">
+
+    </div>
+
+    <label class="title" id="title">
+    </label>
+
+  </div>
+
+  <div class = "information">
+    <div class="block">
+      <label class="block-title">
+        Логин
+      </label>
+      <textarea class="block-text" id="login" readonly></textarea>
+    </div>
+
+    <div class="block">
+      <label class="block-title">
+        Подразделение
+      </label>
+      <textarea class="block-text" id="work" readonly></textarea>
+    </div>
+
+  </div>
+
+  <div class="block last_block">
+    <label class="block-title">
+      Город
+    </label>
+    <textarea class="block-text" id="city" readonly></textarea>
+  </div>
+
+  <div class="buttons">
+
+    <custom-button-red >Редактировать</custom-button-red>
+
+    <custom-button-white >Сменить пароль</custom-button-white>
+      
+    </div>
+
+  </div>
+    
+
+  <script src="scripts/account.js"></script>
+  <script src="../components/components.js"></script>
+</body>
+</html>
