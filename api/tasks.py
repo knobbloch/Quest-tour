@@ -82,13 +82,11 @@ async def send_answer(p_id: int, email: str, answer_list: ListOfStr):
     counter = 0
     questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
     new_answers = []
-    print(answer_list.sections)
     for i in answer_list.sections:
         answer = i.split(", ")
         for j in range(0, len(answer)):
             answer[j] = int(answer[j])
         new_answers.append(answer)
-    print(new_answers)
 
     for i in questions:
         right_answer_list.append(i.right_answers)
@@ -98,8 +96,8 @@ async def send_answer(p_id: int, email: str, answer_list: ListOfStr):
             counter += 1
 
     total_counter = len(right_answer_list)
-    grade = counter / total_counter * 100
-    if edit_practice_res(p_id, email, grade):
+    grade1 = int(counter / total_counter * 100)
+    if edit_practice_res(p_id, email, grade1):
         return {'status': 202, 'Message': 'answers sent'}
     else:
         return {'status': 500, 'Message': 'an error occurred!'}
