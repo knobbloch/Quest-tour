@@ -4,6 +4,20 @@ let color = ["#FF0000","#AB2F90","#742FAB","#392FAB","#FF7800","#E1004C","#EBA43
 let map = document.querySelector('.swiper-wrapper')
 let number = 10
 
+  //Забираем инфу с сервера
+
+  async function getFlowers() {
+    const URL = `${window.location.origin}/script/get_flowers?email=${123}`;
+    try {
+      const response = await axios.get(URL);
+      const data = response.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
 //Меняет дату дедлайна
 function change_deadline(date){
@@ -68,17 +82,28 @@ function flower_create(type, bud, text_color,text, stem, open) { // создае
   }
 }
 
+//Удаляет кнопки навигации если цветков меньше 7
+
+function delete_nuvigation(num){
+  if(num<8){
+    document.querySelector('.left').remove()
+    document.querySelector('.right').remove()
+  }
+}
 
 //Вызов создания цветка
-function addFlowers(num){
-    for(let i=0;i<num;i++){
+async function addFlowers(num){
+  const Flowers = await getFlowers()
+    delete_nuvigation(Flowers.length)
+    for(let i=0;i<Flowers.length;i++){
       let random=flower_choose(i);
-      flower_create(random%3,random,color[parseInt(parseInt(random)-parseInt(random)%3)/3],text_check("Тест на тип личности"),random%7,1);
+      flower_create(random%3,random,color[parseInt(parseInt(random)-parseInt(random)%3)/3],text_check(Flowers[i].title),random%7,Flowers[i].flower_stage);
     }
   }
 
+  
 //Вызов функций
-document.addEventListener('DOMContentLoaded', addFlowers(number))
+addFlowers(number)
 document.addEventListener('DOMContentLoaded', change_deadline("04.04.2024"))
 document.addEventListener('DOMContentLoaded', change_end("02.04.2024"))
 
@@ -124,8 +149,5 @@ let swiper = new Swiper(".map-main", {
       },
     },
   });
-
-
-  //Забираем инфу с сервера
 
   
