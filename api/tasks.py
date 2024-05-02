@@ -4,9 +4,9 @@ import os
 from fastapi import APIRouter
 
 from api.db_main import edit_practice_res
-from api.models import Question, List_of_str
+from api.models import Question, ListOfStr
 
-task_router = APIRouter()
+task_router = APIRouter(prefix="/script", tags=["Task functions (for test practices)"])
 
 
 # object = Question(question="Ты gay?", answers=["yes", "yess", "yess", "no", "?"],
@@ -56,7 +56,7 @@ def read_file_test(path: str):
 #     return {"message": "Hello World"}
 
 
-@task_router.get("/script/read_test_from_file")
+@task_router.get("/read_test_from_file")
 async def read(p_id: int):
     questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
     for i in questions:
@@ -64,20 +64,20 @@ async def read(p_id: int):
     return questions
 
 
-@task_router.post("/script/add_question")
+@task_router.post("/add_question")
 async def add_question(new_question: Question, p_id: int):
     write_new_in_file("data/test/practice_" + str(p_id) + ".txt", new_question)
-    return {"status": 200, "Message": "new question added"}
+    return {"status": 201, "Message": "new question added"}
 
 
-@task_router.delete("/script/delete_question")
+@task_router.delete("/delete_question")
 async def delete_question(num: int, p_id: int):
     delete_from_file("data/test/practice_" + str(p_id) + ".txt", num)
-    return {"status": 200, "Message": "question deleted"}
+    return {"status": 205, "Message": "question deleted"}
 
 
-@task_router.post("/script/send_answers")
-async def send_answer(p_id:int, email: str, answer_list: List_of_str):
+@task_router.post("/send_answers")
+async def send_answer(p_id: int, email: str, answer_list: ListOfStr):
     right_answer_list = []
     counter = 0
     questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
@@ -100,10 +100,9 @@ async def send_answer(p_id:int, email: str, answer_list: List_of_str):
     total_counter = len(right_answer_list)
     grade = counter / total_counter * 100
     if edit_practice_res(p_id, email, grade):
-        return {'status': 200, 'Message': 'answers sent'}
+        return {'status': 202, 'Message': 'answers sent'}
     else:
         return {'status': 500, 'Message': 'an error occurred!'}
-
 
 # @task_router.get("/script/get_result", response_model=int)
 # async def get_result(practice_id: int):
