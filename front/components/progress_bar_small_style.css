@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(Montserrat-VariableFont_wght.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+html{
+    font-size: 20px;
+}
+body{
+    min-height: 100vh;
+}
+
+.skill{
+    width: 17rem;
+    height: 17rem;
+    background: #FFF;
+    position: relative;
+}
+.outer{
+    height: 17rem;
+    width: 17rem;
+    border-radius: 50%;
+    box-shadow: 6px 6px 10px -8px rgba(0,0,0,0.15),
+                -6px -6px 10px -8px rgba(0,0,0,0.15),
+                -6px 6px 10px -8px rgba(0,0,0,0.15),
+                6px 0px 10px -8px rgba(0,0,0,0.15),
+                -6px -6px 10px -3px rgba(255,255,255,0.15);
+    padding: 2rem;
+}
+.inner{
+    height: 13rem;
+    width: 13rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 4px 4px 6px -4px rgba(0,0,0,0.2),
+                inset -4px 4px 6px -6px rgba(0,0,0,0.2),
+                inset 4px -4px 6px -6px rgba(0,0,0,0.2),
+                inset -4px -4px 6px -6px rgba(0,0,0,0.2),
+                inset -4px -4px 6px -1px rgba(255,255,255,0.7),
+                -0.5px -0.5px 0px rgba(255, 255, 255, 1),
+                0.5px 0.5px 0px rgba(0,0,0,0.15),
+                0px 12px 10px -10px rgba(0,0,0,0.05);
+}
+#number{
+    font-weight: bold;
+    font-size: 3.7rem;
+    color:#EC1C24;
+}
+.circle{
+    fill: none;
+    stroke: #EC1C24;
+    stroke-width: 2rem;
+    stroke-dasharray: 942;
+    stroke-dashoffset: 942;
+    animation: anim 1.5s linear forwards;
+    --progress: 1065;
+}
+#percentages{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 20rem;
+    height: 20rem;
+}
+
+@keyframes anim{
+    100%{
+        stroke-dashoffset: var(--progress);
+    }
+}
