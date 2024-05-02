@@ -4,9 +4,10 @@ from pydantic import BaseModel
 
 
 class Question(BaseModel):
+    radio: bool
     question: str
-    answers: list
-    right_answers: list
+    answers: List[str]
+    right_answers: List[int]
 
 
 class ListOfStr(BaseModel):
