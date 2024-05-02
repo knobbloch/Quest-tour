@@ -4,12 +4,13 @@ from pydantic import BaseModel
 
 
 class Question(BaseModel):
+    radio: bool
     question: str
-    answers: list
-    right_answers: list
+    answers: List[str]
+    right_answers: List[int]
 
 
-class List_of_str(BaseModel):
+class ListOfStr(BaseModel):
     sections: List[str]
 
 
@@ -56,3 +57,17 @@ class PracticeRes(BaseModel):
 class Grade(BaseModel):
     result: Optional[int] = None
     comment: Optional[str] = None
+
+
+class LectureRes(BaseModel):
+    id: int
+    viewed: Optional[bool] = False
+    user_email: str
+    lecture_id: int
+
+
+class Flower(BaseModel):
+    title: str
+    flower_stage: int  # 0 - bad, 1 - good
+    type: int  # 0 - lecture, 1 - practice
+    entity_id: int

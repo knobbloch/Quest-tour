@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../components/checkbox.css">
         <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
         <link rel="stylesheet" href="styles/create-test.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         
     </head>
 
@@ -35,50 +36,26 @@
                                 <custom-radiobutton text="иди нахуй" group="myGroup"></custom-radiobutton>
                                 <custom-radiobutton text="долбаеб" group="myGroup"></custom-radiobutton>
                             </div>
-                        </div>
-                        
-                        <div class="question">
-                            <div class="name__question">
-                                2. Мама или чекбокс?
-                            </div>
-                            <div class="answers__question">
-                                <custom-checkbox class="ccheckbox" text="Красный" group="myGroup"> </custom-checkbox>
-                                <custom-checkbox class="ccheckbox" text="тупой чекбокс ненвижу" group="myGroup"> </custom-checkbox>
-                                <custom-checkbox class="ccheckbox" text="лалалла" group="myGroup"> </custom-checkbox>
-                            </div>
-                        </div> -->
+                        </div>-->
                     
                     
                 </div>
-                <h2>Вы ответили не на все вопросы.</h2>
+                <h2>*Вы ответили не на все вопросы.</h2>
                 <custom-button-red>Отправить</custom-button-red>
                 <!-- <custom-button-red>ХУУУУЙ</custom-button-red>
                 <custom-button-blue>мам</custom-button-blue>
                 <custom-button-white>папа</custom-button-white>
                 <custom-button-plus></custom-button-plus> -->
-            </div>       
-            <!-- <div class="progress_bar">
-
-            </div>      -->
-            <textarea readonly disabled class="lecture">
-            </textarea>
+            </div>  
+            <div class="progress_bar">
+                
+                <custom-progressbar></custom-progressbar>
+            </div>     
+            
     
         </main>
         <script>
-            // Функция для автоматического увеличения высоты контейнера
-            function adjustHeight(textarea) {
-                // Сброс высоты контейнера
-                textarea.style.height = 'auto';
-    
-                // Установка новой высоты контейнера на основе содержимого
-                textarea.style.height = textarea.scrollHeight + 'px';
-            }
-    
-            // Обработчик события для увеличения высоты textarea при загрузке
-            document.addEventListener('DOMContentLoaded', function() {
-                const textarea = document.querySelector('.lecture');
-                adjustHeight(textarea);
-            });
+            
         </script>
         <script src="../components/components.js"></script>
         <script src="scripts/print-test.js"></script>

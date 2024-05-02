@@ -4,7 +4,7 @@ import os
 from fastapi import APIRouter
 
 from api.db_main import edit_practice_res
-from api.models import Question, List_of_str
+from api.models import Question, ListOfStr
 
 task_router = APIRouter(prefix="/script", tags=["Task functions (for test practices)"])
 
@@ -77,18 +77,16 @@ async def delete_question(num: int, p_id: int):
 
 
 @task_router.post("/send_answers")
-async def send_answer(p_id:int, email: str, answer_list: List_of_str):
+async def send_answer(p_id: int, email: str, answer_list: ListOfStr):
     right_answer_list = []
     counter = 0
     questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
     new_answers = []
-    print(answer_list.sections)
     for i in answer_list.sections:
         answer = i.split(", ")
         for j in range(0, len(answer)):
             answer[j] = int(answer[j])
         new_answers.append(answer)
-    print(new_answers)
 
     for i in questions:
         right_answer_list.append(i.right_answers)
@@ -98,12 +96,11 @@ async def send_answer(p_id:int, email: str, answer_list: List_of_str):
             counter += 1
 
     total_counter = len(right_answer_list)
-    grade = counter / total_counter * 100
-    if edit_practice_res(p_id, email, grade):
+    grade1 = int(counter / total_counter * 100)
+    if edit_practice_res(p_id, email, grade1):
         return {'status': 202, 'Message': 'answers sent'}
     else:
         return {'status': 500, 'Message': 'an error occurred!'}
-
 
 # @task_router.get("/script/get_result", response_model=int)
 # async def get_result(practice_id: int):
