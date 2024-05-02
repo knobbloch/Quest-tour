@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
+        <link rel="stylesheet" href="styles/auth.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        
+    </head>
+    <body>
+        <main>
+            <div class="logo">                
+                <img src="svg/parma_logo.svg" id="parma_logo_svg">
+                
+            </div>
+            <div class="auth">
+                <div class="auth_form">
+                    <h1>Авторизация</h1>
+
+                    <div class="block">
+                        <label class="block-title">
+                        Email
+                        </label>
+                        <input type="email" class="block-text input" id="email" maxlength="64" ></input>
+                    </div>
+
+                    <div class="block">
+                        <label class="block-title">
+                        Пароль
+                        </label>
+                        <div class="password-container"> 
+                            <input type="password" class="block-text input" id="pass" maxlength="32">
+                            <div class="pass-btn" onclick="hide_pass()"></div>
+                        </div>
+                    </div>
+                    <div class="error-message" id="error-message" style="display: none;">*Неверный email или пароль</div>
+                    <custom-button-red id="sign-in-btn">Войти</custom-button-red>
+                </div>
+
+            </div>
+
+        </main>
+    </body>
+    <script src="scripts/hide_pass.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="../components/components.js"></script>
+</html>
