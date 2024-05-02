@@ -25,6 +25,15 @@ class Person(BaseModel):
     employment: Optional[str] = None
 
 
+class EditPerson(BaseModel):
+    namep: Optional[str] = None
+    surname: Optional[str] = None
+    thirdname: Optional[str] = None
+    division: Optional[str] = None
+    city: Optional[str] = None
+    employment: Optional[str] = None
+
+
 class UserFIO(BaseModel):
     email: str
     fio: str
