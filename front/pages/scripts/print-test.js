@@ -1,14 +1,20 @@
-const questions = [
-    { question: "Твоя мама гей?", answers: ["да", "нет", "ьяу"], type: true },
-    { question: "Какой у тебя любимый цвет?", answers: ["синий", "красный", "зеленый"], type: false },
-    { question: "Какую музыку ты любишь?", answers: ["рок", "поп", "джаз", "суши", "бургер"], type: false },
-    { question: "Ты любишь путешествовать?", answers: ["да", "нет", "иногда"], type: true },
-    { question: "Какая у тебя любимая еда?", answers: ["пицца", "суши", "бургер"], type: false },
-    { question: "Как ты предпочитаешь отдыхать?", answers: ["читать", "смотреть телевизор", "путешествовать"], type: false },
-    { question: "Что ты обычно делаешь в выходные?", answers: ["сплю", "гуляю", "работаю"], type: true }
-];
+// Определение всех функций
 
-function renderQuestion(questionData, index) {
+// Функция для получения вопросов с сервера
+async function getQuestions() {
+    const URL = `${window.location.origin}/script/read_test_from_file?p_id=${1}`;
+    try {
+        const response = await axios.get(URL);
+        const data = response.data;
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Функция для рендеринга одного вопроса
+async function renderQuestion(questionData, index) {
+    const questions = await getQuestions();
     const questionContainer = document.createElement('div');
     questionContainer.classList.add('question');
 
@@ -22,7 +28,7 @@ function renderQuestion(questionData, index) {
 
     questionData.answers.forEach(answer => {
         let answerElement;
-        if (questionData.type) {
+        if (questionData.radio) {
             answerElement = document.createElement('custom-radiobutton');
             answerElement.setAttribute('group', questionData.question);
         } else {
@@ -39,13 +45,12 @@ function renderQuestion(questionData, index) {
     questionsDiv.appendChild(questionContainer);
 }
 
+// Функция для рендеринга всех вопросов
 function renderQuestions(questions) {
     questions.forEach((questionData, index) => {
         renderQuestion(questionData, index + 1);
     });
 }
-
-renderQuestions(questions);
 
 // Функция для сбора отмеченных ответов
 function collectAnswers() {
@@ -75,7 +80,19 @@ function collectAnswers() {
 
     return answersList;
 }
+async function fetchAndRenderQuestions() {
+    try {
+        // Получите вопросы с сервера
+        const questions = await getQuestions();
+        
+        // После получения данных рендерим вопросы
+        renderQuestions(questions);
+    } catch (error) {
+        console.error('Ошибка при получении и рендеринге вопросов:', error);
+    }
+}
 
+// Функция для обработки отправки
 function handleSubmit() {
     const questionsDiv = document.querySelector('.questions');
     const questions = questionsDiv.querySelectorAll('.question');
@@ -116,6 +133,31 @@ function handleSubmit() {
     });
 }
 
+// Добавляем обработчик события к кнопке отправки
 const submitButton = document.querySelector('custom-button-red');
 submitButton.addEventListener('click', handleSubmit);
 
+// Здесь вставьте вызов функции fetchAndRenderQuestions()
+fetchAndRenderQuestions();
+
+
+submitButton.addEventListener('click', () => 
+    sendAnswersToServer(collectAnswers()) 
+)
+
+async function sendAnswersToServer(selectedAnswers) { 
+    const URL = `${window.location.origin}/script/send_answers?p_id=${1}&email=${'mama'}`;
+    const data = JSON.stringify({sections: selectedAnswers})
+    console.log(data)
+    const config = {
+        headers: {'Content-Type': 'application/json'}
+    }
+    const response = await axios.post(URL, data, config)
+    .then(response => {
+        console.log('Правильных ответов: ', response.data)
+    })
+    .catch(error => {
+        console.error('Ошибка при отправке', error)})
+    return response
+    }
+    
