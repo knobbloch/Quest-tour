@@ -6,8 +6,8 @@ from pydantic import BaseModel
 class Question(BaseModel):
     radio: bool
     question: str
-    answers: list
-    right_answers: list
+    answers: List[str]
+    right_answers: List[int]
 
 
 class ListOfStr(BaseModel):
@@ -19,6 +19,15 @@ class Person(BaseModel):
     namep: str
     surname: str
     admornot: int
+    thirdname: Optional[str] = None
+    division: Optional[str] = None
+    city: Optional[str] = None
+    employment: Optional[str] = None
+
+
+class EditPerson(BaseModel):
+    namep: Optional[str] = None
+    surname: Optional[str] = None
     thirdname: Optional[str] = None
     division: Optional[str] = None
     city: Optional[str] = None

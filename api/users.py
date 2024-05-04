@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from api.db_main import new_person, delete_person, get_person, edit_person, get_all_not_adms
 #from api.debugging import get_all_persons
-from api.models import Person, UserFIO
+from api.models import Person, UserFIO, EditPerson
 
 user_router = APIRouter(prefix="/script", tags=["User functions"])
 
@@ -49,8 +49,8 @@ async def add_user(user: Person):
 
 
 @user_router.put("/edit_user")
-async def edit_user(email: str, name=None, surname=None, thirdname=None, division=None, city=None, employment=None):
-    if edit_person(email, name, surname, thirdname, division, city, employment):
+async def edit_user(email: str, new_data: EditPerson):
+    if edit_person(email, new_data.namep, new_data.surname, new_data.thirdname, new_data.division, new_data.city, new_data.employment):
         return {"status": 202, "Message": "user data changed"}
     else:
         return {"status": 500, "Message": "an error occurred!"}

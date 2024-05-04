@@ -17,7 +17,7 @@
 .back_btn svg{
     width:1.8rem;
     height:1.8rem;
-    margin:1.2rem 0rem 0rem 0.9rem;
+    margin:1.2rem 0rem 0rem 1.2rem;
 }
 .logo svg{
     bottom:0;
@@ -52,6 +52,6 @@ a:hover{
     .back_btn svg{
         width: 1.5rem;
         height: 1.5rem;
-        margin:1.2rem 0rem 0rem 1rem;
+        margin:1.2rem 0rem 0rem 1.4rem;
     }
 }

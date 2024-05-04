@@ -143,6 +143,7 @@ custom-button-red{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    transition: all 0.2s ease;
 }
 
 .pass-btn:hover{
