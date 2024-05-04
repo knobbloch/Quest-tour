@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(../../components/Montserrat-VariableFont_wght.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    color: #0F2232
+}
+body{
+    height: 100%;
+    width: 100%;
+}
+
+html{
+    font-size: 20px;
+}
+
+main {
+    height: 100%;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 8fr; 
+    /* column-gap: 10rem; */
+    justify-content: start;
+}
+
+.main__test {
+    
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto auto;
+    row-gap: 6rem;
+    position: relative;
+    align-content: start;
+    padding-bottom: 4rem;
+
+}
+.header {
+    width: 100%;
+    z-index: 3;
+    padding-top: 1rem;
+    position: fixed;
+    font-size: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #FFFFFF;
+
+}
+.name__header {
+    min-width: max-content;
+    align-items: center;
+    display: flex;
+
+}
+
+.header svg {
+}
+
+.header h1 {
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-left: 0.5rem;
+    
+}
+
+.main__test h2{
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: #FF0000;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.test {
+    margin-top: 7rem;
+    margin-left: 4rem;
+
+}
+.name__question {
+    font-weight: 500;
+    /* font-size: 1.8rem; */
+}
+
+.question {
+    margin-bottom: 1.2rem;
+}
+
+.answers__question {
+    margin-top: 1rem;
+    margin-left: 1rem;
+
+}
+
+
+.text {
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.label {
+    margin-bottom: 0.9rem;
+}
+.button_blue{
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 0.8rem;
+    height: 3rem;
+    width: 9rem;
+    
+}
+
+.button_red{
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 0.8rem;
+    height: 3rem;
+    width: 9rem;
+    
+}
+
+custom-button-blue{
+    justify-self: center;
+    margin-left: 4rem;
+}
+
+.lecture{
+    width: 100%; /* Установка ширины контейнера */
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    resize: none; /* Отключение изменения размера пользователем */
+    overflow: hidden; /* Скрытие полос прокрутки */
+    white-space: pre-wrap; /* Перенос строк в соответствии с содержимым */
+    word-wrap: break-word; /* Перенос длинных слов */
+}
+
+.progress_bar{
+    display: flex;
+    /* margin-top: ; */
+    justify-content: center; 
+    align-items: center;
+}
