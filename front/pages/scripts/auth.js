@@ -9,36 +9,26 @@ document.getElementById("sign-in-btn").addEventListener("click", function() {
 });
 
 
-async function SendDataToServer(enteredData) {
+async function SendDataToServer(email, password) {
     const URL = `${window.location.origin}/auth/login-cookie`;
-    const data = JSON.stringify({data: enteredData})
-    const config = {
-        // headers: {'Content-Type': 'application/json', "login": "Finn", "password": "Williams"}
-    }
+    console.log(email, password)
     axios({
         method: 'post',
         url: URL,
-        withCredentials: true,
-        data: JSON.stringify({
-        // "login": "Finn",
-        // "pass": "Williams"
-        }),
-        auth: { 
-            username: 'username', 
-            password: 'password' 
-        },
-        headers: config.headers
-    }).then(response => {
-        if (!response.ok) {
+        auth: {
+            username: email,
+            password: password
+        }
+    })
+    .then(response => {
+        if (response.status < 200 || response.status >= 300) {
             throw new Error("Ошибка");
         }
         return response.json();
-    })
-    .then(data => {
-        console.log("Все крута", data);
+        
     })
     .catch(error => {
         const errorMessageDiv = document.getElementById("error-message");
         errorMessageDiv.style.display = "block";
-    });
+        console.error(error)})
 };
