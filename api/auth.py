@@ -11,6 +11,7 @@ import uuid
 from time import time
 from api.db_main import get_auth, new_token, check_token, delete_token
 from enum import Enum
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 auth_router = APIRouter(prefix="/auth", tags=["Basic auth"])
 security = HTTPBasic()
@@ -20,15 +21,17 @@ COOKIE_SESSION_ID_KEY = "auth-session-id"
 class Access(Enum):
     ADM = 0
     USR = 1
+    ALL = 2
+
+unauthed_exc = HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Basic"},
+)
 
 def get_current_username(
     credentials: Annotated[HTTPBasicCredentials, Depends(security)],
 ):
-    unauthed_exc = HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Basic"},
-        )
     password = get_auth(credentials.username)
     print(password)
     if not(password == []):
@@ -40,8 +43,10 @@ def get_current_username(
         current_password_bytes, correct_password_bytes
     )
 
+    #if not (is_correct_password):
+    #    raise unauthed_exc
     if not (is_correct_password):
-        raise unauthed_exc
+        return {}
     return {"username": credentials.username,
             "admornot": password[2]}
 
@@ -67,6 +72,10 @@ async def auth_login_set_cookie(
     auth_username: dict = Depends(get_current_username),
     #username: str = Depends(get_username_by_static_auth_token),
 ):
+    if auth_username == {}:
+        raise HTTPException(status_code=401, detail="Not found")
+        #return {"St": "ok"}
+        #return RedirectResponse(url="/pages/auth.html",status_code=status.HTTP_401_UNAUTHORIZED)
     print("login-cookie: authenticated")
     session_id = str(auth_username["admornot"]) + generate_session_id()
     new_token(session_id, auth_username["username"])
@@ -103,17 +112,17 @@ def is_accessible(
     access_type: Access,
     session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)
 ):
-    if not ((session_id[0]=="0" and access_type==Access.ADM) or (session_id[0]=="1" and access_type==Access.USR)):
+    if not ((session_id[0]=="0" and access_type==Access.ADM) or (session_id[0]=="1" and access_type==Access.USR) or access_type == Access.ALL):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Forbidden",
         )
+        return ""
     check = check_token(session_id)
     if not check:
-        print("not in cookies")
-        raise HTTPException(
+        '''raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="not authenticated",
-        )
-
+        )'''
+        return ""
     return check["user"]
