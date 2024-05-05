@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
-    src: url(Montserrat-VariableFont_wght.ttf);
+    src: url(../../components/Montserrat-VariableFont_wght.ttf);
 }
 * {
     margin: 0;
@@ -15,55 +15,33 @@ html{
 }
 body{
     min-height: 100%;
-    /* display: grid;
-    grid-template-columns: 4rem 1fr; */
-    /* grid-template-areas: 
-        "side header1"
-        "side video"
-        "side lecture"
-        "side buttons"; */
-    /* grid-template-rows: 4rem 1fr 1fr 1fr; */
 }
-/* .custom-sidepanel{
-    grid-area: side;
-} */
 .heading{
+    width:100%;
     display: grid;
-    grid-template-columns: 4rem 4rem 7fr 1fr;
+    grid-template-columns: 8rem 5fr 1fr;
     grid-template-rows: 4rem;
     align-items: center;
-    /* grid-template-areas:  */
-        /* "icon header button"; */
     z-index: 1000;
     position: fixed;
     background-color: #FFF;
-    /* grid-area: header1; */
-    /* grid-row: 1; */
 }
 .heading p{
     margin-left: 0.7rem;
     font-size: 1.3rem;
     font-weight: bold;
-    grid-column: 3;
-    /* grid-area: header; */
-    margin-left: 1rem;
-    /* position: fixed; */
-    /* justify-self: flex-start; */
+    grid-column: 2;
 }
 .heading svg{
     justify-self: flex-end;
     height: 1.4rem;
     width: 1.4rem;
-    grid-column: 2;
-    /* grid-area: icon; */
-    margin-left: 1rem;
+    grid-column: 1;
 }
 .heading custom-button-blue{
     align-self: flex-end;
-    grid-column: 4;
-    /* margin-right:1.3rem; */
-    /* grid-area: button; */
-    /* justify-self: right; */
+    grid-column: 3;
+    justify-self: center;
 }
 .button_blue{
     width: 8rem;
@@ -72,14 +50,7 @@ body{
     font-size: 0.9rem;
     font-weight: bold;
 }
-/* .videobox{
-    display: grid;
-    justify-content: center;
-} */
 video{
-    /* transform: translate(-46%, 0.5%); */
-    /* max-width: 80%;
-    max-height: 80%; */
     width: 55vw;
     height: 35vw;
     cursor: pointer;
@@ -87,7 +58,6 @@ video{
     grid-column: 2;
     justify-self: center;
     margin-top: 1rem;
-    /* grid-area: video; */
 }
 .lecture{
     grid-column:2;
@@ -101,12 +71,13 @@ video{
     resize: none;
     background: none;
     border-style: none;
+    margin: 2rem;
+    text-indent: 4rem;
 }
 .container{
     display:grid;
     grid-template-rows: 4rem auto auto auto;
     grid-template-columns: 4rem 1fr;
-    row-gap: 1rem;
 }
 .container custom-button-red{
     grid-column: 2;
