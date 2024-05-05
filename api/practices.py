@@ -1,7 +1,11 @@
-from fastapi import APIRouter
+import io
+
+from fastapi import APIRouter, UploadFile
+from fastapi.responses import FileResponse
 
 from api import db_main
 import os
+import glob
 
 from api.db_main import get_practice_res, edit_practice_res
 from api.debugging import get_all_practices
@@ -84,3 +88,57 @@ async def get_practice_result(p_id: int, email: str):
     p_res = PracticeRes(id=result[0], grade=result[1], comment=result[2], user_email=result[3], practice_id=result[4])
     grade = Grade(result=p_res.grade, comment=p_res.comment)
     return grade
+
+
+@practice_router.post("/add_answer_file")
+async def add_answer_file(p_id: int, email: str, file: UploadFile):
+    if not db_main.get_practice(p_id):
+        return {'status': 404, 'Message': 'practice not found'}
+    if db_main.get_practice(p_id)[3] == 1:
+        return {'status': 400, 'Message': 'this practice is a test'}
+
+    answer_id = get_practice_res(p_id, email)[0]
+    content = await file.read()
+    f_type = os.path.splitext(file.filename)[1]
+    new_file = open(f"data/answers/practice_{answer_id}{f_type}", 'wb')
+    new_file.write(content)
+    new_file.close()
+    return {'status': 201, 'Message': 'file added'}
+
+
+@practice_router.get("/get_answer_file")
+async def get_answer_file(p_id: int, email: str):
+    if not db_main.get_practice(p_id):
+        return {'status': 404, 'Message': 'practice not found'}
+    if db_main.get_practice(p_id)[3] == 1:
+        return {'status': 400, 'Message': 'this practice is a test'}
+    answer_id = get_practice_res(p_id, email)[0]
+    paths = glob.glob(f"data/answers/practice_{answer_id}.*")
+    files = []
+    for path in paths:
+        name=path.split("\\")[-1]
+        files.append(name)
+    if not files or files == []:
+        return {'status': 404, 'Message': 'file not found'}
+    else:
+        return [
+            FileResponse(
+                f"data/answers/{file}",
+                media_type="application/octet-stream",
+                filename=f"{file}",
+            )
+            for file in files
+        ]
+
+
+@practice_router.delete("/delete_answers")
+async def delete_answer_file(p_id: int, email: str):
+    if not db_main.get_practice(p_id):
+        return {'status': 404, 'Message': 'practice not found'}
+    if db_main.get_practice(p_id)[3] == 1:
+        return {'status': 400, 'Message': 'this practice is a test'}
+    answer_id = get_practice_res(p_id, email)[0]
+    paths = glob.glob(f"data/answers/practice_{answer_id}.*")
+    for path in paths:
+        os.remove(path)
+    return {'status': 205, 'Message': 'files deleted'}
