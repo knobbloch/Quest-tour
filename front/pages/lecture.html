@@ -26,20 +26,16 @@
             textarea.style.height = 'auto';
             textarea.style.height = textarea.scrollHeight + 'px';
         }
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             const textarea = document.querySelector('.lecture');
             adjustHeight(textarea);
-
+            window.onload = function() {
+                adjustHeight(textarea);
+            };
             window.onresize = function() {
                 adjustHeight(textarea);
             };
-            // window.performance = function() {
-            //     adjustHeight(textarea);
-            // };
-            // if (performance.navigation.type == 1) {
-            //     adjustHeight(textarea);
-            // }
         });
         
     </script>
