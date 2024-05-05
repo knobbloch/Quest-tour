@@ -5,7 +5,7 @@ document.getElementById("sign-in-btn").addEventListener("click", function() {
     email = document.getElementById("email").value;
     password = document.getElementById("pass").value;
     console.log(email, password)
-    SendDataToServer(email)
+    SendDataToServer(email, password);
 });
 
 
