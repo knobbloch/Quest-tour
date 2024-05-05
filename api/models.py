@@ -8,6 +8,7 @@ class Question(BaseModel):
     question: str
     answers: List[str]
     right_answers: List[int]
+    description: Optional[str] = None
 
 
 class ListOfStr(BaseModel):
