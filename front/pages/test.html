@@ -1,12 +1,14 @@
 <html>
     <head>
-        <title>Создание теста</title>
+        <title>Тест</title>
         <!-- <link rel="stylesheet" href="reset.css"/> -->
         <link rel="stylesheet" type="text/css" href="../components/radiobutton.css">
         <link rel="stylesheet" type="text/css" href="../components/checkbox.css">
         <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
         <link rel="stylesheet" type="text/css" href="../components/modal.css">
         <link rel="stylesheet" href="styles/test.css"/>
+        
+        <link rel="stylesheet" type="text/css" href="../components/progress_bar_small_style.css">
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         
     </head>
@@ -42,20 +44,26 @@
                     
                 </div>
                 <h2>*Вы ответили не на все вопросы.</h2>
-                <pop-up question-text="Вы точно хотите отправить ответы?" text-btn1="Нет" text-btn2="Да">Отправить</pop-up>
+                <pop-up id="pop-up" style="display: block;" header-text="Внимание!" disabled_value="false" class-btn="button_red" question-text="Вы точно хотите отправить ответы?" text-btn1="Нет" text-btn2="Да">Отправить</pop-up>        
 
-                <custom-button-red>Отправить</custom-button-red>
             </div>  
             <div class="progress_bar">
                 
-                <custom-progressbar style="display: none;"></custom-progressbar>
+                <custom-progressbar-small style="display: none;"></custom-progressbar-small>
+                <p class="progressbar-text" id="progress-text" style="display: none;" ></p>
             </div>     
+            <div class="btn-box">     
+                <custom-button-red style="display: none;" id="repeat-btn">Пройти повторно</custom-button-red>
+                <custom-button-red style="display: none;" id="next-btn">Далее</custom-button-red>                           
+            </div>
             
     
         </main>
         
+
         <script src="../components/components.js"></script>
-        <script src="../components/scripts/modal.js"></script>
+        <!-- <script src="../components/scripts/progress_bar_small.js"></script> -->
+        <!-- <script src="../components/scripts/modal.js"></script> -->
         <script src="scripts/print-test.js"></script>
         <!-- <script src="../components/scripts/sidebar.js"></script> -->
     </body>

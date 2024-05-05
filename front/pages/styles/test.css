@@ -25,6 +25,7 @@ main {
     width: 90%;
     display: grid;
     grid-template-columns: 1fr 8fr; 
+    column-gap: 1rem;
     /* column-gap: 10rem; */
     justify-content: start;
 }
@@ -33,7 +34,7 @@ main {
     
     width: 100%;
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
     row-gap: 6rem;
     position: relative;
     align-content: start;
@@ -56,6 +57,10 @@ main {
     align-items: center;
     display: flex;
 
+}
+
+.cs {
+    min-width: 3.5rem;
 }
 
 .header svg {
@@ -105,6 +110,15 @@ main {
 .label {
     margin-bottom: 0.9rem;
 }
+
+
+.btn-box {    
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+}
+
 .button_blue{
     font-weight: bold;
     font-size: 0.9rem;
@@ -119,7 +133,8 @@ main {
     font-size: 0.9rem;
     border-radius: 0.8rem;
     height: 3rem;
-    width: 9rem;
+    width: 10rem;
+    cursor: pointer;
     
 }
 
@@ -128,20 +143,20 @@ custom-button-blue{
     margin-left: 4rem;
 }
 
-.lecture{
-    width: 100%; /* Установка ширины контейнера */
-    padding: 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    resize: none; /* Отключение изменения размера пользователем */
-    overflow: hidden; /* Скрытие полос прокрутки */
-    white-space: pre-wrap; /* Перенос строк в соответствии с содержимым */
-    word-wrap: break-word; /* Перенос длинных слов */
-}
-
 .progress_bar{
-    display: flex;
-    /* margin-top: ; */
+    display: grid;
+    grid-template-rows: auto auto;
+    row-gap: 2rem;
     justify-content: center; 
     align-items: center;
+
+}
+custom-progressbar-small{
+    justify-self: center;
+}
+.progressbar-text{
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: #FF0000;
+    text-align: center;
 }
