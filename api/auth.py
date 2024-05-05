@@ -125,5 +125,4 @@ def is_accessible(
             detail="not authenticated",
         )'''
         return ""
-    print(check["user"])
     return check["user"]
