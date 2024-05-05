@@ -25,8 +25,6 @@ body{
     display: flex;
     position: relative;
 
-    cursor: pointer;
-
     width: 9rem;
     height: 3em;
     
@@ -59,8 +57,8 @@ body{
 
     cursor: pointer;
 
-    width: 9rem;
-    height: 3em;
+    width: 8rem;
+    height: 2.5em;
     
     flex-direction: row;
     justify-content: center;
@@ -70,6 +68,7 @@ body{
     border-radius: 25px;
     border-style: none;
     background: #FF0000;
+    font-weight: 600;
     color: rgb(255, 255, 255);
 }
 .modal .button-red:hover{
@@ -86,8 +85,10 @@ body{
     display: flex;
     position: relative;
     justify-self: center;
-    width: 9rem;
-    height: 3em;
+    width: 8rem;
+    height: 2.5em;
+    font-weight: 600;
+    border-color: #0F2232;
 
 }
 
@@ -113,19 +114,21 @@ body{
     opacity: 0;
     transition: opacity .4s, visibility .4s;
 }
-.btn__box
-{
+.btn__box {
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr 1fr;
-    column-gap: 2rem;
-    margin-top: 5rem;
+    column-gap: 8%;
     /* justify-content: center;     */
 }
 .modal__box{
+    display: grid;
+    grid-template-rows: 1fr 1.8fr 1fr;
+    row-gap: 0rem;
     margin: 3rem 1.5rem;
-    padding: 3rem;
+    padding: 2rem 2rem 0 2rem;
 
-    width: 26rem;
+    width: 22rem;
     height: 20rem;
 
     z-index: 1;
@@ -141,26 +144,22 @@ body{
 
 .modal__box-header{
     font-weight: 800;
-    font-size: 35px;
-    line-height: 43px;
-    
+    font-size: 1.75rem;
+    line-height: 1.8rem;    
     text-align: center;
-
     color: #EC1C24;
 }
 
 .modal__box-text{
-    font-family: 'Montserrat';
-
+    display: flex;
+    text-align: center;
     font-weight: 400;
     font-size: 30px;
-    line-height: 41px;
-
-    margin-top: 2vh;
-    margin-left: 1vw;
-    margin-right: 1vw;
+    line-height: 2rem;
+    /* margin-top: 2%; */
 
     color: #0F2232;
+    transition: 0.3s;
 }
 
 .modal.open{
