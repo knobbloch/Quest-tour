@@ -21,6 +21,7 @@ COOKIE_SESSION_ID_KEY = "auth-session-id"
 class Access(Enum):
     ADM = 0
     USR = 1
+    ALL = 2
 
 unauthed_exc = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -72,11 +73,9 @@ async def auth_login_set_cookie(
     #username: str = Depends(get_username_by_static_auth_token),
 ):
     if auth_username == {}:
-        #print("AUTH")
         raise HTTPException(status_code=401, detail="Not found")
         #return {"St": "ok"}
         #return RedirectResponse(url="/pages/auth.html",status_code=status.HTTP_401_UNAUTHORIZED)
-        #return r
     print("login-cookie: authenticated")
     session_id = str(auth_username["admornot"]) + generate_session_id()
     new_token(session_id, auth_username["username"])
@@ -113,17 +112,18 @@ def is_accessible(
     access_type: Access,
     session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)
 ):
-    if not ((session_id[0]=="0" and access_type==Access.ADM) or (session_id[0]=="1" and access_type==Access.USR)):
+    if not ((session_id[0]=="0" and access_type==Access.ADM) or (session_id[0]=="1" and access_type==Access.USR) or access_type == Access.ALL):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Forbidden",
         )
+        return ""
     check = check_token(session_id)
     if not check:
-        print("not in cookies")
-        raise HTTPException(
+        '''raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="not authenticated",
-        )
-
+        )'''
+        return ""
+    print(check["user"])
     return check["user"]
