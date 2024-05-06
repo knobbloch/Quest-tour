@@ -19,8 +19,8 @@ security = HTTPBasic()
 COOKIE_SESSION_ID_KEY = "auth-session-id"
 
 class Access(Enum):
-    ADM = 0
-    USR = 1
+    ADM = 1
+    USR = 0
     ALL = 2
 
 unauthed_exc = HTTPException(
@@ -112,7 +112,7 @@ def is_accessible(
     access_type: Access,
     session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)
 ):
-    if not ((session_id[0]=="0" and access_type==Access.ADM) or (session_id[0]=="1" and access_type==Access.USR) or access_type == Access.ALL):
+    if not ((session_id[0]=="0" and access_type==Access.USR) or (session_id[0]=="1" and access_type==Access.ADM) or access_type == Access.ALL):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Forbidden",
