@@ -1,12 +1,13 @@
 import io
 
-from fastapi import APIRouter, UploadFile
+from fastapi import APIRouter, UploadFile, Cookie
 from fastapi.responses import FileResponse
 
 from api import db_main
 import os
 import glob
 
+from api.auth import COOKIE_SESSION_ID_KEY, is_accessible, Access
 from api.db_main import get_practice_res, edit_practice_res
 from api.debugging import get_all_practices
 from api.models import Practice, Grade, PracticeRes
@@ -81,12 +82,16 @@ async def edit_practice_result(p_id: int, email: str, grade: Grade):
 
 
 @practice_router.get("/get_practice_result")
-async def get_practice_result(p_id: int, email: str):
+async def get_practice_result(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ALL, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
     if not db_main.get_practice(p_id):
         return {'status': 404, 'Message': 'practice not found'}
     result = get_practice_res(p_id, email)
     p_res = PracticeRes(id=result[0], grade=result[1], comment=result[2], user_email=result[3], practice_id=result[4])
     grade = Grade(result=p_res.grade, comment=p_res.comment)
+    print(grade)
     return grade
 
 
