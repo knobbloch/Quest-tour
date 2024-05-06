@@ -1,12 +1,14 @@
 
 
-
+const ansInput = document.getElementById('input_ans');
 // Рост texstarea при добавлении текста
 
-function auto_grow(element) {
-  element.style.height = "5px";
-  element.style.height = (element.scrollHeight) + "px";
-}
+// function auto_grow() {
+//   let rect = ansInput.getBoundingClientRect();
+//   var textArea = document.getElementById('text_box');
+//   ansInput.style.height = (textArea.scrollHeight)/20 + "rem" ;
+//   textArea.style.height = (textArea.scrollHeight)/20 + "rem";
+// }
 
 
 
@@ -18,12 +20,16 @@ async function deleteFile(event) {
   var element = event.currentTarget; // Получаем текущий элемент, на котором произошло событие
   var fileElement = element.closest('.file__box');
   fileElement.parentNode.removeChild(fileElement);
+  let rect = ansInput.getBoundingClientRect();
+  ansInput.style.height = rect.height/20 - 6 + "rem" ;
 }
 
 // Функция считывает изменение в буфере поля загрузки файла, проходится по каждой ссылке и добавляет эти файлы в место выгрузки соответственн
 
 const fileInput = document.getElementById('add_file'); // Переменная с полем для загрузки видео
 const filePlayer = document.getElementById('filePlayer'); // Переменная с местом для выгрузки видео
+
+
 
 function addFile(){
   for(let i=0;i<this.files.length;i++){
@@ -32,8 +38,10 @@ function addFile(){
     const file = this.files[i];
     const url = URL.createObjectURL(file);
 
-    fileElement.innerHTML = '<div class="file__box"><img src="img/file_img.svg"><p class="file__box-label">'+file.name+'</p><div class="button-delete" onclick="deleteFile(event)"></div></div>';
+    fileElement.innerHTML = '<div class="file__box"><img src="svg/file_img.svg"><p class="file__box-label">'+file.name+'</p><div class="button-delete" onclick="deleteFile(event)"></div></div>';
     filePlayer.appendChild(fileElement);
+    let rect = ansInput.getBoundingClientRect();
+    ansInput.style.height = rect.height/20 + (fileElement.scrollHeight/20) + 2 + "rem" ;
   }
 }
 
