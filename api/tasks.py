@@ -71,13 +71,19 @@ async def read(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY))
 
 
 @task_router.post("/add_question")
-async def add_question(new_question: Question, p_id: int):
+async def add_question(new_question: Question, p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
     write_new_in_file("data/test/practice_" + str(p_id) + ".txt", new_question)
     return {"status": 201, "Message": "new question added"}
 
 
 @task_router.delete("/delete_question")
-async def delete_question(num: int, p_id: int):
+async def delete_question(num: int, p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
     delete_from_file("data/test/practice_" + str(p_id) + ".txt", num)
     return {"status": 205, "Message": "question deleted"}
 
