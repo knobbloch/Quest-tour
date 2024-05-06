@@ -19,8 +19,8 @@ security = HTTPBasic()
 COOKIE_SESSION_ID_KEY = "auth-session-id"
 
 class Access(Enum):
-    ADM = 0
-    USR = 1
+    ADM = 1
+    USR = 0
     ALL = 2
 
 unauthed_exc = HTTPException(
