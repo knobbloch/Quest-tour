@@ -7,3 +7,4 @@ document.getElementById("open-modal-btn").addEventListener("click",function(){
 document.getElementById("No-btn").addEventListener("click",function(){
     document.getElementById("exit-modal").classList.remove("open")
 })
+

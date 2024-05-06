@@ -47,6 +47,7 @@ customElements.define('custom-radiobutton', Custom_radio);
 class Custom_button_red extends HTMLElement {
     connectedCallback() {
         const text = this.textContent.trim();
+        const disabled_value = this.getAttribute('disabled_value');
         this.innerHTML = `
         <button class="button_red">${text}</button>
         `
@@ -149,6 +150,35 @@ class Task_list extends HTMLElement {
 
 customElements.define('task-list', Task_list);
 
+class Pop_up extends HTMLElement {
+    connectedCallback() {
+        const text = this.textContent.trim();
+        const question_text = this.getAttribute('question-text');
+        const text_btn1 = this.getAttribute('text-btn1');
+        const text_btn2 = this.getAttribute('text-btn2');
+        const class_btn= this.getAttribute('class-btn');
+        const header_text = this.getAttribute('header-text');
+        const disabled_value = this.getAttribute('disabled_value');
+
+        this.innerHTML = `    
+        <button class="${class_btn}" id="open-modal-btn" disabled_value="${disabled_value}">${text}</button>
+    
+        <!-- Модальное окно  -->
+        <div class="modal" id="exit-modal">
+            <div class="modal__box">
+                <h3 class="modal__box-header">${header_text}</h3>
+                <p class="modal__box-text">${question_text}</p>
+                <div class="btn__box">
+                    <button class="button-red" id="No-btn">${text_btn1}</button>             
+                    <button class="button-blue" >${text_btn2}</button>
+                </div>
+            </div>
+        </div>
+        `
+    }
+}
+
+customElements.define('pop-up', Pop_up);
 
 class Header extends HTMLElement {
     connectedCallback() {
@@ -330,28 +360,6 @@ class Comment_admin extends HTMLElement {
 customElements.define('comment-admin', Comment_admin);
 
 
-class Pop_up extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `    
-        <link rel="stylesheet" type="text/css" href="modal.css"> 
-
-        <button class="button-blue" id="open-modal-btn">Модальное</button>
-    
-        <!-- Модальное окно  -->
-        <div class="modal" id="exit-modal">
-            <div class="modal__box">
-                <h2 class="modal__box-header"> Внимание!</h2>
-                <p class="modal__box-text">Вы уверены что хотите выйти из данного аккаунта?</p>
-    
-                <button class="button-red" id="No-btn">Нет</button>             
-                <button class="button-blue" >Да</button>
-            </div>
-        </div>
-    
-        `
-    }
-}
-customElements.define('pop-up', Pop_up);
 
 
 class Video_input extends HTMLElement {
@@ -419,3 +427,32 @@ class CustomProgressbar extends HTMLElement {
 }
 
 customElements.define('custom-progressbar', CustomProgressbar);
+
+class CustomProgressbar_small extends HTMLElement {
+    connectedCallback(){
+        // const progress = this.textContent.trim();
+        const progress = this.getAttribute('progress');
+        this.innerHTML = `
+            
+            <div class="skill">
+                <div class="outer">
+                    <div class="inner">
+                        <div id="number">${progress}
+                        </div>
+                    </div>
+                </div>
+
+                <svg id="percentages" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <defs>
+                    <linearGradient id="GradientColor">
+                        <stop class="circle_progress" offset="100%" stop-color="#EC1C24" />
+                    </linearGradient>
+                    </defs>
+                    <circle class="circle" cx="-8.5rem" cy="8.5rem" r="7.5rem" stroke-linecap="round" transform="rotate(-90 0 0)"/>
+                </svg>
+            </div>
+        `
+    }
+}
+
+customElements.define('custom-progressbar-small', CustomProgressbar_small);

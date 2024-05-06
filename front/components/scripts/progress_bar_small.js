@@ -1,9 +1,10 @@
+
+let end = 0;
 document.addEventListener("DOMContentLoaded", function(){
     let number = document.getElementById("number");
     let percentProgress = document.querySelector(".circle");
-    let end = 100;
     let speed = 1500/end;
-    percentProgress.style.setProperty('--progress', 1065 - (10.65 * end));
+    percentProgress.style.setProperty('--progress', 942 - (9.42 * end));
     let counter = 0;
     setInterval(()=>{
         if (counter == end){
