@@ -1,8 +1,9 @@
 import pickle
 import os
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Cookie
 
+from api.auth import COOKIE_SESSION_ID_KEY, is_accessible, Access
 from api.db_main import edit_practice_res
 from api.models import Question, ListOfStr
 
@@ -57,7 +58,12 @@ def read_file_test(path: str):
 
 
 @task_router.get("/read_test_from_file")
-async def read(p_id: int):
+async def read(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    print(session_id)
+    email = is_accessible(Access.ALL, session_id)
+    print(email)
+    if email == "":
+        return {"status": 401, "Message": "Unauthorized"}
     questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
     for i in questions:
         i.right_answers = []
@@ -77,7 +83,10 @@ async def delete_question(num: int, p_id: int):
 
 
 @task_router.post("/send_answers")
-async def send_answer(p_id: int, email: str, answer_list: ListOfStr):
+async def send_answer(p_id: int, answer_list: ListOfStr, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ALL, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
     right_answer_list = []
     counter = 0
     questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
