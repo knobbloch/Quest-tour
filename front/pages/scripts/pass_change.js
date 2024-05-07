@@ -1,11 +1,34 @@
 let title_inf = document.getElementById("title"),
-  pass_inf = document.getElementById("pass"),
   new_pass_inf = document.getElementById("new_pass"),
   agein_pass_inf = document.getElementById("agein_pass");
 
-function load_inf(title,pass){
-  title_inf.textContent=title;
-  pass_inf.value=pass;
+async function getInf() {
+  const URL = `${window.location.origin}/script/get_user_self`;
+  try {
+    const response = await axios.get(URL);
+    const data = response.data;
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function load_inf(){
+  const Inf = await getInf();
+  title_inf.textContent=Inf.surname +" "+Inf.namep+" "+Inf.thirdname;
+}
+
+async function sendPassToServer(new_pass) { 
+  const URL = `${window.location.origin}/script/change_password?new_password=${new_pass}`;
+  try {
+    const response = await axios.put(URL);
+    const data = response.data;
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 let error = document.querySelector(".title-error");
@@ -34,10 +57,9 @@ function check_pass(){
         return false;
       }else{
         error.textContent="";
-        console.log(new_pass_inf.value);
+        sendPassToServer(new_pass_inf.value);
         return true;
       }
     }
 }
-
-document.addEventListener('DOMContentLoaded', load_inf("Фёдоровых Михаил Иванович","Qwerty1"))
+document.addEventListener('DOMContentLoaded', load_inf())

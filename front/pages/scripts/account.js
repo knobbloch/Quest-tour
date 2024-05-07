@@ -1,13 +1,26 @@
+async function getInf() {
+  const URL = `${window.location.origin}/script/get_user_self`;
+  try {
+    const response = await axios.get(URL);
+    const data = response.data;
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 let title_inf = document.getElementById("title"),
   login_inf = document.getElementById("login"),
   work_inf = document.getElementById("work"),
   city_inf = document.getElementById("city");
 
-function load_inf(title,login,work,city){
-  title_inf.textContent=title;
-  login_inf.value=login;
-  work_inf.value=work;
-  city_inf.value=city;
+async function load_inf(){
+  const Inf = await getInf()
+  title_inf.textContent=Inf.surname +" "+Inf.namep+" "+Inf.thirdname;
+  login_inf.value=Inf.email;
+  work_inf.value=Inf.division;
+  city_inf.value=Inf.city;
 }
 
-document.addEventListener('DOMContentLoaded', load_inf("Фёдоровых Михаил Иванович","Fedorovykh.MI@parmalogica.ru","Стажер","Пермь"))
+document.addEventListener('DOMContentLoaded', load_inf())
