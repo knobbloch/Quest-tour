@@ -80,7 +80,7 @@ async def edit_user_self(new_data: EditPerson, session_id: str = Cookie(alias=CO
     email = is_accessible(Access.ALL, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if edit_person(email, new_data.namep, new_data.surname, new_data.thirdname, new_data.city):
+    if edit_person(email, new_data.namep, new_data.surname, new_data.thirdname, None, new_data.city):
         return {"status": 202, "Message": "user data changed"}
     else:
         return {"status": 500, "Message": "an error occurred!"}
