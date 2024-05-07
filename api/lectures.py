@@ -74,11 +74,11 @@ async def lecture_list():
     records = get_all_lections()
     if not records or records == []:
         return {'status': 204, 'Message': 'No records found'}
-    list = []
+    lec_list = []
     for record in records:
         lecture = Lecture(id=record[0], title=record[1], description=record[2], pathto=record[3], orderc=record[4])
-        list.append(lecture)
-    return list
+        lec_list.append(lecture)
+    return lec_list
 
 
 @lecture_router.put("/edit_lecture_result")
