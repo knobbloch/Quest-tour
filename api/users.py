@@ -34,7 +34,7 @@ async def user_list(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
 
 
 @user_router.get("/get_user_self")
-async def get_user(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+async def get_user_self(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ALL, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
@@ -76,7 +76,7 @@ async def add_user(user: Person, session_id: str = Cookie(alias=COOKIE_SESSION_I
 
 
 @user_router.put("/edit_user_self")
-async def edit_user(new_data: EditPerson, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+async def edit_user_self(new_data: EditPerson, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ALL, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
