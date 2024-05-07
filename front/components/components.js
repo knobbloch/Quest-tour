@@ -312,11 +312,14 @@ class Answer_input extends HTMLElement {
         this.innerHTML = `
         <link rel="stylesheet" type="text/css" href="answer-input.css">
 
-        <div class="answer-input">
-            <textarea class="answer-input__text"  placeholder="Введите ответ" oninput="auto_grow(this)"></textarea>
+        <div class="answer-input" id="input_ans">
+            <textarea class="answer-input__text" id="text_box" placeholder="Введите ответ" oninput="auto_grow()"></textarea>
 
             <label class="answer-input__field">
-                <img src="img/File_bt.svg">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27 14.82V31C27 34.1826 25.7357 37.2348 23.4853 39.4853C21.2348 41.7357 18.1826 43 15 43C11.8174 43 8.76515 41.7357 6.51472 39.4853C4.26428 37.2348 3 34.1826 3 31V11C3 8.87827 3.84285 6.84344 5.34315 5.34315C6.84344 3.84285 8.87827 3 11 3C13.1217 3 15.1566 3.84285 16.6569 5.34315C18.1571 6.84344 19 8.87827 19 11V29.364C19 29.8893 18.8965 30.4094 18.6955 30.8947C18.4945 31.38 18.1999 31.821 17.8284 32.1924C17.457 32.5639 17.016 32.8585 16.5307 33.0595C16.0454 33.2605 15.5253 33.364 15 33.364C13.9391 33.364 12.9217 32.9426 12.1716 32.1924C11.4214 31.4423 11 30.4249 11 29.364V15" stroke="#0F2232" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
                 <input type="file" id="add_file" multiple>
             </label>
 

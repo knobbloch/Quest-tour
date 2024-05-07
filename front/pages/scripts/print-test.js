@@ -226,7 +226,7 @@ submitButton.addEventListener('click', handleSubmit);
 document.addEventListener('DOMContentLoaded', fetchAndRenderQuestions());
 
 async function sendAnswersToServer(selectedAnswers) { 
-    const URL = `${window.location.origin}/script/send_answers?p_id=${1}&email=${'mama'}`;
+    const URL = `${window.location.origin}/script/send_answers?p_id=${1}`;
     const data = JSON.stringify({sections: selectedAnswers})
     console.log(data)
     const config = {
@@ -243,7 +243,7 @@ async function sendAnswersToServer(selectedAnswers) {
     
 
 async function getPracticeResult() {
-    const URL = `${window.location.origin}/script/get_practice_result?p_id=${1}&email=${'mama'}`;
+    const URL = `${window.location.origin}/script/get_practice_result?p_id=${1}`;
     try {
         const response = await axios.get(URL);
         const data = response.data;
