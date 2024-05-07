@@ -2,7 +2,6 @@
 let color = ["#FF0000","#AB2F90","#742FAB","#392FAB","#FF7800","#E1004C","#EBA43A"]
 
 let map = document.querySelector('.swiper-wrapper')
-let number = 10
 
   //Забираем инфу с сервера
 
@@ -92,7 +91,7 @@ function delete_nuvigation(num){
 }
 
 //Вызов создания цветка
-async function addFlowers(num){
+async function addFlowers(){
   const Flowers = await getFlowers()
     delete_nuvigation(Flowers.length)
     for(let i=0;i<Flowers.length;i++){
@@ -103,8 +102,8 @@ async function addFlowers(num){
 
   
 //Вызов функций
-addFlowers(number)
-document.addEventListener('DOMContentLoaded', change_deadline("04.04.2024"))
+document.addEventListener('DOMContentLoaded', addFlowers())
+document.addEventListener('DOMContentLoaded', change_deadline("042.04.2024"))
 document.addEventListener('DOMContentLoaded', change_end("02.04.2024"))
 
 //Настройки слайдера

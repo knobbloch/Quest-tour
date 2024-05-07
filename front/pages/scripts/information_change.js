@@ -5,18 +5,45 @@ let surname_inf = document.getElementById("surname"),
   department_inf = document.getElementById("department"),
   login_inf = document.getElementById("login");
 
-function load_inf(surname,name,midname,city,department,login){
-  surname_inf.value=surname;
-  name_inf.value=name;
-  midname_inf.value=midname;
-  city_inf.value=city;
-  department_inf.textContent=department;
-  login_inf.textContent=login;
+  async function getInf() {
+    const URL = `${window.location.origin}/script/get_user_self`;
+    try {
+      const response = await axios.get(URL);
+      const data = response.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function sendInfToServer(surname,name,midname,city) { 
+    const URL = `${window.location.origin}/script/edit_user_self`;
+    axios({
+      method: 'put',
+      url: URL,
+      data: {namep: name,surname: surname,thirdname: midname,city: city},
+    })
+    .then(response => {
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    }
+
+async function load_inf(){
+  const Inf = await getInf()
+  surname_inf.value=Inf.surname;
+  name_inf.value=Inf.namep;
+  midname_inf.value=Inf.thirdname;
+  city_inf.value=Inf.city;
+  department_inf.textContent=Inf.division;
+  login_inf.textContent=Inf.email;
 }
 
 function change_inf(){
-  let information = [surname_inf.value,name_inf.value,midname_inf.value,city_inf.value,department_inf.textContent,login_inf.textContent];
-  console.log(information);
+  sendInfToServer(surname_inf.value,name_inf.value,midname_inf.value,city_inf.value);
 }
 
-document.addEventListener('DOMContentLoaded', load_inf("Фёдоровых","Михаил"," Иванович","Пермь","Стажер","Fedorovykh.MI@parmalogica.ru"))
+document.addEventListener('DOMContentLoaded', load_inf())
