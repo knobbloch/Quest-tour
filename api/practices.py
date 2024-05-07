@@ -6,7 +6,7 @@ import os
 import glob
 
 from api.auth import COOKIE_SESSION_ID_KEY, is_accessible, Access
-from api.db_main import get_practice_res, edit_practice_res
+from api.db_main import get_practice_res, edit_practice_res, get_person
 from api.debugging import get_all_practices
 from api.models import Practice, Grade, PracticeRes
 
@@ -139,6 +139,7 @@ async def get_answer_file(p_id: int, target_email: str, session_id: str = Cookie
     if db_main.get_practice(p_id)[3] == 1:
         return {'status': 400, 'Message': 'this practice is a test'}
     answer_id = get_practice_res(p_id, target_email)[0]
+    username = get_person(target_email)[1]+'_'+get_person(target_email)[2]
     paths = glob.glob(f"data/answers/practice_{answer_id}.*")
     files = []
     for path in paths:
@@ -151,7 +152,7 @@ async def get_answer_file(p_id: int, target_email: str, session_id: str = Cookie
             FileResponse(
                 f"data/answers/{file}",
                 media_type="application/octet-stream",
-                filename=f"{file}",
+                filename=f"{username}_{file}",
             )
             for file in files
         ]
