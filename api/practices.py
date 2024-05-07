@@ -1,5 +1,3 @@
-import io
-
 from fastapi import APIRouter, UploadFile, Cookie
 from fastapi.responses import FileResponse
 
@@ -45,7 +43,8 @@ async def get_practice(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_
 
 
 @practice_router.put("/edit_practice")
-async def edit_practice(p_id: int, new_title: str = None, new_description: str = None, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+async def edit_practice(p_id: int, new_title: str = None, new_description: str = None,
+                        session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
@@ -86,7 +85,8 @@ async def practice_list():
 
 
 @practice_router.put("/edit_practice_result")
-async def edit_practice_result(p_id: int, grade: Grade, target_email: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+async def edit_practice_result(p_id: int, grade: Grade, target_email: str,
+                               session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
@@ -112,7 +112,7 @@ async def get_practice_result(p_id: int, session_id: str = Cookie(alias=COOKIE_S
 
 @practice_router.post("/add_answer_file")
 async def add_answer_file(p_id: int, file: UploadFile, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
-    email = is_accessible(Access.ALL, session_id)
+    email = is_accessible(Access.USR, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
     if not db_main.get_practice(p_id):
@@ -142,7 +142,35 @@ async def get_answer_file(p_id: int, target_email: str, session_id: str = Cookie
     paths = glob.glob(f"data/answers/practice_{answer_id}.*")
     files = []
     for path in paths:
-        name=path.split("\\")[-1]
+        name = path.split("\\")[-1]
+        files.append(name)
+    if not files or files == []:
+        return {'status': 404, 'Message': 'file not found'}
+    else:
+        return [
+            FileResponse(
+                f"data/answers/{file}",
+                media_type="application/octet-stream",
+                filename=f"{file}",
+            )
+            for file in files
+        ]
+
+
+@practice_router.get("/get_answer_file_self")
+async def get_answer_file_self(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.USR, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    if not db_main.get_practice(p_id):
+        return {'status': 404, 'Message': 'practice not found'}
+    if db_main.get_practice(p_id)[3] == 1:
+        return {'status': 400, 'Message': 'this practice is a test'}
+    answer_id = get_practice_res(p_id, email)[0]
+    paths = glob.glob(f"data/answers/practice_{answer_id}.*")
+    files = []
+    for path in paths:
+        name = path.split("\\")[-1]
         files.append(name)
     if not files or files == []:
         return {'status': 404, 'Message': 'file not found'}
