@@ -8,11 +8,11 @@
 <link rel="stylesheet" type="text/css" href="styles/pass_change.css">
 </head>
 <body>
-  <custom-header></custom-header>
+  <custom-header colorInf='#FF0000'></custom-header>
   
   <div class="container">
     
-    <div class="back-bt">
+    <div class="back-bt" onclick="back()">
 
     </div>
 
@@ -46,10 +46,9 @@
   </div>
 
   <div class="buttons">
-
     <custom-button-red onclick="check_pass()">Сохранить</custom-button-red>
 
-    <custom-button-white>Отмена</custom-button-white>
+    <custom-button-white onclick="back()">Отмена</custom-button-white>
       
     </div>
 

@@ -23,4 +23,16 @@ async function load_inf(){
   city_inf.value=Inf.city;
 }
 
+function back(){
+  history.back();
+}
+
+function inf_change(){
+  window.location.href = "http://127.0.0.1:8000/pages/information_change.html";
+}
+
+function pass_change(){
+  window.location.href = "http://127.0.0.1:8000/pages/pass_change.html";
+}
+
 document.addEventListener('DOMContentLoaded', load_inf())

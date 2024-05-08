@@ -1,5 +1,5 @@
 async function getPercent() {
-    const URL = `${window.location.origin}/script/course_percent?email=${123}`;
+    const URL = `${window.location.origin}/script/course_percent_self`;
     try {
       const response = await axios.get(URL);
       const data = response.data;

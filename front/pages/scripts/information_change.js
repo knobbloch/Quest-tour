@@ -46,4 +46,8 @@ function change_inf(){
   sendInfToServer(surname_inf.value,name_inf.value,midname_inf.value,city_inf.value);
 }
 
+function back(){
+  history.back();
+}
+
 document.addEventListener('DOMContentLoaded', load_inf())
