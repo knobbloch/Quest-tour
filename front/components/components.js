@@ -182,6 +182,9 @@ customElements.define('pop-up', Pop_up);
 
 class Header extends HTMLElement {
     connectedCallback() {
+        const color_map = this.getAttribute('colorMap');
+        const color_stat = this.getAttribute('colorStat');
+        const color_inf = this.getAttribute('colorInf') || '#0F2232';
         this.innerHTML = `
         <link rel="stylesheet" type="text/css" href="../components/header_style.css">
             <header class="header">
@@ -196,12 +199,12 @@ class Header extends HTMLElement {
                         </svg>                
                 </a>
                 <nav class="navbar">
-                    <a href="#" title="Карта заданий">Карта заданий</a>
-                    <a href="#" title="Статистика">Статистика</a>
-                    <a href="#" id="lk" title="Личный кабинет">
+                    <a href="http://127.0.0.1:8000/pages/map.html" title="Карта заданий" style="color: ${color_map};">Карта заданий</a>
+                    <a href="http://127.0.0.1:8000/pages/statistic.html" title="Статистика" style="color: ${color_stat};">Статистика</a>
+                    <a href="http://127.0.0.1:8000/pages/account.html" id="lk" title="Личный кабинет">
                         <svg viewBox="0 0 55 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M41.5273 17.6481C41.5273 23.5392 36.9009 28.3148 31.194 28.3148C25.4871 28.3148 20.8607 23.5392 20.8607 17.6481C20.8607 11.7571 25.4871 6.98145 31.194 6.98145C36.9009 6.98145 41.5273 11.7571 41.5273 17.6481Z" stroke="#0F2232" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M41.5273 38.9814H20.8607C15.1537 38.9814 10.5273 43.7571 10.5273 49.6481C10.5273 52.5936 12.8405 54.9815 15.694 54.9815H46.694C49.5475 54.9815 51.8607 52.5936 51.8607 49.6481C51.8607 43.7571 47.2343 38.9814 41.5273 38.9814Z" stroke="#0F2232" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M41.5273 17.6481C41.5273 23.5392 36.9009 28.3148 31.194 28.3148C25.4871 28.3148 20.8607 23.5392 20.8607 17.6481C20.8607 11.7571 25.4871 6.98145 31.194 6.98145C36.9009 6.98145 41.5273 11.7571 41.5273 17.6481Z" stroke="${color_inf}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M41.5273 38.9814H20.8607C15.1537 38.9814 10.5273 43.7571 10.5273 49.6481C10.5273 52.5936 12.8405 54.9815 15.694 54.9815H46.694C49.5475 54.9815 51.8607 52.5936 51.8607 49.6481C51.8607 43.7571 47.2343 38.9814 41.5273 38.9814Z" stroke="${color_inf}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>                                       
                     </a>
                     <a href="#" id="logout" title="Выйти из аккаунта">

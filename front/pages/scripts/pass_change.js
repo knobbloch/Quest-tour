@@ -57,9 +57,14 @@ function check_pass(){
         return false;
       }else{
         error.textContent="";
-        sendPassToServer(new_pass_inf.value);
+        //sendPassToServer(new_pass_inf.value);
         return true;
       }
     }
 }
+
+function back(){
+  history.back();
+}
+
 document.addEventListener('DOMContentLoaded', load_inf())
