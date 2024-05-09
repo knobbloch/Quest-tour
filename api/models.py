@@ -48,6 +48,11 @@ class Lecture(BaseModel):
     pathto: Optional[str] = None
 
 
+class EditLecture(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+
+
 class Practice(BaseModel):
     id: Optional[int] = None
     title: str

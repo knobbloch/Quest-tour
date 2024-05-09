@@ -182,6 +182,9 @@ customElements.define('pop-up', Pop_up);
 
 class Header extends HTMLElement {
     connectedCallback() {
+        const color_map = this.getAttribute('colorMap');
+        const color_stat = this.getAttribute('colorStat');
+        const color_inf = this.getAttribute('colorInf') || '#0F2232';
         this.innerHTML = `
         <link rel="stylesheet" type="text/css" href="../components/header_style.css">
             <header class="header">
@@ -196,12 +199,12 @@ class Header extends HTMLElement {
                         </svg>                
                 </a>
                 <nav class="navbar">
-                    <a href="#" title="Карта заданий">Карта заданий</a>
-                    <a href="#" title="Статистика">Статистика</a>
-                    <a href="#" id="lk" title="Личный кабинет">
+                    <a href="http://127.0.0.1:8000/pages/map.html" title="Карта заданий" style="color: ${color_map};">Карта заданий</a>
+                    <a href="http://127.0.0.1:8000/pages/statistic.html" title="Статистика" style="color: ${color_stat};">Статистика</a>
+                    <a href="http://127.0.0.1:8000/pages/account.html" id="lk" title="Личный кабинет">
                         <svg viewBox="0 0 55 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M41.5273 17.6481C41.5273 23.5392 36.9009 28.3148 31.194 28.3148C25.4871 28.3148 20.8607 23.5392 20.8607 17.6481C20.8607 11.7571 25.4871 6.98145 31.194 6.98145C36.9009 6.98145 41.5273 11.7571 41.5273 17.6481Z" stroke="#0F2232" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M41.5273 38.9814H20.8607C15.1537 38.9814 10.5273 43.7571 10.5273 49.6481C10.5273 52.5936 12.8405 54.9815 15.694 54.9815H46.694C49.5475 54.9815 51.8607 52.5936 51.8607 49.6481C51.8607 43.7571 47.2343 38.9814 41.5273 38.9814Z" stroke="#0F2232" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M41.5273 17.6481C41.5273 23.5392 36.9009 28.3148 31.194 28.3148C25.4871 28.3148 20.8607 23.5392 20.8607 17.6481C20.8607 11.7571 25.4871 6.98145 31.194 6.98145C36.9009 6.98145 41.5273 11.7571 41.5273 17.6481Z" stroke="${color_inf}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M41.5273 38.9814H20.8607C15.1537 38.9814 10.5273 43.7571 10.5273 49.6481C10.5273 52.5936 12.8405 54.9815 15.694 54.9815H46.694C49.5475 54.9815 51.8607 52.5936 51.8607 49.6481C51.8607 43.7571 47.2343 38.9814 41.5273 38.9814Z" stroke="${color_inf}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>                                       
                     </a>
                     <a href="#" id="logout" title="Выйти из аккаунта">
@@ -312,11 +315,14 @@ class Answer_input extends HTMLElement {
         this.innerHTML = `
         <link rel="stylesheet" type="text/css" href="answer-input.css">
 
-        <div class="answer-input">
-            <textarea class="answer-input__text"  placeholder="Введите ответ" oninput="auto_grow(this)"></textarea>
+        <div class="answer-input" id="input_ans">
+            <textarea class="answer-input__text" id="text_box" placeholder="Введите ответ" oninput="auto_grow()"></textarea>
 
             <label class="answer-input__field">
-                <img src="img/File_bt.svg">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27 14.82V31C27 34.1826 25.7357 37.2348 23.4853 39.4853C21.2348 41.7357 18.1826 43 15 43C11.8174 43 8.76515 41.7357 6.51472 39.4853C4.26428 37.2348 3 34.1826 3 31V11C3 8.87827 3.84285 6.84344 5.34315 5.34315C6.84344 3.84285 8.87827 3 11 3C13.1217 3 15.1566 3.84285 16.6569 5.34315C18.1571 6.84344 19 8.87827 19 11V29.364C19 29.8893 18.8965 30.4094 18.6955 30.8947C18.4945 31.38 18.1999 31.821 17.8284 32.1924C17.457 32.5639 17.016 32.8585 16.5307 33.0595C16.0454 33.2605 15.5253 33.364 15 33.364C13.9391 33.364 12.9217 32.9426 12.1716 32.1924C11.4214 31.4423 11 30.4249 11 29.364V15" stroke="#0F2232" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
                 <input type="file" id="add_file" multiple>
             </label>
 

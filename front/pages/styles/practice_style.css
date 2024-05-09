@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(Montserrat-VariableFont_wght.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    color: #0F2232;
+}
+html{
+    font-size: 20px;
+}
+body{
+    min-height: 100%;
+}
+.heading{
+    width:100%;
+    display: grid;
+    grid-template-columns: 8rem 5fr 1fr;
+    grid-template-rows: 4rem;
+    align-items: center;
+    z-index: 1000;
+    position: fixed;
+    background-color: #FFF;
+}
+.heading p{
+    margin-left: 0.7rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    grid-column: 2;
+}
+.heading svg{
+    justify-self: flex-end;
+    height: 1.4rem;
+    width: 1.4rem;
+    grid-column: 1;
+}
+.heading custom-button-blue{
+    align-self: flex-end;
+    grid-column: 3;
+    justify-self: center;
+}
+.button_blue{
+    width: 8rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.container{
+    display:grid;
+    grid-template-rows: 4rem auto auto auto;
+    grid-template-columns: 4rem 1fr;
+}
+.task{
+    grid-column: 2;
+    grid-row: 2;
+    margin: 1rem 0 1.5rem 0;
+    width: 80vw;
+    justify-self: center;
+    text-align: justify;
+    text-indent: 2rem;
+    line-height: 1.5rem;
+}
+.container answer-input{
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: center;
+    margin-bottom: 2rem;
+}
+.container custom-button-red{
+    grid-column: 2;
+    grid-row: 4;
+    justify-self: flex-end;
+}
+.button_red{
+    width: 9rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 0rem 9.5rem 2rem 0rem;
+}
