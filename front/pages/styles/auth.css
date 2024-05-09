@@ -144,6 +144,7 @@ custom-button-red{
     background-repeat: no-repeat;
     background-position: center;
     transition: all 0.2s ease;
+    background-color: #ffffff;
 }
 
 .pass-btn:hover{
@@ -157,4 +158,18 @@ custom-button-red{
 .error-message {
     color: #FF0000;
     font-size: 1rem;
+}
+
+input:-webkit-autofill{
+  -webkit-text-fill-color: #0F2232;
+  -webkit-box-shadow: 0 0 0px 40rem #ffff inset;
+}
+
+input[type="password"]::-ms-reveal {
+    display: none;
+}
+
+/* Для браузеров на основе Chromium (Chrome, Brave, Opera) */
+input[type="password"]::-webkit-credentials-picker-button {
+    display: none;
 }
