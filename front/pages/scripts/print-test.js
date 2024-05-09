@@ -1,8 +1,30 @@
-// Определение всех функций
+// Получение параметров из URL
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const id = urlParams.get('id');
+async function getPractice() {
+    const URL = `${window.location.origin}/script/get_practice?p_id=${id}`;
+    try {
+        const response = await axios.get(URL);
+        const data = response.data;
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderPracticeName() {
+    const practice = await getPractice();
+    const practiceName = document.getElementById('practice-name');
+    practiceName.textContent = practice.title;
+}
+
+renderPracticeName();
 
 // Функция для получения вопросов с сервера
 async function getQuestions() {
-    const URL = `${window.location.origin}/script/read_test_from_file?p_id=${1}`;
+    
+    const URL = `${window.location.origin}/script/read_test_from_file?p_id=${id}`;
     try {
         const response = await axios.get(URL);
         const data = response.data;
@@ -30,7 +52,7 @@ async function renderQuestion(questionData, index) {
         let answerElement;
         if (questionData.radio) {
             answerElement = document.createElement('custom-radiobutton');
-            answerElement.setAttribute('group', questionData.question);
+            answerElement.setAttribute('group', `${questionData.question}${index} `);
         } else {
             answerElement = document.createElement('custom-checkbox');
             answerElement.classList.add('ccheckbox');
@@ -226,7 +248,7 @@ submitButton.addEventListener('click', handleSubmit);
 document.addEventListener('DOMContentLoaded', fetchAndRenderQuestions());
 
 async function sendAnswersToServer(selectedAnswers) { 
-    const URL = `${window.location.origin}/script/send_answers?p_id=${1}`;
+    const URL = `${window.location.origin}/script/send_answers?p_id=${id}`;
     const data = JSON.stringify({sections: selectedAnswers})
     console.log(data)
     const config = {
@@ -243,7 +265,7 @@ async function sendAnswersToServer(selectedAnswers) {
     
 
 async function getPracticeResult() {
-    const URL = `${window.location.origin}/script/get_practice_result?p_id=${1}`;
+    const URL = `${window.location.origin}/script/get_practice_result?p_id=${id}`;
     try {
         const response = await axios.get(URL);
         const data = response.data;
@@ -271,7 +293,8 @@ async function fetchResultPractice() {
     }
 }
 
-function progressBar(num){
-    
-    
-}
+const backButton = document.getElementById('back-to-map');
+backButton.addEventListener('click', () => {
+    // Переходим по URL-адресу
+    window.location.href = 'http://127.0.0.1:8000/pages/map.html'; // Замените 'URL' на нужный URL-адрес для перехода
+});

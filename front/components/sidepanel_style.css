@@ -16,11 +16,13 @@
     background-color: inherit;
     border: none;
     align-self: flex-start;
+    
 }
 .back_btn svg{
     width:1.6rem;
     height:1.6rem;
     margin:1.2rem 0rem 0rem 0rem;
+    cursor: pointer;
 }
 .logo svg{
     bottom:0;
@@ -44,6 +46,7 @@ a:hover{
             fill: #EC1C24;
         }
     }
+    
 }
 
 @media (max-width:800px){
