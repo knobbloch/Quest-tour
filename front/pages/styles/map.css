@@ -98,6 +98,7 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
+    cursor: pointer;
 
     transition: all 0.2s ease;
 }

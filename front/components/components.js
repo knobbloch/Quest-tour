@@ -135,7 +135,6 @@ class Task_list extends HTMLElement {
                         <div class="details">
                             <h1 class="name"></h1>
                         </div>
-
                     </div>
                     <div class="action">
                         <div class="delete" onclick="deleteTask(event)">
@@ -153,12 +152,7 @@ customElements.define('task-list', Task_list);
 class Pop_up extends HTMLElement {
     connectedCallback() {
         const text = this.textContent.trim();
-        const question_text = this.getAttribute('question-text');
-        const text_btn1 = this.getAttribute('text-btn1');
-        const text_btn2 = this.getAttribute('text-btn2');
-        const class_btn= this.getAttribute('class-btn');
-        const header_text = this.getAttribute('header-text');
-        const disabled_value = this.getAttribute('disabled_value');
+
 
         this.innerHTML = `    
         <button class="${class_btn}" id="open-modal-btn" disabled_value="${disabled_value}">${text}</button>
@@ -199,15 +193,15 @@ class Header extends HTMLElement {
                         </svg>                
                 </a>
                 <nav class="navbar">
-                    <a href="http://127.0.0.1:8000/pages/map.html" title="Карта заданий" style="color: ${color_map};">Карта заданий</a>
-                    <a href="http://127.0.0.1:8000/pages/statistic.html" title="Статистика" style="color: ${color_stat};">Статистика</a>
-                    <a href="http://127.0.0.1:8000/pages/account.html" id="lk" title="Личный кабинет">
+                    <a title="Карта заданий" style="color: ${color_map};" id="map">Карта заданий</a>
+                    <a title="Статистика" style="color: ${color_stat};" id="stat">Статистика</a>
+                    <a id="lk" title="Личный кабинет" >
                         <svg viewBox="0 0 55 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M41.5273 17.6481C41.5273 23.5392 36.9009 28.3148 31.194 28.3148C25.4871 28.3148 20.8607 23.5392 20.8607 17.6481C20.8607 11.7571 25.4871 6.98145 31.194 6.98145C36.9009 6.98145 41.5273 11.7571 41.5273 17.6481Z" stroke="${color_inf}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M41.5273 38.9814H20.8607C15.1537 38.9814 10.5273 43.7571 10.5273 49.6481C10.5273 52.5936 12.8405 54.9815 15.694 54.9815H46.694C49.5475 54.9815 51.8607 52.5936 51.8607 49.6481C51.8607 43.7571 47.2343 38.9814 41.5273 38.9814Z" stroke="${color_inf}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>                                       
                     </a>
-                    <a href="#" id="logout" title="Выйти из аккаунта">
+                    <a id="logout" title="Выйти из аккаунта">
                         <svg viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M41.6819 20.625C43.9438 22.3214 45.9864 24.2894 47.7643 26.4835C48.0048 26.7802 48.125 27.1401 48.125 27.5M41.6819 34.375C43.9438 32.6786 45.9864 30.7106 47.7643 28.5165C48.0048 28.2198 48.125 27.8599 48.125 27.5M48.125 27.5H18.3333M29.7917 10.3762C27.359 8.19891 24.1466 6.875 20.625 6.875C13.0311 6.875 6.875 13.0311 6.875 20.625V34.375C6.875 41.9689 13.0311 48.125 20.625 48.125C24.1466 48.125 27.359 46.8011 29.7917 44.6238" stroke="#0F2232" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>                    
@@ -215,7 +209,31 @@ class Header extends HTMLElement {
                 </nav>
             </header>
         `
+
+        this.querySelector('#map').addEventListener('click', this.map)
+        this.querySelector('#stat').addEventListener('click', this.stat)
+        this.querySelector('#lk').addEventListener('click', this.lk)
+        this.querySelector('#logout').addEventListener('click', this.deadInf)
     }
+    map() {
+        window.location.href = "http://127.0.0.1:8000/pages/map.html"
+    }
+    stat() {
+        window.location.href = "http://127.0.0.1:8000/pages/statistic.html"
+    }
+
+    lk() {
+        window.location.href = "http://127.0.0.1:8000/pages/account.html"
+    }
+
+    async deadInf() {
+        const URL = `${window.location.origin}/auth/logout-cookie`;
+        try {
+          await axios.get(URL);
+        } catch (error) {
+          console.log(error);
+        }
+      }
 }
 
 
