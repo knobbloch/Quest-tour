@@ -94,7 +94,7 @@ function delete_nuvigation(num){
 async function addFlowers(){
   const Flowers = await getFlowers()
     delete_nuvigation(Flowers.length)
-    for(let i=0;i<Flowers.length;i++){
+    for(let i=Flowers.length-1;i>=0;i--){
       let random=flower_choose(i);
       flower_create(random%3,random,color[parseInt(parseInt(random)-parseInt(random)%3)/3],text_check(Flowers[i].title),random%7,Flowers[i].flower_stage,Flowers[i].type,Flowers[i].entity_id);
     }
