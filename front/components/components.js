@@ -352,14 +352,14 @@ class Header extends HTMLElement {
         this.querySelector('#Yes-btn-header').addEventListener('click', this.deadInf)
     }
     map() {
-        window.location.href = "http://127.0.0.1:8000/pages/map.html"
+        window.location.href = "http://127.0.0.1:8000/map.html"
     }
     stat() {
-        window.location.href = "http://127.0.0.1:8000/pages/statistic.html"
+        window.location.href = "http://127.0.0.1:8000/statistic.html"
     }
 
     lk() {
-        window.location.href = "http://127.0.0.1:8000/pages/account.html"
+        window.location.href = "http://127.0.0.1:8000/account.html"
     }
 
     async deadInf() {
