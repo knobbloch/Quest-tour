@@ -1,3 +1,4 @@
+from datetime import date
 from typing import List, Optional
 
 from pydantic import BaseModel
@@ -86,3 +87,10 @@ class Flower(BaseModel):
     flower_stage: int  # 0 - bad, 1 - good
     type: int  # 0 - lecture, 1 - practice
     entity_id: int
+
+
+class Dead(BaseModel):
+    id: int
+    email: str
+    deadline: date
+    complete: Optional[date] = None

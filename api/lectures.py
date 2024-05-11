@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Cookie
+from fastapi import APIRouter, Cookie, UploadFile
+from fastapi.responses import FileResponse
 
 from api import db_main
 from api.auth import COOKIE_SESSION_ID_KEY, is_accessible, Access
@@ -102,3 +103,44 @@ async def get_lecture_result(l_id: int, session_id: str = Cookie(alias=COOKIE_SE
     result = db_main.get_lection_res(l_id, email)
     lec_res = LectureRes(id=result[0], viewed=result[1], user_email=result[2], lecture_id=result[3])
     return lec_res.viewed
+
+
+@lecture_router.put("/add_lecture_file")
+async def add_lecture_file(l_id: int, file: UploadFile, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    if not db_main.get_lection(l_id):
+        return {'status': 404, 'Message': 'lecture not found'}
+    path = os.path.abspath(os.getcwd())
+    if not os.path.isdir(f'{path}\\data\\lection\\lec_{l_id}'):
+        os.mkdir(f'{path}\\data\\lection\\lec_{l_id}')
+    content = await file.read()
+    new_file = open(f"data/lection/lec_{l_id}/{file.filename}", 'wb')
+    new_file.write(content)
+    new_file.close()
+    return {'status': 201, 'Message': 'file added'}
+
+
+@lecture_router.get("/get_lecture_file")
+async def get_lecture_file(l_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ALL, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    if not db_main.get_lection(l_id):
+        return {'status': 404, 'Message': 'lecture not found'}
+    path = os.path.abspath(os.getcwd())
+    if not os.path.isdir(f'{path}\\data\\lection\\lec_{l_id}'):
+        return {'status': 404, 'Message': 'path is not found'}
+    files = os.listdir(f"{path}\\data\\lection\\lec_{l_id}")
+    if not files or files == []:
+        return {'status': 404, 'Message': 'files not found'}
+    else:
+        return [
+            FileResponse(
+                f"data/lection/lec_{l_id}/{file}",
+                media_type="application/octet-stream",
+                filename=f"{file}",
+            )
+            for file in files
+        ]

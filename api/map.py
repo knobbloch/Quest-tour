@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Cookie
 
 from api.auth import COOKIE_SESSION_ID_KEY, is_accessible, Access
-from api.db_main import get_map
-from api.models import Flower
+from api.db_main import get_map, get_course_res
+from api.models import Flower, Dead
 
 map_router = APIRouter(prefix="/script", tags=["Map"])
 
@@ -36,7 +36,7 @@ async def get_flowers(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
 
 @map_router.get("/course_percent_self", response_model=int)
 async def course_percent_self(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
-    email = is_accessible(Access.USR, session_id)
+    email = is_accessible(Access.ALL, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
     flower_list = get_flowers_for_map(email)
@@ -51,7 +51,7 @@ async def course_percent_self(session_id: str = Cookie(alias=COOKIE_SESSION_ID_K
 
 @map_router.get("/course_percent", response_model=int)
 async def course_percent(target_email: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
-    email = is_accessible(Access.USR, session_id)
+    email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
     flower_list = get_flowers_for_map(target_email)
@@ -62,3 +62,23 @@ async def course_percent(target_email: str, session_id: str = Cookie(alias=COOKI
             done += 1
     percent = int(done / total * 100)
     return percent
+
+
+@map_router.get("/deadline_self")
+async def deadline_self(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ALL, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    inf = get_course_res(email)
+    dead = Dead(id=inf[0], email=inf[3], deadline=inf[1], complete=inf[2])
+    return dead
+
+
+@map_router.get("/deadline")
+async def deadline(target_email: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    inf = get_course_res(target_email)
+    dead = Dead(id=inf[0], email=inf[3], deadline=inf[1], complete=inf[2])
+    return dead
