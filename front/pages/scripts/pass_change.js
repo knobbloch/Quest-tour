@@ -57,7 +57,8 @@ function check_pass(){
         return false;
       }else{
         error.textContent="";
-        //sendPassToServer(new_pass_inf.value);
+        sendPassToServer(new_pass_inf.value);
+        document.getElementById("exit-modal-ok").classList.add("open")
         return true;
       }
     }

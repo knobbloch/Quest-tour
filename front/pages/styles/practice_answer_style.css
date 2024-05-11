@@ -1,0 +1,160 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(Montserrat-VariableFont_wght.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    color: #0F2232;
+}
+html{
+    font-size: 20px;
+}
+body{
+    min-height: 100%;
+}
+.heading{
+    width:100%;
+    display: grid;
+    grid-template-columns: 8rem 5fr 1fr;
+    grid-template-rows: 4rem;
+    align-items: center;
+    z-index: 1000;
+    position: fixed;
+    background-color: #FFF;
+}
+.heading p{
+    margin-left: 0.7rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    grid-column: 2;
+}
+.heading svg{
+    justify-self: flex-end;
+    height: 1.4rem;
+    width: 1.4rem;
+    grid-column: 1;
+}
+.heading custom-button-blue{
+    align-self: flex-end;
+    grid-column: 3;
+    justify-self: center;
+}
+.button_blue{
+    width: 8rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.container{
+    display:grid;
+    grid-template-rows: 4rem auto auto auto;
+    grid-template-columns: 4rem 1fr;
+    /* align-items: center; */
+}
+.task{
+    grid-column: 2;
+    grid-row: 2;
+    margin: 1rem 0 1.5rem 0;
+    width: 80vw;
+    justify-self: center;
+    text-align: justify;
+    text-indent: 2rem;
+    line-height: 1.5rem;
+}
+.user_answer{
+    width: 80vw;
+    font-size: 1rem;
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: center;
+    align-content: center;
+    padding: 1rem;
+    background: #FFFFFF;
+    border: 2px solid #0F2232;
+    border-radius: 15px;
+}
+.file{
+    width: auto;
+    height: auto;
+    margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 4;
+}
+
+.file img{
+    width: 3.8rem;
+    height: 4rem;
+    object-fit: cover;
+    margin-right: 0.5rem;
+    margin-left: 7rem;
+}
+
+.file-label, .file__box-label{
+    font-size: 0.75rem;
+    max-width: 80%;
+    flex-wrap: wrap;
+    overflow-wrap:break-word;
+}
+
+.file__box{
+    width: auto;
+    height: auto;
+    /* margin-bottom: 2rem; */
+    /* position: relative; */
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    /* justify-content: flex-start; */
+    align-items: center;
+}
+
+.container comment-user{
+    grid-column: 2;
+    grid-row: 5;
+    justify-self: center;
+    margin-bottom: 2rem;
+    /* width: 100%; */
+}
+.send{
+    grid-column: 2;
+    grid-row: 7;
+    justify-self: flex-start;
+    margin: 0 1rem 0 6rem;
+}
+.next{
+    grid-column: 2;
+    grid-row: 7;
+    justify-self: flex-start;
+    margin: 0 1rem 0 16rem;
+}
+.container answer-input{
+    grid-column: 2;
+    grid-row: 6;
+    justify-self: center;
+    margin-bottom: 2rem;
+}
+.answer-input__field {
+    position: absolute;
+    right: 8.5rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+.button_red{
+    width: 9rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 0rem 9.5rem 2rem 0rem;
+}
