@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <title>Аккаунт пользователя</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
 <link rel="stylesheet" type="text/css" href="styles/account.css">
 </head>
 <body>
-  <custom-header></custom-header>
+  <custom-header colorInf='#FF0000'></custom-header>
   
   <div class="container">
     
-    <div class="back-bt">
+    <div class="back-bt" onclick="back()">
 
     </div>
 
@@ -46,9 +47,9 @@
 
   <div class="buttons">
 
-    <custom-button-red >Редактировать</custom-button-red>
+    <custom-button-red onclick="inf_change()">Редактировать</custom-button-red>
 
-    <custom-button-white >Сменить пароль</custom-button-white>
+    <custom-button-white onclick="pass_change()">Сменить пароль</custom-button-white>
       
     </div>
 

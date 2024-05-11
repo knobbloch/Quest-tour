@@ -1,18 +1,38 @@
+async function getPercent() {
+    const URL = `${window.location.origin}/script/course_percent_self`;
+    try {
+      const response = await axios.get(URL);
+      const data = response.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return 0;
+    }
+  }
+
+  
+
 let circularProgress = document.querySelector(".circular-progress"),
     progressValue = document.querySelector(".progress-value");
 
-let progressStartValue = 0,
-    progressEndValue = 50,
-    speed = 30;
+async function setProgress() {
+    let progressStartValue = 0,
+        speed = 30;
 
-let progress = setInterval(() => {
-    progressStartValue++;
+    const progressEndValue = await getPercent()
 
-    progressValue.textContent = `${progressStartValue}%`
-    circularProgress.style.background = `conic-gradient(#F69933 ${progressStartValue * 3.6}deg, #ffe0aadc 0deg)`
+    let progress = setInterval(() => {
+        progressStartValue++;
 
-    if (progressStartValue == progressEndValue){
-        clearInterval(progress);
-    }
+        progressValue.textContent = `${progressStartValue}%`
+        circularProgress.style.background = `conic-gradient(#F69933 ${progressStartValue * 3.6}deg, #ffe0aadc 0deg)`
+        console.log(progressEndValue);
+        if (progressStartValue == progressEndValue){
+            clearInterval(progress);
+        }
 
-}, speed);
+    }, speed);
+}
+
+setProgress();

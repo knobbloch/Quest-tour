@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
-    src: url(../../components/Montserrat-VariableFont_wght.ttf);
+    src: url(Montserrat-VariableFont_wght.ttf);
 }
 * {
     margin: 0;
@@ -50,34 +50,26 @@ body{
     font-size: 0.9rem;
     font-weight: bold;
 }
-video{
-    width: 55vw;
-    height: 35vw;
-    cursor: pointer;
-    grid-row: 2;
-    grid-column: 2;
-    justify-self: center;
-    margin-top: 1rem;
-}
-.lecture{
-    grid-column:2;
-    grid-row: 3;
-    justify-self: center;
-    align-self: flex-start;
-    width: 70vw;
-    font-size: 1.1rem;
-    height:auto;
-    text-align: justify;
-    resize: none;
-    background: none;
-    border-style: none;
-    margin: 2rem;
-    text-indent: 4rem;
-}
 .container{
     display:grid;
     grid-template-rows: 4rem auto auto auto;
     grid-template-columns: 4rem 1fr;
+}
+.task{
+    grid-column: 2;
+    grid-row: 2;
+    margin: 1rem 0 1.5rem 0;
+    width: 80vw;
+    justify-self: center;
+    text-align: justify;
+    text-indent: 2rem;
+    line-height: 1.5rem;
+}
+.container answer-input{
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: center;
+    margin-bottom: 2rem;
 }
 .container custom-button-red{
     grid-column: 2;

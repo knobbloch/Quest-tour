@@ -5,40 +5,33 @@ document.getElementById("sign-in-btn").addEventListener("click", function() {
     email = document.getElementById("email").value;
     password = document.getElementById("pass").value;
     console.log(email, password)
-    SendDataToServer(email)
+    SendDataToServer(email, password);
 });
 
 
-async function SendDataToServer(enteredData) {
+async function SendDataToServer(email, password) {
     const URL = `${window.location.origin}/auth/login-cookie`;
-    const data = JSON.stringify({data: enteredData})
-    const config = {
-        // headers: {'Content-Type': 'application/json', "login": "Finn", "password": "Williams"}
-    }
-    axios({
-        method: 'post',
-        url: URL,
-        withCredentials: true,
-        data: JSON.stringify({
-        // "login": "Finn",
-        // "pass": "Williams"
-        }),
-        auth: { 
-            username: 'username', 
-            password: 'password' 
-        },
-        headers: config.headers
-    }).then(response => {
-        if (!response.ok) {
+    try {
+        const response = await axios({
+            method: 'post',
+            url: URL,
+            auth: {
+                username: email,
+                password: password
+            }
+        });
+        
+        if (response.status < 200 || response.status >= 300) {
             throw new Error("Ошибка");
         }
-        return response.json();
-    })
-    .then(data => {
-        console.log("Все крута", data);
-    })
-    .catch(error => {
-        const errorMessageDiv = document.getElementById("error-message");
-        errorMessageDiv.style.display = "block";
-    });
-};
+
+        const data = await response.data;
+        window.location.href = 'http://127.0.0.1:8000/pages/map.html';
+        document.getElementById("error-message").style.display = "none";
+
+        return data;
+    } catch (error) {
+        console.error(error);
+        document.getElementById("error-message").style.display = "block";
+    }
+}

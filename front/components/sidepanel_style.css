@@ -1,6 +1,6 @@
 .nav_panel{
     background: #E9ECEE;
-    width: 4.5rem;
+    width: 3.7rem;
     height: 100%;
     min-height: 100%;
     position: fixed; 
@@ -9,23 +9,28 @@
     margin: 0;
     left: 0;
     z-index: 2000;
+    display: flex;
+    justify-content: center;
 }
 .back_btn{
     background-color: inherit;
     border: none;
+    align-self: flex-start;
+    
 }
 .back_btn svg{
-    width:1.8rem;
-    height:1.8rem;
-    margin:1.2rem 0rem 0rem 1.2rem;
+    width:1.6rem;
+    height:1.6rem;
+    margin:1.2rem 0rem 0rem 0rem;
+    cursor: pointer;
 }
 .logo svg{
     bottom:0;
     left:0;
     position:fixed;
-    margin: 1.1rem;
-    width: 2.7rem;
-    height: 8rem;
+    margin: 0.9rem;
+    width: 2rem;
+    height: 6.5rem;
 }
 .back_btn:hover{
     svg{
@@ -41,17 +46,18 @@ a:hover{
             fill: #EC1C24;
         }
     }
+    
 }
 
 @media (max-width:800px){
     .logo svg{
         margin: 1rem;
         width: 2.3rem;
-        height: 7rem;
+        height: 6rem;
     }
     .back_btn svg{
         width: 1.5rem;
         height: 1.5rem;
-        margin:1.2rem 0rem 0rem 1.4rem;
+        margin:1.2rem 0rem 0rem 0rem;
     }
 }

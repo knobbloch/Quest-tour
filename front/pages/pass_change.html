@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <title>Пароль пользователя</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../components/buttons_style.css">
 <link rel="stylesheet" type="text/css" href="styles/pass_change.css">
 </head>
 <body>
-  <custom-header></custom-header>
+  <custom-header colorInf='#FF0000'></custom-header>
   
   <div class="container">
     
-    <div class="back-bt">
+    <div class="back-bt" onclick="back()">
 
     </div>
 
@@ -19,13 +20,6 @@
 
     </label>
 
-  </div>
-
-  <div class="block first_block">
-    <label class="block-title">
-      Текущий пароль
-    </label>
-    <textarea class="block-text" id="pass" readonly></textarea>
   </div>
 
   <label class="title-error">
@@ -52,10 +46,9 @@
   </div>
 
   <div class="buttons">
-
     <custom-button-red onclick="check_pass()">Сохранить</custom-button-red>
 
-    <custom-button-white>Отмена</custom-button-white>
+    <custom-button-white onclick="back()">Отмена</custom-button-white>
       
     </div>
 
