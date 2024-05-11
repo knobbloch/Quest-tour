@@ -1,5 +1,5 @@
 // Функция открывает модальное окно при нажатии на кнопку
-document.getElementById("open-modal-btn").addEventListener("click",function(){
+document.querySelector("open-modal-btn").addEventListener("click",function(){
     document.getElementById("exit-modal").classList.add("open")
 })
 
