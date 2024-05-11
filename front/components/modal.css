@@ -121,9 +121,15 @@ body{
     column-gap: 8%;
     /* justify-content: center;     */
 }
+
+.Ok{
+    grid-template-columns: none; 
+}
+
+
 .modal__box{
     display: grid;
-    grid-template-rows: 1fr 1.8fr 1fr;
+    grid-template-rows: 1fr 1.4fr 1fr;
     row-gap: 0rem;
     margin: 3rem 1.5rem;
     padding: 2rem 2rem 0 2rem;
