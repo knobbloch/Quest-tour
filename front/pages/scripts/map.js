@@ -17,17 +17,28 @@ let map = document.querySelector('.swiper-wrapper')
     }
   }
 
+  async function getDeadline() {
+    const URL = `${window.location.origin}/script/deadline_self`;
+    try {
+      const response = await axios.get(URL);
+      const data = response.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
 //Меняет дату дедлайна
-function change_deadline(date){
-  document.getElementById('deadline').innerHTML = "Нужно выполнить все задания до " + date+" !"
-}
+async function change_deadline(){
+  const date = await getDeadline()
+  document.getElementById('deadline').innerHTML = "Нужно выполнить все задания до " + date.deadline+" !"
 
-function change_end(date){
-  if (date == "0") {
+  if (date.complete == "0") {
     document.getElementById('end').innerHTML = "Квест ещё не завешен"
   }else{
-    document.getElementById('end').innerHTML = "Квест завешен "+ date
+    document.getElementById('end').innerHTML = "Квест завешен "+ date.complete
   }
 }
 
@@ -94,7 +105,7 @@ function delete_nuvigation(num){
 async function addFlowers(){
   const Flowers = await getFlowers()
     delete_nuvigation(Flowers.length)
-    for(let i=Flowers.length-1;i>=0;i--){
+    for(let i=0;i<Flowers.length;i++){
       let random=flower_choose(i);
       flower_create(random%3,random,color[parseInt(parseInt(random)-parseInt(random)%3)/3],text_check(Flowers[i].title),random%7,Flowers[i].flower_stage,Flowers[i].type,Flowers[i].entity_id);
     }
@@ -110,8 +121,7 @@ async function addFlowers(){
   
 //Вызов функций
 document.addEventListener('DOMContentLoaded', addFlowers())
-document.addEventListener('DOMContentLoaded', change_deadline("042.04.2024"))
-document.addEventListener('DOMContentLoaded', change_end("02.04.2024"))
+document.addEventListener('DOMContentLoaded', change_deadline())
 
 //Настройки слайдера
 let swiper = new Swiper(".map-main", {
