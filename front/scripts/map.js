@@ -71,14 +71,14 @@ function text_check(text){
 
 
 //Создание цветка
-function flower_create(type, bud, text_color,text, stem, open,ref_type,ref_id,i) { // создает цветок
+function flower_create(type, bud, text_color,text, stem, open,ref_type,ref_id,i,testornot) { // создает цветок
   if (open) { // если открытый
     const flower = document.createElement('div'); // создаем элемент div
     flower.className = "swiper-slide"; // добавляем класс
 
     flower.innerHTML = '<div class="map__box">' + // добавляем вinnerHTML
       '<div class="flower fl_op' + type + '" ' + // добавляем класс fl_op
-      'style="background-image: url(svg/Flowers/Open/' + bud + '.svg);" onclick="open_flower('+ref_type+',' + ref_id + ',' + i +')" >' + // и картинку
+      'style="background-image: url(svg/Flowers/Open/' + bud + '.svg);" onclick="open_flower('+ref_type+',' + ref_id + ',' + i + ',' + testornot +')" >' + // и картинку
       '<div class="task" style="color: ' + text_color + ';">' + // добавляем текст
       text +
       '</div></div>' +
@@ -92,7 +92,7 @@ function flower_create(type, bud, text_color,text, stem, open,ref_type,ref_id,i)
 
     flower.innerHTML = '<div class="map__box">' +
       '<div class="flower fl_cl' + type + '" ' +
-      'style="background-image: url(svg/Flowers/Closed/' + bud + '.svg);" onclick="open_flower('+ref_type+',' + ref_id + ',' + i +')" >' +
+      'style="background-image: url(svg/Flowers/Closed/' + bud + '.svg);" onclick="open_flower('+ref_type+',' + ref_id + ',' + i +',' + testornot +')" >' +
       '<div class="task" style="color: ' + text_color + ';">' +
       text +
       '</div></div>' +
@@ -117,17 +117,21 @@ async function addFlowers(){
     delete_nuvigation(Flowers.length)
     for(let i=0;i<Flowers.length;i++){
       let random=flower_choose(i);
-      flower_create(random%3,random,color[parseInt(parseInt(random)-parseInt(random)%3)/3],text_check(Flowers[i].title),random%7,Flowers[i].flower_stage,Flowers[i].type,Flowers[i].entity_id,i);
+      flower_create(random%3,random,color[parseInt(parseInt(random)-parseInt(random)%3)/3],text_check(Flowers[i].title),random%7,Flowers[i].flower_stage,Flowers[i].type,Flowers[i].entity_id,i,Flowers[i].testornot);
     }
   }
 
-  async function open_flower(ref_type,ref_id,i){
+  async function open_flower(ref_type,ref_id,i,testornot){
     if (ref_type == 0) {
       window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id + "&index="+ i
     }else{
       //const res = await getPracticeResult()
+      if(!testornot){
+        window.location.href = "http://127.0.0.1:8000/practice.html?id="+ref_id + "&index="+ i
+      }
+
       if(await getPracticeResult(ref_id) == null){
-      window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
+        window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
       }else{
         window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
       } 
