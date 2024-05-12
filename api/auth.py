@@ -1,17 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Header, Response, Cookie
 import secrets
-from typing import Annotated
 
-from pydantic import BaseModel
-from starlette.staticfiles import StaticFiles
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
-from fastapi import Request
-from typing import Annotated, Any
+from typing import Annotated
 import uuid
-from time import time
 from api.db_main import get_auth, new_token, check_token, delete_token
 from enum import Enum
-from fastapi.responses import HTMLResponse, RedirectResponse
 
 auth_router = APIRouter(prefix="/auth", tags=["Basic auth"])
 security = HTTPBasic()
@@ -113,16 +107,8 @@ def is_accessible(
     session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)
 ):
     if not ((session_id[0]=="0" and access_type==Access.USR) or (session_id[0]=="1" and access_type==Access.ADM) or access_type == Access.ALL):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Forbidden",
-        )
         return ""
     check = check_token(session_id)
     if not check:
-        '''raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="not authenticated",
-        )'''
         return ""
     return check["user"]
