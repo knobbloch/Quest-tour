@@ -45,6 +45,7 @@ def check_permission(method, api, session_id):
     # Parse auth header and check scheme, username and password
 
     if api.split('/')[1] in ['components', 'styles', "scripts", "svg", "auth", "lectures", "script", "map", "tasks", "users",  "lectures"]:
+        print("HERE")
         return '200'
 
     if api in ['/', 'auth.html']:
@@ -52,7 +53,7 @@ def check_permission(method, api, session_id):
 
     print(session_id)
     auth = ''
-    if is_accessible(Access.USR, session_id) == "":
+    if session_id == "" or is_accessible(Access.USR, session_id) == "":
         auth = '307'
 
     if api not in ["/account.html", "/information_change.html", "/lecture.html", "/map.html", "/pass_change.html", "practice.html", "practice_answer.html", "/statistic.html", "/test.html",]:
@@ -63,14 +64,16 @@ def check_permission(method, api, session_id):
 @app.middleware("http")
 async def modify_request_response_middleware(request: Request, call_next, ):
     session_id: str = request.cookies.get(COOKIE_SESSION_ID_KEY)
+    if (session_id == None):
+        session_id = ""
     code = check_permission(request.method, request.url.path, session_id)
     print(code)
     #print(session_id)
     if code == '307':
         print("FALSE")
-        #url1 = '/?continue=' + request.url.path
-        #print(url1)
-        return RedirectResponse(url='/',  status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+        url1 = '/?continue=' + request.url.path
+        print(url1)
+        return RedirectResponse(url=url1,  status_code=status.HTTP_307_TEMPORARY_REDIRECT)
     if code == '404':
         return RedirectResponse("/404", status_code=status.HTTP_404_NOT_FOUND)
     print("TRUE")
