@@ -1,5 +1,8 @@
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const id = urlParams.get('id');
 async function getPractice() {
-  const URL = `${window.location.origin}/script/get_practice?p_id=1`;
+  const URL = `${window.location.origin}/script/get_practice?p_id=${id}`;
   try {
     const response = await axios.get(URL);
     const data = response.data;

@@ -1,5 +1,8 @@
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const id = urlParams.get('id');
 async function getPracticeResult() {
-    const URL = `${window.location.origin}/script/get_practice_result?p_id=1`;
+    const URL = `${window.location.origin}/script/get_practice_result?p_id=${id}`;
     try {
       const response = await axios.get(URL);
       const data = response.data;
@@ -55,13 +58,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     // console.log(score);
     const userAnswer = document.querySelector(".user_answer");
     // var disableButton = true; //change this value to false and the button will be clickable
-    const button = document.getElementById("submit1");
-    // button.disabled = true;
+    const button = document.querySelector(".send");
+    button.disabled = true;
     if (score >= 60){
         userAnswer.style.border = "2px solid #369381"
     }
     else{
-        // button.disabled = false;
+        button.disabled = false;
         userAnswer.style.border = "2px solid #FF4346"
         var userInput = document.createElement('answer-input');
         // userInput.innerHTML = 'Новый блок div';
