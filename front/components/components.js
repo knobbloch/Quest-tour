@@ -494,7 +494,7 @@ class Sidepanel extends HTMLElement {
     }
 
     back() {
-        history.back();
+        window.location.href = 'http://127.0.0.1:8000/map.html';
     }
 }
 
