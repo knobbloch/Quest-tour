@@ -31,7 +31,7 @@ async function SendDataToServer(email, password) {
         console.log(continue1)
         console.log(urlParams)
         const data = await response.data;
-        if (continue1 != null && continue1 != "/lecture.html" && continue1 != "/test.html" && continue1 != "/test_result.html"){
+        if (continue1 != null && continue1 != "/lecture.html" && continue1 != "/test.html" && continue1 != "/test_result.html" && continue1 != "/practice_answer.html" && continue1 != "/practice.html"){
             window.location.href = 'http://127.0.0.1:8000' + continue1;
         }
         else{
