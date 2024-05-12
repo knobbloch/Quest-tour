@@ -46,10 +46,11 @@ customElements.define('custom-radiobutton', Custom_radio);
 
 class Custom_button_red extends HTMLElement {
     connectedCallback() {
+        const id_btn = this.getAttribute('id_btn');
         const text = this.textContent.trim();
         const disabled_value = this.getAttribute('disabled_value');
         this.innerHTML = `
-        <button class="button_red">${text}</button>
+        <button class="button_red" id="${id_btn}">${text}</button>
         `
     }
 }
@@ -171,6 +172,36 @@ customElements.define('task-list', Task_list);
 //         `
 //     }
 // }
+
+class Pop_up_btn extends HTMLElement {
+    connectedCallback() {
+        const text = this.textContent.trim();
+        const question_text = this.getAttribute('question-text');
+        const text_btn1 = this.getAttribute('text-btn1');
+        const text_btn2 = this.getAttribute('text-btn2');
+        const class_btn= this.getAttribute('class-btn');
+        const header_text = this.getAttribute('header-text');
+        const disabled_value = this.getAttribute('disabled_value');
+
+        this.innerHTML = `    
+        <button class="${class_btn}" id="open-modal-btn" disabled_value="${disabled_value}">${text}</button>
+    
+        <!-- Модальное окно  -->
+        <div class="modal" id="exit-modal">
+            <div class="modal__box">
+                <h3 class="modal__box-header">${header_text}</h3>
+                <p class="modal__box-text">${question_text}</p>
+                <div class="btn__box">
+                    <button class="button-red" id="No-btn">${text_btn1}</button>             
+                    <button class="button-blue" >${text_btn2}</button>
+                </div>
+            </div>
+        </div>
+        `
+    }
+}
+
+customElements.define('pop-up-btn', Pop_up_btn);
 
 class Pop_up_OK extends HTMLElement {
     connectedCallback() {
