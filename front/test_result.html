@@ -1,12 +1,12 @@
 <html>
     <head>
-        <title>Тест</title>
+        <title>Результат теста</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="components/radiobutton.css">
         <link rel="stylesheet" type="text/css" href="components/checkbox.css">
         <link rel="stylesheet" type="text/css" href="components/buttons_style.css">
         <link rel="stylesheet" type="text/css" href="components/modal.css">
-        <link rel="stylesheet" href="styles/test.css"/>
+        <link rel="stylesheet" href="styles/test_result.css"/>
         
         <link rel="stylesheet" type="text/css" href="components/progress_bar_small_style.css">
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -15,11 +15,9 @@
 
     <body>       
         
-        <main>
-            
+        <main>           
             <custom-sidepanel class="cs"></custom-sidepanel>
             <div class="main__test">
-                <!-- Принимать заголовок  -->
                 <div class="header"> 
                     <div class="name__header">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,45 +27,23 @@
                         <h1 id="practice-name"></h1>
                     </div>
                     <custom-button-blue id="back-to-map">Назад к карте</custom-button-blue>
-                </div>
-                <div class="test">
-                    <div class="questions">
-                        <template id="question-template">
-                            <div class="question">
-                                <div class="name__question">
-                                    1. Кто платит? ЧТо платит?
-                                </div>
-                                <div class="answers__question">
-                                    <custom-radiobutton text="Красный" group="myGroup"> </custom-radiobutton>
-                                </div>
-                            </div>
-                         </template>
-                        
-                    
-                    
-                </div>
-                <h2>*Вы ответили не на все вопросы.</h2>
-                <pop-up-btn id="pop-up" style="display: block;" header-text="Внимание!" disabled_value="false" class-btn="button_red" question-text="Вы точно хотите отправить ответы?" text-btn1="Нет" text-btn2="Да">Отправить</pop-up-btn>        
+                </div>                
 
-            </div>  
             <div class="progress_bar">
                 
-                <custom-progressbar-small style="display: none;"></custom-progressbar-small>
+                <custom-progressbar-small style="display: block;"></custom-progressbar-small>
                 <p class="progressbar-text" id="progress-text" style="display: none;" ></p>
             </div>     
             <div class="btn-box">     
-                <custom-button-red style="display: none;" id="repeat-btn">Пройти повторно</custom-button-red>
-                <custom-button-red style="display: none;" id="next-btn">Далее</custom-button-red>                           
+                <custom-button-red style="display: block;" id="repeat-btn">Пройти повторно</custom-button-red>
+                <custom-button-red style="display: block;" id="next-btn">Далее</custom-button-red>                           
             </div>
-            
+        </div>  
     
         </main>
         
 
         <script src="components/components.js"></script>
-        <!-- <script src="../components/scripts/progress_bar_small.js"></script> -->
-        <!-- <script src="../components/scripts/modal.js"></script> -->
-        <script src="scripts/print-test.js"></script>
-        <!-- <script src="../components/scripts/sidebar.js"></script> -->
+        <script src="scripts/test_result.js"></script>
     </body>
 </html>

@@ -22,17 +22,17 @@ async function setProgress() {
 
     const progressEndValue = await getPercent()
 
-    let progress = setInterval(() => {
-        progressStartValue++;
-
-        progressValue.textContent = `${progressStartValue}%`
-        circularProgress.style.background = `conic-gradient(#F69933 ${progressStartValue * 3.6}deg, #ffe0aadc 0deg)`
-        console.log(progressEndValue);
-        if (progressStartValue == progressEndValue){
-            clearInterval(progress);
-        }
-
-    }, speed);
+    setInterval(() => {
+      if (progressStartValue == progressEndValue){
+           clearInterval();
+       }
+       else{
+           progressStartValue++;
+   
+           progressValue.textContent = `${progressStartValue}%`
+           circularProgress.style.background = `conic-gradient(#F69933 ${progressStartValue * 3.6}deg, #ffe0aadc 0deg)`
+       }
+   }, speed);
 }
 
 setProgress();

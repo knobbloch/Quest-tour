@@ -47,7 +47,7 @@ function change_inf(){
 }
 
 function back(){
-  history.back();
+  window.location.href = "http://127.0.0.1:8000/account.html"
 }
 
 document.addEventListener('DOMContentLoaded', load_inf())

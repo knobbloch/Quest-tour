@@ -4,6 +4,16 @@ let color = ["#FF0000","#AB2F90","#742FAB","#392FAB","#FF7800","#E1004C","#EBA43
 let map = document.querySelector('.swiper-wrapper')
 
   //Забираем инфу с сервера
+  async function getPracticeResult(id) {
+    const URL = `${window.location.origin}/script/get_practice_result?p_id=${id}`;
+    try {
+        const response = await axios.get(URL);
+        const data = response.data;
+        return data.result;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
   async function getFlowers() {
     const URL = `${window.location.origin}/script/get_flowers`;
@@ -35,7 +45,7 @@ async function change_deadline(){
   const date = await getDeadline()
   document.getElementById('deadline').innerHTML = "Нужно выполнить все задания до " + date.deadline+" !"
 
-  if (date.complete == "0") {
+  if (date.complete == null ) {
     document.getElementById('end').innerHTML = "Квест ещё не завешен"
   }else{
     document.getElementById('end').innerHTML = "Квест завешен "+ date.complete
@@ -61,14 +71,14 @@ function text_check(text){
 
 
 //Создание цветка
-function flower_create(type, bud, text_color,text, stem, open,ref_type,ref_id) { // создает цветок
+function flower_create(type, bud, text_color,text, stem, open,ref_type,ref_id,i) { // создает цветок
   if (open) { // если открытый
     const flower = document.createElement('div'); // создаем элемент div
     flower.className = "swiper-slide"; // добавляем класс
 
     flower.innerHTML = '<div class="map__box">' + // добавляем вinnerHTML
       '<div class="flower fl_op' + type + '" ' + // добавляем класс fl_op
-      'style="background-image: url(svg/Flowers/Open/' + bud + '.svg);" onclick="open_flower('+ref_type+',' + ref_id + ')" >' + // и картинку
+      'style="background-image: url(svg/Flowers/Open/' + bud + '.svg);" onclick="open_flower('+ref_type+',' + ref_id + ',' + i +')" >' + // и картинку
       '<div class="task" style="color: ' + text_color + ';">' + // добавляем текст
       text +
       '</div></div>' +
@@ -82,7 +92,7 @@ function flower_create(type, bud, text_color,text, stem, open,ref_type,ref_id) {
 
     flower.innerHTML = '<div class="map__box">' +
       '<div class="flower fl_cl' + type + '" ' +
-      'style="background-image: url(svg/Flowers/Closed/' + bud + '.svg);" onclick="open_flower('+ref_type+',' + ref_id + ')" >' +
+      'style="background-image: url(svg/Flowers/Closed/' + bud + '.svg);" onclick="open_flower('+ref_type+',' + ref_id + ',' + i +')" >' +
       '<div class="task" style="color: ' + text_color + ';">' +
       text +
       '</div></div>' +
@@ -107,15 +117,20 @@ async function addFlowers(){
     delete_nuvigation(Flowers.length)
     for(let i=0;i<Flowers.length;i++){
       let random=flower_choose(i);
-      flower_create(random%3,random,color[parseInt(parseInt(random)-parseInt(random)%3)/3],text_check(Flowers[i].title),random%7,Flowers[i].flower_stage,Flowers[i].type,Flowers[i].entity_id);
+      flower_create(random%3,random,color[parseInt(parseInt(random)-parseInt(random)%3)/3],text_check(Flowers[i].title),random%7,Flowers[i].flower_stage,Flowers[i].type,Flowers[i].entity_id,i);
     }
   }
 
-  function open_flower(ref_type,ref_id){
+  async function open_flower(ref_type,ref_id,i){
     if (ref_type == 0) {
-      window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id
+      window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id + "&index="+ i
     }else{
-      window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id
+      //const res = await getPracticeResult()
+      if(await getPracticeResult(ref_id) == null){
+      window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
+      }else{
+        window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
+      } 
     }
   }
   
