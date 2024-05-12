@@ -71,6 +71,17 @@ body{
     justify-self: center;
     margin-bottom: 2rem;
 }
+.file__box-label{
+    font-size: 0.75rem;
+    max-width: 20rem;
+    flex-wrap: wrap;
+    overflow-wrap:break-word;
+}
+.answer-input__field {
+    position: absolute;
+    right: 12%;
+    top: 25%;
+}
 .container custom-button-red{
     grid-column: 2;
     grid-row: 4;

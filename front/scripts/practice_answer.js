@@ -10,27 +10,7 @@ async function getPracticeResult() {
       return 0;
     }
   }
-
-async function getPractice() {
-    const URL = `${window.location.origin}/script/get_practice?p_id=1`;
-    try {
-      const response = await axios.get(URL);
-      const data = response.data;
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.log(error);
-      return 0;
-    }
-}
   
-  document.addEventListener('DOMContentLoaded', async function() {
-      const practice = await getPractice();
-      const titlePract = document.querySelector('.title');
-      const textPract = document.querySelector('.task');
-      titlePract.innerHTML = practice.title;
-      textPract.innerHTML = practice.description;
-  })
 // // var adminBorder = document.getElementById('admin-border');
 // // Рост texstarea при добавлении текста
 
@@ -51,18 +31,11 @@ function adjustHeight(textarea, flag) {
         else{
             textarea.style.height = textarea.scrollHeight + 'px';
         }
-        console.log(textarea.scrollHeight);
+        // console.log(textarea.scrollHeight);
     }
 
 document.addEventListener('DOMContentLoaded', async function() {
     const result = await getPracticeResult();
-    const practice = await getPractice();
-    const titlePract = document.querySelector('.title');
-    const textPract = document.querySelector('.task');
-    titlePract.innerHTML = practice.title;
-    textPract.innerHTML = practice.description;
-
-
 
     const adminBorder = document.querySelector('.comment-user');
     const textarea = document.querySelector('.comment-user__text');
@@ -78,15 +51,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         adjustHeight(adminBorder, 1);
     };
     const score = result.result;
+    // const score = 5;
+    // console.log(score);
     const userAnswer = document.querySelector(".user_answer");
     // var disableButton = true; //change this value to false and the button will be clickable
     const button = document.getElementById("submit1");
-    button.disabled = true;
+    // button.disabled = true;
     if (score >= 60){
         userAnswer.style.border = "2px solid #369381"
     }
     else{
-        button.disabled = false;
+        // button.disabled = false;
         userAnswer.style.border = "2px solid #FF4346"
         var userInput = document.createElement('answer-input');
         // userInput.innerHTML = 'Новый блок div';
