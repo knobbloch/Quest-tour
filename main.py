@@ -56,7 +56,7 @@ def check_permission(method, api, session_id):
     if session_id == "" or is_accessible(Access.USR, session_id) == "":
         auth = '307'
 
-    if api not in ["/account.html", "/information_change.html", "/lecture.html", "/map.html", "/pass_change.html", "practice.html", "practice_answer.html", "/statistic.html", "/test.html", "/test_result.html"]:
+    if api not in ["/account.html", "/information_change.html", "/lecture.html", "/map.html", "/pass_change.html", "/practice.html", "/practice_answer.html", "/statistic.html", "/test.html", "/test_result.html"]:
        return '404'
 
     return auth
