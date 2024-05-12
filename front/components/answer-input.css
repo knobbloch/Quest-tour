@@ -31,9 +31,6 @@
 
 
 .answer-input__field {
-    position: absolute;
-    right: 12%;
-    top: 25%;  
     cursor: pointer;
 }
 
@@ -70,7 +67,7 @@
 
 .file__box-label{
     font-size: 0.75rem;
-    min-width: 10rem;
+    min-width: 80%;
 }
 
 .file__box .button-delete{

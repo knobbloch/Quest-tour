@@ -97,7 +97,7 @@ customElements.define('custom-button-plus', Button_plus);
 class User_list extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="../components/list.css">
+        <link rel="stylesheet" type="text/css" href="components/list.css">
         <div class="list" id="listContainer">
             <template id="listTemplate">
                 <div class="line" onclick="redirectToPage(this)">
@@ -127,7 +127,7 @@ customElements.define('user-list', User_list);
 class Task_list extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="../components/list.css">
+        <link rel="stylesheet" type="text/css" href="components/list.css">
         <div class="list" id="listContainer">
             <template id="listTemplate">
                 <div class="line" onclick="redirectToPage(this)">
@@ -315,7 +315,7 @@ class Header extends HTMLElement {
         const color_stat = this.getAttribute('colorStat');
         const color_inf = this.getAttribute('colorInf') || '#0F2232';
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="../components/header_style.css">
+        <link rel="stylesheet" type="text/css" href="components/header_style.css">
             <pop-up-header header-text="Внимание!" open_btn_id="logout" question-text="Вы точно хотите выйти из аккаунта?" text-btn1="Нет" text-btn2="Да"></pop-up-header>
             <header class="header">
                 <a href="#" title="Главная">
@@ -380,7 +380,7 @@ customElements.define('custom-header', Header);
 class Sidebar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-            <link rel="stylesheet" type="text/css" href="../components/sidebar_style.css">
+            <link rel="stylesheet" type="text/css" href="components/sidebar_style.css">
             <nav class="nav_open" id="sidebar">
             <button class="close_menu_btn" onclick="close_menu()">
                 <svg viewBox="0 0 64 59" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -439,7 +439,7 @@ customElements.define('custom-sidebar', Sidebar);
 class Sidepanel extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-            <link rel="stylesheet" type="text/css" href="../components/sidepanel_style.css">
+            <link rel="stylesheet" type="text/css" href="components/sidepanel_style.css">
             <nav class="nav_panel">
             <button class="back_btn" onclick="">
                 <svg viewBox="0 0 64 59" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -477,7 +477,7 @@ customElements.define('custom-sidepanel', Sidepanel);
 class Answer_input extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="answer-input.css">
+        <link rel="stylesheet" type="text/css" href="components/answer-input.css">
 
         <div class="answer-input" id="input_ans">
             <textarea class="answer-input__text" id="text_box" placeholder="Введите ответ" oninput="auto_grow()"></textarea>
@@ -503,10 +503,10 @@ customElements.define('answer-input', Answer_input);
 class Сomment_user extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `    
-        <link rel="stylesheet" type="text/css" href="comment-user.css">
+        <link rel="stylesheet" type="text/css" href="components/comment-user.css">
 
         <div class="comment-user">
-            <img src="img/A.svg" class="comment-user__img">
+            <img src="svg/A.svg" class="comment-user__img">
             <textarea class="comment-user__text" >Ну тут вообще объективно математика - лженаука, а пример для объяснения побольше нужен, но кнопки должны быть видны, поэтому улитка говорит бармену...</textarea>
         </div> 
         `
@@ -518,7 +518,7 @@ customElements.define('comment-user', Сomment_user);
 class Comment_admin extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `   
-        <link rel="stylesheet" type="text/css" href="comment-admin.css">
+        <link rel="stylesheet" type="text/css" href="components/comment-admin.css">
 
         <div class="comment-admin">
             <img src="img/A.svg" class="comment-admin__img">
@@ -535,7 +535,7 @@ customElements.define('comment-admin', Comment_admin);
 class Video_input extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `    
-        <link rel="stylesheet" type="text/css" href="video-input.css">
+        <link rel="stylesheet" type="text/css" href="components/video-input.css">
 
         <!-- Место,куда вставляются все видеофайлы  -->
         <div class="videoPlayer" id="videoPlayer"></div>
@@ -556,7 +556,7 @@ customElements.define('video-input', Video_input);
 class Text_input extends HTMLElement {
     connectedCallback() {
         this.innerHTML = ` 
-        <link rel="stylesheet" type="text/css" href="text-input.css">
+        <link rel="stylesheet" type="text/css" href="components/text-input.css">
 
         <!-- Окошко для написания конспекта  -->
         <div class="text-input">
@@ -573,7 +573,7 @@ customElements.define('text-input', Text_input);
 class CustomProgressbar extends HTMLElement {
     connectedCallback(){
         this.innerHTML = `
-            <link rel="stylesheet" type="text/css" href="../components/progress_bar_style.css">
+            <link rel="stylesheet" type="text/css" href="components/progress_bar_style.css">
             
             <div class="skill">
                 <div class="outer">
