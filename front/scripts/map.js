@@ -113,9 +113,9 @@ async function addFlowers(){
 
   function open_flower(ref_type,ref_id){
     if (ref_type == 0) {
-      window.location.href = "http://127.0.0.1:8000/pages/lecture.html?id="+ref_id
+      window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id
     }else{
-      window.location.href = "http://127.0.0.1:8000/pages/test.html?id="+ref_id
+      window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id
     }
   }
   
