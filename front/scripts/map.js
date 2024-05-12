@@ -4,7 +4,7 @@ let color = ["#FF0000","#AB2F90","#742FAB","#392FAB","#FF7800","#E1004C","#EBA43
 let map = document.querySelector('.swiper-wrapper')
 
   //Забираем инфу с сервера
-  async function getPracticeResult() {
+  async function getPracticeResult(id) {
     const URL = `${window.location.origin}/script/get_practice_result?p_id=${id}`;
     try {
         const response = await axios.get(URL);
@@ -126,7 +126,7 @@ async function addFlowers(){
       window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id + "&index="+ i
     }else{
       //const res = await getPracticeResult()
-      if(await getPracticeResult() == null){
+      if(await getPracticeResult(ref_id) == null){
       window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
       }else{
         window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
