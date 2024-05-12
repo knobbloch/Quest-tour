@@ -1,9 +1,9 @@
 from urllib.request import Request
 
-from fastapi import FastAPI, APIRouter, Cookie
+from fastapi import FastAPI, APIRouter
 from starlette import status
 from starlette.staticfiles import StaticFiles
-from starlette.responses import FileResponse, Response, JSONResponse, RedirectResponse
+from starlette.responses import FileResponse, RedirectResponse
 from api.auth import auth_router
 from api.lectures import lecture_router
 from api.map import map_router
@@ -39,8 +39,8 @@ app.mount("/", StaticFiles(directory="front", html=True), name="front")
 def check_permission(method, api, session_id):
     print(api)
     # The following paths are always allowed:
-    if api[1:] in ['docs', 'openapi.json', 'favicon.ico']:
-    #if method == 'GET' and api[1:] in ['docs', 'openapi.json', 'favicon.ico']:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    #if api[1:] in ['docs', 'openapi.json', 'favicon.ico']:
+    if method == 'GET' and api[1:] in ['docs', 'openapi.json', 'favicon.ico']:
         return '200'
     # Parse auth header and check scheme, username and password
 
@@ -56,7 +56,7 @@ def check_permission(method, api, session_id):
     if session_id == "" or is_accessible(Access.USR, session_id) == "":
         auth = '307'
 
-    if api not in ["/account.html", "/information_change.html", "/lecture.html", "/map.html", "/pass_change.html", "practice.html", "practice_answer.html", "/statistic.html", "/test.html", "/test_result.htmlS"]:
+    if api not in ["/account.html", "/information_change.html", "/lecture.html", "/map.html", "/pass_change.html", "practice.html", "practice_answer.html", "/statistic.html", "/test.html", "/test_result.html"]:
        return '404'
 
     return auth

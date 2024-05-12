@@ -459,7 +459,7 @@ def clean_tokens():
     thread = threading.Timer(600, delete_old_tokens)
     thread.start()
 
-#clean_tokens()                 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+clean_tokens()
 
 #print (new_practice("meowmeow", 1  , testornot=False))
 #print(new_lection("blabla", 1, "HALO"))
