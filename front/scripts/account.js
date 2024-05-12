@@ -24,7 +24,7 @@ async function load_inf(){
 }
 
 function back(){
-  history.back();
+  window.location.href = "http://127.0.0.1:8000/map.html";
 }
 
 function inf_change(){
