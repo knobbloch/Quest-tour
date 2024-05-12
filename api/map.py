@@ -1,3 +1,5 @@
+from datetime import date
+
 from fastapi import APIRouter, Cookie
 
 from api.auth import COOKIE_SESSION_ID_KEY, is_accessible, Access
@@ -70,7 +72,17 @@ async def deadline_self(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
     inf = get_course_res(email)
-    dead = Dead(id=inf[0], email=inf[3], deadline=inf[1], complete=inf[2])
+    print(inf[2])
+    cur_date = str(inf[1])
+    cur_date = cur_date.split("-")
+    cur_deadline = date(int(cur_date[0]), int(cur_date[1]), int(cur_date[2])).strftime("%d.%m.%Y")
+    if inf[2] is not None:
+        cur_date = str(inf[2])
+        cur_date = cur_date.split("-")
+        cur_complete = date(int(cur_date[0]), int(cur_date[1]), int(cur_date[2])).strftime("%d.%m.%Y")
+        dead = Dead(id=inf[0], email=inf[3], deadline=cur_deadline, complete=cur_complete)
+    else:
+        dead = Dead(id=inf[0], email=inf[3], deadline=cur_deadline, complete=inf[2])
     return dead
 
 
@@ -80,5 +92,14 @@ async def deadline(target_email: str, session_id: str = Cookie(alias=COOKIE_SESS
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
     inf = get_course_res(target_email)
-    dead = Dead(id=inf[0], email=inf[3], deadline=inf[1], complete=inf[2])
+    cur_date = str(inf[1])
+    cur_date = cur_date.split("-")
+    cur_deadline = date(int(cur_date[0]), int(cur_date[1]), int(cur_date[2])).strftime("%d.%m.%Y")
+    if inf[2] is not None:
+        cur_date = str(inf[2])
+        cur_date = cur_date.split("-")
+        cur_complete = date(int(cur_date[0]), int(cur_date[1]), int(cur_date[2])).strftime("%d.%m.%Y")
+        dead = Dead(id=inf[0], email=inf[3], deadline=cur_deadline, complete=cur_complete)
+    else:
+        dead = Dead(id=inf[0], email=inf[3], deadline=cur_deadline, complete=inf[2])
     return dead
