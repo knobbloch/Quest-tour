@@ -229,7 +229,7 @@ class Pop_up_OK extends HTMLElement {
             document.getElementById(open_btn_id).addEventListener('click',this.open_modal)
         }
 
-        // Функция закрывает модальное окно при нажатии на кнопку "Да"
+        // Функция закрывает модальное окно при нажатии на кнопку "Ок"
         document.getElementById("Ok-btn").addEventListener("click",this.back)   
     }
 
@@ -242,7 +242,7 @@ class Pop_up_OK extends HTMLElement {
     }
 
     back(){
-        history.back();
+        window.location.href = "http://127.0.0.1:8000/account.html";
     }
 }
 
@@ -401,6 +401,7 @@ class Header extends HTMLElement {
         } catch (error) {
           console.log(error);
         }
+        location.reload();
       }
 }
 
