@@ -92,5 +92,5 @@ class Flower(BaseModel):
 class Dead(BaseModel):
     id: int
     email: str
-    deadline: date
-    complete: Optional[date] = None
+    deadline: str
+    complete: Optional[str] = None

@@ -242,7 +242,7 @@ async function handleSubmit() {
 
 // Добавляем обработчик события к кнопке отправки
 const submitButton = document.getElementById('open-modal-btn');
-submitButton.addEventListener('click', handleSubmit);
+// submitButton.addEventListener('click', handleSubmit);
 
 // Здесь вставьте вызов функции fetchAndRenderQuestions()
 document.addEventListener('DOMContentLoaded', fetchAndRenderQuestions());

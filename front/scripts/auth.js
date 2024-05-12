@@ -26,7 +26,7 @@ async function SendDataToServer(email, password) {
         }
 
         const data = await response.data;
-        window.location.href = 'http://127.0.0.1:8000/pages/map.html';
+        window.location.href = 'http://127.0.0.1:8000/map.html';
         document.getElementById("error-message").style.display = "none";
 
         return data;
