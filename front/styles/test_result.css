@@ -24,8 +24,8 @@ main {
     height: 100%;
     width: 90%;
     display: grid;
-    grid-template-columns: 1fr 8fr; 
-    /* column-gap: 10rem; */
+    grid-template-columns: 1fr 10fr; 
+    column-gap: 2rem;
     justify-content: start;
 }
 
@@ -33,22 +33,22 @@ main {
     
     width: 100%;
     display: grid;
-    grid-template-rows: auto auto;
-    row-gap: 6rem;
+    grid-template-rows: auto auto auto;
+    row-gap: 2rem;
     position: relative;
     align-content: start;
-    padding-bottom: 4rem;
+    /* padding-bottom: 4rem; */
+    padding-top: 8rem;
 
 }
 .header {
     width: 100%;
     z-index: 3;
-    padding-top: 2rem;
+    padding-top: 0.6rem;
     position: fixed;
-    font-size: 2rem;
+    font-size: 1.3rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* align-items: center; */
     background-color: #FFFFFF;
 
 }
@@ -56,16 +56,23 @@ main {
     min-width: max-content;
     align-items: center;
     display: flex;
+    font-size: 1.3rem;
 
 }
 
+.cs {
+    min-width: 3.5rem;
+}
+
 .header svg {
+    height: 1.4rem;
+    width: 1.4rem;
 }
 
 .header h1 {
     font-weight: bold;
-    font-size: 1.8rem;
-    margin-left: 0.5rem;
+    font-size: 1.6rem;
+    margin-left: 0.8rem;
     
 }
 
@@ -106,6 +113,15 @@ main {
 .label {
     margin-bottom: 0.9rem;
 }
+
+
+.btn-box {    
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+}
+
 .button_blue{
     font-weight: bold;
     font-size: 0.9rem;
@@ -120,7 +136,8 @@ main {
     font-size: 0.9rem;
     border-radius: 0.8rem;
     height: 3rem;
-    width: 9rem;
+    width: 10rem;
+    cursor: pointer;
     
 }
 
@@ -129,20 +146,20 @@ custom-button-blue{
     margin-left: 4rem;
 }
 
-.lecture{
-    width: 100%; /* Установка ширины контейнера */
-    padding: 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    resize: none; /* Отключение изменения размера пользователем */
-    overflow: hidden; /* Скрытие полос прокрутки */
-    white-space: pre-wrap; /* Перенос строк в соответствии с содержимым */
-    word-wrap: break-word; /* Перенос длинных слов */
-}
-
 .progress_bar{
-    display: flex;
-    /* margin-top: ; */
+    display: grid;
+    grid-template-rows: auto auto;
+    row-gap: 2rem;
     justify-content: center; 
     align-items: center;
+
+}
+custom-progressbar-small{
+    justify-self: center;
+}
+.progressbar-text{
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: #FF0000;
+    text-align: center;
 }

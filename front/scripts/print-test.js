@@ -2,6 +2,8 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
+
+const index = urlParams.get('index');
 async function getPractice() {
     const URL = `${window.location.origin}/script/get_practice?p_id=${id}`;
     try {
@@ -19,8 +21,18 @@ async function renderPracticeName() {
     practiceName.textContent = practice.title;
 }
 
-renderPracticeName();
+async function getPracticeResult() {
+    const URL = `${window.location.origin}/script/get_practice_result?p_id=${id}`;
+    try {
+        const response = await axios.get(URL);
+        const data = response.data;
+        return data.result;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
+renderPracticeName();
 // Функция для получения вопросов с сервера
 async function getQuestions() {
     
@@ -154,74 +166,18 @@ async function handleSubmit() {
             try {
                 // Отправка выбранных ответов на сервер
                 await sendAnswersToServer(selectedAnswers);
+
             
                 // Сделать кнопку отправки неактивной после успешной отправки ответов
-            
+                notAnsweredMessage.style.display = 'none';
                 // Отключить все элементы ввода (радиокнопки и чекбоксы)
                 document.querySelectorAll('.question custom-radiobutton, .question custom-checkbox').forEach(answer => {
                     const inputElement = answer.querySelector('input');
                     inputElement.disabled = true;
                 });
                 submitButton.disabled = true;
-                 // Получить результат теста
-                
-                const result = await getPracticeResult();
-                console.log('Результат теста:', result);
-                progressbar.style.display = 'block';                     
-                let number = document.getElementById("number");
-                let progress_text = document.getElementById("progress-text");
-                let isCoolResult = false
-                if (result != 0 ){      
-                    let end = result;      
-                    let speed = 1500/end;
-                    let percentProgress = document.querySelector(".circle");
-                    
-                    percentProgress.style.setProperty('--progress', 942 - (9.42 * end));
-                    let counter = 0;
-                    
-                    setInterval(()=>{
-                        if (counter == end){
-                            clearInterval();
-                            // if (isCoolResult) {
-
-                            //     progress_text.style.display = 'block';
-                            //     progress_text.style.color = '#369381'; // Задаем цвет текста зеленым при условии выполнения
-                            //     progress_text.textContent = 'Все верно!';
-                            //     submitButton.display = 'none';
-
-                            // } else {
-                            //     progress_text.style.display = 'block';
-                            //     progress_text.style.color = 'df0009'; // Задаем цвет текста красным, если условие не выполнено
-                            //     progress_text.textContent = 'Попробуй еще раз :c';
-                            //     submitButton.display = 'none';
-                            // }  
-                        }else{
-                            counter ++;
-                            if (counter==60){
-                                percentProgress.style.setProperty('stroke', `#369381`);
-                                number.style.setProperty('color', '#369381');
-                                isCoolResult = true;
-                                
-                                console.log(isCoolResult);
-                            }
-                            number.innerHTML = counter + "%";
-                            
-                            
-                        }
-                        
-                    }, speed);
-                        
-                    }
-                else {
-                    console.log("Нет данных");
-                    number.innerHTML = "0%";
-                }
-                
-                console.log(isCoolResult);
-                
-                
-
-                }
+                window.location.href = `http://127.0.0.1:8000/test_result.html?id=${id}&index=${index}`;
+            }
             catch (error) {
                 console.error('Ошибка при отправке', error);
                 // Возможно, вы хотите добавить обработку ошибок здесь
@@ -242,7 +198,7 @@ async function handleSubmit() {
 
 // Добавляем обработчик события к кнопке отправки
 const submitButton = document.getElementById('open-modal-btn');
-// submitButton.addEventListener('click', handleSubmit);
+submitButton.addEventListener('click', handleSubmit);
 
 // Здесь вставьте вызов функции fetchAndRenderQuestions()
 document.addEventListener('DOMContentLoaded', fetchAndRenderQuestions());
@@ -264,37 +220,8 @@ async function sendAnswersToServer(selectedAnswers) {
     }
     
 
-async function getPracticeResult() {
-    const URL = `${window.location.origin}/script/get_practice_result?p_id=${id}`;
-    try {
-        const response = await axios.get(URL);
-        const data = response.data;
-        return data.result;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-/**
- * Функция для получения результата теста из сервера
- * @returns {Promise<number>} Количество правильных ответов
- */
-async function fetchResultPractice() {
-    try {
-        // Получаем результат теста с сервера
-        const result = await getPracticeResult();
-        console.log('Получен результат теста:', result);
-        // После получения результата рендерим его
-        // renderQuestions(questions);
-        return result;
-    } catch (error) {
-        console.error('Ошибка при получении результата:', error);
-        throw error;
-    }
-}
-
 const backButton = document.getElementById('back-to-map');
 backButton.addEventListener('click', () => {
     // Переходим по URL-адресу
-    window.location.href = 'http://127.0.0.1:8000/pages/map.html'; // Замените 'URL' на нужный URL-адрес для перехода
+    window.location.href = 'http://127.0.0.1:8000/map.html'; // Замените 'URL' на нужный URL-адрес для перехода
 });
