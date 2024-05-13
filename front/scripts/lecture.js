@@ -168,3 +168,9 @@ async function sendLectureToServer(lectureResult) {
   }
 sendLectureToServer(lectureResult);  
 });
+
+const backButton = document.getElementById('back_to_map');
+backButton.addEventListener('click', () => {
+    // Переходим по URL-адресу
+    window.location.href = 'http://127.0.0.1:8000/map.html'; // Замените 'URL' на нужный URL-адрес для перехода
+});
