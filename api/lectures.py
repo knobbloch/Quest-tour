@@ -1,3 +1,5 @@
+import glob
+
 from fastapi import APIRouter, Cookie, UploadFile
 from fastapi.responses import FileResponse
 
@@ -115,6 +117,8 @@ async def add_lecture_file(l_id: int, file: UploadFile, session_id: str = Cookie
     path = os.path.abspath(os.getcwd())
     if not os.path.isdir(f'{path}\\data\\lection\\lec_{l_id}'):
         os.mkdir(f'{path}\\data\\lection\\lec_{l_id}')
+    if not file.content_type.startswith("video/mp4"):
+        return {"status": 400, "Message": "Invalid file format"}
     content = await file.read()
     new_file = open(f"data/lection/lec_{l_id}/{file.filename}", 'wb')
     new_file.write(content)
@@ -130,9 +134,17 @@ async def get_lecture_file(l_id: int, session_id: str = Cookie(alias=COOKIE_SESS
     if not db_main.get_lection(l_id):
         return {'status': 404, 'Message': 'lecture not found'}
     path = os.path.abspath(os.getcwd())
-    if not os.path.isdir(f'{path}\\data\\lection\\lec_{l_id}'):
+    video_path = f"{path}\\data\\lection\\lec_{l_id}"
+    print(video_path)
+    if not os.path.isdir(video_path):
         return {'status': 404, 'Message': 'path is not found'}
-    files = os.listdir(f"{path}\\data\\lection\\lec_{l_id}")
+    paths = glob.glob(f'{video_path}\\*.mp4')
+    files=[]
+    for file_path in paths:
+        file = file_path.split('\\')[-1]
+        files.append(file)
+    #files = os.listdir(f"{path}\\data\\lection\\lec_{l_id}")
+    print(files)
     if not files or files == []:
         return {'status': 404, 'Message': 'files not found'}
     else:
