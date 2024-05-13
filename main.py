@@ -39,8 +39,8 @@ app.mount("/", StaticFiles(directory="front", html=True), name="front")
 def check_permission(method, api, session_id):
     print(api)
     # The following paths are always allowed:
-    #if api[1:] in ['docs', 'openapi.json', 'favicon.ico']:
-    if method == 'GET' and api[1:] in ['docs', 'openapi.json', 'favicon.ico']:
+    if api[1:] in ['docs', 'openapi.json', 'favicon.ico']:
+    #if method == 'GET' and api[1:] in ['docs', 'openapi.json', 'favicon.ico']:
         return '200'
     # Parse auth header and check scheme, username and password
 
