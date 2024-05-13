@@ -82,11 +82,18 @@ body{
     right: 12%;
     top: 25%;
 }
-.container custom-button-red{
+.send{
+    grid-column: 2;
+    grid-row: 4;
+    justify-self: flex-end;
+    margin-right: 12rem;
+}
+.next{
     grid-column: 2;
     grid-row: 4;
     justify-self: flex-end;
 }
+
 .button_red{
     width: 9rem;
     height: 3rem;

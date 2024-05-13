@@ -60,9 +60,10 @@ customElements.define('custom-button-red', Custom_button_red);
 class Custom_button_white extends HTMLElement {
     connectedCallback() {
         const text = this.textContent.trim();
+        const id_btn = this.getAttribute('id_btn');
         this.innerHTML = `
         
-        <button class="button_white">${text}</button>
+        <button class="button_white" id="${id_btn}">${text}</button>
         `
     }
 }
@@ -72,9 +73,10 @@ customElements.define('custom-button-white', Custom_button_white);
 class Custom_button_blue extends HTMLElement {
     connectedCallback() {
         const text = this.textContent.trim();
+        const id_btn = this.getAttribute('id_btn');
         this.innerHTML = `
         
-        <button class="button_blue">${text}</button>
+        <button class="button_blue" id="${id_btn}">${text}</button>
         `
     }
 }
