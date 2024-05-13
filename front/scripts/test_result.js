@@ -14,6 +14,28 @@ async function getPractice() {
     }
 }
 
+async function getPractice2(id2) {
+    const URL = `${window.location.origin}/script/get_practice?p_id=${id2}`;
+    try {
+        const response = await axios.get(URL);
+        const data = response.data;
+        return data.testornot;
+    } catch (error) {
+        console.log(error);
+    }
+  }
+  
+  async function getPracticeResult2(id2) {
+    const URL = `${window.location.origin}/script/get_practice_result?p_id=${id2}`;
+    try {
+        const response = await axios.get(URL);
+        const data = response.data;
+        return data.result;
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
 async function renderPracticeName() {
     const practice = await getPractice();
     const practiceName = document.getElementById('practice-name');
@@ -115,22 +137,21 @@ async function getFlowers() {
   }
 
 
-  async function open_flower(ref_type,ref_id,i,testornot){
+  async function open_flower(ref_type,ref_id,i){
     if (ref_type == 0) {
       window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id + "&index="+ i
     }else{
       //const res = await getPracticeResult()
-      if(!testornot){
+      if(!await getPractice2(ref_id)){
         window.location.href = "http://127.0.0.1:8000/practice.html?id="+ref_id + "&index="+ i
       }
       else{
-        if(await getPracticeResult(ref_id) == null){
-          window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
-        }else{
-          window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
-        } 
+      if(await getPracticeResult2(ref_id) == null){
+        window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
+      }else{
+        window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
+      } 
       }
-      
     }
   }
 
@@ -140,7 +161,7 @@ async function next() {
     const flowers = await getFlowers();
     if (index != flowers.length - 1) {
         let next_index = index + 1;       
-        open_flower(flowers[next_index].type, flowers[next_index].entity_id, next_index, flowers[next_index].testornot);
+        open_flower(flowers[next_index].type, flowers[next_index].entity_id, next_index);
     }
     else {
         window.location.href = 'http://127.0.0.1:8000/map.html';
