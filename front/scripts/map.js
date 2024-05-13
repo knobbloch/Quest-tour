@@ -129,12 +129,13 @@ async function addFlowers(){
       if(!testornot){
         window.location.href = "http://127.0.0.1:8000/practice.html?id="+ref_id + "&index="+ i
       }
-
+      else{
       if(await getPracticeResult(ref_id) == null){
         window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
       }else{
         window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
       } 
+      }
     }
   }
   
