@@ -1,3 +1,4 @@
+const ansInput = document.getElementById('input_ans');
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
@@ -104,3 +105,20 @@ document.addEventListener('DOMContentLoaded', async function() {
     titlePract.innerHTML = practice.title;
     textPract.innerHTML = practice.description;
 })
+
+function sendAnswer(){
+  document.getElementById('text_box').value = '';
+  const filePlayer = document.getElementById('filePlayer'); 
+  var k = 0;
+  var costil = 0;
+  if (filePlayer.childNodes.length > 1){costil = 6};
+  while (filePlayer.firstChild){
+    filePlayer.removeChild(filePlayer.firstChild);
+    k += 6;
+  }
+  let rect = ansInput.getBoundingClientRect();
+  ansInput.style.height = rect.height/20 - k + costil + "rem" ;
+  const button = document.querySelector(".send");
+  button.disabled = true;
+  // console.log(button.disabled);
+}
