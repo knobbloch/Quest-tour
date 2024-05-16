@@ -1,9 +1,7 @@
 const queryString = window.location.search;
-console.log(queryString);
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
 const index = parseInt(urlParams.get('index'));
-console.log(id);
 async function getLecture() {
     const URL = `${window.location.origin}/script/get_lecture?l_id=${id}&index=${index}`;
     try {
@@ -42,7 +40,27 @@ async function getLecture() {
         console.log(error);
     }
 }
+async function getPractice2(id2) {
+  const URL = `${window.location.origin}/script/get_practice?p_id=${id2}`;
+  try {
+      const response = await axios.get(URL);
+      const data = response.data;
+      return data.testornot;
+  } catch (error) {
+      console.log(error);
+  }
+}
 
+async function getPracticeResult2(id2) {
+  const URL = `${window.location.origin}/script/get_practice_result?p_id=${id2}`;
+  try {
+      const response = await axios.get(URL);
+      const data = response.data;
+      return data.result;
+  } catch (error) {
+      console.log(error);
+  }
+}
 
 async function getFlowers() {
     const URL = `${window.location.origin}/script/get_flowers`;
@@ -56,23 +74,21 @@ async function getFlowers() {
     }
   }
 
-
-  async function open_flower(ref_type,ref_id,i,testornot){
+  async function open_flower(ref_type,ref_id,i){
     if (ref_type == 0) {
       window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id + "&index="+ i
     }else{
       //const res = await getPracticeResult()
-      if(!testornot){
+      if(!await getPractice2(ref_id)){
         window.location.href = "http://127.0.0.1:8000/practice.html?id="+ref_id + "&index="+ i
       }
       else{
-        if(await getPracticeResult(ref_id) == null){
-          window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
-        }else{
-          window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
-        } 
+      if(await getPracticeResult2(ref_id) == null){
+        window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
+      }else{
+        window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
+      } 
       }
-      
     }
   }
 
@@ -114,40 +130,33 @@ document.addEventListener('DOMContentLoaded', async function() {
     const videoLect = document.querySelector('.iframe');
     titleLect.innerHTML = lecture.title;
     textLect.innerHTML = lecture.description;
-    // console.log(lecture.pathto);
-    // if (lecture.pathto.length == "youtube"){
-      // document.querySelector('.video').appendChild('<iframe class="iframe" src="svg/Запись 2024-04-24 212245.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>');
+    console.log(lecture.pathto);
+    // if (lecture.pathto != "string"){
+    //   document.querySelector('.video').appendChild('<iframe class="iframe" src="svg/Запись 2024-04-24 212245.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>');
       
     videoLect.setAttribute("src", "https://www.youtube.com/embed/" + lecture.pathto.slice(17, lecture.pathto.length - 16));
     // videoLect.setAttribute("src", lecture.pathto);
       // console.log(videoLect.getAttribute("src"));
     // }
     // else{
-      // const videoData = await getFileLecture();
-      // const fileString = new TextDecoder().decode(videoData);
+    //   const videoData = await getFileLecture();
 
-      // Преобразование строки в объект JSON
-      // const fileJson = JSON.parse(fileString);
-
-      // Использование объекта JSON
-      // console.log(videoData[0].path);
-      // console.log(videoData.path);
-      // // Преобразование ArrayBuffer в Blob
-      // const blob = new Blob([videoData[0]], { type: 'video/mp4' });
-
-      // // Создание URL-адреса из Blob
-      // const videoUrl = URL.createObjectURL(blob);
-      // console.log(videoUrl);
-      // // Использование URL-адреса изображения, например, для отображения в <img>
-      // const video = document.createElement('video');
-      // // video.innerHTML = '<source class="video_lecture">';
-      // document.querySelector('.video').appendChild(video);
-      // // document.querySelector('.video_lecture').src = videoUrl;
-      // video.src = "../" + videoData[0].path;
-      // console.log(video);
-      // console.log(video.src);
       
-      // console.log(video);
+      
+    //   // video.innerHTML = '<source class="video_lecture">';
+      
+    //   // document.querySelector('.video_lecture').src = videoUrl;
+    //   const videoPath = "../" + videoData[0].path;
+    //   // Создание URL из строки пути
+    //   const videoUrl = URL.createObjectURL(new Blob([videoPath], { type: 'application/octet-stream' }));
+
+    //   // Использование URL для вставки видео на страницу
+    //   const videoElement = document.createElement('video');
+      
+    //   videoElement.src = videoUrl;
+    //   videoElement.controls = true;
+    //   document.querySelector('.video').appendChild(videoElement);
+    //   // console.log(typeof videoData[0].path);
     // }
 const lectureResult = [id, 1]
   
