@@ -205,6 +205,51 @@ class Pop_up_btn extends HTMLElement {
 
 customElements.define('pop-up-btn', Pop_up_btn);
 
+class Pop_up_OK_Admin extends HTMLElement {
+    connectedCallback() {
+        const open_btn_id = this.getAttribute('open_btn_id');
+        const header_text = this.getAttribute('header-text');
+        const question_text = this.getAttribute('question-text');
+        const text_btn = this.getAttribute('text-btn');
+
+        this.innerHTML = `
+    
+        <!-- Модальное окно  -->
+        <div class="modal" id="exit-modal-ok">
+            <div class="modal__box">
+                <h3 class="modal__box-header">${header_text}</h3>
+                <p class="modal__box-text">${question_text}</p>
+                <div class="btn__box Ok">            
+                    <button class="button-red" id="Ok-btn" style="cursor: pointer">${text_btn}</button>
+                </div>
+            </div>
+        </div>
+        `
+
+        // Функция открывает модальное окно при нажатии на кнопку
+        if(open_btn_id!=null){
+            document.getElementById(open_btn_id).addEventListener('click',this.open_modal)
+        }
+
+        // Функция закрывает модальное окно при нажатии на кнопку "Ок"
+        document.getElementById("Ok-btn").addEventListener("click",this.back)   
+    }
+
+    open_modal() {
+        document.getElementById("exit-modal-ok").classList.add("open")
+    }
+
+    close_modal() {
+        document.getElementById("exit-modal-ok").classList.remove("open")
+    }
+
+    back(){
+        window.location.href = "http://127.0.0.1:8000/admin_account.html";
+    }
+}
+
+customElements.define('pop-up-ok-admin', Pop_up_OK_Admin);
+
 class Pop_up_OK extends HTMLElement {
     connectedCallback() {
         const open_btn_id = this.getAttribute('open_btn_id');

@@ -9,6 +9,9 @@
     box-sizing: border-box;
     font-family: 'Montserrat';
 }
+html{
+    font-size: 40px;
+}
 
 /* Заголовок */
 
@@ -142,4 +145,5 @@
 
     border-radius: 20px;
 }
+
 
