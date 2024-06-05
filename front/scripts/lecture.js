@@ -134,7 +134,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     // if (lecture.pathto != "string"){
     //   document.querySelector('.video').appendChild('<iframe class="iframe" src="svg/Запись 2024-04-24 212245.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>');
       
-    videoLect.setAttribute("src", "https://www.youtube.com/embed/" + lecture.pathto.slice(17, lecture.pathto.length - 16));
+    //!! videoLect.setAttribute("src", "https://www.youtube.com/embed/" + lecture.pathto.slice(17, lecture.pathto.length - 16));
+    
     // videoLect.setAttribute("src", lecture.pathto);
       // console.log(videoLect.getAttribute("src"));
     // }
