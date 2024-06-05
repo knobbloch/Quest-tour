@@ -50,4 +50,29 @@ function back(){
   window.location.href = "http://127.0.0.1:8000/account.html"
 }
 
+// Часть админа
+
+function admin_back(){
+  window.location.href = "http://127.0.0.1:8000/admin_account.html"
+}
+
+async function admin_sendInfToServer(surname,name,midname,city,department) { 
+  const URL = `${window.location.origin}/script/edit_user_self`;
+  axios({
+    method: 'put',
+    url: URL,
+    data: {namep: name,surname: surname,thirdname: midname,division: department,city: city},
+  })
+  .then(response => {
+    console.log(response.data)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+  }
+
+function admin_change_inf(){
+  sendInfToServer(surname_inf.value,name_inf.value,midname_inf.value,city_inf.value,department_inf.value);
+}
+
 document.addEventListener('DOMContentLoaded', load_inf())

@@ -68,4 +68,8 @@ function back(){
   window.location.href = "http://127.0.0.1:8000/account.html"
 }
 
+function admin_back(){
+  window.location.href = "http://127.0.0.1:8000/admin_account.html"
+}
+
 document.addEventListener('DOMContentLoaded', load_inf())

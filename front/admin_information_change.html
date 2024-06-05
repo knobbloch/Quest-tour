@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Информация пользователя</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="styles/information_change.css">
+<link rel="stylesheet" type="text/css" href="components/modal.css">
+</head>
+<body>
+  <custom-admin_header colorInf='#FF0000'></custom-admin_header>
+
+  <pop-up-ok-admin header-text="Внимание!" open_btn_id="save" question-text="Информация успешно изменена!" text-btn="Ок"></pop-up-ok-admin>
+
+  <div class="back-bt" onclick="admin_back()">
+
+  </div>
+  
+  <div class="container1">
+
+    <div class="block">
+      <label class="block-title">
+        Фамилия
+      </label>
+      <input type="text" class="block-text input" id="surname" maxlength="20" ></input>
+    </div>
+
+    <div class="block">
+      <label class="block-title">
+        Имя
+      </label>
+      <input type="text" class="block-text input" id="name" maxlength="20" ></input>
+    </div>
+
+    <div class="block">
+      <label class="block-title">
+        Отчество
+      </label>
+      <input type="text" class="block-text input" id="midname" maxlength="20" ></input>
+    </div>
+
+  </div>
+
+  <div class = "container2">
+    <div class="block">
+      <label class="block-title">
+        Город
+      </label>
+      <input type="text" class="block-text input" id="city" maxlength="20" ></input>
+    </div>
+
+    <div class="block">
+      <label class="block-title">
+        Подразделение
+      </label>
+      <input type="text" class="block-text input" id="department" maxlength="20" ></input>
+    </div>
+  </div>
+
+
+  <div class="last-block">
+    <div class="block">
+      <label class="block-title blocked_title">
+        Логин
+      </label>
+      <textarea class="block-text blocked_text" id="login" readonly></textarea>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <custom-button-red onclick="admin_change_inf()" id="save">Сохранить</custom-button-red>
+  </div>
+    
+
+  <script src="scripts/information_change.js"></script>
+  <script src="components/components.js"></script>
+</body>
+</html>
