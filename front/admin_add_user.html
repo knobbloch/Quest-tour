@@ -9,18 +9,21 @@
 <link rel="stylesheet" type="text/css" href="components/modal.css">
 </head>
 <body>
-  <custom-admin_header colorInf='#FF0000'></custom-admin_header>
+  <custom-admin_header colorUsers='#FF0000'></custom-admin_header>
 
-  <pop-up-ok ok_bt_func="admin_back" header-text="Внимание!" open_btn_id="save" question-text="Информация успешно изменена!" text-btn="Ок"></pop-up-ok>
-
-  <div class="back-bt" onclick="admin_back()">
+  <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Пользователь был успешно создан!" text-btn="Ок"></pop-up-ok>
+  
+  <div class="back-bt" onclick="back()">
 
   </div>
-  
+
+  <label class="title-error"></label>
+
   <div class="container1">
 
     <div class="block">
       <label class="block-title">
+        <label class="star">*</label>
         Фамилия
       </label>
       <input type="text" class="block-text input" id="surname" maxlength="20" ></input>
@@ -28,6 +31,7 @@
 
     <div class="block">
       <label class="block-title">
+        <label class="star">*</label>
         Имя
       </label>
       <input type="text" class="block-text input" id="name" maxlength="20" ></input>
@@ -59,21 +63,35 @@
   </div>
 
 
-  <div class="last-block">
+  <div class="container3">
     <div class="block">
-      <label class="block-title blocked_title">
+      <label class="block-title">
+        <label class="star">*</label>
         Email
       </label>
-      <textarea class="block-text blocked_text" id="login" readonly></textarea>
+      <input type="text" class="block-text input" id="login" maxlength="30"></input>
     </div>
+
+    <div class="block">
+      <label class="block-title blocked_title">
+        <label class="star">*</label>
+          Пароль
+        </label>
+      <textarea class="block-text blocked_text" id="login" readonly>Qwerty1</textarea>
+    </div>
+  
   </div>
 
   <div class="buttons">
-    <custom-button-red onclick="admin_change_inf()" id="save">Сохранить</custom-button-red>
+    <custom-button-red onclick="change_inf()" id="save">Сохранить</custom-button-red>
   </div>
+
+  <label class="block-title star helper">
+    * - поля, обязательные к заполнению
+  </label>
     
 
-  <script src="scripts/information_change.js"></script>
+  <script src="scripts/add_user.js"></script>
   <script src="components/components.js"></script>
 </body>
 </html>

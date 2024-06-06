@@ -9,11 +9,11 @@
 <link rel="stylesheet" type="text/css" href="components/modal.css">
 </head>
 <body>
-  <custom-admin_header colorInf='#FF0000'></custom-admin_header>
+  <custom-admin_header colorUsers='#FF0000'></custom-admin_header>
 
-  <pop-up-ok ok_bt_func="admin_back" header-text="Внимание!" open_btn_id="save" question-text="Информация успешно изменена!" text-btn="Ок"></pop-up-ok>
+  <pop-up-ok ok_bt_func="back" header-text="Внимание!" open_btn_id="save" question-text="Информация успешно изменена!" text-btn="Ок"></pop-up-ok>
 
-  <div class="back-bt" onclick="admin_back()">
+  <div class="back-bt" onclick="back()">
 
   </div>
   
@@ -69,11 +69,11 @@
   </div>
 
   <div class="buttons">
-    <custom-button-red onclick="admin_change_inf()" id="save">Сохранить</custom-button-red>
+    <custom-button-red onclick="change_inf()" id="save">Сохранить</custom-button-red>
   </div>
     
 
-  <script src="scripts/information_change.js"></script>
+  <script src="scripts/users_information_change.js"></script>
   <script src="components/components.js"></script>
 </body>
 </html>
