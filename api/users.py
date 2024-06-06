@@ -27,7 +27,6 @@ async def user_list(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
             single_user = UserFIO(email=record[0], fio=str(record[1] + " " + record[2]))
         else:
             single_user = UserFIO(email=record[0], fio=str(record[1] + " " + record[2] + " " + record[3]))
-        print(single_user)
         users.append(single_user)
     return users
     # return records
@@ -70,8 +69,6 @@ async def add_user(user: Person, session_id: str = Cookie(alias=COOKIE_SESSION_I
         return {"status": 401, "Message": "user unauthorized"}
     if new_person(user.email, user.surname, user.namep, user.admornot, user.thirdname, user.division,
                   user.city, user.employment):
-        print(user.email, user.surname, user.namep, user.admornot, user.thirdname, user.division,
-                  user.city, user.employment)
         return {"status": 201, "Message": "user added"}
     else:
         return {"status": 500, "Message": "an error occurred :("}
@@ -83,10 +80,10 @@ async def edit_user_self(new_data: EditPerson, session_id: str = Cookie(alias=CO
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
     if is_accessible(Access.ADM, session_id) == email:
-        if edit_person(email, new_data.namep, new_data.surname, new_data.thirdname, new_data.division, new_data.city):
+        if edit_person(email, new_data.surname, new_data.namep, new_data.thirdname, new_data.division, new_data.city):
             return {"status": 202, "Message": "user data changed"}
     if is_accessible(Access.USR, session_id) == email:
-        if edit_person(email, new_data.namep, new_data.surname, new_data.thirdname, None, new_data.city):
+        if edit_person(email, new_data.surname, new_data.namep, new_data.thirdname, None, new_data.city):
             return {"status": 202, "Message": "user data changed"}
     else:
         return {"status": 500, "Message": "an error occurred!"}
@@ -97,7 +94,7 @@ async def edit_user(target_email: str, new_data: EditPerson, session_id: str = C
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if edit_person(target_email, new_data.namep, new_data.surname, new_data.thirdname, new_data.division, new_data.city, new_data.employment):
+    if edit_person(target_email, new_data.surname, new_data.namep, new_data.thirdname, new_data.division, new_data.city, new_data.employment):
         return {"status": 202, "Message": "user data changed"}
     else:
         return {"status": 500, "Message": "an error occurred!"}
