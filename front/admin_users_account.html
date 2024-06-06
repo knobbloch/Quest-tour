@@ -5,13 +5,15 @@
 <title>Аккаунт пользователя</title>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" type="text/css" href="components/buttons_style.css">
-<link rel="stylesheet" type="text/css" href="styles/account.css">
 <link rel="stylesheet" type="text/css" href="components/modal.css">
+<link rel="stylesheet" type="text/css" href="styles/account.css">
 </head>
 <body>
-  <custom-header colorInf='#FF0000'></custom-header>
+  <custom-admin_header colorUsers='#FF0000'></custom-admin_header>
+
+  <pop-up header-text="Внимание!" open_btn_id="del" question-text="Вы уверены что хотите безвозвратно удалить данного пользователя?" text-btn1="Нет" text-btn2="Да"></pop-up>
   
-  <div class="container">
+  <div class="container_admin">
     
     <div class="back-bt" onclick="back()">
 
@@ -19,7 +21,9 @@
 
     <label class="title" id="title">
     </label>
+  </div>
 
+  <div class="button-delete" id="del">
   </div>
 
   <div class = "information">
@@ -48,16 +52,14 @@
 
   <div class="buttons">
 
-    <custom-button-red onclick="inf_change()">Редактировать</custom-button-red>
-
-    <custom-button-white onclick="pass_change()">Сменить пароль</custom-button-white>
+    <custom-button-red onclick="users_inf_change()">Редактировать</custom-button-red>
       
     </div>
 
   </div>
     
 
-  <script src="scripts/account.js"></script>
+  <script src="scripts/users_account.js"></script>
   <script src="components/components.js"></script>
 </body>
 </html>
