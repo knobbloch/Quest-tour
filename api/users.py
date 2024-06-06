@@ -42,7 +42,7 @@ async def get_user_self(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     if person == [] or not person:
         return {"Message": "user not found"}
     else:
-        user = Person(email=person[0], namep=person[1], surname=person[2], admornot=person[7],
+        user = Person(email=person[0], namep=person[2], surname=person[1], admornot=person[7],
                       thirdname=person[3], division=person[4],
                       city=person[5], employment=person[6])
         return user
@@ -57,7 +57,7 @@ async def get_user(target_email: str, session_id: str = Cookie(alias=COOKIE_SESS
     if person == [] or not person:
         return {"Message": "user not found"}
     else:
-        user = Person(email=person[0], namep=person[1], surname=person[2], admornot=person[7],
+        user = Person(email=person[0], namep=person[2], surname=person[1], admornot=person[7],
                       thirdname=person[3], division=person[4],
                       city=person[5], employment=person[6])
         return user
@@ -70,6 +70,8 @@ async def add_user(user: Person, session_id: str = Cookie(alias=COOKIE_SESSION_I
         return {"status": 401, "Message": "user unauthorized"}
     if new_person(user.email, user.surname, user.namep, user.admornot, user.thirdname, user.division,
                   user.city, user.employment):
+        print(user.email, user.surname, user.namep, user.admornot, user.thirdname, user.division,
+                  user.city, user.employment)
         return {"status": 201, "Message": "user added"}
     else:
         return {"status": 500, "Message": "an error occurred :("}
