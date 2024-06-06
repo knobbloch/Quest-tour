@@ -20,7 +20,7 @@ class Person(BaseModel):
     email: str
     namep: str
     surname: str
-    admornot: int
+    admornot: Optional[int] = 0
     thirdname: Optional[str] = None
     division: Optional[str] = None
     city: Optional[str] = None
