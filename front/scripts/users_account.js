@@ -12,6 +12,20 @@ async function getInf() {
   }
 }
 
+async function deleteUser() {
+  const URL = `${window.location.origin}/script/delete_user?target_email=${email}`;
+  axios({
+    method: 'delete',
+    url: URL
+  })
+  .then(response => {
+    console.log(response.data)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
+
 let title_inf = document.getElementById("title"),
   login_inf = document.getElementById("login"),
   work_inf = document.getElementById("work"),
@@ -31,6 +45,17 @@ function back(){
 
 function users_inf_change(){
   window.location.href = "http://127.0.0.1:8000/admin_users_information_change.html";
+}
+
+//для модального окна
+function  close_modal() {
+  document.getElementById("exit-modal").classList.remove("open")
+}
+
+function  del_user() {
+  console.log("пользователь удален");
+  deleteUser();
+  back();
 }
 
 document.addEventListener('DOMContentLoaded', load_inf())
