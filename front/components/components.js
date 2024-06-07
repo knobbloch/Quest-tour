@@ -249,6 +249,8 @@ customElements.define('pop-up-ok', Pop_up_OK);
 
 class Pop_up extends HTMLElement {
     connectedCallback() {
+        const no_bt_func = this.getAttribute('no_bt_func');
+        const yes_bt_func = this.getAttribute('yes_bt_func');
         const open_btn_id = this.getAttribute('open_btn_id');
         const header_text = this.getAttribute('header-text');
         const question_text = this.getAttribute('question-text');
@@ -276,10 +278,10 @@ class Pop_up extends HTMLElement {
         }
 
         // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
-        document.getElementById("No-btn").addEventListener("click",this.close_modal)
+        document.getElementById("No-btn").addEventListener("click",()=>{window[no_bt_func]()})
 
         // Функция закрывает модальное окно при нажатии на кнопку "Да"
-        document.getElementById("Yes-btn").addEventListener("click",this.back)   
+        document.getElementById("Yes-btn").addEventListener("click",()=>{window[yes_bt_func]()})   
     }
 
     open_modal() {
@@ -288,10 +290,6 @@ class Pop_up extends HTMLElement {
 
     close_modal() {
         document.getElementById("exit-modal").classList.remove("open")
-    }
-
-    back(){
-        history.back();
     }
 }
 
