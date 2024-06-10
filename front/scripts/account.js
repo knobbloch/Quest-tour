@@ -3,7 +3,6 @@ async function getInf() {
   try {
     const response = await axios.get(URL);
     const data = response.data;
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
