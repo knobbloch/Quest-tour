@@ -7,7 +7,6 @@ async function getInf() {
   try {
     const response = await axios.get(URL);
     const data = response.data;
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -23,9 +22,11 @@ async function sendPassToServer(new_pass) {
   const URL = `${window.location.origin}/script/change_password?new_password=${new_pass}`;
   try {
     const response = await axios.put(URL);
-    const data = response.data;
-    console.log(data);
-    return data;
+    console.log(response.data)
+    if(response.data['status']!=202){
+      document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+    }
+    document.getElementById("exit-modal-ok").classList.add("open")
   } catch (error) {
     console.log(error);
   }

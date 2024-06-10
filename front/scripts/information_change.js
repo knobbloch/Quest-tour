@@ -10,7 +10,6 @@ let surname_inf = document.getElementById("surname"),
     try {
       const response = await axios.get(URL);
       const data = response.data;
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -26,6 +25,10 @@ let surname_inf = document.getElementById("surname"),
     })
     .then(response => {
       console.log(response.data)
+      if(response.data['status']!=202){
+        document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+      }
+      document.getElementById("exit-modal-ok").classList.add("open")
     })
     .catch(error => {
       console.log(error)
@@ -53,6 +56,10 @@ function back(){
 
 // Часть админа
 
+function admin_back(){
+  window.location.href = "http://127.0.0.1:8000/admin_account.html"
+}
+
 function kadmin_bac(){
   window.location.href = "http://127.0.0.1:8000/admin_account.html"
 }
@@ -66,6 +73,10 @@ async function admin_sendInfToServer(surname,name,midname,city,department) {
   })
   .then(response => {
     console.log(response.data)
+    if(response.data['status']!=202){
+      document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+    }
+    document.getElementById("exit-modal-ok").classList.add("open")
   })
   .catch(error => {
     console.log(error)

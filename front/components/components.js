@@ -219,7 +219,7 @@ class Pop_up_OK extends HTMLElement {
         <div class="modal" id="exit-modal-ok">
             <div class="modal__box">
                 <h3 class="modal__box-header">${header_text}</h3>
-                <p class="modal__box-text">${question_text}</p>
+                <p class="modal__box-text" id="modal__box-text">${question_text}</p>
                 <div class="btn__box Ok">            
                     <button class="button-red" id="Ok-btn" style="cursor: pointer">${text_btn}</button>
                 </div>
