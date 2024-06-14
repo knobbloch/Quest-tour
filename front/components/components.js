@@ -639,7 +639,6 @@ customElements.define('comment-admin', Comment_admin);
 class Video_input extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `    
-        <link rel="stylesheet" type="text/css" href="components/video-input.css">
 
         <!-- Место,куда вставляются все видеофайлы  -->
         <div class="videoPlayer" id="videoPlayer"></div>
@@ -659,14 +658,15 @@ customElements.define('video-input', Video_input);
 
 class Text_input extends HTMLElement {
     connectedCallback() {
+        const text = this.textContent.trim();
+        const height = this.getAttribute('height');
         this.innerHTML = ` 
-        <link rel="stylesheet" type="text/css" href="components/text-input.css">
 
         <!-- Окошко для написания конспекта  -->
-        <div class="text-input">
+        <div class="text-input" style="height: ${height}rem;">
             <label class="text-input__area">
-                <textarea class="text-input__textarea"  placeholder=""></textarea>
-                <p class="text-input__label">Написать конспект</p>
+                <textarea class="text-input__textarea"  id="description" placeholder=""></textarea>
+                <p class="text-input__label">${text}</p>
             </label>
         </div>    
         `

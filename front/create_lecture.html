@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Создании лекции</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="components/video-input.css">
+<link rel="stylesheet" type="text/css" href="components/text-input.css">
+<link rel="stylesheet" type="text/css" href="styles/lecture_create.css">
+</head>
+<body>
+    <custom-sidepanel></custom-sidepanel>
+
+    <div class="heading">
+        <textarea class="title" maxlength="160">Заголовок вашей лекции</textarea>          
+    </div>
+
+    <div class="panels">
+    
+    <video-input></video-input>
+    <text-input>Написать конспект</text-input>
+
+    </div>
+
+    <div class="buttons">
+        <custom-button-blue onclick="check_pass()">Сохранить лекцию</custom-button-blue>
+    
+        <custom-button-red onclick="back()">Отмена</custom-button-red>
+    </div>
+
+    <script src="components/components.js"></script>
+</body>
+</html>
