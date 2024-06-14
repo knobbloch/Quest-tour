@@ -53,7 +53,6 @@ function  close_modal() {
 }
 
 function  del_user() {
-  console.log("пользователь удален");
   deleteUser();
   back();
 }

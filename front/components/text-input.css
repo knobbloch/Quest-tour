@@ -1,45 +1,9 @@
-@font-face {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: normal;
-    src: url(Montserrat-Regular.ttf);
-}
-@font-face {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: bold;
-    src: url(Montserrat-Bold.ttf);
-}
-@font-face {
-    font-family: 'Montserrat-SemiBold';
-    font-style: normal;
-    font-weight: normal;
-    src: url(Montserrat-SemiBold.ttf);
-}
-* {
-    margin: 0;
-    padding:0;
-    box-sizing: border-box;
-    font-family: 'Montserrat-SemiBold';
-}
-body{
-    background-image: url('img/загрузка.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    min-height: 100%;
-
-    
-}
-
-
-
 /* Мишина часть*/
 
 /* Поле для конспекта */
 .text-input{
 
-    position: absolute;
+    position: relative;
     top: 40%;
     left: 20%;
     
@@ -58,7 +22,7 @@ body{
     text-align: center;
     top: 50%;
     left: 0;
-    transform: translateY(-50%);
+    transform: translateY(-60%);
 
     width: 100%;
 
