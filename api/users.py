@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, Cookie
+from fastapi import APIRouter, Cookie
 
 from api import db_main
 from api.auth import is_accessible, Access, COOKIE_SESSION_ID_KEY
 from api.db_main import new_person, delete_person, get_person, edit_person, get_all_not_adms, edit_auth
-from api.debugging import get_all_auths, get_all_tokens
+# from api.debugging import get_all_auths, get_all_tokens
 # from api.debugging import get_all_persons
 from api.models import Person, UserFIO, EditPerson
 
@@ -94,7 +94,8 @@ async def edit_user(target_email: str, new_data: EditPerson, session_id: str = C
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if edit_person(target_email, new_data.surname, new_data.namep, new_data.thirdname, new_data.division, new_data.city, new_data.employment):
+    if edit_person(target_email, new_data.surname, new_data.namep, new_data.thirdname, new_data.division, new_data.city,
+                   new_data.employment):
         return {"status": 202, "Message": "user data changed"}
     else:
         return {"status": 500, "Message": "an error occurred!"}
