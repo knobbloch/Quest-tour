@@ -53,7 +53,7 @@ text{
     height: 2.9rem;
     background-image: url("./svg/profile.svg");
     background-size: 100%;
-    margin-right: 0.8rem;
+    margin-right: 0.3rem;
     cursor: pointer;
 }
 
@@ -101,4 +101,40 @@ text{
 .answer:hover {
     margin-bottom: 15%;
     transition: 0.2s;
+}
+
+.name {
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.line {
+    height: 3.8rem;
+}
+
+.profile{
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.delete {
+    width: 2.1rem;
+    height: 2.1rem;
+}
+
+@media (max-width: 800px){
+    .profile{
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .delete {
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+
+    .name {
+        font-weight: 400;
+        font-size: 0.9rem;
+    }
 }
