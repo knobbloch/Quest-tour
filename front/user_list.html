@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Список пользователей</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="components/list.css">
+<link rel="stylesheet" type="text/css" href="components/modal.css">
+<link rel="stylesheet" type="text/css" href="styles/user_list.css">
+</head>
+<body>
+    <custom-admin_header colorUsers='#FF0000'></custom-admin_header>
+    <main>
+        <div class="main_header">
+            <img class="back_button" src="svg/Buttons/left.svg">
+            <h1>Список пользователей</h1>
+            <custom-button-plus></custom-button-plus>
+        </div>
+        <user-list></user-list>
+    </main>
+    
+    <script src="components/components.js"></script>
+    <script src="scripts/user_list.js"></script>
+</body>
+</html>

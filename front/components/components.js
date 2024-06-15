@@ -100,7 +100,7 @@ customElements.define('custom-button-plus', Button_plus);
 class User_list extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="components/list.css">
+        <!-- <link rel="stylesheet" type="text/css" href="components/list.css"> -->
         <div class="list" id="listContainer">
             <template id="listTemplate">
                 <div class="line" onclick="redirectToPage(this)">
@@ -114,7 +114,7 @@ class User_list extends HTMLElement {
                         <div class="profile" href="#">
 
                         </div>
-                        <div class="delete" onclick="deleteUser(event)">
+                        <div class="delete" onclick="deleteUser(event, this.closest('.line').dataset.email)">
 
                         </div>
                     </div>
@@ -446,7 +446,7 @@ class AdminHeader extends HTMLElement {
         `
 
         // this.querySelector('#admin_stat').addEventListener('click', this.admin_stat)
-        // this.querySelector('#users').addEventListener('click', this.users)
+        this.querySelector('#users').addEventListener('click', this.users)
         // this.querySelector('#quest').addEventListener('click', this.quest)
         this.querySelector('#lk').addEventListener('click', this.lk)
         this.querySelector('#Yes-btn-header').addEventListener('click', this.deadInf)
@@ -454,9 +454,9 @@ class AdminHeader extends HTMLElement {
     // admin_stat() {
     //     window.location.href = "http://127.0.0.1:8000/map.html"
     // }
-    // users() {
-    //     window.location.href = "http://127.0.0.1:8000/statistic.html"
-    // }
+    users() {
+        window.location.href = "http://127.0.0.1:8000/user_list.html"
+    }
     // quest() {
     //     window.location.href = "http://127.0.0.1:8000/statistic.html"
     // }
