@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Модальное окно</title>
 <link rel="stylesheet" type="text/css" href="video-input.css">
+<link rel="stylesheet" type="text/css" href="text-input.css">
 </head>
 <body>
 
@@ -13,11 +14,13 @@
     <!-- Окошко для выбора видео которое вставить  -->
     <div class="video-input" >
         <p class="video-input__label">Вставить видеофайл</p>
+        <div class="video-input__video-file" onclick="changeToFile()"></div>
+        <div class="video-input__youtube" onclick="changeToYoutube()"></div>
         <label class="video-input__field">
             <input type="file" id="add_video" accept="video/*" multiple>
         </label>
     </div>
 
-    <script src="video-input.js"></script>
+    <script src="scripts/video-input.js"></script>
 </body>
 </html>
