@@ -95,6 +95,7 @@ class Flower(BaseModel):
     flower_stage: int  # 0 - bad, 1 - good
     type: int  # 0 - lecture, 1 - practice
     entity_id: int
+    order: int
 
 
 class Dead(BaseModel):

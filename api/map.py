@@ -16,13 +16,13 @@ def get_flowers_for_map(email: str):
     flower_list = []
     for entity in entity_list:
         if entity[2] == 1 and entity[3] is None:
-            flower = Flower(title=entity[1], flower_stage=0, type=entity[2], entity_id=entity[0])
+            flower = Flower(title=entity[1], flower_stage=0, type=entity[2], entity_id=entity[0], order=entity[4])
         elif entity[2] == 1 and entity[3] < 60:
-            flower = Flower(title=entity[1], flower_stage=0, type=entity[2], entity_id=entity[0])
+            flower = Flower(title=entity[1], flower_stage=0, type=entity[2], entity_id=entity[0], order=entity[4])
         elif entity[2] == 1 and entity[3] >= 60:
-            flower = Flower(title=entity[1], flower_stage=1, type=entity[2], entity_id=entity[0])
+            flower = Flower(title=entity[1], flower_stage=1, type=entity[2], entity_id=entity[0], order=entity[4])
         elif entity[2] == 0:
-            flower = Flower(title=entity[1], flower_stage=entity[3], type=entity[2], entity_id=entity[0])
+            flower = Flower(title=entity[1], flower_stage=entity[3], type=entity[2], entity_id=entity[0], order=entity[4])
         flower_list.append(flower)
     return flower_list
 
