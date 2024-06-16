@@ -130,7 +130,7 @@ customElements.define('user-list', User_list);
 class Task_list extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="components/list.css">
+        <!-- <link rel="stylesheet" type="text/css" href="components/list.css"> -->
         <div class="list" id="listContainer">
             <template id="listTemplate">
                 <div class="line" onclick="redirectToPage(this)">
@@ -646,6 +646,8 @@ class Video_input extends HTMLElement {
         <!-- Окошко для выбора видео которое вставить  -->
         <div class="video-input" >
             <p class="video-input__label">Вставить видеофайл</p>
+            <div class="video-input__video-file" onclick="changeToFile()"></div>
+            <div class="video-input__youtube" onclick="changeToYoutube()"></div>
             <label class="video-input__field">
                 <input type="file" id="add_video" accept="video/*" multiple>
             </label>

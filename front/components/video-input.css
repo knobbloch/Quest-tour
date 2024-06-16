@@ -18,6 +18,14 @@
     cursor: pointer;
 }
 
+.video__box iframe{
+    position: relative;
+    left: 50%;
+
+    transform: translate(-46%, 0.5%);
+    cursor: pointer;
+}
+
 /* Кнопка удаления видео */
 
 .button-delete{
@@ -84,6 +92,7 @@
     line-height: 2rem;
     
     color: #000000;
+    transition: all 0.2s ease;
 }
 
 
@@ -91,4 +100,67 @@
 
 .video-input__field.drop {
     background: rgba(15, 34, 50, 0.09);
+}
+
+/* Боковые кнопки */
+
+.video-input__video-file{
+    position: absolute;
+    left: -7rem;
+    bottom: 7.5rem;
+
+    width: 3.5rem;
+    height: 3.5rem;
+
+    background-image: url("svg/video-file-black.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;  
+    cursor: default;
+
+    transition: all 0.2s ease;
+}
+
+.video-input__video-file:hover{
+    transform: scale(1.2);
+}
+
+.video-input__youtube{
+    position: absolute;
+    left: -7.5rem;
+    bottom: 1.5rem;
+
+    width: 3.5rem;
+    height: 3.5rem;
+
+    background-image: url("svg/youtube-white.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.video-input__youtube:hover{
+    transform: scale(1.2);
+}
+
+.video-input__upload{
+    position: absolute;
+    left: 65rem;
+    bottom: 4.5rem;
+
+    width: 3.5rem;
+    height: 3.5rem;
+
+    background-image: url("svg/upload.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.video-input__upload:hover{
+    transform: scale(1.2);
 }
