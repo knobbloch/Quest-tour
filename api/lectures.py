@@ -1,6 +1,7 @@
 import glob
+from typing import Annotated, Optional, Union
 
-from fastapi import APIRouter, Cookie, UploadFile
+from fastapi import APIRouter, Cookie, UploadFile, File, Body
 from fastapi.responses import FileResponse
 
 from api import db_main
@@ -25,6 +26,33 @@ async def create_lecture(lecture: Lecture, session_id: str = Cookie(alias=COOKIE
         return {'status': 201, 'Message': f'new lecture added'}
     else:
         return {'status': 500, 'Message': 'an error occurred'}
+
+
+@lecture_router.post("/create_lecture_with_file")
+async def create_lecture(lecture: Annotated[Lecture, Body(...)],
+                         file: Union[UploadFile, None] = None,
+                         session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    l_id = db_main.new_lection(lecture.title, lecture.orderc, lecture.description, lecture.pathto)
+    if l_id:
+        path = os.path.abspath(os.getcwd())
+        if not os.path.isdir(f"{path}\\data\\lection\\lec_{l_id}"):
+            os.mkdir(f"{path}\\data\\lection\\lec_{l_id}")
+        # return {'status': 201, 'Message': f'new lecture added'}
+    else:
+        return {'status': 500, 'Message': 'an error while creation occurred'}
+    if file is not None:
+        if not file.content_type.startswith("video/mp4"):
+            return {"status": 400, "Message": "Invalid file format"}
+        content = await file.read()
+        new_file = open(f"data/lection/lec_{l_id}/{file.filename}", 'wb')
+        new_file.write(content)
+        new_file.close()
+        return {'status': 201, 'Message': 'new lecture added'}
+    else:
+        return {'status': 201, 'Message': 'new lecture added'}
 
 
 @lecture_router.get("/get_lecture")
@@ -139,11 +167,11 @@ async def get_lecture_file(l_id: int, session_id: str = Cookie(alias=COOKIE_SESS
     if not os.path.isdir(video_path):
         return {'status': 404, 'Message': 'path is not found'}
     paths = glob.glob(f'{video_path}\\*.mp4')
-    files=[]
+    files = []
     for file_path in paths:
         file = file_path.split('\\')[-1]
         files.append(file)
-    #files = os.listdir(f"{path}\\data\\lection\\lec_{l_id}")
+    # files = os.listdir(f"{path}\\data\\lection\\lec_{l_id}")
     print(files)
     if not files or files == []:
         return {'status': 404, 'Message': 'files not found'}
