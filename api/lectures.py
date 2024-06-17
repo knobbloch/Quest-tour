@@ -71,7 +71,7 @@ async def get_lecture(l_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_I
 
 
 @lecture_router.put("/edit_lecture")
-async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)], file: Optional[UploadFile, None] = None,
+async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)], file: Optional[UploadFile] = None,
                        session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
