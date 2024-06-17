@@ -5,7 +5,6 @@
 }
 *{
     font-family: 'Montserrat';
-    font-weight: 600;
     color:#0F2232;
     outline: none;
     border: none;
@@ -16,7 +15,7 @@
 }
 .nav_close{
     background: #E9ECEE;
-    width: 4.5rem;
+    width: 3.7rem;
     height: 100%;
     min-height: 100%;
     position: fixed; 
@@ -32,9 +31,9 @@
     
 }
 .open_menu_btn svg{
-    width:1.7rem;
-    height:1.7rem;
-    margin:1.3rem;
+    width:1.4rem;
+    height:1.4rem;
+    margin:1.1rem;
 }
 .nav_open{
     background: #E9ECEE;
@@ -48,6 +47,7 @@
     left: 0;
     display: none;
     z-index: 2000;
+    font-weight: 600;
 }
 .close_menu_btn{
     background-color: inherit;
@@ -79,9 +79,9 @@ a{
     bottom:0;
     left:0;
     position:fixed;
-    margin: 1.1rem;
-    width: 2.7rem;
-    height: 8rem;
+    margin: 0.9rem;
+    width: 2rem;
+    height: 6.5rem;
 }
 .see_answers::before, .edit::before{
     content:'';
