@@ -35,7 +35,7 @@ function pass_change(){
 }
 
 function admin_back(){
-  //window.location.href = "http://127.0.0.1:8000/admin_map.html";
+  window.location.href = "http://127.0.0.1:8000/task_list.html";
 }
 
 function admin_inf_change(){

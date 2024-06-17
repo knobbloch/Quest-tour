@@ -1,14 +1,3 @@
-    // Функция считывает клики по экрану, если в этот момент запущено видео, то она останавливает его
-    // document.addEventListener('click', function(event) {
-    //     const videos = document.querySelectorAll('video');
-    //     videos.forEach(function(video) {
-    //         if (event.target !== video) {
-    //             video.pause();
-    //         }
-    //     });
-    // });
-  
-  
     // Функция считывает изменение в буфере поля загрузки видео, проходится по каждой ссылке и добавляет эти видеоролики в место выгрузки соответственно
   
     const videoPlayer = document.getElementById('videoPlayer'); // Переменная с местом для выгрузки видео
@@ -34,16 +23,19 @@
     }
   
     function addVideo(){
-      for(let i=0;i<this.files.length;i++){
-        const videoElement = document.createElement('div');
-        videoElement.className="video__box";
+      const videoElement = document.createElement('div');
+      videoElement.className="video__box";
     
-        const file = this.files[i];
-        const url = URL.createObjectURL(file);
-  
-        videoElement.innerHTML = '<video controls><source src="'+url+'"></video><div class="button-delete" onclick="deleteVideo(event)"></div>';
-        videoPlayer.appendChild(videoElement);
-      }
+      const file = this.files[0];
+      const url = URL.createObjectURL(file);
+
+      added_file = file;
+
+      videoElement.innerHTML = '<video controls><source src="'+url+'"></video><div class="button-delete" onclick="deleteVideo(event)"></div>';
+      videoPlayer.appendChild(videoElement);
+
+      document.querySelector('.video-input').innerHTML='';
+      document.querySelector('.video-input').classList.add('destroyed');
     }
   
   
@@ -54,6 +46,12 @@
       var element = event.currentTarget; // Получаем текущий элемент, на котором произошло событие
       var videoElement = element.closest('.video__box');
       videoElement.parentNode.removeChild(videoElement);
+
+      added_file = '';
+      added_link = '';
+
+      document.querySelector('.video-input').classList.remove('destroyed');
+      changeToFile();
     }
   
     // ДрагнДроп видео
@@ -92,7 +90,7 @@
         <div class="video-input__video-file" onclick="changeToFile()"></div>
         <div class="video-input__youtube" onclick="changeToYoutube()"></div>
         <label class="video-input__field">
-            <input type="file" id="add_video" accept="video/*" multiple>
+            <input type="file" id="add_video" accept="video/*">
         </label>`;
 
       document.querySelector('.video-input__video-file').style = "background-image: url('components/svg/video-file-black.svg');   pointer-events: none;     cursor: default;";
@@ -103,6 +101,7 @@
 
     function addYoutubeVideo(link){
       const videoElement = document.createElement('div');
+      added_link = "https://www.youtube.com/embed/"+link;
       videoElement.className="video__box";
       videoElement.innerHTML = `
         <iframe width="1280" height="720" src="https://www.youtube.com/embed/${link}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
@@ -110,11 +109,16 @@
         <div class="button-delete" onclick="deleteVideo(event)"></div>`;
 
       videoPlayer.appendChild(videoElement);
+
+      document.querySelector('.video-input').innerHTML='';
+      document.querySelector('.video-input').classList.add('destroyed');
     }
 
     function upload(){
       addYoutubeVideo(document.getElementById('textareaYoutube').value.slice(17));
       document.getElementById('textareaYoutube').value='';
+      document.querySelector('.video-input').innerHTML='';
+      document.querySelector('.video-input').classList.add('destroyed');
     }
 
     restart();

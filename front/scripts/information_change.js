@@ -60,10 +60,6 @@ function admin_back(){
   window.location.href = "http://127.0.0.1:8000/admin_account.html"
 }
 
-function kadmin_bac(){
-  window.location.href = "http://127.0.0.1:8000/admin_account.html"
-}
-
 async function admin_sendInfToServer(surname,name,midname,city,department) { 
   const URL = `${window.location.origin}/script/edit_user_self`;
   axios({

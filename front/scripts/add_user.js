@@ -43,6 +43,5 @@ function change_inf(){
 }
 
 function back(){
-  window.location.reload();
-  //window.location.href = "http://127.0.0.1:8000/admin_users_account.html"
+  window.location.href = "http://127.0.0.1:8000/user_list.html"
 }

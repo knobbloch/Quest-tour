@@ -1,9 +1,11 @@
-let orderc = 0,
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+let orderc = urlParams.get('orderc'),
   title = document.getElementById("title"),
   description = document.getElementById("description");
+  
 function back(){
-  //window.location.href = 'http://127.0.0.1:8000/map.html';
-  window.location.reload();
+  window.location.href = 'http://127.0.0.1:8000/task_list.html';
 }
 
 async function send_practice(title,description,orderc,testornot){
