@@ -1,0 +1,53 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(components/Montserrat-VariableFont_wght.ttf);
+}
+
+.heading{
+    width:80rem;
+    display: flex;
+    
+    margin-left: 10rem;
+    margin-top: 1rem;
+
+    z-index: 1000;
+    background-color: #FFF;
+}
+.heading .title{
+    margin-left: 0.7rem;
+    font-size: 1.3rem;
+
+    font-weight: bold;
+    width:100%;
+
+    resize: none;
+    background-color: transparent;
+    border: none;
+}
+
+.title:focus {
+    outline: none;
+}
+
+.panels{
+    display: block;
+    margin-top: 1rem;
+}
+
+.text-input{
+    margin-top: 2rem;
+}
+
+.buttons{
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    margin-left: 19rem;
+}
+
+.button_blue{
+    width: 15rem;
+}

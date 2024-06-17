@@ -3,7 +3,6 @@ async function getInf() {
   try {
     const response = await axios.get(URL);
     const data = response.data;
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -33,6 +32,18 @@ function inf_change(){
 
 function pass_change(){
   window.location.href = "http://127.0.0.1:8000/pass_change.html";
+}
+
+function admin_back(){
+  //window.location.href = "http://127.0.0.1:8000/admin_map.html";
+}
+
+function admin_inf_change(){
+  window.location.href = "http://127.0.0.1:8000/admin_information_change.html";
+}
+
+function admin_pass_change(){
+  window.location.href = "http://127.0.0.1:8000/admin_pass_change.html";
 }
 
 document.addEventListener('DOMContentLoaded', load_inf())

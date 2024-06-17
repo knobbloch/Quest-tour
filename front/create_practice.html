@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Создании задания</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="components/modal.css">
+<link rel="stylesheet" type="text/css" href="components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="components/text-input.css">
+<link rel="stylesheet" type="text/css" href="styles/practice_create.css">
+</head>
+<body>
+    <custom-sidepanel></custom-sidepanel>
+
+    <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Задание было успешно создано!" text-btn="Ок"></pop-up-ok>
+
+    <div class="heading">
+        <textarea class="title" maxlength="160" id="title">Заголовок вашего задания</textarea>          
+    </div>
+
+    <div class="panels">
+    
+    <text-input height="18">Добавить задание</text-input>
+
+    </div>
+
+    <div class="buttons">
+        <custom-button-blue onclick="create_practice()">Сохранить задание</custom-button-blue>
+    
+        <custom-button-red onclick="back()">Отмена</custom-button-red>
+    </div>
+
+    <script src="components/components.js"></script>
+    <script src="scripts/create_practice.js"></script>
+</body>
+</html>

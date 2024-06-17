@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="components/modal.css">
 </head>
 <body>
-  <custom-header colorInf='#FF0000'></custom-header>
+  <custom-admin_header colorUsers='#FF0000'></custom-admin_header>
 
   <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Информация успешно изменена!" text-btn="Ок"></pop-up-ok>
 
@@ -51,10 +51,10 @@
     </div>
 
     <div class="block">
-      <label class="block-title blocked_title">
+      <label class="block-title">
         Подразделение
       </label>
-      <textarea class="block-text blocked_text" id="department" readonly></textarea>
+      <input type="text" class="block-text input" id="department" maxlength="20" ></input>
     </div>
   </div>
 
@@ -73,7 +73,7 @@
   </div>
     
 
-  <script src="scripts/information_change.js"></script>
+  <script src="scripts/users_information_change.js"></script>
   <script src="components/components.js"></script>
 </body>
 </html>

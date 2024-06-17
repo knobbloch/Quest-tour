@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, Cookie
+from fastapi import APIRouter, Cookie
 
 from api import db_main
 from api.auth import is_accessible, Access, COOKIE_SESSION_ID_KEY
 from api.db_main import new_person, delete_person, get_person, edit_person, get_all_not_adms, edit_auth
-from api.debugging import get_all_auths, get_all_tokens
+# from api.debugging import get_all_auths, get_all_tokens
 # from api.debugging import get_all_persons
 from api.models import Person, UserFIO, EditPerson
 
@@ -27,7 +27,6 @@ async def user_list(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
             single_user = UserFIO(email=record[0], fio=str(record[1] + " " + record[2]))
         else:
             single_user = UserFIO(email=record[0], fio=str(record[1] + " " + record[2] + " " + record[3]))
-        print(single_user)
         users.append(single_user)
     return users
     # return records
@@ -42,7 +41,7 @@ async def get_user_self(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     if person == [] or not person:
         return {"Message": "user not found"}
     else:
-        user = Person(email=person[0], namep=person[1], surname=person[2], admornot=person[7],
+        user = Person(email=person[0], namep=person[2], surname=person[1], admornot=person[7],
                       thirdname=person[3], division=person[4],
                       city=person[5], employment=person[6])
         return user
@@ -57,7 +56,7 @@ async def get_user(target_email: str, session_id: str = Cookie(alias=COOKIE_SESS
     if person == [] or not person:
         return {"Message": "user not found"}
     else:
-        user = Person(email=person[0], namep=person[1], surname=person[2], admornot=person[7],
+        user = Person(email=person[0], namep=person[2], surname=person[1], admornot=person[7],
                       thirdname=person[3], division=person[4],
                       city=person[5], employment=person[6])
         return user
@@ -80,8 +79,12 @@ async def edit_user_self(new_data: EditPerson, session_id: str = Cookie(alias=CO
     email = is_accessible(Access.ALL, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if edit_person(email, new_data.namep, new_data.surname, new_data.thirdname, None, new_data.city):
-        return {"status": 202, "Message": "user data changed"}
+    if is_accessible(Access.ADM, session_id) == email:
+        if edit_person(email, new_data.surname, new_data.namep, new_data.thirdname, new_data.division, new_data.city):
+            return {"status": 202, "Message": "user data changed"}
+    if is_accessible(Access.USR, session_id) == email:
+        if edit_person(email, new_data.surname, new_data.namep, new_data.thirdname, None, new_data.city):
+            return {"status": 202, "Message": "user data changed"}
     else:
         return {"status": 500, "Message": "an error occurred!"}
 
@@ -91,7 +94,8 @@ async def edit_user(target_email: str, new_data: EditPerson, session_id: str = C
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if edit_person(target_email, new_data.namep, new_data.surname, new_data.thirdname, new_data.division, new_data.city, new_data.employment):
+    if edit_person(target_email, new_data.surname, new_data.namep, new_data.thirdname, new_data.division, new_data.city,
+                   new_data.employment):
         return {"status": 202, "Message": "user data changed"}
     else:
         return {"status": 500, "Message": "an error occurred!"}

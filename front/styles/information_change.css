@@ -124,7 +124,7 @@
     top: 9rem;
 }
 
-/* Кнопки */
+/* Изменения для админа */
 
 .buttons{
     width: 33rem;
@@ -144,3 +144,35 @@
     border-radius: 20px;
 }
 
+.star{
+    font-weight: 700;
+}
+
+.container3{
+    display: flex;
+
+    width: 52rem;
+
+    position: relative;
+
+    left: 12rem;
+    top: 9rem;
+
+    gap: 6rem;
+}
+
+.helper{
+    position: relative;
+    left: 12rem;
+    top: 15rem;
+}
+
+.title-error{
+    position: relative;
+    left: 8rem;
+    top: 3rem;
+
+    font-weight: 400;
+
+    color: #FF0000;
+}

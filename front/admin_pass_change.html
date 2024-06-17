@@ -9,13 +9,13 @@
 <link rel="stylesheet" type="text/css" href="components/modal.css">
 </head>
 <body>
-  <custom-header colorInf='#FF0000'></custom-header>
+  <custom-admin_header colorInf='#FF0000'></custom-admin_header>
   
-  <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Пароль успешно изменён!" text-btn="Ок"></pop-up-ok>
+  <pop-up-ok ok_bt_func="admin_back" header-text="Внимание!" question-text="Пароль успешно изменён!" text-btn="Ок"></pop-up-ok>
 
   <div class="container">
     
-    <div class="back-bt" onclick="back()">
+    <div class="back-bt" onclick="admin_back()">
 
     </div>
 
@@ -25,7 +25,8 @@
 
   </div>
 
-  <label class="title-error"></label>
+  <label class="title-error">
+  </label>
 
   <div class = "information">
     <div class="block">
@@ -43,12 +44,17 @@
     </div>
   </div>
 
-  <div class="pass-btn" onclick="hide_pass()"></div>
+  <div class="pass-btn" onclick="hide_pass()">
+
+  </div>
 
   <div class="buttons">
     <custom-button-red onclick="check_pass()">Сохранить</custom-button-red>
 
-    <custom-button-white onclick="back()">Отмена</custom-button-white>
+    <custom-button-white onclick="admin_back()">Отмена</custom-button-white>
+      
+    </div>
+
   </div>
     
 

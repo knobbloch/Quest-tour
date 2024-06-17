@@ -9,11 +9,11 @@
 <link rel="stylesheet" type="text/css" href="components/modal.css">
 </head>
 <body>
-  <custom-header colorInf='#FF0000'></custom-header>
+  <custom-admin_header colorInf='#FF0000'></custom-admin_header>
 
-  <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Информация успешно изменена!" text-btn="Ок"></pop-up-ok>
+  <pop-up-ok ok_bt_func="admin_back" header-text="Внимание!" open_btn_id="save" question-text="Информация успешно изменена!" text-btn="Ок"></pop-up-ok>
 
-  <div class="back-bt" onclick="back()">
+  <div class="back-bt" onclick="admin_back()">
 
   </div>
   
@@ -51,10 +51,10 @@
     </div>
 
     <div class="block">
-      <label class="block-title blocked_title">
+      <label class="block-title">
         Подразделение
       </label>
-      <textarea class="block-text blocked_text" id="department" readonly></textarea>
+      <input type="text" class="block-text input" id="department" maxlength="20" ></input>
     </div>
   </div>
 
@@ -69,7 +69,7 @@
   </div>
 
   <div class="buttons">
-    <custom-button-red onclick="change_inf()">Сохранить</custom-button-red>
+    <custom-button-red onclick="admin_change_inf()" id="save">Сохранить</custom-button-red>
   </div>
     
 

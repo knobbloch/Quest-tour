@@ -1,7 +1,8 @@
+import json
 from datetime import date
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 
 
 class Question(BaseModel):
@@ -20,7 +21,7 @@ class Person(BaseModel):
     email: str
     namep: str
     surname: str
-    admornot: int
+    admornot: Optional[int] = 0
     thirdname: Optional[str] = None
     division: Optional[str] = None
     city: Optional[str] = None
@@ -47,6 +48,13 @@ class Lecture(BaseModel):
     orderc: int
     description: Optional[str] = None
     pathto: Optional[str] = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def validate_to_json(cls, value):
+        if isinstance(value, str):
+            return cls(**json.loads(value))
+        return value
 
 
 class EditLecture(BaseModel):
@@ -87,6 +95,7 @@ class Flower(BaseModel):
     flower_stage: int  # 0 - bad, 1 - good
     type: int  # 0 - lecture, 1 - practice
     entity_id: int
+    order: int
 
 
 class Dead(BaseModel):
