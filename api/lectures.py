@@ -30,7 +30,7 @@ async def create_lecture(lecture: Lecture, session_id: str = Cookie(alias=COOKIE
 
 @lecture_router.post("/create_lecture_with_file")
 async def create_lecture(lecture: Annotated[Lecture, Body(...)],
-                         file: Union[UploadFile, None] = None,
+                         file: Annotated[UploadFile, File(...)],
                          session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
@@ -52,7 +52,7 @@ async def create_lecture(lecture: Annotated[Lecture, Body(...)],
         new_file.close()
         return {'status': 201, 'Message': 'new lecture added'}
     else:
-        return {'status': 201, 'Message': 'new lecture added'}
+        return {'status': 500, 'Message': 'an error occurred'}
 
 
 @lecture_router.get("/get_lecture")
