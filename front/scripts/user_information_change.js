@@ -1,4 +1,6 @@
-let email = "123"
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+let email = urlParams.get('email');
 
 let surname_inf = document.getElementById("surname"),
   name_inf = document.getElementById("name"),
@@ -53,7 +55,7 @@ function change_inf(){
 }
 
 function back(){
-  window.location.href = "http://127.0.0.1:8000/admin_users_account.html"
+  window.location.href = "http://127.0.0.1:8000/admin_user_account.html?email="+email;
 }
 
 document.addEventListener('DOMContentLoaded', load_inf())

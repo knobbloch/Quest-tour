@@ -1,5 +1,7 @@
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+let email = urlParams.get('email');
 
-let email = "123"
 async function getInf() {
   const URL = `${window.location.origin}/script/get_user?target_email=${email}`;
   try {
@@ -40,11 +42,11 @@ async function load_inf(){
 }
 
 function back(){
-  //window.location.href = "http://127.0.0.1:8000/map.html";
+  window.location.href = "http://127.0.0.1:8000/user_list.html";
 }
 
 function users_inf_change(){
-  window.location.href = "http://127.0.0.1:8000/admin_users_information_change.html";
+  window.location.href = "http://127.0.0.1:8000/admin_user_information_change.html?email="+email;
 }
 
 //для модального окна
