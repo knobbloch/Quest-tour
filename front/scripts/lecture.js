@@ -115,18 +115,18 @@ function adjustHeight(textarea) {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-    const textarea = document.querySelector('.lecture');
-    adjustHeight(textarea);
+    const textLect = document.querySelector('.lecture');
+    adjustHeight(textLect);
     window.onload = function() {
-        adjustHeight(textarea);
+        adjustHeight(textLect);
     };
     window.onresize = function() {
-        adjustHeight(textarea);
+        adjustHeight(textLect);
     };
 
     const lecture = await getLecture();
     const titleLect = document.querySelector('.title');
-    const textLect = document.querySelector('.lecture');
+    
     const videoLect = document.querySelector('.iframe');
     titleLect.innerHTML = lecture.title;
     textLect.innerHTML = lecture.description;
