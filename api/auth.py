@@ -7,7 +7,7 @@ import uuid
 from api.db_main import get_auth, new_token, check_token, delete_token
 from enum import Enum
 
-auth_router = APIRouter(prefix="/auth", tags=["Basic auth"])
+auth_router = APIRouter(prefix="/script", tags=["Basic auth"])
 security = HTTPBasic()
 
 COOKIE_SESSION_ID_KEY = "auth-session-id"
