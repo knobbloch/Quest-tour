@@ -71,7 +71,7 @@ async def get_lecture(l_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_I
 
 
 @lecture_router.put("/edit_lecture")
-async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)], file: Optional[UploadFile] = None,
+async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)], file: Optional[UploadFile] = File(None),
                        session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
@@ -198,3 +198,17 @@ async def get_lecture_file(l_id: int, session_id: str = Cookie(alias=COOKIE_SESS
             )
             for file in files
         ]
+
+@lecture_router.delete("/delete_lecture_file")
+async def delete_lecture_file(l_id: int, file_name: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    if not db_main.get_lection(l_id):
+        return {'status': 404, 'Message': 'lecture not found'}
+    path = os.path.abspath(os.getcwd())
+    if os.path.isfile(f"{path}\\data\\lection\\lec_{l_id}\\{file_name}"):
+        os.remove(f"{path}\\data\\lection\\lec_{l_id}\\{file_name}")
+        return {'status': 202, 'Message': 'file deleted'}
+    else:
+        return {'status': 404, 'Message': 'file not found'}
