@@ -14,7 +14,7 @@ document.getElementById("sign-in-btn").addEventListener("click", function() {
 
 
 async function SendDataToServer(email, password) {
-    const URL = `${window.location.origin}/auth/login-cookie`;
+    const URL = `${window.location.origin}/script/login-cookie`;
     try {
         const response = await axios({
             method: 'post',
