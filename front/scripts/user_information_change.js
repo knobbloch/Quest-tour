@@ -1,6 +1,7 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 let email = urlParams.get('email');
+let error = document.querySelector(".title-error");
 
 let surname_inf = document.getElementById("surname"),
   name_inf = document.getElementById("name"),
@@ -9,35 +10,54 @@ let surname_inf = document.getElementById("surname"),
   department_inf = document.getElementById("department"),
   login_inf = document.getElementById("login");
 
-  async function getInf() {
-    const URL = `${window.location.origin}/script/get_user?target_email=${email}`;
-    try {
-      const response = await axios.get(URL);
-      const data = response.data;
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
+function destroy_gap(str){
+  let i = 0;
+  while(str[i] === " " && i < str.length){
+    i++;
   }
+  return str.slice(i);
+}
 
-  async function sendInfToServer(surname,name,midname,city,department) { 
-    const URL = `${window.location.origin}/script/edit_user?target_email=${email}`;
-    axios({
-      method: 'put',
-      url: URL,
-      data: {namep: name,surname: surname,thirdname: midname,division: department,city: city},
-    })
-    .then(response => {
-      console.log(response.data)
-      if(response.data['status']!=202){
-        document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
-      }
-      document.getElementById("exit-modal-ok").classList.add("open")
-    })
-    .catch(error => {
-      console.log(error)
-    })
+function no_num(obj){
+  obj.value = destroy_gap(obj.value);
+  if(/^[A-Za-zА-Яа-яЁё\s]+$/.test(obj.value)){
+    obj.classList.remove("error");
+    return true;
+  }else{
+    obj.classList.add("error");
+    return false;
+  };
+} 
+
+async function getInf() {
+  const URL = `${window.location.origin}/script/get_user?target_email=${email}`;
+  try {
+    const response = await axios.get(URL);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function sendInfToServer(surname,name,midname,city,department) { 
+  const URL = `${window.location.origin}/script/edit_user?target_email=${email}`;
+  axios({
+    method: 'put',
+    url: URL,
+    data: {namep: name,surname: surname,thirdname: midname,division: department,city: city},
+  })
+  .then(response => {
+    console.log(response.data)
+    if(response.data['status']!=202){
+      document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
     }
+    document.getElementById("exit-modal-ok").classList.add("open")
+  })
+  .catch(error => {
+    console.log(error)
+  })
+  }
 
 async function load_inf(){
   const Inf = await getInf()
@@ -51,7 +71,12 @@ async function load_inf(){
 }
 
 function change_inf(){
-  sendInfToServer(surname_inf.value,name_inf.value,midname_inf.value,city_inf.value,department_inf.value);
+  if(no_num(surname_inf) * no_num(name_inf) * no_num(midname_inf) * no_num(city_inf) * no_num(department_inf)){
+    error.textContent="";
+    sendInfToServer(surname_inf.value,name_inf.value,midname_inf.value,city_inf.value,department_inf.value);
+  }else{
+    error.textContent="Заполните все поля корректно!";
+  }
 }
 
 function back(){

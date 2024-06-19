@@ -10,6 +10,39 @@
     font-family: 'Montserrat';
 }
 
+/* Медиа */
+@media (max-width: 1920px){
+    html{
+        font-size: 20px;
+    }
+}
+@media (max-width: 1600px){
+    html{
+        font-size: 16.5px;
+    }
+}
+@media (max-width: 1536px){
+    html{
+        font-size: 15.5px;
+    }
+}
+@media (max-width: 1400px){
+    html{
+        font-size: 14.5px;
+    }
+}
+@media (max-width: 1280px){
+    html{
+        font-size: 13.5px;
+    }
+}
+
+@media (max-width: 960px){
+    html{
+        font-size: 10px;
+    }
+}
+
 /* Первые 3 элемента */
 
 .container1{
@@ -91,7 +124,7 @@
 
     background: #E9ECEE;
     border: none;
-    border-radius: 20px;
+    border-radius: 1rem;
 
     resize: none;
     overflow: hidden;
@@ -101,6 +134,10 @@
     line-height: 3rem;
 
     color: #0F2232;
+}
+
+.input:-webkit-autofill{
+    transition: all 5000s ease-in-out 0s;
 }
 
 .input{
@@ -141,11 +178,7 @@
     width: 12rem;
     height: 3.5rem;
 
-    border-radius: 20px;
-}
-
-.star{
-    font-weight: 700;
+    border-radius: 1rem;
 }
 
 .container3{
@@ -176,3 +209,16 @@
 
     color: #FF0000;
 }
+
+/* Считавание ошибок */
+
+.error{
+    color: white;
+    background-color: #FF4346;
+    -webkit-text-fill-color: white;
+}
+
+.error:focus-visible{
+    outline: none;
+}
+
