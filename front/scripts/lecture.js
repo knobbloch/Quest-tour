@@ -21,7 +21,7 @@ async function getLecture() {
       const response = await axios.get(URL, {
         responseType: 'json'
       });
-      const fileData = response.data; // Данные файла в виде ArrayBuffer
+      const fileData = response.data; 
       console.log(fileData);
       return fileData;
     } catch (error) {
@@ -127,40 +127,25 @@ document.addEventListener('DOMContentLoaded', async function() {
     const lecture = await getLecture();
     const titleLect = document.querySelector('.title');
     
-    const videoLect = document.querySelector('.iframe');
+    const videoLect = document.querySelector('.video');
     titleLect.innerHTML = lecture.title;
     textLect.innerHTML = lecture.description;
-    console.log(lecture.pathto);
-    // if (lecture.pathto != "string"){
-    //   document.querySelector('.video').appendChild('<iframe class="iframe" src="svg/Запись 2024-04-24 212245.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>');
-      
-    //!! videoLect.setAttribute("src", "https://www.youtube.com/embed/" + lecture.pathto.slice(17, lecture.pathto.length - 16));
-    
-    // videoLect.setAttribute("src", lecture.pathto);
-      // console.log(videoLect.getAttribute("src"));
-    // }
-    // else{
-    //   const videoData = await getFileLecture();
+    if (lecture.pathto != "string"){
+      const videoLect = document.querySelector('.video');
+      videoLect.innerHTML='<iframe class="iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+      const videoYT = document.querySelector(".iframe");
+      videoYT.setAttribute("src", "https://www.youtube.com/embed/" + lecture.pathto.slice(17, lecture.pathto.length - 16));
+    }
+    else{
+      const videoData = await getFileLecture();
+      const videoPath = "../" + videoData[0].path;
+      var videoFile = document.createElement('video');
+      videoFile.controls = true;
+      videoFile.setAttribute("src", videoPath);
+      videoLect.appendChild(videoFile);
+    }
+  });
 
-      
-      
-    //   // video.innerHTML = '<source class="video_lecture">';
-      
-    //   // document.querySelector('.video_lecture').src = videoUrl;
-    //   const videoPath = "../" + videoData[0].path;
-    //   // Создание URL из строки пути
-    //   const videoUrl = URL.createObjectURL(new Blob([videoPath], { type: 'application/octet-stream' }));
-
-    //   // Использование URL для вставки видео на страницу
-    //   const videoElement = document.createElement('video');
-      
-    //   videoElement.src = videoUrl;
-    //   videoElement.controls = true;
-    //   document.querySelector('.video').appendChild(videoElement);
-    //   // console.log(typeof videoData[0].path);
-    // }
-const lectureResult = [id, 1]
-  
 async function sendLectureToServer(lectureResult) { 
   const URL = `${window.location.origin}/script/edit_lecture_result?l_id=${id}&viewed=true`;
   const data = JSON.stringify({sections: lectureResult})
@@ -174,10 +159,11 @@ async function sendLectureToServer(lectureResult) {
   })
   .catch(error => {
       console.error('Ошибка при отправке', error)})
-  return response
-  }
-sendLectureToServer(lectureResult);  
-});
+  return response;
+};
+
+const lectureResult = [id, 1]
+sendLectureToServer(lectureResult);
 
 const backButton = document.getElementById('back_to_map');
 backButton.addEventListener('click', () => {
