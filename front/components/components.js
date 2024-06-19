@@ -24,12 +24,13 @@ class Custom_radio extends HTMLElement {
     connectedCallback() {
         const text = this.getAttribute('text');
         const group = this.getAttribute('group');
+        const value = this.getAttribute('value');
 
         this.innerHTML = `
 
             <div>
                 <label class="label">
-                    <input id="radio1" type="radio" class="radiobutton" name="${group}" value="no" >
+                    <input id="radio1" type="radio" class="radiobutton"  value="${value}" name="${group}" value="no" >
                     <span class="fake-radio"></span>
                     <span class="text">${text}</span>
                 </label>
@@ -85,8 +86,9 @@ customElements.define('custom-button-blue', Custom_button_blue);
 
 class Button_plus extends HTMLElement {
     connectedCallback() {
+        const id_btn = this.getAttribute('id_btn');
         this.innerHTML = `
-        <button class="button_plus">
+        <button class="button_plus" id="${id_btn}">
             <svg class="button_plus_svg" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.5456 32.6257V18.0423M18.5456 18.0423V3.45898M18.5456 18.0423L2.50391 18.0423M18.5456 18.0423L34.5872 18.0423" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -133,7 +135,7 @@ class Task_list extends HTMLElement {
         <!-- <link rel="stylesheet" type="text/css" href="components/list.css"> -->
         <div class="list" id="listContainer">
             <template id="listTemplate">
-                <div class="line" onclick="redirectToPage(this)">
+                <div class="line">
                     <div class="user">
                         <div class="details">
                             <h1 class="name"></h1>
@@ -174,6 +176,46 @@ customElements.define('task-list', Task_list);
 //         `
 //     }
 // }
+class Pop_up_create_task extends HTMLElement {
+    connectedCallback() {
+        const open_btn_id = this.getAttribute('open_btn_id');
+
+        this.innerHTML = `
+    
+        <!-- Модальное окно  -->
+        <div class="modal" id="create_task_modal">
+            <div class="modal__box">
+                <h3 class="modal__box-header">Какой тип задания вы хотите создать?</h3>
+                <div class="radio__box">
+                <custom-radiobutton text="С открытым ответом" value="open_response" group="myGroup"></custom-radiobutton>
+                    <custom-radiobutton text="Тест" value="test" group="myGroup"></custom-radiobutton>
+                    <custom-radiobutton text="Лекция" value="lecture" group="myGroup"></custom-radiobutton>
+                </div>
+                <div class="btn__box">
+                    <button class="button-red" id="No-btn" style="cursor: pointer">Отмена</button>             
+                    <button class="button-blue" id="Yes-btn" style="cursor: pointer">Создать</button>
+                </div>
+            </div>
+        </div>
+        `
+        // Функция открывает модальное окно при нажатии на кнопку
+        document.getElementById("create_task_btn").addEventListener('click', this.open_modal)
+
+        // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
+        document.getElementById("No-btn").addEventListener("click", this.close_modal)
+            
+    }
+
+    open_modal() {
+        document.getElementById("create_task_modal").classList.add("open")
+    }
+
+    close_modal() {
+        document.getElementById("create_task_modal").classList.remove("open")
+    }
+}
+
+customElements.define('pop-up-create-task', Pop_up_create_task);
 
 class Pop_up_btn extends HTMLElement {
     connectedCallback() {
