@@ -59,6 +59,12 @@ body{
     object-fit: cover;
     overflow: auto;
 }
+.video video{
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    overflow: auto;
+}
 .lecture{
     grid-column:2;
     grid-row: 3;

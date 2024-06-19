@@ -6,25 +6,23 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" type="text/css" href="components/buttons_style.css">
 <link rel="stylesheet" type="text/css" href="styles/edit_lecture_style.css">
+<link rel="stylesheet" type="text/css" href="components/modal.css">
 </head>
 <body>
+    <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Лекция успешно изменена!" text-btn="Ок"></pop-up-ok>
     <custom-sidepanel></custom-sidepanel>
     <div class="heading">
             <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.9555 6.29491C11.4299 0.0613213 20.5701 0.0613289 21.0444 6.29492C21.234 8.78617 23.2138 10.766 25.7051 10.9555C31.9386 11.4299 31.9386 20.5701 25.705 21.0444C23.2138 21.234 21.234 23.2138 21.0444 25.7051C20.5701 31.9386 11.4299 31.9386 10.9555 25.705C10.766 23.2138 8.78616 21.234 6.29491 21.0444C0.0613213 20.5701 0.0613289 11.4299 6.29492 10.9555C8.78617 10.766 10.766 8.78616 10.9555 6.29491Z" fill="#EC1C24"/>
                 <path d="M11.0512 16.7071C10.6607 16.3166 10.6607 15.6834 11.0512 15.2929L15.2939 11.0503C15.6844 10.6597 16.3176 10.6597 16.7081 11.0503L20.9507 15.2929C21.3412 15.6834 21.3412 16.3166 20.9507 16.7071L16.7081 20.9497C16.3176 21.3403 15.6844 21.3403 15.2939 20.9497L11.0512 16.7071Z" fill="#FFCCCC" stroke="#FF6666" stroke-width="2"/>
                 </svg>  
-            <textarea class="title" maxlength="160">Первая лекция</textarea>
+            <textarea class="title" maxlength="160"></textarea>
             <!-- <custom-button-blue id="back_to_map">Назад к карте</custom-button-blue>           -->
         </div>
     <div class="container">
         <div class="video">
-            <video controls src="../data/lection/lec_1/Запись 2024-05-07 022147.mp4"></video>
-            <!-- <video controls src="svg/Запись 2024-05-07 022147.mp4"></video> -->
-            <!-- <img src="../photo_2023-06-04_22-34-26.jpg"> -->
-            <!-- <iframe class="iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
         </div>
-        <textarea class="lecture">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, distinctio, cupiditate placeat similique voluptatum dicta dolorem nesciunt omnis assumenda, a possimus accusantium! Eaque alias inventore illum est similique atque dicta voluptatum cumque vitae. Incidunt doloremque veritatis ipsa eaque dolore fugiat cumque quo? Architecto laborum explicabo nulla quod illo culpa? Inventore ipsam itaque minus cumque odio pariatur. Perspiciatis, dicta minus! Ratione velit rerum necessitatibus culpa perferendis at saepe vitae magnam dignissimos omnis. Voluptas hic officiis aliquam inventore! Blanditiis iusto illo quis nobis dolor, ratione dolore autem fugit quidem nesciunt suscipit nostrum, praesentium harum in rerum exercitationem modi asperiores a, atque odit voluptate. Aliquam eaque illum nesciunt necessitatibus maxime molestiae laboriosam, labore iusto deserunt dicta facilis voluptatibus, nulla neque! A odio quidem excepturi, ex modi porro! Nam, excepturi nostrum maiores suscipit eum quisquam optio corporis! Maiores fugiat beatae quia unde corrupti minus non, omnis quisquam voluptates temporibus? Quis impedit quasi, reprehenderit facilis illo expedita earum repellat consequuntur ab sit, id esse recusandae. Dolorem, vel accusantium expedita ducimus dicta in officiis reiciendis praesentium doloribus voluptatem ut animi autem aspernatur sit ea possimus similique atque minus perferendis veniam, totam itaque, cumque error. Fugit repellat repudiandae mollitia maxime explicabo labore fugiat at veniam. Quibusdam, ipsa!</textarea> 
+        <textarea class="lecture"></textarea> 
         <custom-button-blue id="save" onclick="editLecture()">Сохранить изменения</custom-button-blue>
         <custom-button-red id="cancel-btn" onclick="back()">Отмена</custom-button-red>  
     </div>
