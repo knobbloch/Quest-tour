@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Информация пользователя</title>
+<title>Ваша информация</title>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<link rel="stylesheet" type="text/css" href="components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="/components/buttons_style.css">
 <link rel="stylesheet" type="text/css" href="styles/information_change.css">
-<link rel="stylesheet" type="text/css" href="components/modal.css">
+<link rel="stylesheet" type="text/css" href="/components/modal.css">
 </head>
 <body>
   <custom-header colorInf='#FF0000'></custom-header>
@@ -16,6 +16,8 @@
   <div class="back-bt" onclick="back()">
 
   </div>
+
+  <label class="title-error"></label>
   
   <div class="container1">
 
@@ -23,21 +25,21 @@
       <label class="block-title">
         Фамилия
       </label>
-      <input type="text" class="block-text input" id="surname" maxlength="20" ></input>
+      <input type="text" class="block-text input" id="surname" maxlength="20" autocomplete="off"></input>
     </div>
 
     <div class="block">
       <label class="block-title">
         Имя
       </label>
-      <input type="text" class="block-text input" id="name" maxlength="20" ></input>
+      <input type="text" class="block-text input" id="name" maxlength="20" autocomplete="off"></input>
     </div>
 
     <div class="block">
       <label class="block-title">
         Отчество
       </label>
-      <input type="text" class="block-text input" id="midname" maxlength="20" ></input>
+      <input type="text" class="block-text input" id="midname" maxlength="20" autocomplete="off"></input>
     </div>
 
   </div>
@@ -47,7 +49,7 @@
       <label class="block-title">
         Город
       </label>
-      <input type="text" class="block-text input" id="city" maxlength="20" ></input>
+      <input type="text" class="block-text input" id="city" maxlength="20" autocomplete="off"></input>
     </div>
 
     <div class="block">

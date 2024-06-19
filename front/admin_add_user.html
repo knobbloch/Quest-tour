@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Информация пользователя</title>
+<title>Создание пользователя</title>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<link rel="stylesheet" type="text/css" href="components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="/components/buttons_style.css">
 <link rel="stylesheet" type="text/css" href="styles/information_change.css">
-<link rel="stylesheet" type="text/css" href="components/modal.css">
+<link rel="stylesheet" type="text/css" href="/components/modal.css">
 </head>
 <body>
   <custom-admin_header colorUsers='#FF0000'></custom-admin_header>
@@ -23,25 +23,23 @@
 
     <div class="block">
       <label class="block-title">
-        <label class="star">*</label>
         Фамилия
       </label>
-      <input type="text" class="block-text input" id="surname" maxlength="20" ></input>
+      <input type="text" class="block-text input" id="surname" maxlength="20" autocomplete="off"></input>
     </div>
 
     <div class="block">
       <label class="block-title">
-        <label class="star">*</label>
         Имя
       </label>
-      <input type="text" class="block-text input" id="name" maxlength="20" ></input>
+      <input type="text" class="block-text input" id="name" maxlength="20" autocomplete="off"></input>
     </div>
 
     <div class="block">
       <label class="block-title">
         Отчество
       </label>
-      <input type="text" class="block-text input" id="midname" maxlength="20" ></input>
+      <input type="text" class="block-text input" id="midname" maxlength="20" autocomplete="off"></input>
     </div>
 
   </div>
@@ -51,14 +49,14 @@
       <label class="block-title">
         Город
       </label>
-      <input type="text" class="block-text input" id="city" maxlength="20" ></input>
+      <input type="text" class="block-text input" id="city" maxlength="20" autocomplete="off"></input>
     </div>
 
     <div class="block">
       <label class="block-title">
         Подразделение
       </label>
-      <input type="text" class="block-text input" id="department" maxlength="20" ></input>
+      <input type="text" class="block-text input" id="department" maxlength="20" autocomplete="off"></input>
     </div>
   </div>
 
@@ -66,15 +64,13 @@
   <div class="container3">
     <div class="block">
       <label class="block-title">
-        <label class="star">*</label>
         Email
       </label>
-      <input type="text" class="block-text input" id="login" maxlength="30"></input>
+      <input type="email" class="block-text input" id="login" maxlength="30" autocomplete="off"></input>
     </div>
 
     <div class="block">
       <label class="block-title blocked_title">
-        <label class="star">*</label>
           Пароль
         </label>
       <textarea class="block-text blocked_text" id="login" readonly>Qwerty1</textarea>
@@ -85,10 +81,6 @@
   <div class="buttons">
     <custom-button-red onclick="change_inf()">Сохранить</custom-button-red>
   </div>
-
-  <label class="block-title star helper">
-    * - поля, обязательные к заполнению
-  </label>
     
 
   <script src="scripts/add_user.js"></script>
