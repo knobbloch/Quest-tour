@@ -178,8 +178,6 @@ customElements.define('task-list', Task_list);
 // }
 class Pop_up_create_task extends HTMLElement {
     connectedCallback() {
-        const open_btn_id = this.getAttribute('open_btn_id');
-
         this.innerHTML = `
     
         <!-- Модальное окно  -->
@@ -198,8 +196,6 @@ class Pop_up_create_task extends HTMLElement {
             </div>
         </div>
         `
-        // Функция открывает модальное окно при нажатии на кнопку
-        document.getElementById("create_task_btn").addEventListener('click', this.open_modal)
 
         // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
         document.getElementById("No-btn").addEventListener("click", this.close_modal)
@@ -489,7 +485,7 @@ class AdminHeader extends HTMLElement {
 
         // this.querySelector('#admin_stat').addEventListener('click', this.admin_stat)
         this.querySelector('#users').addEventListener('click', this.users)
-        // this.querySelector('#quest').addEventListener('click', this.quest)
+        this.querySelector('#quest').addEventListener('click', this.quest)
         this.querySelector('#lk').addEventListener('click', this.lk)
         this.querySelector('#Yes-btn-header').addEventListener('click', this.deadInf)
     }
@@ -499,9 +495,9 @@ class AdminHeader extends HTMLElement {
     users() {
         window.location.href = "http://127.0.0.1:8000/user_list.html"
     }
-    // quest() {
-    //     window.location.href = "http://127.0.0.1:8000/statistic.html"
-    // }
+    quest() {
+        window.location.href = "http://127.0.0.1:8000/task_list.html"
+    }
 
     lk() {
         window.location.href = "http://127.0.0.1:8000/admin_account.html"
