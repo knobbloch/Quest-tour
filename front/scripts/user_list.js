@@ -48,11 +48,11 @@ async function deleteUser(event, email) {
 
 function redirectToPage(user) {
     var email = user.dataset.email;
-    window.location.href = `${window.location.origin}/admin_user_account.html?email=${email}`;
+    window.location.href = `${window.location.origin}/admin_user_account?email=${email}`;
 }
 
 document.getElementsByClassName("button_plus")[0].addEventListener("click", function() {
-    window.location.href = `${window.location.origin}/admin_add_user.html`;
+    window.location.href = `${window.location.origin}/admin_add_user`;
 });
 
 document.getElementsByClassName("back_button")[0].addEventListener("click", function() {
