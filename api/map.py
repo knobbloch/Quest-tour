@@ -142,4 +142,15 @@ async def delete_by_index(index: int, session_id: str = Cookie(alias=COOKIE_SESS
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-
+    flower_list = get_flowers_for_map(email)
+    victim = flower_list[index]
+    if victim.type == 0:
+        if delete_lecture(victim.entity_id):
+            return {"status": 205, "Message": "lecture deleted"}
+        else:
+            return {"status": 500, "Message": "an error occurred :("}
+    elif victim.type == 1:
+        if delete_practice(victim.entity_id):
+            return {"status": 205, "Message": "practice deleted"}
+        else:
+            return {"status": 500, "Message": "an error occurred :("}
