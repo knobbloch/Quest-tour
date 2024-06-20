@@ -1,0 +1,102 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(Montserrat-VariableFont_wght.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    color: #0F2232;
+}
+html{
+    font-size: 20px;
+}
+body{
+    min-height: 100%;
+}
+
+main {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 5rem;
+    display: grid;
+    grid-template-rows: auto auto;
+    row-gap: 1rem;
+}
+
+h1 {
+    font-size: 1.6rem;
+    align-self: center;
+}
+.main_header{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 1rem;
+    justify-content: start;
+}
+.back_button {
+    width: 2rem;
+    cursor: pointer;
+}
+.button_plus{
+    height: 2.1rem;
+    width: 2.1rem;
+    border-radius: 25%;
+}
+.button_plus_svg{
+    width: 1rem;
+    height: 1rem;
+}
+
+.modal__box{
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    row-gap: 0rem;
+    width: 23rem;
+
+}
+
+.modal__box h3{
+    font-size: 1.3rem;
+}
+
+.btn__box .button-red {
+    font-size: 1.2rem;
+    border-radius: 15pt;
+    width: 7.6rem;
+}
+
+.btn__box .button-blue {
+    font-size: 1.2rem;
+    border-radius: 15pt;
+    width: 7.6rem;
+}
+
+.fake-radio {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.radio__box .text {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.radio__box label {
+    margin-bottom: 0.8rem;
+}
+@media (max-width: 800px){
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .back_button {
+        width: 1.8rem;
+    }
+    .button_plus{
+        height: 1.8rem;
+        width: 1.8rem;
+    }
+}
