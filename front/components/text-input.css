@@ -5,9 +5,9 @@
 
     position: relative;
     top: 40%;
-    left: 20%;
+    left: 19rem;
     
-    width: 65%;
+    width: 62.5rem;
     height: 13rem;
     max-width: 80rem;
     
@@ -57,6 +57,11 @@
     font-size: 1rem;
     max-block-size: 10;
 }
+
+.text-input__textarea:focus{
+    outline: none;
+}
+
 .text-input__area {
     position: absolute;
     top: 0;
@@ -91,4 +96,23 @@
 .text-input__textarea:not(:placeholder-shown){
     border: 0.125rem solid #293240;
     border-radius: 0.375rem;
+}
+
+/* Обработка ошибки */
+
+.error{
+    border: 0.125rem dashed #FF4346;
+    animation: shake 0.5s ease-in-out forwards;
+}
+
+.error:not(:placeholder-shown){
+    border: 0.125rem solid #FF4346;
+}
+
+.error:focus-visible{
+    outline: none;
+}
+
+.error_label{
+    color: #FF4346;
 }
