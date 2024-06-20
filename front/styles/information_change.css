@@ -216,9 +216,19 @@
     color: white;
     background-color: #FF4346;
     -webkit-text-fill-color: white;
+    animation: shake 0.5s ease-in-out forwards;
 }
 
 .error:focus-visible{
     outline: none;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-0.5rem); }
+    40% { transform: translateX(0.5rem); }
+    60% { transform: translateX(-0.5rem); }
+    80% { transform: translateX(0.5rem); }
+    100% { transform: translateX(0); }
 }
 

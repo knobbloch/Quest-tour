@@ -24,6 +24,8 @@ function no_num(obj){
     obj.classList.remove("error");
     return true;
   }else{
+    obj.classList.remove("error");
+    void obj.offsetWidth;
     obj.classList.add("error");
     return false;
   };
