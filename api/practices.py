@@ -200,3 +200,21 @@ async def delete_answer_file(p_id: int, session_id: str = Cookie(alias=COOKIE_SE
     for path in paths:
         os.remove(path)
     return {'status': 205, 'Message': 'files deleted'}
+
+
+@practice_router.post("/add_answer")
+async def add_answer(p_id: int, text: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.USR, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    if not db_main.get_practice(p_id):
+        return {'status': 404, 'Message': 'practice not found'}
+    if db_main.get_practice(p_id)[3] == 1:
+        return {'status': 400, 'Message': 'this practice is a test'}
+
+    answer_id = get_practice_res(p_id, email)[0]
+    new_file = open(f"data/answers/practice_{answer_id}.txt", 'wb')
+    new_file.write(text.encode('utf-8'))
+    new_file.close()
+    return {'status': 201, 'Message': 'answer added'}
+
