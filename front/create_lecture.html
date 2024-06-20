@@ -4,17 +4,22 @@
 <meta charset="utf-8">
 <title>Создании лекции</title>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<link rel="stylesheet" type="text/css" href="components/buttons_style.css">
-<link rel="stylesheet" type="text/css" href="components/video-input.css">
-<link rel="stylesheet" type="text/css" href="components/text-input.css">
+<link rel="stylesheet" type="text/css" href="/components/modal.css">
+<link rel="stylesheet" type="text/css" href="/components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="/components/video-input.css">
+<link rel="stylesheet" type="text/css" href="/components/text-input.css">
 <link rel="stylesheet" type="text/css" href="styles/lecture_create.css">
 </head>
 <body>
-    <custom-sidepanel></custom-sidepanel>
+    <custom-sidepanel back_page="http://127.0.0.1:8000/task_list.html"></custom-sidepanel>
+
+    <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Лекция была успешно создана!" text-btn="Ок"></pop-up-ok>
 
     <div class="heading">
-        <textarea class="title" maxlength="160">Заголовок вашей лекции</textarea>          
+        <textarea class="title" maxlength="160" id="title">Заголовок вашей лекции</textarea>          
     </div>
+
+    <label class="title-error"></label>
 
     <div class="panels">
     
@@ -24,12 +29,13 @@
     </div>
 
     <div class="buttons">
-        <custom-button-blue onclick="check_pass()">Сохранить лекцию</custom-button-blue>
+        <custom-button-blue onclick="create_lection()">Сохранить лекцию</custom-button-blue>
     
         <custom-button-red onclick="back()">Отмена</custom-button-red>
     </div>
 
     <script src="components/components.js"></script>
+    <script src="scripts/create_lecture.js"></script>
     <script src="components/scripts/video-input.js"></script>
 </body>
 </html>

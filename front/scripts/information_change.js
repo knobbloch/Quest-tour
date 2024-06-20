@@ -5,6 +5,29 @@ let surname_inf = document.getElementById("surname"),
   department_inf = document.getElementById("department"),
   login_inf = document.getElementById("login");
 
+let error = document.querySelector(".title-error");
+
+function destroy_gap(str){
+  let i = 0;
+  while(str[i] === " " && i < str.length){
+    i++;
+  }
+  return str.slice(i);
+}
+
+function no_num(obj){
+  obj.value = destroy_gap(obj.value);
+  if(/^[A-Za-zА-Яа-яЁё\s]+$/.test(obj.value)){
+    obj.classList.remove("error");
+    return true;
+  }else{
+    obj.classList.remove("error");
+    void obj.offsetWidth;
+    obj.classList.add("error");
+    return false;
+  };
+}
+
   async function getInf() {
     const URL = `${window.location.origin}/script/get_user_self`;
     try {
@@ -47,7 +70,12 @@ async function load_inf(){
 }
 
 function change_inf(){
-  sendInfToServer(surname_inf.value,name_inf.value,midname_inf.value,city_inf.value);
+  if(no_num(surname_inf) * no_num(name_inf) * no_num(midname_inf) * no_num(city_inf)){
+    error.textContent="";
+    sendInfToServer(surname_inf.value,name_inf.value,midname_inf.value,city_inf.value);
+  }else{
+    error.textContent="Заполните все поля корректно!";
+  }
 }
 
 function back(){
@@ -57,10 +85,6 @@ function back(){
 // Часть админа
 
 function admin_back(){
-  window.location.href = "http://127.0.0.1:8000/admin_account.html"
-}
-
-function kadmin_bac(){
   window.location.href = "http://127.0.0.1:8000/admin_account.html"
 }
 
@@ -84,7 +108,12 @@ async function admin_sendInfToServer(surname,name,midname,city,department) {
   }
 
 function admin_change_inf(){
-  admin_sendInfToServer(surname_inf.value,name_inf.value,midname_inf.value,city_inf.value,department_inf.value);
+  if(no_num(surname_inf) * no_num(name_inf) * no_num(midname_inf) * no_num(city_inf) * no_num(department_inf)){
+    error.textContent="";
+    admin_sendInfToServer(surname_inf.value,name_inf.value,midname_inf.value,city_inf.value,department_inf.value);
+  }else{
+    error.textContent="Заполните все поля корректно!";
+  }
 }
 
 document.addEventListener('DOMContentLoaded', load_inf())

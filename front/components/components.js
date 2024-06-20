@@ -24,12 +24,13 @@ class Custom_radio extends HTMLElement {
     connectedCallback() {
         const text = this.getAttribute('text');
         const group = this.getAttribute('group');
+        const value = this.getAttribute('value');
 
         this.innerHTML = `
 
             <div>
                 <label class="label">
-                    <input id="radio1" type="radio" class="radiobutton" name="${group}" value="no" >
+                    <input id="radio1" type="radio" class="radiobutton"  value="${value}" name="${group}" value="no" >
                     <span class="fake-radio"></span>
                     <span class="text">${text}</span>
                 </label>
@@ -85,8 +86,9 @@ customElements.define('custom-button-blue', Custom_button_blue);
 
 class Button_plus extends HTMLElement {
     connectedCallback() {
+        const id_btn = this.getAttribute('id_btn');
         this.innerHTML = `
-        <button class="button_plus">
+        <button class="button_plus" id="${id_btn}">
             <svg class="button_plus_svg" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.5456 32.6257V18.0423M18.5456 18.0423V3.45898M18.5456 18.0423L2.50391 18.0423M18.5456 18.0423L34.5872 18.0423" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -133,7 +135,7 @@ class Task_list extends HTMLElement {
         <!-- <link rel="stylesheet" type="text/css" href="components/list.css"> -->
         <div class="list" id="listContainer">
             <template id="listTemplate">
-                <div class="line" onclick="redirectToPage(this)">
+                <div class="line">
                     <div class="user">
                         <div class="details">
                             <h1 class="name"></h1>
@@ -174,6 +176,46 @@ customElements.define('task-list', Task_list);
 //         `
 //     }
 // }
+class Pop_up_create_task extends HTMLElement {
+    connectedCallback() {
+        const open_btn_id = this.getAttribute('open_btn_id');
+
+        this.innerHTML = `
+    
+        <!-- Модальное окно  -->
+        <div class="modal" id="create_task_modal">
+            <div class="modal__box">
+                <h3 class="modal__box-header">Какой тип задания вы хотите создать?</h3>
+                <div class="radio__box">
+                <custom-radiobutton text="С открытым ответом" value="open_response" group="myGroup"></custom-radiobutton>
+                    <custom-radiobutton text="Тест" value="test" group="myGroup"></custom-radiobutton>
+                    <custom-radiobutton text="Лекция" value="lecture" group="myGroup"></custom-radiobutton>
+                </div>
+                <div class="btn__box">
+                    <button class="button-red" id="No-btn" style="cursor: pointer">Отмена</button>             
+                    <button class="button-blue" id="Yes-btn" style="cursor: pointer">Создать</button>
+                </div>
+            </div>
+        </div>
+        `
+        // Функция открывает модальное окно при нажатии на кнопку
+        document.getElementById("create_task_btn").addEventListener('click', this.open_modal)
+
+        // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
+        document.getElementById("No-btn").addEventListener("click", this.close_modal)
+            
+    }
+
+    open_modal() {
+        document.getElementById("create_task_modal").classList.add("open")
+    }
+
+    close_modal() {
+        document.getElementById("create_task_modal").classList.remove("open")
+    }
+}
+
+customElements.define('pop-up-create-task', Pop_up_create_task);
 
 class Pop_up_btn extends HTMLElement {
     connectedCallback() {
@@ -535,6 +577,16 @@ class Sidebar extends HTMLElement {
             </nav>
     
         `
+        this.querySelector('.see_answers').addEventListener('click', this.answers);
+        this.querySelector('.edit').addEventListener('click', this.edit);
+    }
+
+    answers(){
+        window.location.href = "http://127.0.0.1:8000/admin_practice.html"//надо чета с айдишниками придумоть и тестики добавить, пока пусть так будет
+    };
+
+    edit() {
+        window.location.href = "http://127.0.0.1:8000/edit_practice.html"//надо чета с айдишниками придумоть
     }
 }
 
@@ -551,7 +603,7 @@ class LectureSidebar extends HTMLElement {
                     </svg>                
             </button>
             <ul>
-                <li><a href="#" class="edit" style="margin: 0.5rem 0 0 2rem">
+                <li><a class="edit" style="margin: 0.5rem 0 0 2rem">
                     <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.7456 0C1.67696 0 0 1.70132 0 3.8V34.2C0 36.2987 1.67696 38 3.7456 38H33.7104C35.7791 38 37.456 36.2987 37.456 34.2V26.6C37.456 25.5507 36.6175 24.7 35.5832 24.7C34.5489 24.7 33.7104 25.5507 33.7104 26.6V34.2H3.7456V3.8H18.728C19.7623 3.8 20.6008 2.94934 20.6008 1.9C20.6008 0.850659 19.7623 0 18.728 0H3.7456ZM33.8369 1.6792C32.3817 0.427874 30.2321 0.485874 28.8446 1.81389L10.1628 19.6948C9.70534 20.1326 9.36394 20.6802 9.17003 21.2871L7.80015 25.5744C6.79666 28.715 9.94654 31.5705 12.9102 30.2069L17.3029 28.1859C17.6796 28.0125 18.0254 27.7771 18.3262 27.4892L36.8247 9.78377C38.4494 8.22881 38.3801 5.58612 36.6763 4.12096L33.8369 1.6792ZM31.4149 4.57795L34.2544 7.01971L15.7559 24.7251L11.3632 26.7462L12.7331 22.4588L31.4149 4.57795Z" fill="#0F2232"/>
                         </svg>  
@@ -588,6 +640,10 @@ class LectureSidebar extends HTMLElement {
             </nav>
     
         `
+        this.querySelector('.edit').addEventListener('click', this.edit)
+    }
+    edit() {
+        window.location.href = "http://127.0.0.1:8000/edit_lecture.html"//надо чета с айдишниками придумоть
     }
 }
 

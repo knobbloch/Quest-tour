@@ -3,9 +3,9 @@
     font-style: normal;
     src: url(Montserrat-VariableFont_wght.ttf);
 }
-html{
+/* html{
     font-size: 20px;
-}
+} */
 * {
     margin: 0;
     padding:0;
@@ -90,7 +90,7 @@ body{
     }
 }
 
-@media (max-width: 800px){
+/* @media (max-width: 800px){
     .navbar a{
         font-size: 0.7rem;
         margin-left: 0.5rem;
@@ -147,4 +147,4 @@ body{
         width:4.5rem;
         height:1.6rem;
     }
-}
+} */

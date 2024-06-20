@@ -1,4 +1,5 @@
 import glob
+import shutil
 from typing import Annotated, Optional, Union
 
 from fastapi import APIRouter, Cookie, UploadFile, File, Body
@@ -29,9 +30,9 @@ async def create_lecture(lecture: Lecture, session_id: str = Cookie(alias=COOKIE
 
 
 @lecture_router.post("/create_lecture_with_file")
-async def create_lecture(lecture: Annotated[Lecture, Body(...)],
-                         file: Union[UploadFile, None] = None,
-                         session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+async def create_lecture_with_file(lecture: Annotated[Lecture, Body(...)],
+                                   file: Annotated[UploadFile, File(...)],
+                                   session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
@@ -52,7 +53,7 @@ async def create_lecture(lecture: Annotated[Lecture, Body(...)],
         new_file.close()
         return {'status': 201, 'Message': 'new lecture added'}
     else:
-        return {'status': 201, 'Message': 'new lecture added'}
+        return {'status': 500, 'Message': 'an error occurred'}
 
 
 @lecture_router.get("/get_lecture")
@@ -70,14 +71,27 @@ async def get_lecture(l_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_I
 
 
 @lecture_router.put("/edit_lecture")
-async def edit_lecture(l_id: int, new_data: EditLecture, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)], file: Optional[UploadFile] = File(None),
+                       session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if db_main.edit_lection(l_id, new_data.title, new_data.description):
-        return {'status': 202, 'Message': f'lecture №{l_id} edited'}
-    else:
+    if not (db_main.edit_lection(l_id, new_data.title, new_data.description)):
         return {'status': 500, 'Message': 'an error occurred'}
+    else:
+        if file is not None:
+            if not file.content_type.startswith("video/mp4"):
+                return {"status": 400, "Message": "Invalid file format"}
+            path = os.path.abspath(os.getcwd())
+            if os.path.exists(f"{path}\\data\\lection\\lec_{l_id}"):
+                shutil.rmtree(f"{path}\\data\\lection\\lec_{l_id}")
+            content = await file.read()
+            new_file = open(f"data/lection/lec_{l_id}/{file.filename}", 'wb')
+            new_file.write(content)
+            new_file.close()
+            return {'status': 202, 'Message': 'lecture edited'}
+        else:
+            return {'status': 202, 'Message': 'lecture edited'}
 
 
 @lecture_router.delete("/delete_lecture")
@@ -184,3 +198,17 @@ async def get_lecture_file(l_id: int, session_id: str = Cookie(alias=COOKIE_SESS
             )
             for file in files
         ]
+
+@lecture_router.delete("/delete_lecture_file")
+async def delete_lecture_file(l_id: int, file_name: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    if not db_main.get_lection(l_id):
+        return {'status': 404, 'Message': 'lecture not found'}
+    path = os.path.abspath(os.getcwd())
+    if os.path.isfile(f"{path}\\data\\lection\\lec_{l_id}\\{file_name}"):
+        os.remove(f"{path}\\data\\lection\\lec_{l_id}\\{file_name}")
+        return {'status': 202, 'Message': 'file deleted'}
+    else:
+        return {'status': 404, 'Message': 'file not found'}
