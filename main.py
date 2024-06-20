@@ -55,21 +55,24 @@ async def html_landing(path) -> FileResponse:
 
 @components.get("/{path:path}")
 async def html_landing(path) -> FileResponse:
-    print("HERE" +  path)
     return FileResponse('front/components/'+ path)
 
 @svg.get("/{path:path}")
 async def html_landing(path) -> FileResponse:
-    print("HERE" +  path)
     return FileResponse('front/svg/'+ path)
 
 @subapp.get("/{path}")
 async def html_landing(path) -> HTMLResponse:
-    print("HERE" +  path)
-    return FileResponse('front/'+ path)
+    return FileResponse('front/'+ path + ".html")
 
 
 app = FastAPI(title="api app")
+
+@app.get('/')
+async def index():
+    print("QWEWQEWQ")
+    return FileResponse('front/auth.html')
+
 
 main_router = APIRouter()
 main_router.include_router(task_router)
@@ -89,11 +92,6 @@ app.mount("/data", data)
 app.mount("/", subapp)
 
 
-@app.get('/')
-async def index():
-    return FileResponse('front/auth.html')
-
-
 def check_permission(method, api, session_id):
     print(method, api, session_id)
     # The following paths are always allowed:
@@ -103,22 +101,30 @@ def check_permission(method, api, session_id):
     # Parse auth header and check scheme, username and password
 
     print(api.split('/'))
-    if api.split('/')[0] in ['components', 'styles', "scripts", "svg", "auth", "lectures", "script", "map", "tasks", "users",  "lectures"]:
-        print("HERE")
+    if api.split('/')[1] in ['components', 'styles', "scripts", "svg", "script"]:
         return '200'
 
-    if api == '/auth.html':
+    if api == '/auth' or api == "" or api == "/":
         return '200'
 
-    auth = ''
-    if session_id == "" or is_accessible(Access.USR, session_id) == "":
-        auth = '307'
+    if session_id == "" or is_accessible(Access.ALL, session_id) == "":
+        return '307'
 
-    if api not in ["/auth.html", "/account.html", "/information_change.html", "/lecture.html", "/map.html", "/pass_change.html", "/practice.html", "/practice_answer.html", "/statistic.html", "/test.html", "/test_result.html"]:
+    in_usr = True if api in ["/auth", "/account", "/information_change", "/lecture", "/map", "/pass_change", "/practice", "/practice_answer", "/statistic", "/test", "/test_result"] else False
+    in_adm = True if api in ["/admin_account", "/admin_add_user", "/admin_information_change", "/admin_lecture", "/admin_pass_change", "/admin_statistic", "/admin_users_account", "/admin_users_information_change", "/create_lecture", "/create_practice", "/create_test",
+                     "/edit_lecture", "/edit_test", "/information_change", "/pass_change", "user_list", "/task_list", "/practice_answer_list", "/practice_answer"] else False
+
+    if in_usr and is_accessible(Access.USR, session_id) != "":
+        return '200'
+    if in_adm and is_accessible(Access.ADM, session_id) != "":
+        return '200'
+    if in_adm or in_usr:
+        return '403'
+    else:
         return '404'
 
-    return auth
-'''
+
+
 @app.middleware("http")
 async def modify_request_response_middleware(request: Request, call_next, ):
     session_id: str = request.cookies.get(COOKIE_SESSION_ID_KEY)
@@ -126,14 +132,11 @@ async def modify_request_response_middleware(request: Request, call_next, ):
         session_id = ""
     code = check_permission(request.method, request.url.path, session_id)
     print(code)
-    #print(session_id)
     if code == '307':
-        print("FALSE")
-        url1 = '/?continue=' + request.url.path
-        print(url1)
+        url1 = '/auth?continue=' + request.url.path
         return RedirectResponse(url=url1,  status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+    if code == '403':
+        return RedirectResponse('/auth',  status_code=status.HTTP_403_FORBIDDEN)
     if code == '404':
         return RedirectResponse("/404", status_code=status.HTTP_404_NOT_FOUND)
-    print("TRUE")
     return await call_next(request)
-'''
