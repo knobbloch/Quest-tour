@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 });
 
 async function renderList(list) {
+    var index = 0;
     var listContainer = document.getElementById('listContainer');
     var listTemplate = document.getElementById('listTemplate');
     list.forEach(function(task) {
@@ -25,27 +26,32 @@ async function renderList(list) {
         clone.querySelector('.name').textContent = task.title;
         clone.querySelector('.line').dataset.order = task.order + 1; 
         clone.querySelector('.line').dataset.type = task.type; 
+        clone.querySelector('.line').dataset.index = index; 
         clone.querySelector('.line').dataset.entity_id = task.entity_id; 
         listContainer.appendChild(clone);
+        index++;
     });
 }
-
 function CreateTask(order) {
-    console.log('create task');
-    const selectedRadio = document.querySelector('input[name="myGroup"]');
+    const selectedRadio = document.querySelector('input[name="myGroup"]:checked'); // Убедитесь, что выбрана радиокнопка
     if (selectedRadio) {
         const taskType = selectedRadio.value;
+        console.log('Selected task type:', taskType); // Логирование значения taskType
         switch (taskType) {
             case 'open_response':
-                window.location.href = `${window.location.origin}/create_practice.html?order=${order}`;
+                window.location.href = `${window.location.origin}/create_practice?order=${order}`;
                 break;
             case 'test':
-                window.location.href = `${window.location.origin}/create_test.html?order=${order}`;
+                window.location.href = `${window.location.origin}/create_test?order=${order}`;
                 break;
             case 'lecture':
-                window.location.href = `${window.location.origin}/create_lecture.html?order=${order}`;
+                window.location.href = `${window.location.origin}/create_lecture?order=${order}`;
                 break;
+            default:
+                console.error('Unknown task type:', taskType); // Логирование для отладки
         }
+    } else {
+        console.error('No radio button selected'); // Логирование для отладки
     }
 }
 
@@ -62,12 +68,12 @@ async function getPractice(id2) {
 
 async function openTask(ref_type, ref_id) {
     if (ref_type == 0) {
-        window.location.href = "http://127.0.0.1:8000/edit_lecture.html?id=" + ref_id;
+        window.location.href = "http://127.0.0.1:8000/edit_lecture?id=" + ref_id;
     } else {
         if (!await getPractice(ref_id)) {
-            window.location.href = "http://127.0.0.1:8000/edit_practice.html?id=" + ref_id;
+            window.location.href = "http://127.0.0.1:8000/edit_practice?id=" + ref_id;
         } else {
-            window.location.href = "http://127.0.0.1:8000/edit_test.html?id=" + ref_id;
+            window.location.href = "http://127.0.0.1:8000/edit_test?id=" + ref_id;
         }
     }
 }
@@ -140,3 +146,22 @@ document.getElementById("create_task_btn").addEventListener("click", function() 
         }
     });
 });
+
+
+async function deleteTask(event, index) {
+    event.stopPropagation(); 
+    var element = event.currentTarget; 
+    var lineElement = element.closest('.line');
+    lineElement.parentNode.removeChild(lineElement);
+
+
+    const URL = `${window.location.origin}/script/delete_by_index?index=${index}`;
+    try {
+        const response = await axios.delete(URL);
+        const data = response.data;
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+    window.location.reload()
+}

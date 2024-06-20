@@ -142,7 +142,7 @@ class Task_list extends HTMLElement {
                         </div>
                     </div>
                     <div class="action">
-                        <div class="delete" onclick="deleteTask(event)">
+                        <div class="delete" onclick="deleteTask(event, this.closest('.line').dataset.index)">
                         </div>
                     </div>
                 </div>
