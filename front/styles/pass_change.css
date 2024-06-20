@@ -17,28 +17,28 @@
 }
 @media (max-width: 1600px){
     html{
-        font-size: 18.5px;
+        font-size: 16.5px;
     }
 }
 @media (max-width: 1536px){
     html{
-        font-size: 17.5px;
+        font-size: 15.5px;
     }
 }
 @media (max-width: 1400px){
     html{
-        font-size: 16.5px;
+        font-size: 14.5px;
     }
 }
 @media (max-width: 1280px){
     html{
-        font-size: 15.5px;
+        font-size: 13.5px;
     }
 }
 
 @media (max-width: 960px){
     html{
-        font-size: 12px;
+        font-size: 10px;
     }
 }
 
