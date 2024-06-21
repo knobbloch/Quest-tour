@@ -355,7 +355,7 @@ class Pop_up_OK extends HTMLElement {
     
         <!-- Модальное окно  -->
         <div class="modal" id="exit-modal-ok">
-            <div class="modal__box">
+            <div class="modal__box-ok">
                 <h3 class="modal__box-header">${header_text}</h3>
                 <p class="modal__box-text" id="modal__box-text">${question_text}</p>
                 <div class="btn__box Ok">            
@@ -394,17 +394,20 @@ class Pop_up extends HTMLElement {
         const question_text = this.getAttribute('question-text');
         const text_btn1 = this.getAttribute('text-btn1');
         const text_btn2 = this.getAttribute('text-btn2');
+        const id_modal = this.getAttribute('id_modal') || "exit-modal";
+        const no_id = this.getAttribute('no_id') || "No-btn";
+        const yes_id = this.getAttribute('yes_id') || "Yes-btn";
 
         this.innerHTML = `
     
         <!-- Модальное окно  -->
-        <div class="modal" id="exit-modal">
+        <div class="modal" id=${id_modal}>
             <div class="modal__box">
                 <h3 class="modal__box-header">${header_text}</h3>
                 <p class="modal__box-text">${question_text}</p>
                 <div class="btn__box">
-                    <button class="button-red" id="No-btn" style="cursor: pointer">${text_btn1}</button>             
-                    <button class="button-blue" id="Yes-btn" style="cursor: pointer">${text_btn2}</button>
+                    <button class="button-red" id="${no_id}" style="cursor: pointer">${text_btn1}</button>             
+                    <button class="button-blue" id="${yes_id}" style="cursor: pointer">${text_btn2}</button>
                 </div>
             </div>
         </div>
@@ -412,21 +415,21 @@ class Pop_up extends HTMLElement {
 
         // Функция открывает модальное окно при нажатии на кнопку
         if(open_btn_id!=null){
-            document.getElementById(open_btn_id).addEventListener('click',this.open_modal)
+            document.getElementById(open_btn_id).addEventListener('click',this.open_modal(id_modal))
         }
 
         // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
-        document.getElementById("No-btn").addEventListener("click",()=>{window[no_bt_func]()})
+        document.getElementById(no_id).addEventListener("click",()=>{window[no_bt_func]()})
 
         // Функция закрывает модальное окно при нажатии на кнопку "Да"
-        document.getElementById("Yes-btn").addEventListener("click",()=>{window[yes_bt_func]()})   
+        document.getElementById(yes_id).addEventListener("click",()=>{window[yes_bt_func]()})   
     }
 
-    open_modal() {
-        document.getElementById("exit-modal").classList.add("open")
+    open_modal(id) {
+        document.getElementById(id).classList.add("open")
     }
 
-    close_modal() {
+    close_modal(id) {
         document.getElementById("exit-modal").classList.remove("open")
     }
 }
@@ -530,7 +533,7 @@ class Header extends HTMLElement {
 
     async deadInf() {
         document.getElementById("exit-modal-header").classList.remove("open")
-        const URL = `${window.location.origin}/auth/logout-cookie`;
+        const URL = `${window.location.origin}/script/logout-cookie`;
         try {
           await axios.get(URL);
         } catch (error) {
@@ -605,7 +608,7 @@ class AdminHeader extends HTMLElement {
 
     async deadInf() {
         document.getElementById("exit-modal-header").classList.remove("open")
-        const URL = `${window.location.origin}/auth/logout-cookie`;
+        const URL = `${window.location.origin}/script/logout-cookie`;
         try {
           await axios.get(URL);
         } catch (error) {

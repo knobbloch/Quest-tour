@@ -9,16 +9,16 @@
     position: relative;
 
     width: 9rem;
-    height: 3em;
+    height: 3rem;
     
     flex-direction: row;
     justify-content: center;
     align-items: center;
 
     
-    font-size: 22pt;
-    border: 3px solid #6B80A0;
-    border-radius: 25px;
+    font-size: 1.5rem;
+    border: 0.15rem solid #6B80A0;
+    border-radius: 1.25rem;
     color: #0F2232;
     background-color: #FFFFFF;
 }
@@ -40,15 +40,15 @@
 
     cursor: pointer;
 
-    width: 8rem;
-    height: 2.5em;
+    width: 10rem;
+    height: 2.7em;
     
     flex-direction: row;
     justify-content: center;
     align-items: center;
     justify-self: center;
-    font-size: 22pt;
-    border-radius: 25px;
+    font-size: 1.5rem;
+    border-radius: 1.25rem;
     border-style: none;
     background: #FF0000;
     font-weight: 600;
@@ -68,8 +68,8 @@
     display: flex;
     position: relative;
     justify-self: center;
-    width: 8rem;
-    height: 2.5em;
+    width: 10rem;
+    height: 2.7em;
     font-weight: 600;
     border-color: #0F2232;
 
@@ -109,8 +109,39 @@
     grid-template-columns: none; 
 }
 
+.Ok .button-blue{
+    width: 8rem;
+    height: 2.5em;
+}
+
+.Ok .button-red{
+    width: 8rem;
+    height: 2.5em;
+}
+
 
 .modal__box{
+    display: grid;
+    grid-template-rows: 1fr 1.4fr 1fr;
+    row-gap: 0rem;
+    margin: 3rem 1.5rem;
+    padding: 2rem 2rem 0 2rem;
+
+    width: 27rem;
+    height: 25rem;
+
+    z-index: 1;
+    
+    background-color: #E9ECEE;
+    border: 0.15rem solid #293240;
+    border-radius: 1.25rem;
+    box-shadow: 0px 0px 0.85rem -0.35rem rgba(34,60,80,.2);
+
+    transform: scale(0);
+    transition: transform .8s;
+}
+
+.modal__box-ok{
     display: grid;
     grid-template-rows: 1fr 1.4fr 1fr;
     row-gap: 0rem;
@@ -123,9 +154,9 @@
     z-index: 1;
     
     background-color: #E9ECEE;
-    border: 3px solid #293240;
-    border-radius: 25px;
-    box-shadow: 0px 0px 17px -7px rgba(34,60,80,.2);
+    border: 0.15rem solid #293240;
+    border-radius: 1.25rem;
+    box-shadow: 0px 0px 0.85rem -0.35rem rgba(34,60,80,.2);
 
     transform: scale(0);
     transition: transform .8s;
@@ -143,7 +174,7 @@
     display: flex;
     text-align: center;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 1.5rem;
     line-height: 2rem;
     /* margin-top: 2%; */
 
@@ -154,6 +185,10 @@
 .modal.open{
     visibility: visible;
     opacity: 1;
+}
+
+.modal.open .modal__box-ok{
+    transform: scale(1);
 }
 
 .modal.open .modal__box{
