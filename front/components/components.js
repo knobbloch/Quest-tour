@@ -116,7 +116,7 @@ class User_list extends HTMLElement {
                         <div class="profile" href="#">
 
                         </div>
-                        <div class="delete" onclick="deleteUser(event, this.closest('.line').dataset.email)">
+                        <div class="delete" id="del" onclick="showDeletePopup(event, this.closest('.line').dataset.email)"></div>
 
                         </div>
                     </div>
@@ -142,8 +142,7 @@ class Task_list extends HTMLElement {
                         </div>
                     </div>
                     <div class="action">
-                        <div class="delete" onclick="deleteTask(event, this.closest('.line').dataset.index)">
-                        </div>
+                        <div class="delete" id="del" onclick="showDeletePopup(event, this.closest('.line').dataset.index)"></div>
                     </div>
                 </div>
             </template>
@@ -154,6 +153,29 @@ class Task_list extends HTMLElement {
 
 customElements.define('task-list', Task_list);
 
+class Practice_answer_list extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
+        <!-- <link rel="stylesheet" type="text/css" href="components/list.css"> -->
+        <div class="list" id="listContainer">
+            <template id="listTemplate">
+                <div class="line" onclick="redirectToPage(this)">
+                    <div class="user">
+                        <div class="details">
+                            <h1 class="name"></h1>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <div class="answer"></div>
+                    </div>
+                </div>
+            </template>
+        </div>
+        `
+    }
+}
+
+customElements.define('practice-answer-list', Practice_answer_list);
 // class Pop_up extends HTMLElement {
 //     connectedCallback() {
 //         const text = this.textContent.trim();
@@ -190,15 +212,15 @@ class Pop_up_create_task extends HTMLElement {
                     <custom-radiobutton text="Лекция" value="lecture" group="myGroup"></custom-radiobutton>
                 </div>
                 <div class="btn__box">
-                    <button class="button-red" id="No-btn" style="cursor: pointer">Отмена</button>             
-                    <button class="button-blue" id="Yes-btn" style="cursor: pointer">Создать</button>
+                    <button class="button-red" id="create-no-btn" style="cursor: pointer">Отмена</button>             
+                    <button class="button-blue" id="create-yes-btn" style="cursor: pointer">Создать</button>
                 </div>
             </div>
         </div>
         `
 
         // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
-        document.getElementById("No-btn").addEventListener("click", this.close_modal)
+        document.getElementById("create-no-btn").addEventListener("click", this.close_modal)
             
     }
 
@@ -418,14 +440,14 @@ class Header extends HTMLElement {
         this.querySelector('#Yes-btn-header').addEventListener('click', this.deadInf)
     }
     map() {
-        window.location.href = "http://127.0.0.1:8000/map.html"
+        window.location.href = "http://127.0.0.1:8000/map"
     }
     stat() {
-        window.location.href = "http://127.0.0.1:8000/statistic.html"
+        window.location.href = "http://127.0.0.1:8000/statistic"
     }
 
     lk() {
-        window.location.href = "http://127.0.0.1:8000/account.html"
+        window.location.href = "http://127.0.0.1:8000/account"
     }
 
     async deadInf() {
@@ -483,24 +505,24 @@ class AdminHeader extends HTMLElement {
             </header>
         `
 
-        // this.querySelector('#admin_stat').addEventListener('click', this.admin_stat)
+        this.querySelector('#admin_stat').addEventListener('click', this.admin_stat)
         this.querySelector('#users').addEventListener('click', this.users)
         this.querySelector('#quest').addEventListener('click', this.quest)
         this.querySelector('#lk').addEventListener('click', this.lk)
         this.querySelector('#Yes-btn-header').addEventListener('click', this.deadInf)
     }
-    // admin_stat() {
-    //     window.location.href = "http://127.0.0.1:8000/map.html"
-    // }
+    admin_stat() {
+        window.location.href = "http://127.0.0.1:8000/admin_statistic"
+    }
     users() {
-        window.location.href = "http://127.0.0.1:8000/user_list.html"
+        window.location.href = "http://127.0.0.1:8000/user_list"
     }
     quest() {
-        window.location.href = "http://127.0.0.1:8000/task_list.html"
+        window.location.href = "http://127.0.0.1:8000/task_list"
     }
 
     lk() {
-        window.location.href = "http://127.0.0.1:8000/admin_account.html"
+        window.location.href = "http://127.0.0.1:8000/admin_account"
     }
 
     async deadInf() {
@@ -578,11 +600,11 @@ class Sidebar extends HTMLElement {
     }
 
     answers(){
-        window.location.href = "http://127.0.0.1:8000/admin_practice.html"//надо чета с айдишниками придумоть и тестики добавить, пока пусть так будет
+        window.location.href = "http://127.0.0.1:8000/admin_practice"//надо чета с айдишниками придумоть и тестики добавить, пока пусть так будет
     };
 
     edit() {
-        window.location.href = "http://127.0.0.1:8000/edit_practice.html"//надо чета с айдишниками придумоть
+        window.location.href = "http://127.0.0.1:8000/edit_practice"//надо чета с айдишниками придумоть
     }
 }
 
@@ -639,7 +661,7 @@ class LectureSidebar extends HTMLElement {
         this.querySelector('.edit').addEventListener('click', this.edit)
     }
     edit() {
-        window.location.href = "http://127.0.0.1:8000/edit_lecture.html"//надо чета с айдишниками придумоть
+        window.location.href = "http://127.0.0.1:8000/edit_lecture"//надо чета с айдишниками придумоть
     }
 }
 

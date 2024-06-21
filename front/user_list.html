@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="styles/user_list.css">
 </head>
 <body>
-    <!-- <pop-up no_bt_func="close_modal" yes_bt_func="del_user" header-text="Внимание!" open_btn_id="del" question-text="Вы уверены что хотите безвозвратно удалить данного пользователя?" text-btn1="Нет" text-btn2="Да"></pop-up> -->
+    <pop-up header-text="Внимание!" open_btn_id="del" question-text="Вы уверены что хотите безвозвратно удалить данного пользователя?" text-btn1="Нет" text-btn2="Да"></pop-up>
     <custom-admin_header colorUsers='#FF0000'></custom-admin_header>
     <main>
         <div class="main_header">
@@ -19,6 +19,7 @@
             <custom-button-plus></custom-button-plus>
         </div>
         <user-list></user-list>
+        <h4 id="without-answers"></h4>
     </main>
     
     <script src="/components/components.js"></script>

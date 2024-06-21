@@ -11,10 +11,13 @@ async function getTaskList() {
 
 document.addEventListener("DOMContentLoaded", async function() {
     const taskList = await getTaskList();
-    renderList(taskList);
-
-    // Добавляем обработчик кликов на элементы .line
-    document.getElementById('listContainer').addEventListener('click', lineClickHandler);
+    if (taskList.length == 0) {
+        document.getElementById('without-answers').innerHTML = "Вы еще не создали ни одного задания";
+    }
+    else {     
+        renderList(taskList);
+        document.getElementById('listContainer').addEventListener('click', lineClickHandler)   
+    };
 });
 
 async function renderList(list) {
@@ -84,7 +87,7 @@ function handleLineClick(event) {
     console.log(order);
     const popUpCreateTask = document.querySelector('pop-up-create-task');
     popUpCreateTask.open_modal();
-    document.getElementById("Yes-btn").addEventListener("click", function() {
+    document.getElementById("create-yes-btn").addEventListener("click", function() {
         CreateTask(order);
     });
     // Удаляем обработчик beforeLineClick после клика на "Yes-btn"
@@ -148,10 +151,10 @@ document.getElementById("create_task_btn").addEventListener("click", function() 
 });
 
 
-async function deleteTask(event, index) {
-    event.stopPropagation(); 
-    var element = event.currentTarget; 
-    var lineElement = element.closest('.line');
+async function deleteTask() {
+    var index = window.deleteTaskElement.index;
+    var lineElement = window.deleteTaskElement.lineElement;
+
     lineElement.parentNode.removeChild(lineElement);
 
 
@@ -163,5 +166,31 @@ async function deleteTask(event, index) {
     } catch (error) {
         console.log(error);
     }
-    window.location.reload()
+    
+}
+
+function showDeletePopup(event, index) {
+    event.stopPropagation();
+    var element = event.currentTarget;
+    var lineElement = element.closest('.line');
+
+    // Сохраняем текущий элемент для удаления
+    window.deleteTaskElement = { index: index, lineElement: lineElement };
+    
+    // Открываем модальное окно
+    const deleteModal = document.querySelector('pop-up');
+    deleteModal.open_modal();
+    // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
+    document.getElementById("No-btn").addEventListener("click",function(){
+        deleteModal.close_modal()
+        window.location.reload()
+    })
+
+    // Функция закрывает модальное окно при нажатии на кнопку "Да"
+    document.getElementById("Yes-btn").addEventListener("click",function() {
+        deleteTask()
+        deleteModal.close_modal()
+        window.location.reload()
+    });
+
 }

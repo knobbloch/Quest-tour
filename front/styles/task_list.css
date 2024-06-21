@@ -20,12 +20,16 @@ body{
 main {
     width: 90%;
     margin: 0 auto;
-    margin-top: 5rem;
+    margin-top: 3.7rem;
     display: grid;
-    grid-template-rows: auto auto;
-    row-gap: 1rem;
 }
 
+.list {
+    margin-top: 4rem;
+}
+.line {
+    margin-left: 0.6rem;
+}
 h1 {
     font-size: 1.6rem;
     align-self: center;
@@ -35,6 +39,12 @@ h1 {
     grid-template-columns: auto auto auto;
     column-gap: 1rem;
     justify-content: start;
+    z-index: 1000;
+    position: fixed;
+    background-color: #FFF;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    width: 100%;
 }
 .back_button {
     width: 2rem;
@@ -87,9 +97,22 @@ h1 {
 .radio__box label {
     margin-bottom: 0.8rem;
 }
+
+h4 {
+    margin-top: 4rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #a1a5a8;
+    align-self: center;
+    justify-self: center;
+}
+
 @media (max-width: 800px){
     h1 {
         font-size: 1.2rem;
+    }
+    h2 {
+        font-size: 0.7rem;
     }
 
     .back_button {
