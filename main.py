@@ -100,7 +100,7 @@ def check_permission(method, api, session_id):
         return '200'
     # Parse auth header and check scheme, username and password
 
-    print(api.split('/'))
+    #print(api.split('/'))
     if api.split('/')[1] in ['components', 'styles', "scripts", "svg", "script"]:
         return '200'
 
@@ -111,8 +111,8 @@ def check_permission(method, api, session_id):
         return '307'
 
     in_usr = True if api in ["/auth", "/account", "/information_change", "/lecture", "/map", "/pass_change", "/practice", "/practice_answer", "/statistic", "/test", "/test_result"] else False
-    in_adm = True if api in ["/admin_account", "/admin_add_user", "/admin_information_change", "/admin_lecture", "/admin_pass_change", "/admin_statistic", "/admin_users_account", "/admin_users_information_change", "/create_lecture", "/create_practice", "/create_test",
-                     "/edit_lecture", "/edit_test", "/information_change", "/pass_change", "user_list", "/task_list", "/practice_answer_list", "/practice_answer"] else False
+    in_adm = True if api in ["/admin_account", "/admin_add_user", "/admin_information_change", "/admin_lecture", "/admin_pass_change", "/admin_statistic", "/admin_users_account", "/admin_user_information_change", "/create_lecture", "/create_practice", "/create_test",
+                     "/edit_lecture", "/edit_test", "/information_change", "/pass_change", "/user_list", "/task_list", "/practice_answer_list", "/practice_answer"] else False
 
     if in_usr and is_accessible(Access.USR, session_id) != "":
         return '200'
