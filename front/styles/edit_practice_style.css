@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
-    src: url(components/Montserrat-VariableFont_wght.ttf);
+    src: url(Montserrat-VariableFont_wght.ttf);
 }
 * {
     margin: 0;
@@ -43,70 +43,49 @@ body{
     width: 1.4rem;
     grid-column: 1;
 }
-/* .video{
-    width: 55vw;
-    height: 35vw;
-    cursor: pointer;
-    grid-row: 2;
-    grid-column: 2;
-    justify-self: center;
-    margin-top: 1rem;
-    
-} */
-/* .iframe{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    overflow: auto;
-} */
-.container video-input{
-    /* width: 100%;
-    height: 100%;
-    object-fit: cover;
-    overflow: auto;*/
-    grid-column:2;
-    grid-row: 2;
 
-}
-.videoPlayer{
-    grid-row: 2;
-    grid-column: 2;
-}
-.text-input{
-    grid-row: 2;
-    grid-column: 2;
-}
-.lecture{
-    grid-column:2;
-    grid-row: 3;
-    justify-self: center;
-    align-self: flex-start;
-    width: 70vw;
-    font-size: 1.1rem;
-    height:auto;
-    text-align: justify;
-    resize: none;
-    background: none;
-    border-style: none;
-    margin: 2rem;
-    text-indent: 4rem;
+.button_blue{
+    width: 13rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: bold;
 }
 .container{
     display:grid;
     grid-template-rows: 4rem auto auto auto;
     grid-template-columns: 4rem 1fr;
 }
-.container custom-button-blue{
+.task{
+    grid-column: 2;
+    grid-row: 2;
+    margin: 1rem 0 1.5rem 0;
+    width: 80vw;
+    text-indent: 2rem;
+    line-height: 1.5rem;
+    justify-self: center;
+    align-self: flex-start;
+    font-size: 1.1rem;
+    height:auto;
+    text-align: justify;
+    resize: none;
+    background: none;
+    border-style: none;
+    padding: 1rem;
+}
+.save{
     grid-column: 2;
     grid-row: 4;
     justify-self: flex-start;
-    margin-left: 9rem;
+    margin-left: 5.5rem;
 }
-.container custom-button-red{
+.cancel{
     grid-column: 2;
     grid-row: 4;
-    margin-left: 24rem;
+    justify-self: flex-start;
+    margin-left: 20rem;
 }
+
 .button_red{
     width: 9rem;
     height: 3rem;
@@ -114,11 +93,4 @@ body{
     font-size: 0.9rem;
     font-weight: bold;
     margin: 0rem 9.5rem 2rem 0rem;
-}
-.button_blue{
-    width: 13rem;
-    height: 3rem;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-radius: 0.8rem;
 }

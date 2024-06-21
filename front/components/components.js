@@ -633,13 +633,13 @@ class Sidebar extends HTMLElement {
                     </svg>                
             </button>
             <ul>
-                <li><a href="#" class="see_answers">
+                <li><a href="#" class="see_answers" onclick="answers()">
                     <svg viewBox="0 0 31 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.875 0C1.7349 0 0 1.74609 0 3.9V35.1C0 37.2539 1.7349 39 3.875 39H27.125C29.2651 39 31 37.2539 31 35.1V3.9C31 1.74609 29.2651 0 27.125 0H3.875ZM3.875 3.9L27.125 3.9V35.1H3.875V3.9ZM9.6875 9.75C8.61745 9.75 7.75 10.623 7.75 11.7C7.75 12.777 8.61745 13.65 9.6875 13.65H13.5625C14.6326 13.65 15.5 12.777 15.5 11.7C15.5 10.623 14.6326 9.75 13.5625 9.75H9.6875ZM7.75 19.5C7.75 18.423 8.61745 17.55 9.6875 17.55H17.4375C18.5076 17.55 19.375 18.423 19.375 19.5C19.375 20.577 18.5076 21.45 17.4375 21.45H9.6875C8.61745 21.45 7.75 20.577 7.75 19.5ZM9.6875 25.35C8.61745 25.35 7.75 26.223 7.75 27.3C7.75 28.377 8.61745 29.25 9.6875 29.25H21.3125C22.3826 29.25 23.25 28.377 23.25 27.3C23.25 26.223 22.3826 25.35 21.3125 25.35H9.6875Z" fill="#0F2232"/>
                         </svg>    
                     Посмотреть ответы
                 </a></li>
-                <li><a href="#" class="edit">
+                <li><a href="#" class="edit" onclick="edit()">
                     <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.7456 0C1.67696 0 0 1.70132 0 3.8V34.2C0 36.2987 1.67696 38 3.7456 38H33.7104C35.7791 38 37.456 36.2987 37.456 34.2V26.6C37.456 25.5507 36.6175 24.7 35.5832 24.7C34.5489 24.7 33.7104 25.5507 33.7104 26.6V34.2H3.7456V3.8H18.728C19.7623 3.8 20.6008 2.94934 20.6008 1.9C20.6008 0.850659 19.7623 0 18.728 0H3.7456ZM33.8369 1.6792C32.3817 0.427874 30.2321 0.485874 28.8446 1.81389L10.1628 19.6948C9.70534 20.1326 9.36394 20.6802 9.17003 21.2871L7.80015 25.5744C6.79666 28.715 9.94654 31.5705 12.9102 30.2069L17.3029 28.1859C17.6796 28.0125 18.0254 27.7771 18.3262 27.4892L36.8247 9.78377C38.4494 8.22881 38.3801 5.58612 36.6763 4.12096L33.8369 1.6792ZM31.4149 4.57795L34.2544 7.01971L15.7559 24.7251L11.3632 26.7462L12.7331 22.4588L31.4149 4.57795Z" fill="#0F2232"/>
                         </svg>  
@@ -676,16 +676,6 @@ class Sidebar extends HTMLElement {
             </nav>
     
         `
-        this.querySelector('.see_answers').addEventListener('click', this.answers);
-        this.querySelector('.edit').addEventListener('click', this.edit);
-    }
-
-    answers(){
-        window.location.href = "http://127.0.0.1:8000/admin_practice"//надо чета с айдишниками придумоть и тестики добавить, пока пусть так будет
-    };
-
-    edit() {
-        window.location.href = "http://127.0.0.1:8000/edit_practice"//надо чета с айдишниками придумоть
     }
 }
 
@@ -702,7 +692,7 @@ class LectureSidebar extends HTMLElement {
                     </svg>                
             </button>
             <ul>
-                <li><a class="edit" style="margin: 0.5rem 0 0 2rem">
+                <li><a class="edit" onclick="edit()" style="margin: 0.5rem 0 0 2rem">
                     <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.7456 0C1.67696 0 0 1.70132 0 3.8V34.2C0 36.2987 1.67696 38 3.7456 38H33.7104C35.7791 38 37.456 36.2987 37.456 34.2V26.6C37.456 25.5507 36.6175 24.7 35.5832 24.7C34.5489 24.7 33.7104 25.5507 33.7104 26.6V34.2H3.7456V3.8H18.728C19.7623 3.8 20.6008 2.94934 20.6008 1.9C20.6008 0.850659 19.7623 0 18.728 0H3.7456ZM33.8369 1.6792C32.3817 0.427874 30.2321 0.485874 28.8446 1.81389L10.1628 19.6948C9.70534 20.1326 9.36394 20.6802 9.17003 21.2871L7.80015 25.5744C6.79666 28.715 9.94654 31.5705 12.9102 30.2069L17.3029 28.1859C17.6796 28.0125 18.0254 27.7771 18.3262 27.4892L36.8247 9.78377C38.4494 8.22881 38.3801 5.58612 36.6763 4.12096L33.8369 1.6792ZM31.4149 4.57795L34.2544 7.01971L15.7559 24.7251L11.3632 26.7462L12.7331 22.4588L31.4149 4.57795Z" fill="#0F2232"/>
                         </svg>  
@@ -739,10 +729,6 @@ class LectureSidebar extends HTMLElement {
             </nav>
     
         `
-        this.querySelector('.edit').addEventListener('click', this.edit)
-    }
-    edit() {
-        window.location.href = "http://127.0.0.1:8000/edit_lecture"//надо чета с айдишниками придумоть
     }
 }
 
@@ -754,7 +740,7 @@ class Sidepanel extends HTMLElement {
         this.innerHTML = `
             <link rel="stylesheet" type="text/css" href="components/sidepanel_style.css">
             <nav class="nav_panel">
-            <button class="back_btn" onclick="">
+            <button class="back_btn" onclick="back()">
                 <svg viewBox="0 0 64 59" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M23.5477 44.25C17.9387 40.4259 12.9009 35.9586 8.55872 30.961C8.18624 30.5323 8 30.0162 8 29.5M23.5477 14.75C17.9387 18.5741 12.9009 23.0414 8.55872 28.039C8.18624 28.4677 8 28.9838 8 29.5M8 29.5L56 29.5" stroke="#0F2232" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>                
@@ -770,12 +756,6 @@ class Sidepanel extends HTMLElement {
                 </a>          
             </nav>
         `;
-
-        this.querySelector('.back_btn').addEventListener('click', this.back);
-    }
-
-    back() {
-        window.location.href = back_page;
     }
 }
 

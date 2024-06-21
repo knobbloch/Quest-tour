@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ответ на задание</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="components/comment-admin.css">
+<!-- <link rel="stylesheet" type="text/css" href="components/answer-input.css"> -->
+<link rel="stylesheet" type="text/css" href="styles/admin_practice_answer_style.css">
+</head>
+<body>
+    <custom-sidepanel back_page="http://127.0.0.1:8000/practice_answer_list.html"></custom-sidepanel>
+    <div class="container">
+        <p class="title">Ответ на задание от юзера</p> 
+        <p class="task_title">Задание</p>
+        <p class="task">Опишите подробно Вашу любимую серию Смешариков (приложите скриншоты, объясните свой выбор). И ещё какое-то задание, не могу придумать.</p>
+        <p class="answer_title">Ответ</p>
+        <p class="answer">Ответ юзера</p>
+        <comment-admin></comment-admin>
+        <custom-button-red class="send" onclick="sendScore()">Принять ответ</custom-button-red> 
+        <custom-button-blue class="reject" id="reject-btn">Отправить на доработку</custom-button-blue>
+    </div>
+    <script src="components/components.js"></script>
+    <script src="scripts/practice.js"></script>
+    <script src="components/scripts/comment-admin.js"></script>
+</body>
+</html>

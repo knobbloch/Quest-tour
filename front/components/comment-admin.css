@@ -1,35 +1,16 @@
-@font-face {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: normal;
-    src: url(Montserrat-Regular.ttf);
-}
-@font-face {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: bold;
-    src: url(Montserrat-Bold.ttf);
-}
-@font-face {
-    font-family: 'Montserrat-SemiBold';
-    font-style: normal;
-    font-weight: normal;
-    src: url(Montserrat-SemiBold.ttf);
-}
 * {
     margin: 0;
     padding:0;
     box-sizing: border-box;
-    font-family: 'Montserrat-SemiBold';
 }
-body{
+/* body{
     background-image: url('img/загрузка.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     min-height: 100vh;
     
-}
+} */
 
 
 
@@ -39,14 +20,14 @@ body{
 /* Комментарий (админ) */
 
 .comment-admin{
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     
-    position: relative;
-    top: 400px;
-    right: 0;
+    /* position: relative; */
+    /* top: 400px; */
+    /* right: 0;
     bottom: 0;
-    left: 0;
-    margin: auto;
+    left: 0; */
+    /* margin: auto; */
 
     width: 1040px;
     height: 110px;
