@@ -45,6 +45,84 @@ class Custom_radio extends HTMLElement {
 
 customElements.define('custom-radiobutton', Custom_radio);
 
+class Custom_checkbox_for_create extends HTMLElement {
+    connectedCallback() {
+        const text = this.textContent.trim();
+        const group = this.getAttribute('group');
+        
+
+        this.innerHTML = `   
+
+            <label class="label">
+                <input id = "check" type="checkbox" class="checkbox" name="${group}" value="yes">
+                
+                <span class="fake">
+                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6953 0.162106C12.0294 0.433152 12.0995 0.949317 11.8519 1.31499L6.49691 9.22195C5.91843 10.0761 4.81642 10.2544 4.03686 9.62L0.303744 6.58188C-0.0299928 6.31028 -0.0993633 5.794 0.148801 5.42873C0.396964 5.06347 0.868688 4.98755 1.20243 5.25916L4.93554 8.29727C5.0469 8.38791 5.20433 8.36243 5.28697 8.24041L10.6419 0.333448C10.8896 -0.0322278 11.3612 -0.10894 11.6953 0.162106Z" fill="transparent"/>
+                    </svg>
+                </span>
+                <textarea class="textarea" maxlength="100">${text}</textarea>           
+                <img class="delete_answer" src="./svg/delete.svg">
+            </label>`;
+            const textarea = this.querySelector('.textarea');
+            const hiddenText = document.getElementById('hidden-text');
+    
+            const updateWidth = () => {
+                hiddenText.textContent = textarea.value || textarea.placeholder;
+                textarea.style.width = hiddenText.offsetWidth + 'px';
+            };
+    
+            // Устанавливаем начальную ширину
+            updateWidth();
+    
+            // Обновляем ширину при каждом вводе
+            textarea.addEventListener('input', updateWidth);
+    
+            // Обновляем ширину при загрузке
+            window.addEventListener('load', updateWidth);
+    }
+}
+
+customElements.define('custom-checkbox-for-create', Custom_checkbox_for_create);
+
+class Custom_radio_for_create extends HTMLElement {
+    connectedCallback() {
+        const text = this.textContent.trim();
+        const group = this.getAttribute('group');
+        const value = this.getAttribute('value');
+
+        this.innerHTML = `
+            <div>
+                <label class="label">
+                    <input id="radio1" type="radio" class="radiobutton" value="${value}" name="${group}" >
+                    <span class="fake-radio"></span>
+                    <textarea class="textarea" maxlength="100">${text}</textarea>
+                    <img class="delete_answer" src="./svg/delete.svg">
+                </label>
+            </div>
+        `;
+
+        const textarea = this.querySelector('.textarea');
+        const hiddenText = document.getElementById('hidden-text');
+
+        const updateWidth = () => {
+            hiddenText.textContent = textarea.value || textarea.placeholder;
+            textarea.style.width = hiddenText.offsetWidth + 'px';
+        };
+
+        // Устанавливаем начальную ширину
+        updateWidth();
+
+        // Обновляем ширину при каждом вводе
+        textarea.addEventListener('input', updateWidth);
+
+        // Обновляем ширину при загрузке
+        window.addEventListener('load', updateWidth);
+    }
+}
+
+customElements.define('custom-radiobutton-for-create', Custom_radio_for_create);
+
 class Custom_button_red extends HTMLElement {
     connectedCallback() {
         const id_btn = this.getAttribute('id_btn');
