@@ -7,7 +7,7 @@ let orderc = urlParams.get('order'),
 
   console.log(orderc);
 function back(){
-  window.location.href = 'http://127.0.0.1:8000/task_list.html';
+  window.location.href = 'http://127.0.0.1:8000/task_list';
 }
 
 async function send_practice(title,description,orderc,testornot){

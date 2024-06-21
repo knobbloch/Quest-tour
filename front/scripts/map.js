@@ -134,16 +134,16 @@ async function addFlowers(){
 
   async function open_flower(ref_type,ref_id,i){
     if (ref_type == 0) {
-      window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id + "&index="+ i
+      window.location.href = "http://127.0.0.1:8000/lecture?id="+ref_id + "&index="+ i
     }else{
       if(!await getPractice(ref_id)){
-        window.location.href = "http://127.0.0.1:8000/practice.html?id="+ref_id + "&index="+ i
+        window.location.href = "http://127.0.0.1:8000/practice?id="+ref_id + "&index="+ i
       }
       else{
         if(await getPracticeResult(ref_id) == null){
-          window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
+          window.location.href = "http://127.0.0.1:8000/test?id="+ref_id + "&index="+ i
         }else{
-          window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
+          window.location.href = "http://127.0.0.1:8000/test_result?id="+ref_id + "&index="+ i
         } 
       }
     }

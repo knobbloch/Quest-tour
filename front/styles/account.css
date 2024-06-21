@@ -206,19 +206,3 @@
 .button-delete:hover{
     transform: scale(1.2);
 }
-
-.modal__box{
-    width: 27rem;
-    height: 25rem;
-}
-
-.btn__box .button-blue{  
-    width: 10rem;
-    height: 2.7em;
-}
-
-.btn__box .button-red{ 
-    width: 10rem;
-    height: 2.7em;
-}
-

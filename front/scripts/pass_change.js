@@ -1,6 +1,17 @@
 let title_inf = document.getElementById("title"),
   new_pass_inf = document.getElementById("new_pass"),
   agein_pass_inf = document.getElementById("agein_pass");
+  old_pass_inf = document.getElementById("old_pass");
+
+function add_error(obj){
+  obj.classList.remove("error");
+  void obj.offsetWidth;
+  obj.classList.add("error");
+}
+
+function del_error(obj){
+  obj.classList.remove("error");
+}
 
 async function getInf() {
   const URL = `${window.location.origin}/script/get_user_self`;
@@ -18,15 +29,24 @@ async function load_inf(){
   title_inf.textContent=Inf.surname +" "+Inf.namep+" "+Inf.thirdname;
 }
 
-async function sendPassToServer(new_pass) { 
-  const URL = `${window.location.origin}/script/change_password?new_password=${new_pass}`;
+async function sendPassToServer(new_pass,old_pass_inf) { 
+  const URL = `${window.location.origin}/script/change_password?new_password=${new_pass}&old_password=${old_pass_inf.value}`;
   try {
     const response = await axios.put(URL);
-    console.log(response.data)
-    if(response.data['status']!=202){
-      document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+
+    if(response.data['status']==403){
+      error.textContent="*Старый пароль введен неверно!";
+      add_error(old_pass_inf);
+      return
     }
-    document.getElementById("exit-modal-ok").classList.add("open")
+
+    if(response.data['status']==202){
+      del_error(old_pass_inf);
+      document.getElementById("exit-modal-ok").classList.add("open")
+    }else{
+      document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+      document.getElementById("exit-modal-ok").classList.add("open")
+    }
   } catch (error) {
     console.log(error);
   }
@@ -48,29 +68,32 @@ function hide_pass(){
 }
 
 function check_pass(){
-    if(new_pass_inf.value.length<8 || agein_pass_inf.value.length<8){
+    if(new_pass_inf.value.length<8){
       error.textContent="*Пароль должен содержать не менее 8 символов!";
+      add_error(new_pass_inf);
       return false;
-    }else{
-      
-      if(new_pass_inf.value!=agein_pass_inf.value){
-        error.textContent="*Пароли должны совпадать!";
-        return false;
-      }else{
-        error.textContent="";
-        sendPassToServer(new_pass_inf.value);
-        document.getElementById("exit-modal-ok").classList.add("open")
-        return true;
-      }
     }
+    
+    if(new_pass_inf.value!=agein_pass_inf.value){
+      error.textContent="*Пароли должны совпадать!";
+      add_error(new_pass_inf);
+      add_error(agein_pass_inf);
+      return false;
+    }
+
+    del_error(new_pass_inf);
+    del_error(agein_pass_inf);
+    error.textContent="";
+    sendPassToServer(new_pass_inf.value,old_pass_inf);
+    return true;
 }
 
 function back(){
-  window.location.href = "http://127.0.0.1:8000/account.html"
+  window.location.href = "http://127.0.0.1:8000/account"
 }
 
 function admin_back(){
-  window.location.href = "http://127.0.0.1:8000/admin_account.html"
+  window.location.href = "http://127.0.0.1:8000/admin_account"
 }
 
 document.addEventListener('DOMContentLoaded', load_inf())

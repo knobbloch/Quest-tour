@@ -17,7 +17,7 @@ function destroy_gap(str){
 
 function no_num(obj){
   obj.value = destroy_gap(obj.value);
-  if(/^[A-Za-zА-Яа-яЁё\s]+$/.test(obj.value)){
+  if(/^[A-Za-zА-Яа-яЁё\s]+$/.test(obj.value)){
     obj.classList.remove("error");
     return true;
   }else{
@@ -77,5 +77,5 @@ function change_inf(){
 }
 
 function back(){
-  window.location.href = "http://127.0.0.1:8000/user_list.html"
+  window.location.href = "http://127.0.0.1:8000/user_list"
 }

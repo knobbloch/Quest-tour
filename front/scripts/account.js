@@ -23,27 +23,27 @@ async function load_inf(){
 }
 
 function back(){
-  window.location.href = "http://127.0.0.1:8000/map.html";
+  window.location.href = "http://127.0.0.1:8000/map";
 }
 
 function inf_change(){
-  window.location.href = "http://127.0.0.1:8000/information_change.html";
+  window.location.href = "http://127.0.0.1:8000/information_change";
 }
 
 function pass_change(){
-  window.location.href = "http://127.0.0.1:8000/pass_change.html";
+  window.location.href = "http://127.0.0.1:8000/pass_change";
 }
 
 function admin_back(){
-  window.location.href = "http://127.0.0.1:8000/task_list.html";
+  window.location.href = "http://127.0.0.1:8000/task_list";
 }
 
 function admin_inf_change(){
-  window.location.href = "http://127.0.0.1:8000/admin_information_change.html";
+  window.location.href = "http://127.0.0.1:8000/admin_information_change";
 }
 
 function admin_pass_change(){
-  window.location.href = "http://127.0.0.1:8000/admin_pass_change.html";
+  window.location.href = "http://127.0.0.1:8000/admin_pass_change";
 }
 
 document.addEventListener('DOMContentLoaded', load_inf())
