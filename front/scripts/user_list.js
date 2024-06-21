@@ -10,8 +10,12 @@ async function getUserList() {
 }
 document.addEventListener("DOMContentLoaded", async function(){ 
     const userList = await getUserList();
-    console.log(userList);
-    renderList(userList);
+    if (userList.length == 0) {
+        document.getElementById('without-answers').innerHTML = "Вы еще не создали ни одного пользователя";Ы
+    }
+    else {
+        renderList(userList);       
+    }
 });
 
 
@@ -28,12 +32,37 @@ async function renderList(list) {
 }
 
 
-async function deleteUser(event, email) {
-    event.stopPropagation(); 
-    var element = event.currentTarget; 
+function showDeletePopup(event, email) {
+    event.stopPropagation();
+    var element = event.currentTarget;
     var lineElement = element.closest('.line');
-    lineElement.parentNode.removeChild(lineElement);
 
+    // Сохраняем текущий элемент для удаления
+    window.deleteUserElement = { email: email, lineElement: lineElement };
+    
+    // Открываем модальное окно
+    const deleteModal = document.querySelector('pop-up');
+    deleteModal.open_modal();
+    // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
+    document.getElementById("No-btn").addEventListener("click",function(){
+        deleteModal.close_modal()
+        window.location.reload()
+    })
+
+    // Функция закрывает модальное окно при нажатии на кнопку "Да"
+    document.getElementById("Yes-btn").addEventListener("click",function() {
+        deleteUser()
+        deleteModal.close_modal()
+        window.location.reload()
+    });
+
+}
+
+async function deleteUser() {
+    var email = window.deleteUserElement.email;
+    var lineElement = window.deleteUserElement.lineElement;
+
+    lineElement.parentNode.removeChild(lineElement);
 
     const URL = `${window.location.origin}/script/delete_user?target_email=${email}`;
     try {
@@ -43,8 +72,8 @@ async function deleteUser(event, email) {
     } catch (error) {
         console.log(error);
     }
-   
 }
+
 
 function redirectToPage(user) {
     var email = user.dataset.email;
