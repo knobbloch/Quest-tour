@@ -1,0 +1,128 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(components/Montserrat-VariableFont_wght.ttf);
+}
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    color: #0F2232;
+}
+html{
+    font-size: 20px;
+}
+body{
+    min-height: 100%;
+}
+/* .heading{
+    width:100%;
+    display: grid;
+    grid-template-columns: 8rem 5fr 1fr;
+    grid-template-rows: 4rem;
+    align-items: center;
+    z-index: 1000;
+    position: fixed;
+    background-color: #FFF;
+} */
+
+/* .heading svg{
+    justify-self: flex-end;
+    height: 1.4rem;
+    width: 1.4rem;
+    grid-column: 1;
+}
+.heading custom-button-blue{
+    align-self: flex-end;
+    grid-column: 3;
+    justify-self: center;
+} */
+.container{
+    display:grid;
+    grid-template-rows: 4rem auto auto auto auto;
+    grid-template-columns: 4rem 1fr;
+    /* align-items: center; */
+}
+.title{
+    margin-left: 2rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+}
+.task_title{
+    margin-left: 5.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+}
+.task{
+    grid-column: 2;
+    grid-row: 3;
+    margin: 1rem 0 1.5rem 0;
+    width: 80vw;
+    justify-self: center;
+    text-align: justify;
+    line-height: 1.5rem;
+}
+.answer_title{
+    margin-left: 5.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    grid-column: 2;
+    grid-row: 4;
+    align-self: center;
+}
+.answer{
+    width: 80vw;
+    font-size: 1rem;
+    grid-column: 2;
+    grid-row: 5;
+    justify-self: center;
+    align-content: center;
+    margin: 1rem 0 1rem 0;
+}
+.container comment-admin{
+    grid-column: 2;
+    grid-row: 6;
+    justify-self: flex-start;
+    margin: 0 0 1rem 5.5rem;
+    /* margin-bottom: 2rem; */
+    /* width: 100%; */
+}
+.comment-admin{
+    width: 80vw;
+}
+.comment-admin__text{
+    width: 80vw;
+}
+.send{
+    grid-column: 2;
+    grid-row: 7;
+    justify-self: flex-start;
+    margin: 0 0 0 5.5rem;
+}
+.reject{
+    grid-column: 2;
+    grid-row: 7;
+    justify-self: flex-start;
+    margin: 0 0 0 17rem;
+}
+.button_red{
+    width: 10rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.button_blue{
+    width: 14rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+}

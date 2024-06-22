@@ -107,17 +107,22 @@ document.addEventListener('DOMContentLoaded', async function() {
 })
 
 function sendAnswer(){
+  let answer = document.getElementById('text_box').value;
+
   document.getElementById('text_box').value = '';
-  const filePlayer = document.getElementById('filePlayer'); 
-  var k = 0;
-  var costil = 0;
-  if (filePlayer.childNodes.length > 1){costil = 6};
-  while (filePlayer.firstChild){
-    filePlayer.removeChild(filePlayer.firstChild);
-    k += 6;
-  }
-  let rect = ansInput.getBoundingClientRect();
-  ansInput.style.height = rect.height/20 - k + costil + "rem" ;
+  // const filePlayer = document.getElementById('filePlayer'); 
+  // var k = 0;
+  // var costil = 0;
+  // console.log(filePlayer.childNodes.length);
+  // if (filePlayer.childNodes.length > 1){
+  //   costil = 6;
+  //   while (filePlayer.firstChild){
+  //     filePlayer.removeChild(filePlayer.firstChild);
+  //     k += 6;
+  //   }
+  //   let rect = ansInput.getBoundingClientRect();
+  //   ansInput.style.height = rect.height/20 - k + costil + "rem" ;
+  // }
   const button = document.querySelector(".send");
   button.disabled = true;
   // console.log(button.disabled);

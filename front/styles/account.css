@@ -10,38 +10,6 @@
     font-family: 'Montserrat';
 }
 
-@media (max-width: 1920px){
-    html{
-        font-size: 20px;
-    }
-}
-@media (max-width: 1600px){
-    html{
-        font-size: 16.5px;
-    }
-}
-@media (max-width: 1536px){
-    html{
-        font-size: 15.5px;
-    }
-}
-@media (max-width: 1400px){
-    html{
-        font-size: 14.5px;
-    }
-}
-@media (max-width: 1280px){
-    html{
-        font-size: 13.5px;
-    }
-}
-
-@media (max-width: 960px){
-    html{
-        font-size: 10px;
-    }
-}
-
 /* Заголовок */
 
 .container{
@@ -205,20 +173,5 @@
 
 .button-delete:hover{
     transform: scale(1.2);
-}
-
-.modal__box{
-    width: 27rem;
-    height: 25rem;
-}
-
-.btn__box .button-blue{  
-    width: 10rem;
-    height: 2.7em;
-}
-
-.btn__box .button-red{ 
-    width: 10rem;
-    height: 2.7em;
 }
 

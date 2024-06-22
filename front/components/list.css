@@ -22,7 +22,7 @@ text{
     justify-content: space-between;
     align-items: center;
     background: #E9ECEE;
-    border-radius: 14px;
+    border-radius: 0.7rem;
     padding: 0.5rem 1rem;
     cursor: pointer;
     transition: all 0.3s;
@@ -93,7 +93,7 @@ text{
     width: 2.4rem;
     height: 2.4rem;
     margin-bottom: 5%;
-    background-image: url("./svg/delete.svg");
+    background-image: url("./svg/answer.svg");
     background-size: 100%;
     cursor: pointer;
 }

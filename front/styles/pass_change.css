@@ -10,38 +10,6 @@
     font-family: 'Montserrat';
 }
 
-@media (max-width: 1920px){
-    html{
-        font-size: 20px;
-    }
-}
-@media (max-width: 1600px){
-    html{
-        font-size: 16.5px;
-    }
-}
-@media (max-width: 1536px){
-    html{
-        font-size: 15.5px;
-    }
-}
-@media (max-width: 1400px){
-    html{
-        font-size: 14.5px;
-    }
-}
-@media (max-width: 1280px){
-    html{
-        font-size: 13.5px;
-    }
-}
-
-@media (max-width: 960px){
-    html{
-        font-size: 10px;
-    }
-}
-
 /* Заголовок */
 
 .container{
@@ -87,6 +55,16 @@
     background-image: url(../svg/Buttons/left_hov.svg);
 }
 
+/* Старый пароль*/
+
+.old{
+    width: 23rem;
+    display: flex;
+    position: relative;
+    left: 18rem;
+    top: 9rem;
+}
+
 /* Последние 2 блока*/
 
 .information{
@@ -123,7 +101,7 @@
 .title-error{
     position: relative;
     left: 18rem;
-    top: 12rem;
+    top: 9rem;
 
     color: #FF0000;
 }
@@ -152,17 +130,6 @@
     padding: 0rem 1rem 0 1rem;
 }
 
-/* 1 блок*/
-
-.first_block{
-    width: 23rem;
-
-    pointer-events: none;
-    position: relative;
-    left: 18rem;
-    top: 9rem;
-}
-
 /* Кнопки */
 
 .buttons{
@@ -170,7 +137,7 @@
 
     position: relative;
     left: 18rem;
-    top: 18rem;
+    top: 14.7rem;
 
     display: flex;
     gap: 5rem;
@@ -212,5 +179,27 @@
 
 .pass-btn:hover{
     opacity: 0.8;
+}
+
+/* Визуал ошибки */
+
+.error{
+    color: white;
+    background-color: #FF4346;
+    -webkit-text-fill-color: white;
+    animation: shake 0.5s ease-in-out forwards;
+}
+
+.error:focus-visible{
+    outline: none;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-0.5rem); }
+    40% { transform: translateX(0.5rem); }
+    60% { transform: translateX(-0.5rem); }
+    80% { transform: translateX(0.5rem); }
+    100% { transform: translateX(0); }
 }
 

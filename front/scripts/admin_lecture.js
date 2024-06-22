@@ -1,9 +1,7 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-// const id = urlParams.get('id');
-// const index = parseInt(urlParams.get('index'));
-const id = 1;
-const index = 0;
+const id = urlParams.get('id');
+const index = parseInt(urlParams.get('index'));
 async function getLecture() {
     const URL = `${window.location.origin}/script/get_lecture?l_id=${id}&index=${index}`;
     try {
@@ -57,7 +55,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     const videoLect = document.querySelector('.video');
     videoLect.innerHTML='<iframe class="iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
     const videoYT = document.querySelector(".iframe");
-    videoYT.setAttribute("src", "https://www.youtube.com/embed/" + lecture.pathto.slice(17, lecture.pathto.length - 16));
+    videoYT.setAttribute("src", lecture.pathto);
+    console.log(lecture.pathto);
   }
   else{
     const videoData = await getFileLecture();
@@ -69,8 +68,12 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 });
 
+function edit(){
+  window.location.href = 'http://127.0.0.1:8000/edit_lecture?id=' + id;
+}
+
 const backButton = document.getElementById('back');
 backButton.addEventListener('click', () => {
     // Переходим по URL-адресу
-    window.location.href = 'http://127.0.0.1:8000/task_list.html'; // Замените 'URL' на нужный URL-адрес для перехода
+    window.location.href = 'http://127.0.0.1:8000/task_list'; // Замените 'URL' на нужный URL-адрес для перехода
 });

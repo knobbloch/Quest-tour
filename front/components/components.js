@@ -45,6 +45,84 @@ class Custom_radio extends HTMLElement {
 
 customElements.define('custom-radiobutton', Custom_radio);
 
+class Custom_checkbox_for_create extends HTMLElement {
+    connectedCallback() {
+        const text = this.textContent.trim();
+        const group = this.getAttribute('group');
+        
+
+        this.innerHTML = `   
+
+            <label class="label">
+                <input id = "check" type="checkbox" class="checkbox" name="${group}" value="yes">
+                
+                <span class="fake">
+                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6953 0.162106C12.0294 0.433152 12.0995 0.949317 11.8519 1.31499L6.49691 9.22195C5.91843 10.0761 4.81642 10.2544 4.03686 9.62L0.303744 6.58188C-0.0299928 6.31028 -0.0993633 5.794 0.148801 5.42873C0.396964 5.06347 0.868688 4.98755 1.20243 5.25916L4.93554 8.29727C5.0469 8.38791 5.20433 8.36243 5.28697 8.24041L10.6419 0.333448C10.8896 -0.0322278 11.3612 -0.10894 11.6953 0.162106Z" fill="transparent"/>
+                    </svg>
+                </span>
+                <textarea class="textarea" maxlength="100">${text}</textarea>           
+                <img class="delete_answer" src="./svg/delete.svg">
+            </label>`;
+            const textarea = this.querySelector('.textarea');
+            const hiddenText = document.getElementById('hidden-text');
+    
+            const updateWidth = () => {
+                hiddenText.textContent = textarea.value || textarea.placeholder;
+                textarea.style.width = hiddenText.offsetWidth + 'px';
+            };
+    
+            // Устанавливаем начальную ширину
+            updateWidth();
+    
+            // Обновляем ширину при каждом вводе
+            textarea.addEventListener('input', updateWidth);
+    
+            // Обновляем ширину при загрузке
+            window.addEventListener('load', updateWidth);
+    }
+}
+
+customElements.define('custom-checkbox-for-create', Custom_checkbox_for_create);
+
+class Custom_radio_for_create extends HTMLElement {
+    connectedCallback() {
+        const text = this.textContent.trim();
+        const group = this.getAttribute('group');
+        const value = this.getAttribute('value');
+
+        this.innerHTML = `
+            <div>
+                <label class="label">
+                    <input id="radio1" type="radio" class="radiobutton" value="${value}" name="${group}" >
+                    <span class="fake-radio"></span>
+                    <textarea class="textarea" maxlength="100">${text}</textarea>
+                    <img class="delete_answer" src="./svg/delete.svg">
+                </label>
+            </div>
+        `;
+
+        const textarea = this.querySelector('.textarea');
+        const hiddenText = document.getElementById('hidden-text');
+
+        const updateWidth = () => {
+            hiddenText.textContent = textarea.value || textarea.placeholder;
+            textarea.style.width = hiddenText.offsetWidth + 'px';
+        };
+
+        // Устанавливаем начальную ширину
+        updateWidth();
+
+        // Обновляем ширину при каждом вводе
+        textarea.addEventListener('input', updateWidth);
+
+        // Обновляем ширину при загрузке
+        window.addEventListener('load', updateWidth);
+    }
+}
+
+customElements.define('custom-radiobutton-for-create', Custom_radio_for_create);
+
 class Custom_button_red extends HTMLElement {
     connectedCallback() {
         const id_btn = this.getAttribute('id_btn');
@@ -116,7 +194,7 @@ class User_list extends HTMLElement {
                         <div class="profile" href="#">
 
                         </div>
-                        <div class="delete" onclick="deleteUser(event, this.closest('.line').dataset.email)">
+                        <div class="delete" id="del" onclick="showDeletePopup(event, this.closest('.line').dataset.email)"></div>
 
                         </div>
                     </div>
@@ -142,8 +220,7 @@ class Task_list extends HTMLElement {
                         </div>
                     </div>
                     <div class="action">
-                        <div class="delete" onclick="deleteTask(event)">
-                        </div>
+                        <div class="delete" id="del" onclick="showDeletePopup(event, this.closest('.line').dataset.index)"></div>
                     </div>
                 </div>
             </template>
@@ -154,6 +231,29 @@ class Task_list extends HTMLElement {
 
 customElements.define('task-list', Task_list);
 
+class Practice_answer_list extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
+        <!-- <link rel="stylesheet" type="text/css" href="components/list.css"> -->
+        <div class="list" id="listContainer">
+            <template id="listTemplate">
+                <div class="line" onclick="redirectToPage(this)">
+                    <div class="user">
+                        <div class="details">
+                            <h1 class="name"></h1>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <div class="answer"></div>
+                    </div>
+                </div>
+            </template>
+        </div>
+        `
+    }
+}
+
+customElements.define('practice-answer-list', Practice_answer_list);
 // class Pop_up extends HTMLElement {
 //     connectedCallback() {
 //         const text = this.textContent.trim();
@@ -178,8 +278,6 @@ customElements.define('task-list', Task_list);
 // }
 class Pop_up_create_task extends HTMLElement {
     connectedCallback() {
-        const open_btn_id = this.getAttribute('open_btn_id');
-
         this.innerHTML = `
     
         <!-- Модальное окно  -->
@@ -192,17 +290,15 @@ class Pop_up_create_task extends HTMLElement {
                     <custom-radiobutton text="Лекция" value="lecture" group="myGroup"></custom-radiobutton>
                 </div>
                 <div class="btn__box">
-                    <button class="button-red" id="No-btn" style="cursor: pointer">Отмена</button>             
-                    <button class="button-blue" id="Yes-btn" style="cursor: pointer">Создать</button>
+                    <button class="button-red" id="create-no-btn" style="cursor: pointer">Отмена</button>             
+                    <button class="button-blue" id="create-yes-btn" style="cursor: pointer">Создать</button>
                 </div>
             </div>
         </div>
         `
-        // Функция открывает модальное окно при нажатии на кнопку
-        document.getElementById("create_task_btn").addEventListener('click', this.open_modal)
 
         // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
-        document.getElementById("No-btn").addEventListener("click", this.close_modal)
+        document.getElementById("create-no-btn").addEventListener("click", this.close_modal)
             
     }
 
@@ -259,7 +355,7 @@ class Pop_up_OK extends HTMLElement {
     
         <!-- Модальное окно  -->
         <div class="modal" id="exit-modal-ok">
-            <div class="modal__box">
+            <div class="modal__box-ok">
                 <h3 class="modal__box-header">${header_text}</h3>
                 <p class="modal__box-text" id="modal__box-text">${question_text}</p>
                 <div class="btn__box Ok">            
@@ -281,10 +377,6 @@ class Pop_up_OK extends HTMLElement {
     open_modal() {
         document.getElementById("exit-modal-ok").classList.add("open")
     }
-
-    close_modal() {
-        document.getElementById("exit-modal-ok").classList.remove("open")
-    }
 }
 
 customElements.define('pop-up-ok', Pop_up_OK);
@@ -298,17 +390,20 @@ class Pop_up extends HTMLElement {
         const question_text = this.getAttribute('question-text');
         const text_btn1 = this.getAttribute('text-btn1');
         const text_btn2 = this.getAttribute('text-btn2');
+        const id_modal = this.getAttribute('id_modal') || "exit-modal";
+        const no_id = this.getAttribute('no_id') || "No-btn";
+        const yes_id = this.getAttribute('yes_id') || "Yes-btn";
 
         this.innerHTML = `
     
         <!-- Модальное окно  -->
-        <div class="modal" id="exit-modal">
+        <div class="modal" id=${id_modal}>
             <div class="modal__box">
                 <h3 class="modal__box-header">${header_text}</h3>
                 <p class="modal__box-text">${question_text}</p>
                 <div class="btn__box">
-                    <button class="button-red" id="No-btn" style="cursor: pointer">${text_btn1}</button>             
-                    <button class="button-blue" id="Yes-btn" style="cursor: pointer">${text_btn2}</button>
+                    <button class="button-red" id="${no_id}" style="cursor: pointer">${text_btn1}</button>             
+                    <button class="button-blue" id="${yes_id}" style="cursor: pointer">${text_btn2}</button>
                 </div>
             </div>
         </div>
@@ -316,22 +411,18 @@ class Pop_up extends HTMLElement {
 
         // Функция открывает модальное окно при нажатии на кнопку
         if(open_btn_id!=null){
-            document.getElementById(open_btn_id).addEventListener('click',this.open_modal)
+            document.getElementById(open_btn_id).addEventListener('click',this.open_modal(id_modal))
         }
 
         // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
-        document.getElementById("No-btn").addEventListener("click",()=>{window[no_bt_func]()})
+        document.getElementById(no_id).addEventListener("click",()=>{window[no_bt_func]()})
 
         // Функция закрывает модальное окно при нажатии на кнопку "Да"
-        document.getElementById("Yes-btn").addEventListener("click",()=>{window[yes_bt_func]()})   
+        document.getElementById(yes_id).addEventListener("click",()=>{window[yes_bt_func]()})   
     }
 
-    open_modal() {
-        document.getElementById("exit-modal").classList.add("open")
-    }
-
-    close_modal() {
-        document.getElementById("exit-modal").classList.remove("open")
+    open_modal(id) {
+        document.getElementById(id).classList.add("open")
     }
 }
 
@@ -384,8 +475,10 @@ class Header extends HTMLElement {
         const color_map = this.getAttribute('colorMap');
         const color_stat = this.getAttribute('colorStat');
         const color_inf = this.getAttribute('colorInf') || '#0F2232';
+        const style_num = this.getAttribute('style_num') || "2";
+
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="components/header_style.css">
+        <link rel="stylesheet" type="text/css" href="components/header_style${style_num}.css">
             <pop-up-header header-text="Внимание!" open_btn_id="logout" question-text="Вы точно хотите выйти из аккаунта?" text-btn1="Нет" text-btn2="Да"></pop-up-header>
             <header class="header">
                 <a href="#" title="Главная">
@@ -422,19 +515,19 @@ class Header extends HTMLElement {
         this.querySelector('#Yes-btn-header').addEventListener('click', this.deadInf)
     }
     map() {
-        window.location.href = "http://127.0.0.1:8000/map.html"
+        window.location.href = "http://127.0.0.1:8000/map"
     }
     stat() {
-        window.location.href = "http://127.0.0.1:8000/statistic.html"
+        window.location.href = "http://127.0.0.1:8000/statistic"
     }
 
     lk() {
-        window.location.href = "http://127.0.0.1:8000/account.html"
+        window.location.href = "http://127.0.0.1:8000/account"
     }
 
     async deadInf() {
         document.getElementById("exit-modal-header").classList.remove("open")
-        const URL = `${window.location.origin}/auth/logout-cookie`;
+        const URL = `${window.location.origin}/script/logout-cookie`;
         try {
           await axios.get(URL);
         } catch (error) {
@@ -454,8 +547,9 @@ class AdminHeader extends HTMLElement {
         const color_users = this.getAttribute('colorUsers');
         const color_quest = this.getAttribute('colorQuest');
         const color_inf = this.getAttribute('colorInf') || '#0F2232';
+        const style_num = this.getAttribute('style_num') || "2";
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="components/header_style.css">
+        <link rel="stylesheet" type="text/css" href="components/header_style${style_num}.css">
             <pop-up-header header-text="Внимание!" open_btn_id="logout" question-text="Вы точно хотите выйти из аккаунта?" text-btn1="Нет" text-btn2="Да"></pop-up-header>
             <header class="header">
                 <a href="#" title="Главная">
@@ -487,29 +581,29 @@ class AdminHeader extends HTMLElement {
             </header>
         `
 
-        // this.querySelector('#admin_stat').addEventListener('click', this.admin_stat)
+        this.querySelector('#admin_stat').addEventListener('click', this.admin_stat)
         this.querySelector('#users').addEventListener('click', this.users)
-        // this.querySelector('#quest').addEventListener('click', this.quest)
+        this.querySelector('#quest').addEventListener('click', this.quest)
         this.querySelector('#lk').addEventListener('click', this.lk)
         this.querySelector('#Yes-btn-header').addEventListener('click', this.deadInf)
     }
-    // admin_stat() {
-    //     window.location.href = "http://127.0.0.1:8000/map.html"
-    // }
-    users() {
-        window.location.href = "http://127.0.0.1:8000/user_list.html"
+    admin_stat() {
+        window.location.href = "http://127.0.0.1:8000/admin_statistic"
     }
-    // quest() {
-    //     window.location.href = "http://127.0.0.1:8000/statistic.html"
-    // }
+    users() {
+        window.location.href = "http://127.0.0.1:8000/user_list"
+    }
+    quest() {
+        window.location.href = "http://127.0.0.1:8000/task_list"
+    }
 
     lk() {
-        window.location.href = "http://127.0.0.1:8000/admin_account.html"
+        window.location.href = "http://127.0.0.1:8000/admin_account"
     }
 
     async deadInf() {
         document.getElementById("exit-modal-header").classList.remove("open")
-        const URL = `${window.location.origin}/auth/logout-cookie`;
+        const URL = `${window.location.origin}/script/logout-cookie`;
         try {
           await axios.get(URL);
         } catch (error) {
@@ -525,8 +619,9 @@ customElements.define('custom-admin_header', AdminHeader);
 
 class Sidebar extends HTMLElement {
     connectedCallback() {
+        const style_num = this.getAttribute('style_num') || "2";
         this.innerHTML = `
-            <link rel="stylesheet" type="text/css" href="components/sidebar_style.css">
+            <link rel="stylesheet" type="text/css" href="components/sidebar_style${style_num}.css">
             <nav class="nav_open" id="sidebar">
             <button class="close_menu_btn" onclick="close_menu()">
                 <svg viewBox="0 0 64 59" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -534,13 +629,13 @@ class Sidebar extends HTMLElement {
                     </svg>                
             </button>
             <ul>
-                <li><a href="#" class="see_answers">
+                <li><a href="#" class="see_answers" onclick="answers()">
                     <svg viewBox="0 0 31 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.875 0C1.7349 0 0 1.74609 0 3.9V35.1C0 37.2539 1.7349 39 3.875 39H27.125C29.2651 39 31 37.2539 31 35.1V3.9C31 1.74609 29.2651 0 27.125 0H3.875ZM3.875 3.9L27.125 3.9V35.1H3.875V3.9ZM9.6875 9.75C8.61745 9.75 7.75 10.623 7.75 11.7C7.75 12.777 8.61745 13.65 9.6875 13.65H13.5625C14.6326 13.65 15.5 12.777 15.5 11.7C15.5 10.623 14.6326 9.75 13.5625 9.75H9.6875ZM7.75 19.5C7.75 18.423 8.61745 17.55 9.6875 17.55H17.4375C18.5076 17.55 19.375 18.423 19.375 19.5C19.375 20.577 18.5076 21.45 17.4375 21.45H9.6875C8.61745 21.45 7.75 20.577 7.75 19.5ZM9.6875 25.35C8.61745 25.35 7.75 26.223 7.75 27.3C7.75 28.377 8.61745 29.25 9.6875 29.25H21.3125C22.3826 29.25 23.25 28.377 23.25 27.3C23.25 26.223 22.3826 25.35 21.3125 25.35H9.6875Z" fill="#0F2232"/>
                         </svg>    
                     Посмотреть ответы
                 </a></li>
-                <li><a href="#" class="edit">
+                <li><a href="#" class="edit" onclick="edit()">
                     <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.7456 0C1.67696 0 0 1.70132 0 3.8V34.2C0 36.2987 1.67696 38 3.7456 38H33.7104C35.7791 38 37.456 36.2987 37.456 34.2V26.6C37.456 25.5507 36.6175 24.7 35.5832 24.7C34.5489 24.7 33.7104 25.5507 33.7104 26.6V34.2H3.7456V3.8H18.728C19.7623 3.8 20.6008 2.94934 20.6008 1.9C20.6008 0.850659 19.7623 0 18.728 0H3.7456ZM33.8369 1.6792C32.3817 0.427874 30.2321 0.485874 28.8446 1.81389L10.1628 19.6948C9.70534 20.1326 9.36394 20.6802 9.17003 21.2871L7.80015 25.5744C6.79666 28.715 9.94654 31.5705 12.9102 30.2069L17.3029 28.1859C17.6796 28.0125 18.0254 27.7771 18.3262 27.4892L36.8247 9.78377C38.4494 8.22881 38.3801 5.58612 36.6763 4.12096L33.8369 1.6792ZM31.4149 4.57795L34.2544 7.01971L15.7559 24.7251L11.3632 26.7462L12.7331 22.4588L31.4149 4.57795Z" fill="#0F2232"/>
                         </svg>  
@@ -577,16 +672,6 @@ class Sidebar extends HTMLElement {
             </nav>
     
         `
-        this.querySelector('.see_answers').addEventListener('click', this.answers);
-        this.querySelector('.edit').addEventListener('click', this.edit);
-    }
-
-    answers(){
-        window.location.href = "http://127.0.0.1:8000/admin_practice.html"//надо чета с айдишниками придумоть и тестики добавить, пока пусть так будет
-    };
-
-    edit() {
-        window.location.href = "http://127.0.0.1:8000/edit_practice.html"//надо чета с айдишниками придумоть
     }
 }
 
@@ -594,8 +679,9 @@ customElements.define('custom-sidebar', Sidebar);
 
 class LectureSidebar extends HTMLElement {
     connectedCallback() {
+        const style_num = this.getAttribute('style_num') || "2";
         this.innerHTML = `
-            <link rel="stylesheet" type="text/css" href="components/sidebar_style.css">
+            <link rel="stylesheet" type="text/css" href="components/sidebar_style${style_num}.css">
             <nav class="nav_open" id="sidebar">
             <button class="close_menu_btn" onclick="close_menu()">
                 <svg viewBox="0 0 64 59" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -603,7 +689,7 @@ class LectureSidebar extends HTMLElement {
                     </svg>                
             </button>
             <ul>
-                <li><a class="edit" style="margin: 0.5rem 0 0 2rem">
+                <li><a class="edit" onclick="edit()" style="margin: 0.5rem 0 0 2rem">
                     <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3.7456 0C1.67696 0 0 1.70132 0 3.8V34.2C0 36.2987 1.67696 38 3.7456 38H33.7104C35.7791 38 37.456 36.2987 37.456 34.2V26.6C37.456 25.5507 36.6175 24.7 35.5832 24.7C34.5489 24.7 33.7104 25.5507 33.7104 26.6V34.2H3.7456V3.8H18.728C19.7623 3.8 20.6008 2.94934 20.6008 1.9C20.6008 0.850659 19.7623 0 18.728 0H3.7456ZM33.8369 1.6792C32.3817 0.427874 30.2321 0.485874 28.8446 1.81389L10.1628 19.6948C9.70534 20.1326 9.36394 20.6802 9.17003 21.2871L7.80015 25.5744C6.79666 28.715 9.94654 31.5705 12.9102 30.2069L17.3029 28.1859C17.6796 28.0125 18.0254 27.7771 18.3262 27.4892L36.8247 9.78377C38.4494 8.22881 38.3801 5.58612 36.6763 4.12096L33.8369 1.6792ZM31.4149 4.57795L34.2544 7.01971L15.7559 24.7251L11.3632 26.7462L12.7331 22.4588L31.4149 4.57795Z" fill="#0F2232"/>
                         </svg>  
@@ -640,10 +726,6 @@ class LectureSidebar extends HTMLElement {
             </nav>
     
         `
-        this.querySelector('.edit').addEventListener('click', this.edit)
-    }
-    edit() {
-        window.location.href = "http://127.0.0.1:8000/edit_lecture.html"//надо чета с айдишниками придумоть
     }
 }
 
@@ -652,10 +734,11 @@ customElements.define('custom-lecture_sidebar', LectureSidebar);
 class Sidepanel extends HTMLElement {
     connectedCallback() {
         const back_page = this.getAttribute('back_page');
+        const style_num = this.getAttribute('style_num') || "2";
         this.innerHTML = `
-            <link rel="stylesheet" type="text/css" href="components/sidepanel_style.css">
+            <link rel="stylesheet" type="text/css" href="components/sidepanel_style${style_num}.css">
             <nav class="nav_panel">
-            <button class="back_btn" onclick="">
+            <button class="back_btn" onclick="back()">
                 <svg viewBox="0 0 64 59" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M23.5477 44.25C17.9387 40.4259 12.9009 35.9586 8.55872 30.961C8.18624 30.5323 8 30.0162 8 29.5M23.5477 14.75C17.9387 18.5741 12.9009 23.0414 8.55872 28.039C8.18624 28.4677 8 28.9838 8 29.5M8 29.5L56 29.5" stroke="#0F2232" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>                
@@ -671,12 +754,6 @@ class Sidepanel extends HTMLElement {
                 </a>          
             </nav>
         `;
-
-        this.querySelector('.back_btn').addEventListener('click', this.back);
-    }
-
-    back() {
-        window.location.href = back_page;
     }
 }
 

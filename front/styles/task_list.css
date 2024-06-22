@@ -60,6 +60,44 @@ h1 {
     height: 1rem;
 }
 
+.modal__box{
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    row-gap: 0rem;
+    width: 23rem;
+
+}
+
+.modal__box h3{
+    font-size: 1.3rem;
+}
+
+.btn__box .button-red {
+    font-size: 1.2rem;
+    border-radius: 15pt;
+    width: 7.6rem;
+}
+
+.btn__box .button-blue {
+    font-size: 1.2rem;
+    border-radius: 15pt;
+    width: 7.6rem;
+}
+
+.fake-radio {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.radio__box .text {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.radio__box label {
+    margin-bottom: 0.8rem;
+}
+
 h4 {
     margin-top: 4rem;
     font-size: 1rem;
@@ -76,6 +114,7 @@ h4 {
     h2 {
         font-size: 0.7rem;
     }
+
     .back_button {
         width: 1.8rem;
     }

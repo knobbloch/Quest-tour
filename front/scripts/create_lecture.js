@@ -7,15 +7,14 @@
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    //let orderc = urlParams.get('orderc'),
-    let orderc = 0,
+    let orderc = urlParams.get('order'),
     title = document.getElementById("title"),
     description = document.getElementById("description");
     
     // Функция перехода
 
     function back(){
-        window.location.href = 'http://127.0.0.1:8000/task_list.html';
+        window.location.href = 'http://127.0.0.1:8000/task_list';
     }
   
       // Функция выгрузки лекции
@@ -64,6 +63,8 @@
         if(added_file!=''){
             send_lection_file(title.value,description.value,orderc);
         }else{
+          
+          console.log(orderc);
             send_lection_no_file(title.value,description.value,orderc);
         }
     }

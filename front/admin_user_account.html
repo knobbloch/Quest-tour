@@ -5,14 +5,18 @@
 <title>Аккаунт пользователя</title>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/components/buttons_style.css">
-<link rel="stylesheet" type="text/css" href="/components/modal.css">
 <link rel="stylesheet" type="text/css" href="styles/account.css">
+<link rel="stylesheet" type="text/css" href="/components/modal2.css">
 </head>
 <body>
-  <custom-admin_header colorUsers='#FF0000'></custom-admin_header>
+  <custom-admin_header colorUsers='#FF0000' style_num="1"></custom-admin_header>
 
-  <pop-up no_bt_func="close_modal" yes_bt_func="del_user" header-text="Внимание!" open_btn_id="del" question-text="Вы уверены что хотите безвозвратно удалить данного пользователя?" text-btn1="Нет" text-btn2="Да"></pop-up>
+  <pop-up id_modal="del-modal" no_bt_func="close_modal_del" yes_bt_func="del_user" header-text="Внимание!" question-text="Вы уверены что хотите безвозвратно удалить данного пользователя?" text-btn1="Нет" text-btn2="Да"></pop-up>
   
+  <pop-up yes_id="Yes-drop" no_id="No-drop" id_modal="drop-modal" no_bt_func="close_modal_pass" yes_bt_func="pass_drop" header-text="Внимание!" question-text="Вы уверены что хотите сбросить пароль данного пользователя?" text-btn1="Нет" text-btn2="Да"></pop-up>
+
+  <pop-up-ok ok_bt_func="close_modal_ok" header-text="Внимание!" question-text="Пароль данного пользователя успешно сброшен!" text-btn="Ок"></pop-up-ok>
+
   <div class="container_admin">
     
     <div class="back-bt" onclick="back()">
@@ -23,7 +27,7 @@
     </label>
   </div>
 
-  <div class="button-delete" id="del">
+  <div class="button-delete" onclick="open_modal_del()" >
   </div>
 
   <div class = "information">
@@ -53,8 +57,8 @@
   <div class="buttons">
 
     <custom-button-red onclick="users_inf_change()">Редактировать</custom-button-red>
-      
-    </div>
+
+    <custom-button-white onclick="open_modal_pass()">Сбросить пароль</custom-button-white>
 
   </div>
     

@@ -113,14 +113,17 @@ async def delete_user(target_email: str, session_id: str = Cookie(alias=COOKIE_S
 
 
 @user_router.put("/change_password")
-async def change_password(new_password: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+async def change_password(old_password: str, new_password: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ALL, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if edit_auth(email, new_password):
-        return {"status": 202, "Message": "password changed"}
+    if old_password == db_main.get_auth(email)[1]:
+        if edit_auth(email, new_password):
+            return {"status": 202, "Message": "password changed"}
+        else:
+            return {"status": 500, "Message": "an error occurred"}
     else:
-        return {"status": 500, "Message": "an error occurred"}
+        return {"status": 403, "Message": "wrong password"}
 
 
 @user_router.get("/get_user_auth")

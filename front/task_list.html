@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Список заданий</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/components/buttons_style.css">
+<link rel="stylesheet" type="text/css" href="/components/list.css">
+<link rel="stylesheet" type="text/css" href="/components/modal.css">
+<link rel="stylesheet" type="text/css" href="/components/radiobutton.css">
+<link rel="stylesheet" type="text/css" href="styles/task_list.css">
+</head>
+<body>
+    <pop-up header-text="Внимание!" open_btn_id="del" question-text="Вы уверены что хотите безвозвратно удалить данное задание?" text-btn1="Нет" text-btn2="Да"></pop-up>
+    <custom-admin_header colorQuest='#FF0000'></custom-admin_header>
+    <main>
+        <div class="main_header">
+            <img class="back_button" src="svg/Buttons/left.svg">
+            <h1 id="title" >Задания квеста</h1>
+            <custom-button-plus id_btn="create_task_btn"></custom-button-plus>
+            <pop-up-create-task></pop-up-create-task>
+        </div>
+        <task-list></task-list>
+        <h4 id="without-answers"></h4>
+    </main>
+    
+    <script src="/components/components.js"></script>
+    <script src="scripts/task_list.js"></script>
+</body>
+</html>
