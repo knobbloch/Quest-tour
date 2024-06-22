@@ -3,6 +3,9 @@ let title_inf = document.getElementById("title"),
   agein_pass_inf = document.getElementById("agein_pass");
   old_pass_inf = document.getElementById("old_pass");
 
+let error = document.querySelector(".title-error");
+let hide_btn = document.querySelector(".pass-btn");
+
 function add_error(obj){
   obj.classList.remove("error");
   void obj.offsetWidth;
@@ -40,20 +43,16 @@ async function sendPassToServer(new_pass,old_pass_inf) {
       return
     }
 
-    if(response.data['status']==202){
-      del_error(old_pass_inf);
-      document.getElementById("exit-modal-ok").classList.add("open")
-    }else{
+    if(response.data['status']!=202){
       document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
-      document.getElementById("exit-modal-ok").classList.add("open")
     }
+    del_error(old_pass_inf);
+    document.getElementById("exit-modal-ok").classList.add("open")
+
   } catch (error) {
     console.log(error);
   }
 }
-
-let error = document.querySelector(".title-error");
-let hide_btn = document.querySelector(".pass-btn");
 
 function hide_pass(){
   if(new_pass_inf.type=="password"){

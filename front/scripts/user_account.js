@@ -33,13 +33,10 @@ async function sendPassToServer() {
   try {
     const response = await axios.put(URL);
 
-    if(response.data['status']==202){
-      del_error(old_pass_inf);
-      document.getElementById("exit-modal-ok").classList.add("open")
-    }else{
+    if(response.data['status']!=202){
       document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
-      document.getElementById("exit-modal-ok").classList.add("open")
     }
+    document.getElementById("exit-modal-ok").classList.add("open")
 
   } catch (error) {
     console.log(error);
