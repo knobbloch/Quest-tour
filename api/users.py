@@ -128,11 +128,22 @@ async def change_password(old_password: str, new_password: str, session_id: str 
 
 @user_router.get("/get_user_auth")
 async def get_user_auth(session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
-    email = is_accessible(Access.ALL, session_id)
+    email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
     res = db_main.get_auth(email)
     if res:
         return res
+    else:
+        return {"status": 500, "Message": "an error occurred"}
+
+
+@user_router.put("/set_default_password")
+async def set_default_password(target:str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    if edit_auth(target, "Hi"):
+        return {"status": 202, "Message": "password changed"}
     else:
         return {"status": 500, "Message": "an error occurred"}
