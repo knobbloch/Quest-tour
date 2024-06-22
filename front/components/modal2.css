@@ -8,17 +8,17 @@
     display: flex;
     position: relative;
 
-    width: 6.5rem;
-    height: 2.2rem;
+    width: 9rem;
+    height: 3rem;
     
     flex-direction: row;
     justify-content: center;
     align-items: center;
 
     
-    font-size: 1.09rem;
-    border: 0.11rem solid #6B80A0;
-    border-radius: 0.91rem;
+    font-size: 1.5rem;
+    border: 0.15rem solid #6B80A0;
+    border-radius: 1.25rem;
     color: #0F2232;
     background-color: #FFFFFF;
 }
@@ -40,15 +40,15 @@
 
     cursor: pointer;
 
-    width: 7.25rem;
-    height: 2.7em; /*Не менял*/
+    width: 10rem;
+    height: 2.7em;
     
     flex-direction: row;
     justify-content: center;
     align-items: center;
     justify-self: center;
-    font-size: 1.09rem;
-    border-radius: 0.91rem;
+    font-size: 1.5rem;
+    border-radius: 1.25rem;
     border-style: none;
     background: #FF0000;
     font-weight: 600;
@@ -68,8 +68,8 @@
     display: flex;
     position: relative;
     justify-self: center;
-    width: 7.25rem;
-    height: 2.7em; /*Не менял*/
+    width: 10rem;
+    height: 2.7em;
     font-weight: 600;
     border-color: #0F2232;
 
@@ -110,13 +110,13 @@
 }
 
 .Ok .button-blue{
-    width: 5.8rem;
-    height: 2.5em; /*Не менял*/
+    width: 8rem;
+    height: 2.5em;
 }
 
 .Ok .button-red{
-    width: 5.8rem;
-    height: 2.5em; /*Не менял*/
+    width: 8rem;
+    height: 2.5em;
 }
 
 
@@ -124,18 +124,18 @@
     display: grid;
     grid-template-rows: 1fr 1.4fr 1fr;
     row-gap: 0rem;
-    margin: 2.2rem 1.09rem;
-    padding: 1.45rem 1.45rem 0 1.45rem;
+    margin: 3rem 1.5rem;
+    padding: 2rem 2rem 0 2rem;
 
-    width: 19.575rem;
-    height: 18.125rem;
+    width: 27rem;
+    height: 25rem;
 
     z-index: 1;
     
     background-color: #E9ECEE;
-    border: 0.11rem solid #293240;
-    border-radius: 1.09rem;
-    box-shadow: 0px 0px 0.62rem -0.25rem rgba(34,60,80,.2);
+    border: 0.15rem solid #293240;
+    border-radius: 1.25rem;
+    box-shadow: 0px 0px 0.85rem -0.35rem rgba(34,60,80,.2);
 
     transform: scale(0);
     transition: transform .8s;
@@ -145,18 +145,18 @@
     display: grid;
     grid-template-rows: 1fr 1.4fr 1fr;
     row-gap: 0rem;
-    margin: 2.2rem 1.09rem;
-    padding: 1.45rem 1.45rem 0 1.45rem;
+    margin: 3rem 1.5rem;
+    padding: 2rem 2rem 0 2rem;
 
-    width: 15.95rem;
-    height: 14.5rem;
+    width: 22rem;
+    height: 20rem;
 
     z-index: 1;
     
     background-color: #E9ECEE;
-    border: 0.11rem solid #293240;
-    border-radius: 1.09rem;
-    box-shadow: 0px 0px 0.62rem -0.25rem rgba(34,60,80,.2);
+    border: 0.15rem solid #293240;
+    border-radius: 1.25rem;
+    box-shadow: 0px 0px 0.85rem -0.35rem rgba(34,60,80,.2);
 
     transform: scale(0);
     transition: transform .8s;
@@ -164,8 +164,8 @@
 
 .modal__box-header{
     font-weight: 800;
-    font-size: 1.27rem;
-    line-height: 1.3rem;    
+    font-size: 1.75rem;
+    line-height: 1.8rem;    
     text-align: center;
     color: #EC1C24;
 }
@@ -174,8 +174,9 @@
     display: flex;
     text-align: center;
     font-weight: 400;
-    font-size: 1.09rem;
-    line-height: 1.45rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    /* margin-top: 2%; */
 
     color: #0F2232;
     transition: 0.3s;

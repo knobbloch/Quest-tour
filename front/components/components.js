@@ -377,10 +377,6 @@ class Pop_up_OK extends HTMLElement {
     open_modal() {
         document.getElementById("exit-modal-ok").classList.add("open")
     }
-
-    close_modal() {
-        document.getElementById("exit-modal-ok").classList.remove("open")
-    }
 }
 
 customElements.define('pop-up-ok', Pop_up_OK);
@@ -427,10 +423,6 @@ class Pop_up extends HTMLElement {
 
     open_modal(id) {
         document.getElementById(id).classList.add("open")
-    }
-
-    close_modal(id) {
-        document.getElementById("exit-modal").classList.remove("open")
     }
 }
 
@@ -483,8 +475,10 @@ class Header extends HTMLElement {
         const color_map = this.getAttribute('colorMap');
         const color_stat = this.getAttribute('colorStat');
         const color_inf = this.getAttribute('colorInf') || '#0F2232';
+        const style_num = this.getAttribute('style_num') || "2";
+
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="components/header_style.css">
+        <link rel="stylesheet" type="text/css" href="components/header_style${style_num}.css">
             <pop-up-header header-text="Внимание!" open_btn_id="logout" question-text="Вы точно хотите выйти из аккаунта?" text-btn1="Нет" text-btn2="Да"></pop-up-header>
             <header class="header">
                 <a href="#" title="Главная">
@@ -553,8 +547,9 @@ class AdminHeader extends HTMLElement {
         const color_users = this.getAttribute('colorUsers');
         const color_quest = this.getAttribute('colorQuest');
         const color_inf = this.getAttribute('colorInf') || '#0F2232';
+        const style_num = this.getAttribute('style_num') || "2";
         this.innerHTML = `
-        <link rel="stylesheet" type="text/css" href="components/header_style.css">
+        <link rel="stylesheet" type="text/css" href="components/header_style${style_num}.css">
             <pop-up-header header-text="Внимание!" open_btn_id="logout" question-text="Вы точно хотите выйти из аккаунта?" text-btn1="Нет" text-btn2="Да"></pop-up-header>
             <header class="header">
                 <a href="#" title="Главная">
@@ -624,8 +619,9 @@ customElements.define('custom-admin_header', AdminHeader);
 
 class Sidebar extends HTMLElement {
     connectedCallback() {
+        const style_num = this.getAttribute('style_num') || "2";
         this.innerHTML = `
-            <link rel="stylesheet" type="text/css" href="components/sidebar_style.css">
+            <link rel="stylesheet" type="text/css" href="components/sidebar_style${style_num}.css">
             <nav class="nav_open" id="sidebar">
             <button class="close_menu_btn" onclick="close_menu()">
                 <svg viewBox="0 0 64 59" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -683,8 +679,9 @@ customElements.define('custom-sidebar', Sidebar);
 
 class LectureSidebar extends HTMLElement {
     connectedCallback() {
+        const style_num = this.getAttribute('style_num') || "2";
         this.innerHTML = `
-            <link rel="stylesheet" type="text/css" href="components/sidebar_style.css">
+            <link rel="stylesheet" type="text/css" href="components/sidebar_style${style_num}.css">
             <nav class="nav_open" id="sidebar">
             <button class="close_menu_btn" onclick="close_menu()">
                 <svg viewBox="0 0 64 59" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -737,8 +734,9 @@ customElements.define('custom-lecture_sidebar', LectureSidebar);
 class Sidepanel extends HTMLElement {
     connectedCallback() {
         const back_page = this.getAttribute('back_page');
+        const style_num = this.getAttribute('style_num') || "2";
         this.innerHTML = `
-            <link rel="stylesheet" type="text/css" href="components/sidepanel_style.css">
+            <link rel="stylesheet" type="text/css" href="components/sidepanel_style${style_num}.css">
             <nav class="nav_panel">
             <button class="back_btn" onclick="back()">
                 <svg viewBox="0 0 64 59" fill="none" xmlns="http://www.w3.org/2000/svg">
