@@ -26,8 +26,8 @@ unauthed_exc = HTTPException(
 def get_current_username(
     credentials: Annotated[HTTPBasicCredentials, Depends(security)],
 ):
+    print("get_current_username ")
     password = get_auth(credentials.username)
-    print(password)
     if not(password == []):
         correct_password_bytes = password[1].encode("utf8")
     else:
@@ -36,7 +36,6 @@ def get_current_username(
     is_correct_password = secrets.compare_digest(
         current_password_bytes, correct_password_bytes
     )
-
     #if not (is_correct_password):
     #    raise unauthed_exc
     if not (is_correct_password):
@@ -74,7 +73,7 @@ async def auth_login_set_cookie(
     session_id = str(auth_username["admornot"]) + generate_session_id()
     new_token(session_id, auth_username["username"])
     response.set_cookie(COOKIE_SESSION_ID_KEY, session_id)
-    return {"result": "ok"}
+    return {"result": auth_username["admornot"]}
 
 @auth_router.get("/check-cookie")
 def auth_check_cookie(
