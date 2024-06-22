@@ -70,7 +70,6 @@ app = FastAPI(title="api app")
 
 @app.get('/')
 async def index():
-    print("QWEWQEWQ")
     return FileResponse('front/auth.html')
 
 
