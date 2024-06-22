@@ -78,6 +78,11 @@ class Practice(BaseModel):
     description: Optional[str] = None
 
 
+class EditPractice(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+
+
 class PracticeRes(BaseModel):
     id: int
     grade: Optional[int] = None
@@ -111,3 +116,8 @@ class Dead(BaseModel):
     email: str
     deadline: str
     complete: Optional[str] = None
+
+
+class Answer(BaseModel):
+    p_id: int
+    text: str
