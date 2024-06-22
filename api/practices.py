@@ -8,7 +8,7 @@ import glob
 from api.auth import COOKIE_SESSION_ID_KEY, is_accessible, Access
 from api.db_main import get_practice_res, edit_practice_res, get_person
 from api.debugging import get_all_practices
-from api.models import Practice, Grade, PracticeRes
+from api.models import Practice, Grade, PracticeRes, Answer, EditPractice
 
 practice_router = APIRouter(prefix="/script", tags=["Practice functions"])
 
@@ -43,12 +43,12 @@ async def get_practice(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_
 
 
 @practice_router.put("/edit_practice")
-async def edit_practice(p_id: int, new_title: str = None, new_description: str = None,
+async def edit_practice(p_id: int, info: EditPractice,
                         session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if db_main.edit_practice(p_id, new_title, new_description):
+    if db_main.edit_practice(p_id, info.title, info.description):
         return {'status': 202, 'Message': f'practice №{p_id} edited'}
     else:
         return {'status': 500, 'Message': 'an error occurred'}
@@ -203,18 +203,18 @@ async def delete_answer_file(p_id: int, session_id: str = Cookie(alias=COOKIE_SE
 
 
 @practice_router.post("/add_answer")
-async def add_answer(p_id: int, text: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+async def add_answer(info: Answer, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.USR, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if not db_main.get_practice(p_id):
+    if not db_main.get_practice(info.p_id):
         return {'status': 404, 'Message': 'practice not found'}
-    if db_main.get_practice(p_id)[3] == 1:
+    if db_main.get_practice(info.p_id)[3] == 1:
         return {'status': 400, 'Message': 'this practice is a test'}
 
-    answer_id = get_practice_res(p_id, email)[0]
+    answer_id = get_practice_res(info.p_id, email)[0]
     new_file = open(f"data/answers/practice_{answer_id}.txt", 'wb')
-    new_file.write(text.encode('utf-8'))
+    new_file.write(info.text.encode('utf-8'))
     new_file.close()
     return {'status': 201, 'Message': 'answer added'}
 
