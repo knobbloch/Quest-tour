@@ -401,6 +401,10 @@ class Pop_up_OK extends HTMLElement {
     open_modal() {
         document.getElementById("exit-modal-ok").classList.add("open")
     }
+
+    close_modal() {
+        document.getElementById("exit-modal").classList.remove("open")
+    }
 }
 
 customElements.define('pop-up-ok', Pop_up_OK);
@@ -435,7 +439,7 @@ class Pop_up extends HTMLElement {
 
         // Функция открывает модальное окно при нажатии на кнопку
         if(open_btn_id!=null){
-            document.getElementById(open_btn_id).addEventListener('click',this.open_modal(id_modal))
+            document.getElementById(open_btn_id).addEventListener('click',this.open_modal)
         }
 
         // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
@@ -445,9 +449,14 @@ class Pop_up extends HTMLElement {
         document.getElementById(yes_id).addEventListener("click",()=>{window[yes_bt_func]()})   
     }
 
-    open_modal(id) {
-        document.getElementById(id).classList.add("open")
+    open_modal() {
+        document.getElementById("exit-modal").classList.add("open")
     }
+
+    close_modal() {
+        document.getElementById("exit-modal").classList.remove("open")
+    }
+
 }
 
 customElements.define('pop-up', Pop_up);
