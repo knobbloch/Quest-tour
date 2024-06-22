@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Создание теста</title>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/components/modal.css">
-<link rel="stylesheet" type="text/css" href="/components/buttons_style.css">
-<link rel="stylesheet" type="text/css" href="/components/checkbox.css">
-<link rel="stylesheet" type="text/css" href="/components/radiobutton.css">
-<link rel="stylesheet" type="text/css" href="/components/text-input.css">
-<link rel="stylesheet" type="text/css" href="styles/create_test.css">
+    <meta charset="utf-8">
+    <title>Создание теста</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/components/modal.css">
+    <link rel="stylesheet" type="text/css" href="/components/buttons_style.css">
+    <link rel="stylesheet" type="text/css" href="/components/checkbox.css">
+    <link rel="stylesheet" type="text/css" href="/components/radiobutton.css">
+    <link rel="stylesheet" type="text/css" href="/components/text-input.css">
+    <link rel="stylesheet" type="text/css" href="styles/create_test.css">
 </head>
 <body>
     <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Задание было успешно создано!" text-btn="Ок"></pop-up-ok>
@@ -28,25 +28,21 @@
                 <template id="question-template">
                     <div class="question">
                         <div class="name__question">
-                            <custom-checkbox id="question-type-toggle" title="Несколько вариантов ответа" text=" " value="multiple"></custom-checkbox>
+                            <custom-checkbox  title="Несколько вариантов ответа" text=" " value="multiple"></custom-checkbox>
                             <h3 class="number__question">1. </h3>
-                            <textarea class="textarea" maxlength="100" id="question_1">Введите вопрос...</textarea>
+                            <textarea class="textarea question-text" maxlength="100" id="question_1">Введите вопрос...</textarea>
                             <img class="delete_question" src="./svg/delete.svg">
-                            <input type="hidden" class="question-type" value="single"> <!-- Скрытое поле для типа вопроса -->
                         </div>
                         <div class="answers__question" id="answers-container">
-                            <custom-radiobutton-for-create group="myGroup">Ответ 1</custom-radiobutton-for-create>
-                            <custom-radiobutton-for-create group="myGroup">Ответ 2</custom-radiobutton-for-create>
-                            <custom-radiobutton-for-create group="myGroup">Ответ 3</custom-radiobutton-for-create>
                         </div>
                         <button class="add_answer_btn">+ Добавить ответ</button>
                     </div>
                 </template>   
-        </div>
+            </div>
         
-        <button class="add_question_btn" >
-            + Добавить вопрос
-        </button>   
+            <button class="add_question_btn">
+                + Добавить вопрос
+            </button>
         </div>
 
         <div class="buttons">
@@ -55,10 +51,6 @@
             <custom-button-red onclick="back()">Отмена</custom-button-red>
         </div>
     </main> 
-    <script>
-       
-        </script>
-        
     <script src="components/components.js"></script>
     <script src="scripts/create_test.js"></script>
 </body>
