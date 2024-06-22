@@ -58,7 +58,7 @@ async function getPracticeResult() {
 document.addEventListener("DOMContentLoaded", async function(){ 
     const result = await getPracticeResult();
     if (result == null) {
-        window.location.href = `http://127.0.0.1:8000/test.html?id=${id}&index=${index}`
+        window.location.href = `http://127.0.0.1:8000/test?id=${id}&index=${index}`
     }
     console.log('Результат теста:', result);
     setProgress(result);
@@ -115,12 +115,12 @@ async function setProgress(result) {
 
 const backButton = document.getElementById('back-to-map');
 backButton.addEventListener('click', () => {
-    window.location.href = 'http://127.0.0.1:8000/map.html';
+    window.location.href = 'http://127.0.0.1:8000/map';
 });
 
 const repeat_btn = document.getElementById('repeat-btn');
 repeat_btn.addEventListener('click', () => {
-    window.location.href = `http://127.0.0.1:8000/test.html?id=${id}&index=${index}`;
+    window.location.href = `http://127.0.0.1:8000/test?id=${id}&index=${index}`;
 });
 
 

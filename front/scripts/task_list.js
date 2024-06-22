@@ -76,7 +76,7 @@ async function openTask(ref_type, ref_id) {
         if (!await getPractice(ref_id)) {
             window.location.href = "http://127.0.0.1:8000/admin_practice?id=" + ref_id;
         } else {
-            window.location.href = "http://127.0.0.1:8000/edit_test?id=" + ref_id;
+            window.location.href = "http://127.0.0.1:8000/admin_test?id=" + ref_id;
         }
     }
 }

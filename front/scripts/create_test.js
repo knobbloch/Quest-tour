@@ -187,68 +187,114 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-    function createTest() {
-        const title = document.getElementById('title').value.trim();
-        if (!title) {
-            alert('Заголовок теста не может быть пустым');
-            return;
-        }
+function createTest() {
+    const title = document.getElementById('title').value.trim();
 
-        const questions = [];
+    const questions = [];
+    let allQuestionsValid = true;
 
-        const questionElements = document.querySelectorAll('.question');
-        questionElements.forEach((questionElement, index) => {
-            const questionTextElement = questionElement.querySelector('.question-text');
-            const questionText = questionTextElement.value.trim();
+    const questionElements = document.querySelectorAll('.question');
+    questionElements.forEach((questionElement, index) => {
+        const questionTextElement = questionElement.querySelector('.question-text');
+        const questionText = questionTextElement.value.trim();
 
-            if (!questionText) {
-                alert(`Вопрос ${index + 1} не может быть пустым`);
-                return;
+        const answers = [];
+        const answerElements = questionElement.querySelectorAll('.answers__question .label');
+        answerElements.forEach((answerElement, answerIndex) => {
+            const answerTextElement = answerElement.querySelector('.textarea');
+            const answerText = answerTextElement.value.trim();
+            if (answerText) {
+                answers.push(answerText);
             }
-
-            const answers = [];
-            const answerElements = questionElement.querySelectorAll('.answers__question .label');
-            answerElements.forEach((answerElement, answerIndex) => {
-                const answerTextElement = answerElement.querySelector('.textarea');
-                const answerText = answerTextElement.value.trim();
-                if (answerText) {
-                    answers.push(answerText);
-                }
-            });
-
-            const questionTypeToggle = questionElement.querySelector('#question-type-toggle');
-            const isMultiple = questionTypeToggle.checked;
-
-            const rightAnswers = [];
-            if (!isMultiple) {
-                const radioButtons = questionElement.querySelectorAll('.answers__question input[type="radio"]');
-                radioButtons.forEach((radioButton, answerIndex) => {
-                    if (radioButton.checked) {
-                        rightAnswers.push(answerIndex);
-                    }
-                });
-            } else {
-                const checkboxes = questionElement.querySelectorAll('.answers__question input[type="checkbox"]');
-                checkboxes.forEach((checkbox, answerIndex) => {
-                    if (checkbox.checked) {
-                        rightAnswers.push(answerIndex);
-                    }
-                });
-            }
-
-            questions.push({
-                radio: !isMultiple,
-                question: questionText,
-                answers: answers,
-                right_answers: rightAnswers,
-                description: "string"
-            });
         });
 
-        const testObject = {
-            title: title,
-            questions: questions
-        };
+        const questionTypeToggle = questionElement.querySelector('#question-type-toggle');
+        const isMultiple = questionTypeToggle.checked;
 
-        console.log(JSON.stringify(questions, null, 2)); 
+        const rightAnswers = [];
+        if (!isMultiple) {
+            const radioButtons = questionElement.querySelectorAll('.answers__question input[type="radio"]');
+            radioButtons.forEach((radioButton, answerIndex) => {
+                if (radioButton.checked) {
+                    rightAnswers.push(answerIndex);
+                }
+            });
+        } else {
+            const checkboxes = questionElement.querySelectorAll('.answers__question input[type="checkbox"]');
+            checkboxes.forEach((checkbox, answerIndex) => {
+                if (checkbox.checked) {
+                    rightAnswers.push(answerIndex);
+                }
+            });
+        }
+
+        if (rightAnswers.length === 0) {
+            allQuestionsValid = false;
+            document.getElementById('warning').textContent = `* Вопрос ${index + 1} должен иметь хотя бы один правильный ответ.`;
+        }
+
+        questions.push({
+            radio: !isMultiple,
+            question: questionText,
+            answers: answers,
+            right_answers: rightAnswers,
+            description: "string"
+        });
+    });
+
+    if (!allQuestionsValid) {
+        return;
     }
+
+    const testObject = {
+        title: title,
+        questions: questions
+    };
+
+    console.log(JSON.stringify(questions, null, 2));
+
+    sendPractice().then(practiceSent => {
+        if (practiceSent) {
+            sendQuestions(questions);
+        }
+    });
+}
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+let orderc = urlParams.get('order');
+async function sendPractice(){
+    const title = document.getElementById('title').value.trim();
+    const URL = `${window.location.origin}/script/create_practice`;
+    try {
+        const response = await axios.post(URL, {
+            title: title,
+            description: "string",
+            orderc: orderc,
+            testornot: true
+        });
+
+        if(response.data.status != 201) {
+            document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+            return false;
+        }
+        document.getElementById("exit-modal-ok").classList.add("open");
+        return true;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+async function sendQuestions(list){
+    const URL = `${window.location.origin}/script/add_questions`;
+    try {
+        const response = await axios.post(URL, { list: list });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function back(){
+    window.location.href = 'http://127.0.0.1:8000/task_list';
+  }

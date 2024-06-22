@@ -8,7 +8,6 @@ console.log(continue1)
 document.getElementById("sign-in-btn").addEventListener("click", function() {
     email = document.getElementById("email").value;
     password = document.getElementById("pass").value;
-    console.log(email, password)
     SendDataToServer(email, password);
 });
 
@@ -28,15 +27,24 @@ async function SendDataToServer(email, password) {
         if (response.status < 200 || response.status >= 300) {
             throw new Error("Ошибка");
         }
-        console.log(continue1)
-        console.log(urlParams)
         const data = await response.data;
-        if (continue1 != null && continue1 != "/lecture.html" && continue1 != "/test.html" && continue1 != "/test_result.html" && continue1 != "/practice_answer.html" && continue1 != "/practice.html"){
-            window.location.href = 'http://127.0.0.1:8000' + continue1;
+        if (data.result) {
+            if (continue1 != null && continue1 != "/lecture" && continue1 != "/test" && continue1 != "/test_result" && continue1 != "/practice_answer" && continue1 != "/practice"){
+                window.location.href = 'http://127.0.0.1:8000' + continue1;
+            }
+            else{
+                 window.location.href = 'http://127.0.0.1:8000/task_list';
+            }
         }
-        else{
-             window.location.href = 'http://127.0.0.1:8000/map.html';
+        else {
+            if (continue1 != null && continue1 != "/lecture" && continue1 != "/test" && continue1 != "/test_result" && continue1 != "/practice_answer" && continue1 != "/practice"){
+                window.location.href = 'http://127.0.0.1:8000' + continue1;
+            }
+            else{
+                 window.location.href = 'http://127.0.0.1:8000/map';
+            }
         }
+        
         document.getElementById("error-message").style.display = "none";
 
         return data;
