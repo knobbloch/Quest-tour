@@ -2,11 +2,12 @@ class Custom_checkbox extends HTMLElement {
     connectedCallback() {
         const text = this.getAttribute('text');
         const group = this.getAttribute('group');
+        const id = this.getAttribute('id');
 
         this.innerHTML = `   
 
             <label class="label">
-                <input id = "check" type="checkbox" class="checkbox" name="${group}" value="yes">
+                <input id = "question-type-toggle" type="checkbox" class="checkbox" name="${group}" value="yes">
                 
                 <span class="fake">
                     <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,12 +26,13 @@ class Custom_radio extends HTMLElement {
         const text = this.getAttribute('text');
         const group = this.getAttribute('group');
         const value = this.getAttribute('value');
+        const id = this.getAttribute('id');
 
         this.innerHTML = `
 
             <div>
                 <label class="label">
-                    <input id="radio1" type="radio" class="radiobutton"  value="${value}" name="${group}" value="no" >
+                    <input type="radio" class="radiobutton" id = "${id}" value="${value}" name="${group}" value="no" >
                     <span class="fake-radio"></span>
                     <span class="text">${text}</span>
                 </label>
@@ -80,8 +82,19 @@ class Custom_checkbox_for_create extends HTMLElement {
     
             // Обновляем ширину при загрузке
             window.addEventListener('load', updateWidth);
+            this.textareaExpanding();
+        }
+    
+        textareaExpanding() {
+            // Код textareaExpanding() для этого кастомного элемента
+            const textareas = this.querySelectorAll('.textarea');
+            textareas.forEach(textarea => {
+                textarea.addEventListener('input', () => {
+                    // Реализация textareaExpanding() в контексте кастомного элемента
+                });
+            });
+        }
     }
-}
 
 customElements.define('custom-checkbox-for-create', Custom_checkbox_for_create);
 
@@ -118,6 +131,17 @@ class Custom_radio_for_create extends HTMLElement {
 
         // Обновляем ширину при загрузке
         window.addEventListener('load', updateWidth);
+        this.textareaExpanding();
+    }
+
+    textareaExpanding() {
+        // Код textareaExpanding() для этого кастомного элемента
+        const textareas = this.querySelectorAll('.textarea');
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', () => {
+                // Реализация textareaExpanding() в контексте кастомного элемента
+            });
+        });
     }
 }
 
