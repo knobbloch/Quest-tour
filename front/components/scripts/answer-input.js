@@ -1,3 +1,4 @@
+
 async function deleteFile(event) {
   event.stopPropagation(); // Предотвращаем всплытие события
   var ansInput = document.getElementById('input_ans');
@@ -7,7 +8,7 @@ async function deleteFile(event) {
   let rect = ansInput.getBoundingClientRect();
   ansInput.style.height = rect.height/20 - 6 + "rem" ;
 }
-// let fileInput = null;
+
 // document.addEventListener('DOMNodeInserted', function(){fileInput = document.getElementById('add_file')});
 document.addEventListener('DOMContentLoaded', function(){
   const ansInput = document.getElementById('input_ans');
@@ -34,16 +35,18 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
   function addFile(){
-    for(let i=0;i<this.files.length;i++){
+    // for(let i=0;i<this.files.length;i++){
       const fileElement = document.createElement('div');
 
-      const file = this.files[i];
+      let file = this.files[0];
+      // console.log(file);
+      inputFile = file;
       const url = URL.createObjectURL(file);
       fileElement.innerHTML = '<div class="file__box"><img src="svg/file_img.svg"><p class="file__box-label">'+file.name+'</p><div class="button-delete" onclick="deleteFile(event)"></div></div>';
       filePlayer.appendChild(fileElement);
       let rect = ansInput.getBoundingClientRect();
       ansInput.style.height = rect.height/20 + (fileElement.scrollHeight/20) + 2 + "rem" ;
-    }
+    // }
     
   }
 

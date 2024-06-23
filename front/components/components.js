@@ -801,7 +801,7 @@ class Answer_input extends HTMLElement {
         <link rel="stylesheet" type="text/css" href="components/answer-input.css">
 
         <div class="answer-input" id="input_ans">
-            <textarea class="answer-input__text" id="text_box" placeholder="Введите ответ" oninput="auto_grow()"></textarea>
+            <textarea class="answer-input__text" id="text_box" placeholder="Введите ответ"></textarea>
 
             <label class="answer-input__field">
                 <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

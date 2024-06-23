@@ -72,7 +72,7 @@
       const url = URL.createObjectURL(file);
 
       added_file = file;
-
+      flag = 1;
       videoElement.innerHTML = '<video controls><source src="'+url+'"></video><div class="button-delete" onclick="deleteVideo(event)"></div>';
       videoPlayer.appendChild(videoElement);
 
