@@ -84,7 +84,10 @@ async def add_question(questions: List[Question], p_id: int, session_id: str = C
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
     for new_question in questions:
-        write_new_in_file("data/test/practice_" + str(p_id) + ".txt", new_question)
+        file = open("data/test/practice_" + str(p_id) + ".txt", "wb")  # запись в файл
+        pickle.dump(questions, file)  # сереализация
+        file.close()
+        #write_new_in_file("data/test/practice_" + str(p_id) + ".txt", new_question)
     return {"status": 201, "Message": "new questions added"}
 
 
