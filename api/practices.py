@@ -23,7 +23,7 @@ async def create_practice(practice: Practice, session_id: str = Cookie(alias=COO
         if practice.testornot:
             file = open("data/test/practice_" + str(p_id) + ".txt", 'wb')
             file.close()
-        return {'status': 201, 'Message': f'new practice added'}
+        return {'status': 201, 'Message': f'{p_id}'}
     else:
         return {'status': 500, 'Message': 'an error occurred'}
 
