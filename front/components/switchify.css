@@ -1,0 +1,39 @@
+label.switchify.switchify-label {
+	display: inline-block;
+}
+
+label.switchify.switchify-label > input.switchified {
+	display: none;
+}
+
+label.switchify.switchify-label > span.switchify-switch {
+	display: block;
+	background-color: #cecece;
+	height: 1em;
+	width: 1.6em;
+	position: relative;
+	border: 1px solid #cecece;
+	border-radius: 1em;
+	transition: background-color 0.25s, border-color 0.25s;
+}
+
+label.switchify.switchify-label > span.switchify-switch::after {
+	content: "";
+	background-color: #fff;
+	display: block;
+	height: 1em;
+	width: 1em;
+	position: absolute;
+	border-radius: 1em;
+	left: 0;
+	transition: left 0.25s;
+}
+
+label.switchify.switchify-label > input.switchified:checked + span.switchify-switch {
+	background-color: #4bcc23;
+	border-color: #4bcc23;
+}
+
+label.switchify.switchify-label > input.switchified:checked + span.switchify-switch::after {
+	left: calc(100% - 1em);
+}
