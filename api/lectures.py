@@ -71,7 +71,8 @@ async def get_lecture(l_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_I
 
 
 @lecture_router.put("/edit_lecture")
-async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)], file: Optional[UploadFile] = File(None),
+async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)],
+                       file: Optional[Annotated[UploadFile, File(...)]] = File(None),
                        session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
@@ -198,6 +199,7 @@ async def get_lecture_file(l_id: int, session_id: str = Cookie(alias=COOKIE_SESS
             )
             for file in files
         ]
+
 
 @lecture_router.delete("/delete_lecture_file")
 async def delete_lecture_file(l_id: int, file_name: str, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
