@@ -72,7 +72,7 @@ async def get_lecture(l_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_I
 
 @lecture_router.put("/edit_lecture")
 async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)],
-                       file: Optional[Annotated[UploadFile, File(...)]] = File(None),
+                       file: Annotated[UploadFile, File(...)] = None,
                        session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
@@ -86,6 +86,7 @@ async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)],
             path = os.path.abspath(os.getcwd())
             if os.path.exists(f"{path}\\data\\lection\\lec_{l_id}"):
                 shutil.rmtree(f"{path}\\data\\lection\\lec_{l_id}")
+                os.mkdir(f"{path}\\data\\lection\\lec_{l_id}")
             content = await file.read()
             new_file = open(f"data/lection/lec_{l_id}/{file.filename}", 'wb')
             new_file.write(content)
