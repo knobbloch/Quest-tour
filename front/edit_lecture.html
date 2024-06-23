@@ -8,12 +8,12 @@
 <link rel="stylesheet" type="text/css" href="/components/buttons_style.css">
 <link rel="stylesheet" type="text/css" href="/components/video-input.css">
 <link rel="stylesheet" type="text/css" href="/components/text-input.css">
-<link rel="stylesheet" type="text/css" href="styles/lecture_create.css">
+<link rel="stylesheet" type="text/css" href="styles/edit_lecture_style.css">
 </head>
 <body>
     <custom-sidepanel></custom-sidepanel>
 
-    <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Лекция была успешно создана!" text-btn="Ок"></pop-up-ok>
+    <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Лекция была успешно изменена!" text-btn="Ок"></pop-up-ok>
 
     <div class="heading">
         <textarea class="title" maxlength="160" id="title">Заголовок вашей лекции</textarea>          
@@ -29,7 +29,7 @@
     </div>
 
     <div class="buttons">
-        <custom-button-blue onclick="create_lection()">Сохранить лекцию</custom-button-blue>
+        <custom-button-blue onclick="edit_lecture()">Сохранить изменения</custom-button-blue>
     
         <custom-button-red onclick="back()">Отмена</custom-button-red>
     </div>

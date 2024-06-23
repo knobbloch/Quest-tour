@@ -9,9 +9,9 @@
     box-sizing: border-box;
     font-family: 'Montserrat';
 }
-html{
+/* html{
     font-size: 20px;
-}
+} */
 body{
     min-height: 100vh;
 }

@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const videoLect = document.querySelector('.video');
     titleLect.innerHTML = lecture.title;
     textLect.innerHTML = lecture.description;
-    if (lecture.pathto != "string"){
+    if (lecture.pathto != null){
       const videoLect = document.querySelector('.video');
       videoLect.innerHTML='<iframe class="iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
       const videoYT = document.querySelector(".iframe");
