@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tempSpan.textContent = textarea.value;
 
                 const newWidth = tempSpan.offsetWidth + parseInt(styles.paddingLeft) + parseInt(styles.paddingRight);
-                textarea.style.width = `${newWidth}px`;
+                textarea.style.width = `${newWidth + 20}px`;
 
                 document.body.removeChild(tempSpan);
             });
@@ -254,8 +254,9 @@ function createTest() {
     console.log(JSON.stringify(questions, null, 2));
 
     sendPractice().then(practiceSent => {
-        if (practiceSent) {
-            sendQuestions(questions);
+        if (practiceSent.okornot) {
+            console.log(practiceSent.message);
+            sendQuestions(questions, practiceSent.message);
         }
     });
 }
@@ -276,23 +277,32 @@ async function sendPractice(){
 
         if(response.data.status != 201) {
             document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
-            return false;
+            return {okornot:false, message:response.data.Message};
         }
+        console.log("Задание создано");
         document.getElementById("exit-modal-ok").classList.add("open");
-        return true;
+        return {okornot:true, message:response.data.Message};
     } catch (error) {
         console.error(error);
-        return false;
+        return {okornot:false, message:response.data.Message};
     }
 }
 
-async function sendQuestions(list){
-    const URL = `${window.location.origin}/script/add_questions`;
-    try {
-        const response = await axios.post(URL, { list: list });
-    } catch (error) {
-        console.error(error);
-    }
+async function sendQuestions(list, id){
+    id = parseInt(id);
+    const URL = `${window.location.origin}/script/add_questions?p_id=${id}`;
+
+    axios({
+        method: 'post',
+        url: URL,
+        data: list
+      })
+      .then(response => { 
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
 }
 
 function back(){

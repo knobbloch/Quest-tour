@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Редактирование теста</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/components/modal.css">
+    <link rel="stylesheet" type="text/css" href="/components/buttons_style.css">
+    <link rel="stylesheet" type="text/css" href="/components/checkbox.css">
+    <link rel="stylesheet" type="text/css" href="/components/radiobutton.css">
+    <link rel="stylesheet" type="text/css" href="/components/text-input.css">
+    <link rel="stylesheet" type="text/css" href="styles/edit_test.css">
+</head>
+<body>
+    <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Задание было сохранено!" text-btn="Ок"></pop-up-ok>
+    <custom-sidepanel back_page="http://127.0.0.1:8000/task_list"></custom-sidepanel>
+    <main>
+        <div class="heading">
+            <textarea class="title" maxlength="160" id="title"></textarea>          
+        </div>
+        <div class="test">
+            <div class="test__title">              
+                <h2>Тест</h2>
+                <h5> (Выделенные варианты ответов будут являться правильными)</h5>
+            </div>
+            <div id="hidden-text" class="hidden-text"></div>
+            <div class="questions">
+                <template id="question-template">
+                    <div class="question">
+                        <div class="name__question">
+                            <custom-checkbox  title="Несколько вариантов ответа" text=" " value="multiple"></custom-checkbox>
+                            <h3 class="number__question">1. </h3>
+                            <textarea class="textarea question-text" maxlength="100" id="question_1">Введите вопрос...</textarea>
+                            <img class="delete_question" src="./svg/delete.svg">
+                        </div>
+                        <div class="answers__question" id="answers-container">
+                        </div>
+                        <button class="add_answer_btn">+ Добавить ответ</button>
+                    </div>
+                </template>   
+            </div>
+        
+            <button class="add_question_btn">
+                + Добавить вопрос
+            </button>
+        </div>
+        <h4 class="warning" id="warning"></h4>
+        <div class="buttons">
+
+            <custom-button-blue onclick="createTest()">Сохранить тест</custom-button-blue>
+        
+            <custom-button-red onclick="back()">Отмена</custom-button-red>
+        </div>
+    </main> 
+    <script src="components/components.js"></script>
+    <script src="scripts/edit_test.js"></script>
+</body>
+</html>

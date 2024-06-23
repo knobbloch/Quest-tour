@@ -1,0 +1,263 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(components/Montserrat-VariableFont_wght.ttf);
+}
+
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    color: #0F2232;
+}
+
+body{
+    
+}
+
+main {
+    margin: 0 auto;
+    margin-left: 0rem;
+    display: grid;
+    /* grid-template-columns: auto auto auto; */
+    /* row-gap: 1rem; */
+    height: 100%;
+    margin-left: 6rem;
+   
+}
+
+.test__title {
+    display: flex;
+    justify-content: start;
+    align-items: center
+}
+
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    align-self: center;
+}
+h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.h3 {
+    font-size: 0.5rem;
+    font-weight: 500;
+}
+.number__question {
+    font-size: 1rem;
+    font-weight: 500;
+    align-self: self-start;
+    margin-right: 0.3rem
+}
+
+.name__question .textarea {
+    overflow: hidden;
+    font-size: 1rem;
+    font-weight: 500;
+    resize: none;
+    background-color: transparent;
+    border: none;
+    width: auto;
+    height: 2.4rem;
+    min-width: 5rem; /* Минимальная ширина */
+    box-sizing: content-box;
+    max-width: 45rem;
+}
+
+.name__question .textarea:focus {
+    outline: none;
+}
+
+.warning {
+    margin-top: 3rem;
+    margin-left: 2rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #EC1C24;
+}
+h5 {
+    font-size: 0.8rem;
+    font-weight: 350;
+    color: #4D5B67;
+}
+
+h6 {
+    font-size: 0.7rem;
+    font-weight: 350;
+    color: #4D5B67;
+}
+
+
+
+/* Текс в скобках и вопрос */
+.name__question .text {
+    font-size: 0.8rem;
+    font-weight: 350;
+    color: #4D5B67;
+}
+
+.name__question .fake {
+    margin-right: 0.4rem;
+    margin-left: 0.1rem;
+}
+
+/* Варианты ответов */
+.question .fake-radio {
+    margin-right: 0.6rem;
+    align-self: self-start;
+}
+
+.question .fake {
+    margin-right: 0.6rem;
+    align-self: self-start;
+}
+
+.question {
+    margin-left: 0rem;
+    margin-bottom: 1rem
+}
+
+.answers__question {
+    margin-left: 1rem;
+}
+
+.label {
+    margin-bottom: 0.2rem;
+}
+
+.name__question custom-checkbox {
+    align-self: self-start;
+}
+.textarea {
+    overflow: hidden;
+    font-size: 0.9rem;
+    font-weight: 400;
+    resize: none;
+    background-color: transparent;
+    border: none;
+    width: auto;
+    height: 2.4rem;
+    min-width: 4rem; /* Минимальная ширина */
+    box-sizing: content-box;
+    max-width: 50rem;
+}
+
+.textarea:focus {
+    outline: none;
+}
+
+.hidden-text {
+    visibility: hidden;
+    position: absolute;
+    white-space: pre;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+/* Заголовок */
+.heading{
+    display: flex;
+    
+    margin-left: 0rem;
+    margin-top: 1.5rem;
+
+    z-index: 1000;
+    background-color: #FFF;
+}
+.heading .title{
+    margin-left: 0.7rem;
+    font-size: 1.4rem;
+
+    font-weight: bold;
+    width:60%;
+    overflow: hidden; 
+    resize: none;
+    background-color: transparent;
+    border: none;
+}
+
+.title:focus {
+    outline: none;
+}
+
+.test{
+    margin-left: 2rem;
+}
+
+.buttons{
+    width: 25rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+
+.button_blue{
+    height: 3rem;
+    width: 10rem;
+    font-size: 1rem;
+}
+
+.button_red{
+    height: 3rem;
+    width: 10rem;
+    font-size: 1rem;
+    justify-self: start;
+}
+
+
+.name__question{
+    display: flex;
+    justify-content: start;
+    align-items: center
+}
+
+.add_answer_btn{
+    background-color: #FFF;
+    cursor: pointer;
+    border-color: transparent;   
+    font-size: 0.7rem;
+    font-weight: 350;
+    color: #4D5B67;
+    margin-left: 1.7rem;
+
+}
+.add_answer_btn:hover{
+    color: #383838;
+    font-weight: 500;
+}
+
+.add_question_btn{
+    background-color: #FFF;
+    cursor: pointer;
+    border-color: transparent;
+    
+    font-size: 0.8rem;
+    font-weight: 350;
+    color: #4D5B67;
+}
+
+.add_question_btn:hover{
+    color: #383838;
+    font-weight: 500;
+}
+
+.delete_answer {
+    align-self: self-start;
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+
+.delete_question {
+    align-self: self-start;
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
