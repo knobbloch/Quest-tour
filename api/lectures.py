@@ -77,7 +77,7 @@ async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)],
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    if not (db_main.edit_lection(l_id, new_data.title, new_data.description)):
+    if not (db_main.edit_lection(l_id, new_data.title, new_data.description, new_data.pathto)):
         return {'status': 500, 'Message': 'an error occurred'}
     else:
         if file is not None:
