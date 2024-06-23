@@ -3,16 +3,16 @@ class Custom_checkbox extends HTMLElement {
         const text = this.getAttribute('text');
         const group = this.getAttribute('group');
         const id = this.getAttribute('id');
+        const disabled = this.getAttribute('disabled') === 'true';
+        const checked = this.getAttribute('checked') === 'true';
 
         this.innerHTML = `   
-
             <label class="label">
-                <input id = "question-type-toggle" type="checkbox" class="checkbox" name="${group}" value="yes">
-                
+                <input id="question-type-toggle" ${disabled ? 'disabled' : ''} ${checked ? 'checked' : ''} type="checkbox" class="checkbox" name="${group}" value="yes">
                 <span class="fake">
                     <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6953 0.162106C12.0294 0.433152 12.0995 0.949317 11.8519 1.31499L6.49691 9.22195C5.91843 10.0761 4.81642 10.2544 4.03686 9.62L0.303744 6.58188C-0.0299928 6.31028 -0.0993633 5.794 0.148801 5.42873C0.396964 5.06347 0.868688 4.98755 1.20243 5.25916L4.93554 8.29727C5.0469 8.38791 5.20433 8.36243 5.28697 8.24041L10.6419 0.333448C10.8896 -0.0322278 11.3612 -0.10894 11.6953 0.162106Z" fill="transparent"/>
-                </svg>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6953 0.162106C12.0294 0.433152 12.0995 0.949317 11.8519 1.31499L6.49691 9.22195C5.91843 10.0761 4.81642 10.2544 4.03686 9.62L0.303744 6.58188C-0.0299928 6.31028 -0.0993633 5.794 0.148801 5.42873C0.396964 5.06347 0.868688 4.98755 1.20243 5.25916L4.93554 8.29727C5.0469 8.38791 5.20433 8.36243 5.28697 8.24041L10.6419 0.333448C10.8896 -0.0322278 11.3612 -0.10894 11.6953 0.162106Z" fill="transparent"/>
+                    </svg>
                 </span>
                 <span class="text">${text}</span>
             </label>`;
@@ -27,22 +27,19 @@ class Custom_radio extends HTMLElement {
         const group = this.getAttribute('group');
         const value = this.getAttribute('value');
         const id = this.getAttribute('id');
+        const disabled = this.getAttribute('disabled') === 'true';
+        const checked = this.getAttribute('checked') === 'true';
 
         this.innerHTML = `
-
             <div>
                 <label class="label">
-                    <input type="radio" class="radiobutton" id = "${id}" value="${value}" name="${group}" value="no" >
+                    <input type="radio" ${disabled ? 'disabled' : ''} ${checked ? 'checked' : ''} class="radiobutton" id="${id}" value="${value}" name="${group}" value="no">
                     <span class="fake-radio"></span>
                     <span class="text">${text}</span>
                 </label>
             </div>
         `;
-        const radioButton = this.querySelector('.radiobutton');
-
-        
     }
-    
 }
 
 customElements.define('custom-radiobutton', Custom_radio);
@@ -71,7 +68,7 @@ class Custom_checkbox_for_create extends HTMLElement {
     
             const updateWidth = () => {
                 hiddenText.textContent = textarea.value || textarea.placeholder;
-                textarea.style.width = hiddenText.offsetWidth + 'px';
+                textarea.style.width = `${hiddenText.offsetWidth + 20}px`;
             };
     
             // Устанавливаем начальную ширину
@@ -120,7 +117,7 @@ class Custom_radio_for_create extends HTMLElement {
 
         const updateWidth = () => {
             hiddenText.textContent = textarea.value || textarea.placeholder;
-            textarea.style.width = hiddenText.offsetWidth + 'px';
+            textarea.style.width = `${hiddenText.offsetWidth + 20}px`;
         };
 
         // Устанавливаем начальную ширину
