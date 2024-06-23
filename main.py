@@ -111,7 +111,7 @@ def check_permission(method, api, session_id):
 
     in_usr = True if api in ["/auth", "/account", "/information_change", "/lecture", "/map", "/pass_change", "/practice", "/practice_answer", "/statistic", "/test", "/test_result"] else False
     in_adm = True if api in ["/admin_account", "/admin_add_user", "/admin_information_change", "/admin_lecture", "/admin_pass_change", "/admin_statistic", "/admin_user_account", "/admin_user_information_change", "/create_lecture", "/create_practice", "/create_test",
-                     "/edit_lecture", "/edit_test", "/information_change", "/pass_change", "/user_list", "/task_list", "/practice_answer_list", "/practice_answer"] else False
+                     "/edit_lecture", "/edit_test", "/information_change", "/pass_change", "/user_list", "/task_list", "/practice_answer_list", "/practice_answer", "admin_practice", "edit_practice", "admin_test"] else False
 
     if in_usr and is_accessible(Access.USR, session_id) != "":
         return '200'

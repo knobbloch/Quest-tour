@@ -152,15 +152,17 @@ def edit_practice(id, title=None, description=None):
     print("edit_practice happened")
     return True
 
-def edit_lection(id, title=None, description=None):
+def edit_lection(id, title=None, description=None, pathto=None):
     try:
         cursor.execute("""SELECT * from Lection l WHERE l.id = ?""", (id, ))
         records = cursor.fetchall()
-        noww = [records[0][1], records[0][2]]
-        input = [title, description]
+        print("RECORDS")
+        print(records)
+        noww = [records[0][1], records[0][2], records[0][3]]
+        input = [title, description, pathto]
         changes = [elem_noww if elem_input is None else elem_input for elem_noww, elem_input in zip(noww, input)]
-        cursor.execute("UPDATE Lection SET title=?, description=? WHERE id=?",
-        (changes[0], changes[1], id))
+        cursor.execute("UPDATE Lection SET title=?, description=?, pathto=? WHERE id=?",
+        (changes[0], changes[1], pathto, id))
         conn.commit()
     except Exception as error:
         conn.rollback()
