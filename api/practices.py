@@ -1,5 +1,9 @@
+
+import mimetypes
+
 from fastapi import APIRouter, UploadFile, Cookie
-from fastapi.responses import FileResponse
+#from fastapi.responses import FileResponse
+from starlette.responses import StreamingResponse
 
 from api import db_main
 import os
@@ -148,14 +152,20 @@ async def get_answer_file(p_id: int, target_email: str, session_id: str = Cookie
     if not files or files == []:
         return {'status': 404, 'Message': 'file not found'}
     else:
-        return [
-            FileResponse(
-                f"data/answers/{file}",
-                media_type="application/octet-stream",
-                filename=f"{username}_{file}",
-            )
-            for file in files
-        ]
+        async def file_iterator(files):
+            for i_file in files:
+                print(i_file)
+                i_file_path = f"data/answers/{i_file}"
+                with open(i_file_path, 'rb') as f:
+                    while True:
+                        chunk = f.read(1024)
+                        if not chunk:
+                            break
+                        yield chunk
+
+        media_type_f = mimetypes.guess_type(paths[0])
+
+        return StreamingResponse(file_iterator(files), media_type=media_type_f[0])
 
 
 @practice_router.get("/get_answer_file_self")
@@ -176,14 +186,20 @@ async def get_answer_file_self(p_id: int, session_id: str = Cookie(alias=COOKIE_
     if not files or files == []:
         return {'status': 404, 'Message': 'file not found'}
     else:
-        return [
-            FileResponse(
-                f"data/answers/{file}",
-                media_type="application/octet-stream",
-                filename=f"{file}",
-            )
-            for file in files
-        ]
+        async def file_iterator(files):
+            for i_file in files:
+                print(i_file)
+                i_file_path = f"data/answers/{i_file}"
+                with open(i_file_path, 'rb') as f:
+                    while True:
+                        chunk = f.read(1024)
+                        if not chunk:
+                            break
+                        yield chunk
+
+        media_type_f = mimetypes.guess_type(paths[0])
+
+        return StreamingResponse(file_iterator(files), media_type=media_type_f[0])
 
 
 @practice_router.delete("/delete_answers")
