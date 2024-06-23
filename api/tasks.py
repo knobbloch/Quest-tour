@@ -1,5 +1,6 @@
 import pickle
 import os
+from typing import List
 
 from fastapi import APIRouter, Cookie
 
@@ -59,9 +60,7 @@ def read_file_test(path: str):
 
 @task_router.get("/read_test_from_file")
 async def read(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
-    print(session_id)
     email = is_accessible(Access.ALL, session_id)
-    print(email)
     if email == "":
         return {"status": 401, "Message": "Unauthorized"}
     questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
@@ -70,13 +69,23 @@ async def read(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY))
     return questions
 
 
-@task_router.post("/add_question")
-async def add_question(new_question: Question, p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+@task_router.get("/read_test_from_file_adm")
+async def read_adm(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "Unauthorized"}
+    questions = read_file_test("data/test/practice_" + str(p_id) + ".txt")
+    return questions
+
+
+@task_router.post("/add_questions")
+async def add_question(questions: List[Question], p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
-    write_new_in_file("data/test/practice_" + str(p_id) + ".txt", new_question)
-    return {"status": 201, "Message": "new question added"}
+    for new_question in questions:
+        write_new_in_file("data/test/practice_" + str(p_id) + ".txt", new_question)
+    return {"status": 201, "Message": "new questions added"}
 
 
 @task_router.delete("/delete_question")
