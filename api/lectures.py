@@ -3,7 +3,8 @@ import shutil
 from typing import Annotated, Optional, Union
 
 from fastapi import APIRouter, Cookie, UploadFile, File, Body
-from fastapi.responses import FileResponse
+#from fastapi.responses import FileResponse
+from starlette.responses import StreamingResponse
 
 from api import db_main
 from api.auth import COOKIE_SESSION_ID_KEY, is_accessible, Access
@@ -70,10 +71,10 @@ async def get_lecture(l_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_I
         return lecture_obj
 
 
-@lecture_router.put("/edit_lecture")
-async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)],
-                       file: Annotated[UploadFile, File(...)] = None,
-                       session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+@lecture_router.put("/edit_lecture_file")
+async def edit_lecture_file(l_id: int, new_data: Annotated[EditLecture, Body(...)],
+                            file: Annotated[UploadFile, File(...)],
+                            session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
     email = is_accessible(Access.ADM, session_id)
     if email == "":
         return {"status": 401, "Message": "user unauthorized"}
@@ -94,6 +95,18 @@ async def edit_lecture(l_id: int, new_data: Annotated[EditLecture, Body(...)],
             return {'status': 202, 'Message': 'lecture edited'}
         else:
             return {'status': 202, 'Message': 'lecture edited'}
+
+
+@lecture_router.put("/edit_lecture")
+async def edit_lecture(l_id: int, new_data: EditLecture,
+                       session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    if not (db_main.edit_lection(l_id, new_data.title, new_data.description, new_data.pathto)):
+        return {'status': 500, 'Message': 'an error occurred'}
+    else:
+        return {'status': 202, 'Message': 'lecture edited'}
 
 
 @lecture_router.delete("/delete_lecture")
@@ -192,14 +205,24 @@ async def get_lecture_file(l_id: int, session_id: str = Cookie(alias=COOKIE_SESS
     if not files or files == []:
         return {'status': 404, 'Message': 'files not found'}
     else:
-        return [
-            FileResponse(
-                f"data/lection/lec_{l_id}/{file}",
-                media_type="application/octet-stream",
-                filename=f"{file}",
-            )
-            for file in files
-        ]
+        # return [
+        #     FileResponse(
+        #         f"data/lection/lec_{l_id}/{file}",
+        #         media_type="application/octet-stream",
+        #         filename=f"{file}",
+        #     )
+        #     for file in files
+        # ]
+        async def file_iterator():
+            for i_file in files:
+                i_file_path = f"{path}\\data\\lection\\lec_{l_id}\\{i_file}"
+                with open(i_file_path, 'rb') as f:
+                    while True:
+                        chunk = f.read(1024)
+                        if not chunk:
+                            break
+                        yield chunk
+        return StreamingResponse(file_iterator(), media_type="video/mp4")
 
 
 @lecture_router.delete("/delete_lecture_file")
