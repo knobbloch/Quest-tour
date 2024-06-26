@@ -1,8 +1,7 @@
-
 import mimetypes
 
 from fastapi import APIRouter, UploadFile, Cookie
-#from fastapi.responses import FileResponse
+# from fastapi.responses import FileResponse
 from starlette.responses import StreamingResponse
 
 from api import db_main
@@ -12,7 +11,7 @@ import glob
 from api.auth import COOKIE_SESSION_ID_KEY, is_accessible, Access
 from api.db_main import get_practice_res, edit_practice_res, get_person
 from api.debugging import get_all_practices
-from api.models import Practice, Grade, PracticeRes, Answer, EditPractice
+from api.models import Practice, Grade, PracticeRes, Answer, EditPractice, Person
 
 practice_router = APIRouter(prefix="/script", tags=["Practice functions"])
 
@@ -143,7 +142,7 @@ async def get_answer_file(p_id: int, target_email: str, session_id: str = Cookie
     if db_main.get_practice(p_id)[3] == 1:
         return {'status': 400, 'Message': 'this practice is a test'}
     answer_id = get_practice_res(p_id, target_email)[0]
-    username = get_person(target_email)[1]+'_'+get_person(target_email)[2]
+    username = get_person(target_email)[1] + '_' + get_person(target_email)[2]
     paths = glob.glob(f"data/answers/practice_{answer_id}.*")
     files = []
     for path in paths:
@@ -234,3 +233,29 @@ async def add_answer(info: Answer, session_id: str = Cookie(alias=COOKIE_SESSION
     new_file.close()
     return {'status': 201, 'Message': 'answer added'}
 
+
+@practice_router.get("/who_done")
+async def who_done(p_id: int, session_id: str = Cookie(alias=COOKIE_SESSION_ID_KEY)):
+    email = is_accessible(Access.ADM, session_id)
+    if email == "":
+        return {"status": 401, "Message": "user unauthorized"}
+    if not db_main.get_practice(p_id):
+        return {'status': 404, 'Message': 'practice not found'}
+    if db_main.get_practice(p_id)[3] == 1:
+        return {'status': 400, 'Message': 'this practice is a test'}
+    users = db_main.get_all_not_adms()
+    pr_results = []
+    for i in users:
+        res = get_practice_res(p_id, i[0])
+        pr_results.append(res[0])
+    done = []
+    for i in range(0, len(pr_results)):
+        paths = glob.glob(f"data/answers/practice_{pr_results[i]}.*")
+        files = []
+        for path in paths:
+            name = path.split("\\")[-1]
+            files.append(name)
+        if files:
+            done.append(Person(email=users[i][0], namep=users[i][2], surname=users[i][1], admornot=users[i][7],
+                               thirdname=users[i][3], division=users[i][4], city=users[i][5], employment=users[i][6]))
+    return done
