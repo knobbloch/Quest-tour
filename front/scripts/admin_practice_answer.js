@@ -1,9 +1,9 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-// const p_id = urlParams.get('p_id');
-// const email = urlParams.get('target_email');
-const p_id = 4;
-const email = "user";
+const p_id = urlParams.get('p_id');
+const email = urlParams.get('target_email');
+// const p_id = 4;
+// const email = "user";
 function back(){
     window.location.href = "http://127.0.0.1:8000/practice_answer_list?p_id=" + p_id;
 }
