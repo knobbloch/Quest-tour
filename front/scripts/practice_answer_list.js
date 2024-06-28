@@ -1,5 +1,9 @@
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+let p_id = urlParams.get('p_id');
+
 async function getPracticeAnswerList() {
-    const URL = `${window.location.origin}/script/user_list`;
+    const URL = `${window.location.origin}/script/who_done?p_id=${p_id}`;
     try {
         const response = await axios.get(URL);
         const data = response.data;
