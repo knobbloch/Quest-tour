@@ -29,8 +29,9 @@ async function renderList(list) {
 
     list.forEach(function(user) {
         var clone = document.importNode(listTemplate.content, true);
-        clone.querySelector('.name').textContent = user.fio;
+        clone.querySelector('.name').textContent = user.surname + ' ' + user.namep + ' ' + user.thirdname;
         clone.querySelector('.line').dataset.email = user.email; 
+        
         listContainer.appendChild(clone);
     });    
 }
@@ -38,9 +39,8 @@ async function renderList(list) {
 
 
 function redirectToPage(user) {
-    var p_id = user.dataset.p_id;
-    var target_email = user.dataset.target_email;
-    window.location.href = `${window.location.origin}/practice_answer?p_id=${p_id}&target_email=${target_email}`;
+    var target_email = user.dataset.email;
+    window.location.href = `${window.location.origin}/admin_practice_answer?p_id=${p_id}&target_email=${target_email}`;
 }
 
 
