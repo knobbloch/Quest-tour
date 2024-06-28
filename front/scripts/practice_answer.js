@@ -19,7 +19,7 @@ async function getPracticeResult() {
     try {
         const response = await axios.get(URL);
         const data = response.data;
-        return data.result;
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -65,7 +65,6 @@ async function getFlowers() {
     if (ref_type == 0) {
       window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id + "&index="+ i
     }else{
-      //const res = await getPracticeResult()
       if(!await getPractice2(ref_id)){
         window.location.href = "http://127.0.0.1:8000/practice.html?id="+ref_id + "&index="+ i
       }
@@ -80,20 +79,79 @@ async function getFlowers() {
   }
 
 
-const next_btn = document.getElementById('next-btn');
-async function next() {
-    const flowers = await getFlowers();
-    if (index != flowers.length - 1) {
-        let next_index = index + 1;       
-        open_flower(flowers[next_index].type, flowers[next_index].entity_id, next_index);
-    }
-    else {
-        window.location.href = 'http://127.0.0.1:8000/map.html';
-    }
+  const next_btn = document.getElementById('next-btn');
+  async function next() {
+      const flowers = await getFlowers();
+      if (index != flowers.length - 1) {
+          let next_index = index + 1;       
+          open_flower(flowers[next_index].type, flowers[next_index].entity_id, next_index);
+      }
+      else {
+          window.location.href = 'http://127.0.0.1:8000/map';
+      }
+  }
+  next_btn.addEventListener('click', () => {
+      next();
+  });
+
+
+async function getPractice() {
+  const URL = `${window.location.origin}/script/get_practice?p_id=${id}&index=${index}`;
+  try {
+    const response = await axios.get(URL);
+    const data = response.data;
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return 0;
+  }
 }
-next_btn.addEventListener('click', () => {
-    next();
-});
+
+async function getAnswer() {
+  const URL = `${window.location.origin}/script/get_answer_file_self?p_id=${id}`;
+  axios({
+      method: 'get',
+      url: URL,
+      responseType: 'blob',
+      headers: {
+        Accept: 'application/json'
+      }
+    }).then(function(response) {
+      const data = response.data;
+      const reader = new FileReader();
+      if (data.type == "text/plain"){
+          reader.onload = function() {
+              const text = reader.result;
+              const textAnswer = document.querySelector('.user_answer');
+              textAnswer.innerHTML = text;
+            };
+            
+          reader.readAsText(data);
+      }
+      else{
+          reader.onloadend = function() {
+              const textAnswer = document.querySelector('.user_answer');
+              textAnswer.innerHTML = "Ответ дан файлом.";
+              const imageDataUrl = reader.result;
+              const fileBox = document.querySelector(".file");
+              const imgFile = document.createElement("img");
+              imgFile.src = "svg/file_img.svg";
+              fileBox.appendChild(imgFile);
+              const lableFile = document.createElement("a");
+              lableFile.download = true;
+              lableFile.className = "file-label";
+              lableFile.innerHTML = "файл ответа";
+              lableFile.href = imageDataUrl;
+              fileBox.appendChild(lableFile);
+          }  
+          reader.readAsDataURL(response.data);
+      }   
+    }).catch(function(error) {
+      console.log(error);
+      return 0;
+    });
+}
 
 // // var adminBorder = document.getElementById('admin-border');
 // // Рост texstarea при добавлении текста
@@ -119,11 +177,16 @@ function adjustHeight(textarea, flag) {
     }
 
 document.addEventListener('DOMContentLoaded', async function() {
+    const practice = await getPractice();
+    const titlePract = document.querySelector('.title');
+    const textPract = document.querySelector('.task');
+    titlePract.innerHTML = practice.title;
+    textPract.innerHTML = practice.description;
+    const userAnswer = document.querySelector('.user_answer');
     const result = await getPracticeResult();
-
-    const adminBorder = document.querySelector('.comment-user');
+    getAnswer();
     const textarea = document.querySelector('.comment-user__text');
-    textarea.innerHTML = result.comment;
+    const adminBorder = document.querySelector('.comment-user');
     adjustHeight(textarea, 0);
     adjustHeight(adminBorder, 1);
     window.onload = function() {
@@ -134,17 +197,24 @@ document.addEventListener('DOMContentLoaded', async function() {
         adjustHeight(textarea, 0);
         adjustHeight(adminBorder, 1);
     };
-    const score = result.result;
-    // const score = 5;
-    // console.log(score);
-    const userAnswer = document.querySelector(".user_answer");
+    
+    // let score = result.result;
+    let score = null;
     // var disableButton = true; //change this value to false and the button will be clickable
-    const button = document.querySelector(".send");
+    const button = document.querySelector(".button_red");
     button.disabled = true;
+    
     if (score >= 60){
         userAnswer.style.border = "2px solid #369381"
+        textarea.innerHTML = result.comment;
+    }
+    else if (score == null){
+        userAnswer.style.border = "2px solid black";
+        textarea.innerHTML = "Задание на проверке";
+        button.disabled = true;
     }
     else{
+        textarea.innerHTML = result.comment;
         button.disabled = false;
         userAnswer.style.border = "2px solid #FF4346"
         var userInput = document.createElement('answer-input');
@@ -160,5 +230,5 @@ document.addEventListener('DOMContentLoaded', async function() {
 const backButton = document.getElementById('back_to_map');
 backButton.addEventListener('click', () => {
     // Переходим по URL-адресу
-    window.location.href = 'http://127.0.0.1:8000/map.html'; // Замените 'URL' на нужный URL-адрес для перехода
+    window.location.href = 'http://127.0.0.1:8000/map'; // Замените 'URL' на нужный URL-адрес для перехода
 });

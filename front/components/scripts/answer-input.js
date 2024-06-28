@@ -1,13 +1,16 @@
+window.length = 0;
 async function deleteFile(event) {
   event.stopPropagation(); // Предотвращаем всплытие события
   var ansInput = document.getElementById('input_ans');
   var element = event.currentTarget; // Получаем текущий элемент, на котором произошло событие
   var fileElement = element.closest('.file__box');
+  console.log()
   fileElement.parentNode.removeChild(fileElement);
+  window.length -= 1;
   let rect = ansInput.getBoundingClientRect();
   ansInput.style.height = rect.height/20 - 6 + "rem" ;
 }
-// let fileInput = null;
+
 // document.addEventListener('DOMNodeInserted', function(){fileInput = document.getElementById('add_file')});
 document.addEventListener('DOMContentLoaded', function(){
   const ansInput = document.getElementById('input_ans');
@@ -31,20 +34,26 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
   // Функция считывает изменение в буфере поля загрузки файла, проходится по каждой ссылке и добавляет эти файлы в место выгрузки соответственн
-
-
+  
+console.log(window.length);
   function addFile(){
-    for(let i=0;i<this.files.length;i++){
-      const fileElement = document.createElement('div');
-
-      const file = this.files[i];
-      const url = URL.createObjectURL(file);
-      fileElement.innerHTML = '<div class="file__box"><img src="svg/file_img.svg"><p class="file__box-label">'+file.name+'</p><div class="button-delete" onclick="deleteFile(event)"></div></div>';
-      filePlayer.appendChild(fileElement);
-      let rect = ansInput.getBoundingClientRect();
-      ansInput.style.height = rect.height/20 + (fileElement.scrollHeight/20) + 2 + "rem" ;
-    }
-    
+      if (window.length < 1){
+        const fileElement = document.createElement('div');
+        let file = this.files[0];
+        inputFile = file;
+        const url = URL.createObjectURL(file);
+        fileElement.innerHTML = '<div class="file__box"><img src="svg/file_img.svg"><p class="file__box-label">'+file.name+'</p><div class="button-delete" onclick="deleteFile(event)"></div></div>';
+        filePlayer.appendChild(fileElement);
+        let rect = ansInput.getBoundingClientRect();
+        ansInput.style.height = rect.height/20 + (fileElement.scrollHeight/20) + 2 + "rem" ;
+        window.length++;
+        
+      }
+      else{
+        document.getElementById("modal__box-text").textContent = "Можно добавить только один файл!";
+        document.getElementById("exit-modal-ok").classList.add("open");
+      }
+      
   }
 
   fileInput.addEventListener('change', addFile);

@@ -176,7 +176,7 @@ async function handleSubmit() {
                     inputElement.disabled = true;
                 });
                 submitButton.disabled = true;
-                window.location.href = `http://127.0.0.1:8000/test_result.html?id=${id}&index=${index}`;
+                window.location.href = `http://127.0.0.1:8000/test_result?id=${id}&index=${index}`;
             }
             catch (error) {
                 console.error('Ошибка при отправке', error);
@@ -223,5 +223,5 @@ async function sendAnswersToServer(selectedAnswers) {
 const backButton = document.getElementById('back-to-map');
 backButton.addEventListener('click', () => {
     // Переходим по URL-адресу
-    window.location.href = 'http://127.0.0.1:8000/map.html'; // Замените 'URL' на нужный URL-адрес для перехода
+    window.location.href = 'http://127.0.0.1:8000/map'; // Замените 'URL' на нужный URL-адрес для перехода
 });

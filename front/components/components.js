@@ -2,16 +2,17 @@ class Custom_checkbox extends HTMLElement {
     connectedCallback() {
         const text = this.getAttribute('text');
         const group = this.getAttribute('group');
+        const id = this.getAttribute('id');
+        const disabled = this.getAttribute('disabled') === 'true';
+        const checked = this.getAttribute('checked') === 'true';
 
         this.innerHTML = `   
-
             <label class="label">
-                <input id = "check" type="checkbox" class="checkbox" name="${group}" value="yes">
-                
+                <input id="question-type-toggle" ${disabled ? 'disabled' : ''} ${checked ? 'checked' : ''} type="checkbox" class="checkbox" name="${group}" value="yes">
                 <span class="fake">
                     <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6953 0.162106C12.0294 0.433152 12.0995 0.949317 11.8519 1.31499L6.49691 9.22195C5.91843 10.0761 4.81642 10.2544 4.03686 9.62L0.303744 6.58188C-0.0299928 6.31028 -0.0993633 5.794 0.148801 5.42873C0.396964 5.06347 0.868688 4.98755 1.20243 5.25916L4.93554 8.29727C5.0469 8.38791 5.20433 8.36243 5.28697 8.24041L10.6419 0.333448C10.8896 -0.0322278 11.3612 -0.10894 11.6953 0.162106Z" fill="transparent"/>
-                </svg>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6953 0.162106C12.0294 0.433152 12.0995 0.949317 11.8519 1.31499L6.49691 9.22195C5.91843 10.0761 4.81642 10.2544 4.03686 9.62L0.303744 6.58188C-0.0299928 6.31028 -0.0993633 5.794 0.148801 5.42873C0.396964 5.06347 0.868688 4.98755 1.20243 5.25916L4.93554 8.29727C5.0469 8.38791 5.20433 8.36243 5.28697 8.24041L10.6419 0.333448C10.8896 -0.0322278 11.3612 -0.10894 11.6953 0.162106Z" fill="transparent"/>
+                    </svg>
                 </span>
                 <span class="text">${text}</span>
             </label>`;
@@ -25,22 +26,20 @@ class Custom_radio extends HTMLElement {
         const text = this.getAttribute('text');
         const group = this.getAttribute('group');
         const value = this.getAttribute('value');
+        const id = this.getAttribute('id');
+        const disabled = this.getAttribute('disabled') === 'true';
+        const checked = this.getAttribute('checked') === 'true';
 
         this.innerHTML = `
-
             <div>
                 <label class="label">
-                    <input id="radio1" type="radio" class="radiobutton"  value="${value}" name="${group}" value="no" >
+                    <input type="radio" ${disabled ? 'disabled' : ''} ${checked ? 'checked' : ''} class="radiobutton" id="${id}" value="${value}" name="${group}" value="no">
                     <span class="fake-radio"></span>
                     <span class="text">${text}</span>
                 </label>
             </div>
         `;
-        const radioButton = this.querySelector('.radiobutton');
-
-        
     }
-    
 }
 
 customElements.define('custom-radiobutton', Custom_radio);
@@ -69,7 +68,7 @@ class Custom_checkbox_for_create extends HTMLElement {
     
             const updateWidth = () => {
                 hiddenText.textContent = textarea.value || textarea.placeholder;
-                textarea.style.width = hiddenText.offsetWidth + 'px';
+                textarea.style.width = `${hiddenText.offsetWidth + 20}px`;
             };
     
             // Устанавливаем начальную ширину
@@ -80,8 +79,19 @@ class Custom_checkbox_for_create extends HTMLElement {
     
             // Обновляем ширину при загрузке
             window.addEventListener('load', updateWidth);
+            this.textareaExpanding();
+        }
+    
+        textareaExpanding() {
+            // Код textareaExpanding() для этого кастомного элемента
+            const textareas = this.querySelectorAll('.textarea');
+            textareas.forEach(textarea => {
+                textarea.addEventListener('input', () => {
+                    // Реализация textareaExpanding() в контексте кастомного элемента
+                });
+            });
+        }
     }
-}
 
 customElements.define('custom-checkbox-for-create', Custom_checkbox_for_create);
 
@@ -107,7 +117,7 @@ class Custom_radio_for_create extends HTMLElement {
 
         const updateWidth = () => {
             hiddenText.textContent = textarea.value || textarea.placeholder;
-            textarea.style.width = hiddenText.offsetWidth + 'px';
+            textarea.style.width = `${hiddenText.offsetWidth + 20}px`;
         };
 
         // Устанавливаем начальную ширину
@@ -118,6 +128,17 @@ class Custom_radio_for_create extends HTMLElement {
 
         // Обновляем ширину при загрузке
         window.addEventListener('load', updateWidth);
+        this.textareaExpanding();
+    }
+
+    textareaExpanding() {
+        // Код textareaExpanding() для этого кастомного элемента
+        const textareas = this.querySelectorAll('.textarea');
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', () => {
+                // Реализация textareaExpanding() в контексте кастомного элемента
+            });
+        });
     }
 }
 
@@ -377,6 +398,10 @@ class Pop_up_OK extends HTMLElement {
     open_modal() {
         document.getElementById("exit-modal-ok").classList.add("open")
     }
+
+    close_modal() {
+        document.getElementById("exit-modal").classList.remove("open")
+    }
 }
 
 customElements.define('pop-up-ok', Pop_up_OK);
@@ -411,7 +436,7 @@ class Pop_up extends HTMLElement {
 
         // Функция открывает модальное окно при нажатии на кнопку
         if(open_btn_id!=null){
-            document.getElementById(open_btn_id).addEventListener('click',this.open_modal(id_modal))
+            document.getElementById(open_btn_id).addEventListener('click',this.open_modal)
         }
 
         // Функция закрывает модальное окно при нажатии на кнопку "НЕТ"
@@ -421,9 +446,14 @@ class Pop_up extends HTMLElement {
         document.getElementById(yes_id).addEventListener("click",()=>{window[yes_bt_func]()})   
     }
 
-    open_modal(id) {
-        document.getElementById(id).classList.add("open")
+    open_modal() {
+        document.getElementById("exit-modal").classList.add("open")
     }
+
+    close_modal() {
+        document.getElementById("exit-modal").classList.remove("open")
+    }
+
 }
 
 customElements.define('pop-up', Pop_up);
@@ -771,7 +801,7 @@ class Answer_input extends HTMLElement {
         <link rel="stylesheet" type="text/css" href="components/answer-input.css">
 
         <div class="answer-input" id="input_ans">
-            <textarea class="answer-input__text" id="text_box" placeholder="Введите ответ" oninput="auto_grow()"></textarea>
+            <textarea class="answer-input__text" id="text_box" placeholder="Введите ответ"></textarea>
 
             <label class="answer-input__field">
                 <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -782,9 +812,7 @@ class Answer_input extends HTMLElement {
             </label>
 
             <!-- Место,куда вставляются все файлы  -->
-            <div class="filePlayer" id="filePlayer">
-
-        </div>        
+            <div class="filePlayer" id="filePlayer"></div>        
         `
     }
 }
@@ -798,7 +826,7 @@ class Сomment_user extends HTMLElement {
 
         <div class="comment-user">
             <img src="svg/A.svg" class="comment-user__img">
-            <textarea class="comment-user__text" >Ну тут вообще объективно математика - лженаука, а пример для объяснения побольше нужен, но кнопки должны быть видны, поэтому улитка говорит бармену...</textarea>
+            <textarea class="comment-user__text" ></textarea>
         </div> 
         `
     }
@@ -812,7 +840,7 @@ class Comment_admin extends HTMLElement {
         <link rel="stylesheet" type="text/css" href="components/comment-admin.css">
 
         <div class="comment-admin">
-            <img src="img/A.svg" class="comment-admin__img">
+            <img src="../svg/A.svg" class="comment-admin__img">
             <textarea class="comment-admin__text"  placeholder="Напишите комментарий к этому ответу" oninput="auto_grow(this)"></textarea>
         </div>       
         `

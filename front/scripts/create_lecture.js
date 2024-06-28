@@ -24,7 +24,7 @@
         const data={title: title,description: description,orderc: orderc};
         formData.append('lecture', JSON.stringify(data));
         formData.append('file', added_file);
-
+        
         try {
             const response = await axios.post(URL, formData);
             console.log(response.data);

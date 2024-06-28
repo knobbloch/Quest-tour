@@ -32,7 +32,7 @@ function back(){
 };
 
 function answers(){
-  window.location.href = 'http://127.0.0.1:8000/practice_answer_list';//?????
+  window.location.href = 'http://127.0.0.1:8000/practice_answer_list?p_id=' + id;
 }
 
 function edit(){

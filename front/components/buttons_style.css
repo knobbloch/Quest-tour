@@ -9,9 +9,9 @@
     box-sizing: border-box;
     font-family: 'Montserrat';
 }
-html{
+/* html{
     font-size: 20px;
-}
+} */
 .button_red{
     display: flex;
     justify-content: center;

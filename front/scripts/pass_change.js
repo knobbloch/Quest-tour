@@ -12,6 +12,16 @@ function add_error(obj){
   obj.classList.add("error");
 }
 
+function latin_check(obj){
+  if(/[А-Яа-яЁё]/.test(obj.value)){
+    add_error(obj);
+    return false;
+  }else{
+    del_error(obj);
+    return true;
+  }
+}
+
 function del_error(obj){
   obj.classList.remove("error");
 }
@@ -70,6 +80,11 @@ function check_pass(){
     if(new_pass_inf.value.length<8){
       error.textContent="*Пароль должен содержать не менее 8 символов!";
       add_error(new_pass_inf);
+      return false;
+    }
+
+    if(!latin_check(new_pass_inf) * !latin_check(agein_pass_inf)){
+      error.textContent="*Пароль должен содержать только латинские буквы, цифры и специальные символы !";
       return false;
     }
     

@@ -3,6 +3,100 @@
     font-style: normal;
     src: url(components/Montserrat-VariableFont_wght.ttf);
 }
+
+.heading{
+    width:100%;
+    display: flex;
+    z-index: 1000;
+    background-color: #FFF;
+}
+.heading .title{
+    width: 100%;
+    margin-left: 6rem;
+    margin-top: 1.2rem;
+    font-size: 1.3rem;
+
+    font-weight: bold;
+    width:100%;
+
+    resize: none;
+    background-color: transparent;
+    border: none;
+}
+
+.title:focus {
+    outline: none;
+}
+
+.panels{
+    display: block;
+    margin-top: 1rem;
+}
+
+.text-input{
+    margin-top: 2rem;
+    width: 70vw;
+    left: 12rem;
+}
+
+.buttons{
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+
+    margin-left: 12rem;
+    align-items: center;;
+}
+
+.button-delete{
+    left: 59rem;
+    bottom: 3rem;
+
+    width: 3rem;
+    height: 3rem;
+}
+.button_blue{
+    width: 12rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+}
+.button_red{
+    height: 3rem;
+    width: 8rem;
+    font-size: 0.9rem;
+    border-radius: 0.8rem;
+}
+.video-input{
+    max-width: 40rem;
+}
+.video-input__upload{
+    left: 42rem;
+    top: 10rem;
+}
+/* .videoPlayer{
+    width: 55vw;
+    height: 35vw;
+    display: flex;
+    justify-content: center;
+} */
+/* .video__box{
+    width: 55vw;
+    height: 35vw;
+} */
+.video__box iframe, .video__box video{
+    width: 55vw;
+    height: 35vw;
+    left: 36rem;
+    display: flex;
+    justify-content: center;
+}
+/* @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    src: url(components/Montserrat-VariableFont_wght.ttf);
+}
 * {
     margin: 0;
     padding:0;
@@ -10,10 +104,10 @@
     font-family: 'Montserrat';
     color: #0F2232;
 }
-html{
+/* html{
     font-size: 20px;
-}
-body{
+} */
+/*body{
     min-height: 100%;
 }
 .heading{
@@ -59,12 +153,12 @@ body{
     object-fit: cover;
     overflow: auto;
 } */
-.container video-input{
+/*.container video-input{
     /* width: 100%;
     height: 100%;
     object-fit: cover;
     overflow: auto;*/
-    grid-column:2;
+    /*grid-column:2;
     grid-row: 2;
 
 }
@@ -121,4 +215,4 @@ body{
     font-size: 0.9rem;
     font-weight: bold;
     border-radius: 0.8rem;
-}
+} */

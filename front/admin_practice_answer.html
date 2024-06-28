@@ -6,23 +6,26 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" type="text/css" href="components/buttons_style.css">
 <link rel="stylesheet" type="text/css" href="components/comment-admin.css">
+<link rel="stylesheet" type="text/css" href="/components/modal.css">
 <!-- <link rel="stylesheet" type="text/css" href="components/answer-input.css"> -->
 <link rel="stylesheet" type="text/css" href="styles/admin_practice_answer_style.css">
 </head>
 <body>
-    <custom-sidepanel back_page="http://127.0.0.1:8000/practice_answer_list.html"></custom-sidepanel>
+    <custom-sidepanel></custom-sidepanel>
+    <pop-up-ok ok_bt_func="back" header-text="Внимание!" question-text="Практика успешно принята!" text-btn="Ок"></pop-up-ok>
     <div class="container">
         <p class="title">Ответ на задание от юзера</p> 
         <p class="task_title">Задание</p>
         <p class="task">Опишите подробно Вашу любимую серию Смешариков (приложите скриншоты, объясните свой выбор). И ещё какое-то задание, не могу придумать.</p>
         <p class="answer_title">Ответ</p>
-        <p class="answer">Ответ юзера</p>
+        <div class="file"></div>
+        <p class="answer"></p>
         <comment-admin></comment-admin>
         <custom-button-red class="send" onclick="sendScore()">Принять ответ</custom-button-red> 
-        <custom-button-blue class="reject" id="reject-btn">Отправить на доработку</custom-button-blue>
+        <custom-button-blue class="reject" id="reject-btn" onclick="sendBadScore()">Отправить на доработку</custom-button-blue>
     </div>
     <script src="components/components.js"></script>
-    <script src="scripts/practice.js"></script>
+    <script src="scripts/admin_practice_answer.js"></script>
     <script src="components/scripts/comment-admin.js"></script>
 </body>
 </html>

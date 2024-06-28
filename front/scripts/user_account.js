@@ -29,7 +29,7 @@ async function deleteUser() {
 }
 
 async function sendPassToServer() { 
-  const URL = `${window.location.origin}/script/drop_password?email=${email}`;
+  const URL = `${window.location.origin}/script/set_default_password?target=${email}`;
   try {
     const response = await axios.put(URL);
 

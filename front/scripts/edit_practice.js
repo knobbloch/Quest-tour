@@ -39,9 +39,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 })
 
 async function sendPractice(practContent){
-    const URL = `${window.location.origin}/script/edit_practice?l_id=${id}`; 
+    const URL = `${window.location.origin}/script/edit_practice?p_id=${id}`; 
     const data = {title: practContent[0], description: practContent[1]};
-    console.log(data)
+    console.log(typeof(practContent[0]));
     const config = {
         headers: {'Content-Type': 'application/json'}
     }

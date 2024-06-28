@@ -31,81 +31,116 @@
     }
       
     async function getFileLecture() {
-      const URL = `${window.location.origin}/script/get_lecture_file?l_id=${id}`;
       try {
+        const URL = `${window.location.origin}/script/get_lecture_file?l_id=${id}`;
         const response = await axios.get(URL, {
-          responseType: 'json'
+          responseType: 'blob',
+          headers: {
+            'Content-Type': 'video/mp4'
+          }
         });
-        const fileData = response.data; // Данные файла в виде ArrayBuffer
+        const fileData = response.data;
         console.log(fileData);
         return fileData;
-       } catch (error) {
-        console.log(error);
-        return 0;
-       }
+      } catch (error) {
+        console.error('Ошибка:', error);
+        // Обработка ошибки
+      }
     }
 
+    let flag = 0;
+
     document.addEventListener('DOMContentLoaded', async function() {
-      const textLect = document.querySelector('.lecture');
+      const textLect = document.querySelector('.text-input__textarea');
       const lecture = await getLecture();
       const titleLect = document.querySelector('.title');
       titleLect.innerHTML = lecture.title;
       textLect.innerHTML = lecture.description;
-      if (lecture.pathto != "string"){ //?????
+      if ((lecture.pathto != null)&&(lecture.pathto != "string")&&(lecture.pathto != "")){ //?????
         addYoutubeVideo(lecture.pathto);
       }
-      
+      else{
+        const videoElement = document.createElement('div');
+        videoElement.className="video__box";
+        videoElement.id="file";
+
+        const videoData = await getFileLecture();
+        const videoPath = URL.createObjectURL(videoData);
+        added_file = videoData;
+        
+        videoElement.innerHTML = '<video controls><source src="'+videoPath+'"></video><div class="button-delete" onclick="deleteVideo(event)"></div>';
+        videoPlayer.appendChild(videoElement);
+
+        document.querySelector('.video-input').innerHTML='';
+        document.querySelector('.video-input').classList.add('destroyed');
+      }
     });
   
-    //   // Функция выгрузки лекции
-    // async function send_lection_file(title, description, orderc) {  
-    //     const URL = `${window.location.origin}/script/create_lecture_with_file`;
-    //     const formData = new FormData();
-    //     const data={title: title,description: description,orderc: orderc};
-    //     formData.append('lecture', JSON.stringify(data));
-    //     formData.append('file', added_file);
+    async function edit_lecture_youtube(title, description) {  
+      const URL = `${window.location.origin}/script/edit_lecture?l_id=${id}`;
+      axios({
+        method: 'put',
+        url: URL,
+        data: {title: title,description: description, pathto:added_link},
+      })
+      .then(response => {
+        console.log(response.data)
+        if(response.data['status']!=202){
+          document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+        }
+        document.getElementById("exit-modal-ok").classList.add("open")
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
 
-    //     try {
-    //         const response = await axios.post(URL, formData);
-    //         console.log(response.data);
-    //         if (response.data['status'] != 201) {
-    //             document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
-    //         }
-    //         document.getElementById("exit-modal-ok").classList.add("open");
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    async function edit_lecture_file(title1, description1) {  
+      const URL = `${window.location.origin}/script/edit_lecture_file?l_id=${id}`;
+      const formData = new FormData();
+      const data = {
+        title: title1,
+        description: description1,
+        pathto: "string"
+      };
+      formData.append('new_data', JSON.stringify(data));
+      console.log(added_file);
+      formData.append('file', added_file);
+      axios.put(URL, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(response => {
+        console.log('Файл и словарь успешно отправлены');
+        console.log(response.data);
+        if (response.data['status'] != 202) {
+          document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+        }
+        document.getElementById("exit-modal-ok").classList.add("open");
+      })
+      .catch(error => {
+        console.error('Ошибка:', error);
+      });
+    }
 
-    // async function send_lection_no_file(title,description,orderc){
-    //     const URL = `${window.location.origin}/script/create_lecture`;
-    //     axios({
-    //       method: 'post',
-    //       url: URL,
-    //       data: {title: title,description: description,orderc: orderc,pathto:added_link},
-    //     })
-    //     .then(response => {
-    //       console.log(response.data)
-    //       if(response.data['status']!=201){
-    //         document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
-    //       }
-    //       document.getElementById("exit-modal-ok").classList.add("open")
-    //     })
-    //     .catch(error => {
-    //       console.log(error)
-    //     })
-    // }
-      
-  
-      // Функция открытия попапа
-  
-    function create_lection(){
-        if(added_file!=''){
-            send_lection_file(title.value,description.value,orderc);
-        }else{
-          
-          console.log(orderc);
-            send_lection_no_file(title.value,description.value,orderc);
+    function edit_lecture(){
+        if (added_link != ""){
+          edit_lecture_youtube(title.value, description.value);
+        }
+        else{
+          if (flag == 0){
+            // Создание объекта File с типом MP4
+            const fileName = 'video.mp4';
+            const fileOptions = {
+              type: 'video/mp4',
+              lastModified: Date.now() // метка времени последнего изменения файла
+            };
+            const file = new File([added_file], fileName, fileOptions);
+            added_file = file;
+          }
+          edit_lecture_file(title.value, description.value);
+          console.log("file");
         }
     }
 // const queryString = window.location.search;

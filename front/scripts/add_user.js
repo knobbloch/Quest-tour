@@ -57,6 +57,16 @@ async function sendInfToServer(login,surname,name,midname,city,department) {
   })
   .then(response => {
     console.log(response.data)
+
+    if(response.data['status']==418){
+      error.textContent="Пользователь с такой почтой уже существует!";
+      login_inf.classList.remove("error");
+      void login_inf.offsetWidth;
+      login_inf.classList.add("error");
+      return;
+    }
+
+    login_inf.classList.remove("error");
     if(response.data['status']!=201){
       document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
     }
