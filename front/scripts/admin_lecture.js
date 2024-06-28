@@ -16,19 +16,23 @@ async function getLecture() {
   }
 
   async function getFileLecture() {
-    const URL = `${window.location.origin}/script/get_lecture_file?l_id=${id}`;
-    try {
-      const response = await axios.get(URL, {
-        responseType: 'json'
-      });
-      const fileData = response.data; // Данные файла в виде ArrayBuffer
-      console.log(fileData);
-      return fileData;
-    } catch (error) {
-      console.log(error);
-      return 0;
+      try {
+        const URL = `${window.location.origin}/script/get_lecture_file?l_id=${id}`;
+        const response = await axios.get(URL, {
+          responseType: 'blob',
+          headers: {
+            'Content-Type': 'application/octet-stream'
+          }
+        });
+        const fileData = response.data;
+        console.log(fileData);
+        return fileData;
+      } catch (error) {
+        console.error('Ошибка:', error);
+        // Обработка ошибки
+      }
     }
-  }
+
 
 function adjustHeight(textarea) {
     textarea.style.height = 'auto';
@@ -51,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   const videoLect = document.querySelector('.video');
   titleLect.innerHTML = lecture.title;
   textLect.innerHTML = lecture.description;
-  if (lecture.pathto != "string"){
+  if ((lecture.pathto != null)&&(lecture.pathto != "string")&&(lecture.pathto != "")){
     const videoLect = document.querySelector('.video');
     videoLect.innerHTML='<iframe class="iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
     const videoYT = document.querySelector(".iframe");
@@ -60,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
   else{
     const videoData = await getFileLecture();
-    const videoPath = "../" + videoData[0].path;
+    const videoPath = URL.createObjectURL(videoData);
     var videoFile = document.createElement('video');
     videoFile.controls = true;
     videoFile.setAttribute("src", videoPath);

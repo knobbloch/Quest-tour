@@ -1,3 +1,4 @@
+inputFile = '';
 const ansInput = document.getElementById('input_ans');
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -106,10 +107,47 @@ document.addEventListener('DOMContentLoaded', async function() {
     textPract.innerHTML = practice.description;
 })
 
+async function sendUserAnswer(user_answer){
+  const URL = `${window.location.origin}/script/add_answer`;
+  axios({
+    method: 'post',
+    url: URL,
+    data: {p_id: id, text: user_answer},
+  })
+  .then(response => {
+    console.log(response.data)
+    // if(response.data['status']!=201){ ??????????????????????????????????????????
+    //   document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+    // }
+    //   document.getElementById("exit-modal-ok").classList.add("open")
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+async function sendUserAnswerFile(){
+  const URL = `${window.location.origin}/script/add_answer_file?p_id=${id}`;
+  const formData = new FormData();
+  formData.append('file', inputFile);
+  try {
+    const response = await axios.post(URL, formData);
+    console.log(response.data);
+    // if (response.data['status'] != 201) {
+    //   document.getElementById("modal__box-text").textContent = "Возникла ошибка :( Попробуйте ещё раз";
+    // }
+    //   document.getElementById("exit-modal-ok").classList.add("open");
+    } catch (error) {
+      console.log(error);
+    }
+}
+
 function sendAnswer(){
   let answer = document.getElementById('text_box').value;
-
+  // sendUserAnswer(answer);
+  // sendUserAnswerFile();
   document.getElementById('text_box').value = '';
+  console.log(filePlayer.childNodes.length);
   // const filePlayer = document.getElementById('filePlayer'); 
   // var k = 0;
   // var costil = 0;
