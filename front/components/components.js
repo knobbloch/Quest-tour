@@ -812,9 +812,7 @@ class Answer_input extends HTMLElement {
             </label>
 
             <!-- Место,куда вставляются все файлы  -->
-            <div class="filePlayer" id="filePlayer">
-
-        </div>        
+            <div class="filePlayer" id="filePlayer"></div>        
         `
     }
 }
@@ -828,7 +826,7 @@ class Сomment_user extends HTMLElement {
 
         <div class="comment-user">
             <img src="svg/A.svg" class="comment-user__img">
-            <textarea class="comment-user__text" >Ну тут вообще объективно математика - лженаука, а пример для объяснения побольше нужен, но кнопки должны быть видны, поэтому улитка говорит бармену...</textarea>
+            <textarea class="comment-user__text" ></textarea>
         </div> 
         `
     }
@@ -842,7 +840,7 @@ class Comment_admin extends HTMLElement {
         <link rel="stylesheet" type="text/css" href="components/comment-admin.css">
 
         <div class="comment-admin">
-            <img src="img/A.svg" class="comment-admin__img">
+            <img src="../svg/A.svg" class="comment-admin__img">
             <textarea class="comment-admin__text"  placeholder="Напишите комментарий к этому ответу" oninput="auto_grow(this)"></textarea>
         </div>       
         `
