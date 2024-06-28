@@ -86,6 +86,46 @@ body{
     align-content: center;
     margin: 1rem 0 1rem 0;
 }
+.file{
+    width: auto;
+    height: auto;
+    margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 5;
+}
+
+.file img{
+    width: 3.8rem;
+    height: 4rem;
+    object-fit: cover;
+    margin-right: 0.5rem;
+    margin-left: 7rem;
+}
+
+.file-label, .file__box-label{
+    font-size: 0.75rem;
+    max-width: 80%;
+    flex-wrap: wrap;
+    overflow-wrap:break-word;
+}
+
+.file__box{
+    width: auto;
+    height: auto;
+    /* margin-bottom: 2rem; */
+    /* position: relative; */
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    /* justify-content: flex-start; */
+    align-items: center;
+}
 .container comment-admin{
     grid-column: 2;
     grid-row: 6;

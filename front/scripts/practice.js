@@ -66,17 +66,17 @@ async function getFlowers() {
 
 async function open_flower(ref_type,ref_id,i){
   if (ref_type == 0) {
-    window.location.href = "http://127.0.0.1:8000/lecture.html?id="+ref_id + "&index="+ i
+    window.location.href = "http://127.0.0.1:8000/lecture?id="+ref_id + "&index="+ i
   }else{
     //const res = await getPracticeResult()
     if(!await getPractice2(ref_id)){
-      window.location.href = "http://127.0.0.1:8000/practice.html?id="+ref_id + "&index="+ i
+      window.location.href = "http://127.0.0.1:8000/practice?id="+ref_id + "&index="+ i
     }
     else{
     if(await getPracticeResult2(ref_id) == null){
-      window.location.href = "http://127.0.0.1:8000/test.html?id="+ref_id + "&index="+ i
+      window.location.href = "http://127.0.0.1:8000/test?id="+ref_id + "&index="+ i
     }else{
-      window.location.href = "http://127.0.0.1:8000/test_result.html?id="+ref_id + "&index="+ i
+      window.location.href = "http://127.0.0.1:8000/test_result?id="+ref_id + "&index="+ i
     } 
     }
   }
@@ -144,10 +144,13 @@ async function sendUserAnswerFile(){
 
 function sendAnswer(){
   let answer = document.getElementById('text_box').value;
-  // sendUserAnswer(answer);
-  // sendUserAnswerFile();
+  if (length > 0){
+    sendUserAnswerFile();
+  }
+  else{
+    sendUserAnswer(answer);
+  }
   document.getElementById('text_box').value = '';
-  console.log(filePlayer.childNodes.length);
   // const filePlayer = document.getElementById('filePlayer'); 
   // var k = 0;
   // var costil = 0;
@@ -164,10 +167,15 @@ function sendAnswer(){
   const button = document.querySelector(".send");
   button.disabled = true;
   // console.log(button.disabled);
+  window.location.href = 'http://127.0.0.1:8000/practice_answer?id=' + id;
 }
 
 const backButton = document.getElementById('back_to_map');
 backButton.addEventListener('click', () => {
     // Переходим по URL-адресу
-    window.location.href = 'http://127.0.0.1:8000/map.html'; // Замените 'URL' на нужный URL-адрес для перехода
+    window.location.href = 'http://127.0.0.1:8000/map'; // Замените 'URL' на нужный URL-адрес для перехода
 });
+
+function back(){
+  window.location.href = 'http://127.0.0.1:8000/practice?id='+ id + "&index=" + index;
+}
