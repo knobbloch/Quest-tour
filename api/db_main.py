@@ -11,7 +11,7 @@ db_router = APIRouter()
 ANSWERS = 'data/answers'
 TEST = 'data/test'
 LECTION = 'data/lection'
-DEFAULT_PASSWORD = "Hi"
+DEFAULT_PASSWORD = "Qwerty12"
 DEFAULT_DEADLINE = datetime.timedelta(days=30)
 TOKEN_TIME = datetime.timedelta(minutes=30)
 
@@ -519,7 +519,7 @@ clean_tokens()
 # print(debugging.get_all_persons())
 
 '''
-new_person("adm", "the", "best", 1, division = "adm")
-new_person("molodetc", "molodetc", "Ivanov", 0, division = "Horoshii")
-new_person("newbie", "newnew", "person", 0, division = "glupi")
+new_person("adm@gmail.com", "the", "best", 1, division = "adm")
+new_person("molodetc@gmail.com", "molodetc", "Ivanov", 0, division = "Horoshii")
+new_person("newbie@gmail.com", "newnew", "person", 0, division = "glupi")
 '''
