@@ -11,14 +11,15 @@
 
 ---
 **Что в репозитории**
+
 Данный репозиторий хранит api и frontend части сайта, а так же папку, в которой должны храниться записываемые пользователями файлы.
 
 ---
 
 
 **Участники**
-- Алена [Алена](https://github.com/alenocyberlox3000)
-- Миша [Миша](https://github.com/Facenip)
-- Алина [Алина](https://github.com/KosichkaCheese)
-- Лена [Лена](https://github.com/jalences)
-- Маша [Маша](https://github.com/knobbloch)
+- [Алена](https://github.com/alenocyberlox3000)
+- [Миша](https://github.com/Facenip)
+- [Алина](https://github.com/KosichkaCheese)
+- [Лена](https://github.com/jalences)
+- [Маша](https://github.com/knobbloch)
